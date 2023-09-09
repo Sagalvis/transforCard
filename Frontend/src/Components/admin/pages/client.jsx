@@ -19,7 +19,9 @@ import {
   Tr,
   Th,
   Tbody,
-  Td
+  Td,
+  Tdbuttons,
+  Buttons,
 } from "./styles/styledClient";
 
 const Client = () => {
@@ -36,7 +38,7 @@ const Client = () => {
         {/* Botones */}
 
         <ContainButtons>
-          <Button>
+          <Button title="Crear nuevo cliente">
             <i className="fa-solid fa-plus"></i>
           </Button>
         </ContainButtons>
@@ -67,8 +69,8 @@ const Client = () => {
 
           {/* BUSCADOR */}
           <ContainSearch>
-            <Label className='search'>Buscar: </Label>
-            <Input type='text'></Input>
+            <Label className="search">Buscar: </Label>
+            <Input type="text" title="Buscar cliente"></Input>
           </ContainSearch>
         </ContainControls>
 
@@ -93,31 +95,19 @@ const Client = () => {
                 <Td>dev.beecodes@gmail.com</Td>
                 <Td>+57 304 526 4366</Td>
                 <Td>KR 8C # 45- 71</Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td>Johan</Td>
-                <Td>0001</Td>
-                <Td>dev.beecodes@gmail.com</Td>
-                <Td>+57 304 526 4366</Td>
-                <Td>KR 8C # 45- 71</Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td>Johan</Td>
-                <Td>0001</Td>
-                <Td>dev.beecodes@gmail.com</Td>
-                <Td>+57 304 526 4366</Td>
-                <Td>KR 8C # 45- 71</Td>
-                <Td></Td>
-              </Tr>
-              <Tr>
-                <Td>Johan</Td>
-                <Td>0001</Td>
-                <Td>dev.beecodes@gmail.com</Td>
-                <Td>+57 304 526 4366</Td>
-                <Td>KR 8C # 45- 71</Td>
-                <Td></Td>
+                <Td>
+                  <Tdbuttons>
+                    <Buttons title="Editar cliente">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </Buttons>
+                    <Buttons title="Vehículos">
+                      <i class="fa-solid fa-car"></i>
+                    </Buttons>
+                    <Buttons title="Eliminar cliente">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </Buttons>
+                  </Tdbuttons>
+                </Td>
               </Tr>
             </Tbody>
           </Table>
