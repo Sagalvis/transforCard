@@ -37,7 +37,7 @@ const Login = () => {
               <LogoLogin src={Logologin} alt="Logologin" />
             </ContainLogo>
             <ContainInputs>
-              <TittleInputs>Bienvenido de nuevo</TittleInputs>
+              <TittleInputs>Bienvenidos de nuevo</TittleInputs>
               <ContenInputs>
                 <InputBox>
                   <i className="fa-solid fa-envelope"></i>
