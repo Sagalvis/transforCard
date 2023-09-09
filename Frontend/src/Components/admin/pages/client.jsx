@@ -133,7 +133,7 @@ const Client = () => {
           <ControlHandle>
             <Ul>
               <Li><ButtonHandle>Anterior</ButtonHandle></Li>
-              <Li className="button-li"><a href="/">1</a></Li>
+              <Li title='Pagina actual'className="button-li"><a href="/">1</a></Li>
               <Li><ButtonHandle>Siguiente</ButtonHandle></Li>
             </Ul>
           </ControlHandle>
@@ -141,6 +141,7 @@ const Client = () => {
       </ContainMain>
 
       {/* Componente footer */}
+
       <Footer />
     </>
   );

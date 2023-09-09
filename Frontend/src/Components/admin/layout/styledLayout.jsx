@@ -4,7 +4,7 @@ export const ContainLayout = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
-  overflow-y: hidden;
+  overflow: hidden;
 `;
 export const ContainPages = styled.div`
   width: 100%;

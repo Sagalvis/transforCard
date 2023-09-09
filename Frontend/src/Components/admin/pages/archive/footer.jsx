@@ -7,11 +7,11 @@ const Footer = () => {
     <ContainFooter>
       {/* Contenedor text Copyright */}
       <Copyright>
-        <Tag_P_Copy>Aqui va el texto de copyright</Tag_P_Copy>
+        <Tag_P_Copy>Copyright &copy; 2023 Transfor CARS. All Rights</Tag_P_Copy>
       </Copyright>
 
       <FootText>
-        <Tag_P_Copy>Bienvenido a transforCar 💚</Tag_P_Copy>
+        <Tag_P_Copy>Te damos la bienvenida en transforCar 💚</Tag_P_Copy>
       </FootText>
     </ContainFooter>
     </>
