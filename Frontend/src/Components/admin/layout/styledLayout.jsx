@@ -8,4 +8,5 @@ export const ContainLayout = styled.div`
 export const ContainPages = styled.div`
   width: 100%;
   height: 100%;
+  background-color: #f1f0f3;
 `;
