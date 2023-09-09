@@ -48,7 +48,7 @@ const Client = () => {
 
       <ContainMain>
         <ContainCheck>
-          <Label htmlFor="checkbox">Empresas</Label>
+          <Label type="checkbox">Empresas</Label>
           <Input type="checkbox" />
           <Label htmlFor="checkbox">Personas</Label>
         </ContainCheck>
@@ -98,13 +98,13 @@ const Client = () => {
                 <Td>
                   <Tdbuttons>
                     <Buttons title="Editar cliente">
-                      <i class="fa-solid fa-pen-to-square"></i>
+                      <i className="fa-solid fa-pen-to-square"></i>
                     </Buttons>
                     <Buttons title="Vehículos">
-                      <i class="fa-solid fa-car"></i>
+                      <i className="fa-solid fa-car"></i>
                     </Buttons>
                     <Buttons title="Eliminar cliente">
-                      <i class="fa-solid fa-trash-can"></i>
+                      <i className="fa-solid fa-trash-can"></i>
                     </Buttons>
                   </Tdbuttons>
                 </Td>

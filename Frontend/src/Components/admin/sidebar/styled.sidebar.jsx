@@ -18,7 +18,7 @@ export const ContainLogo = styled.div`
   /* background-color: red; */
   width: 100%;
   height: 10%;
-  border-bottom: 1px solid  #e5e4e4;
+  border-bottom: 1px solid  #12213b;
 
 `
 export const LogoSidebar = styled.img`
@@ -42,7 +42,7 @@ export const NavbarContain = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid  #e5e4e4;
+  border-bottom: 1px solid  #12213b;
 `
 
 export const NavConten = styled.div`
