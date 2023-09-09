@@ -112,6 +112,20 @@ const Client = () => {
             </Tbody>
           </Table>
         </ContainTable>
+
+        <div style={{backgroundColor: 'red', display: 'flex', justifyContent: 'space-between'}} className='container-main'>
+          <div className='text' style={{backgroundColor: 'yellow'}}>
+          <p style={{margin: '0'}}>Mostrando registros del 1 al 2 de un total de 2 registros</p>
+          </div>
+
+          <div className='next-page' style={{backgroundColor: 'green'}}>
+            <ul style={{margin: '0', display: 'flex', listStyle: 'none'}}>
+              <li>Anterior</li>
+              <li><a href="/">1</a></li>
+              <li>Anterior</li>
+            </ul>
+          </div>
+        </div>
       </ContainMain>
     </>
   );
