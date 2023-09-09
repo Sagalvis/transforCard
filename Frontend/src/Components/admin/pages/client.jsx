@@ -1,3 +1,4 @@
+import Footer from "./archive/footer";
 import {
   Button,
   ContainButtons,
@@ -20,8 +21,15 @@ import {
   Th,
   Tbody,
   Td,
-  Tdbuttons,
   Buttons,
+  ContainHandlePage,
+  ContainTextHandle,
+  ControlHandle,
+  Ul,
+  Li,
+  ButtonOptions,
+  ButtonHandle,
+  Tag_P_Handle,
 } from "./styles/styledClient";
 
 const Client = () => {
@@ -96,7 +104,7 @@ const Client = () => {
                 <Td>+57 304 526 4366</Td>
                 <Td>KR 8C # 45- 71</Td>
                 <Td>
-                  <Tdbuttons>
+                  <ButtonOptions>
                     <Buttons title="Editar cliente">
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Buttons>
@@ -106,27 +114,34 @@ const Client = () => {
                     <Buttons title="Eliminar cliente">
                       <i className="fa-solid fa-trash-can"></i>
                     </Buttons>
-                  </Tdbuttons>
+                  </ButtonOptions>
                 </Td>
               </Tr>
             </Tbody>
           </Table>
         </ContainTable>
 
-        <div style={{backgroundColor: 'red', display: 'flex', justifyContent: 'space-between'}} className='container-main'>
-          <div className='text' style={{backgroundColor: 'yellow'}}>
-          <p style={{margin: '0'}}>Mostrando registros del 1 al 2 de un total de 2 registros</p>
-          </div>
+        {/* Contenedor manejo de paginas */}
 
-          <div className='next-page' style={{backgroundColor: 'green'}}>
-            <ul style={{margin: '0', display: 'flex', listStyle: 'none'}}>
-              <li>Anterior</li>
-              <li><a href="/">1</a></li>
-              <li>Anterior</li>
-            </ul>
-          </div>
-        </div>
+        <ContainHandlePage>
+          {/* Texto numero de registros */}
+          <ContainTextHandle>
+          <Tag_P_Handle>Mostrando registros del 1 al 2 de un total de 2 registros</Tag_P_Handle>
+          </ContainTextHandle>
+
+          {/* Manejo de paginas */}
+          <ControlHandle>
+            <Ul>
+              <Li><ButtonHandle>Anterior</ButtonHandle></Li>
+              <Li className="button-li"><a href="/">1</a></Li>
+              <Li><ButtonHandle>Siguiente</ButtonHandle></Li>
+            </Ul>
+          </ControlHandle>
+        </ContainHandlePage>
       </ContainMain>
+
+      {/* Componente footer */}
+      <Footer />
     </>
   );
 };

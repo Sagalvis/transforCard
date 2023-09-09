@@ -45,7 +45,7 @@ export const Button = styled.button`
   justify-content: center;
 
   &:hover {
-    background: #e7e7e7;
+    background: #d3d3d3;
     border-radius: 4px;
     
   }
@@ -62,7 +62,7 @@ export const Button = styled.button`
 export const ContainMain = styled.div`
   display: block;
   box-sizing: border-box;
-  /* background-color: #222; */
+  background-color: #222;
   width: 100%;
   height: 80%;
   padding: 24px;
@@ -137,6 +137,7 @@ export const ContainTable = styled.div`
   background-color: #fff;
   width: 100%;
   max-height: 75%;
+  margin-bottom: 15px;
 `;
 
 export const Table = styled.table`
@@ -182,8 +183,9 @@ export const Td = styled.td`
   border-bottom: 1px solid #ccc;
 `;
 
+
 //Contenedor y botones para editar, eliminar y crear vehiculo.
-export const Tdbuttons = styled.div`
+export const ButtonOptions = styled.div`
   .fa-pen-to-square {
     font-size: 15px;
   }
@@ -197,7 +199,7 @@ export const Tdbuttons = styled.div`
   }
 `;
 
-// Boton independiente del de crear un cliente.
+// Boton de Opciones independiente del de crear un cliente.
 export const Buttons = styled.button`
   background: none;
   border: none;
@@ -207,7 +209,77 @@ export const Buttons = styled.button`
   transition: all .4s ease;
 
   &:hover {
-    background: #e7e7e7;
+    background: #d3d3d3;
+    border-radius: 4px;
+    
+  }
+`;
+
+// Manejo de paginas <<-------------------
+
+export const ContainHandlePage = styled.div`
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ContainTextHandle = styled.div`
+  /* background-color: yellow; */
+`;
+
+export const Tag_P_Handle = styled.p`
+  margin: 0;
+`;
+
+export const ControlHandle = styled.div`
+  /* background-color: green; */
+`;
+
+export const Ul = styled.ul`
+  display: flex;
+  margin: 0;
+  list-style: none;
+`;
+
+export const Li = styled.li`
+
+&.button-li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: #041737;
+  border-radius: 2px;
+  cursor: pointer;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: #0c244e;
+    border-radius: 2px;
+  }
+}
+`;
+
+export const ButtonHandle = styled.button`
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'outfit';
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  width: 80px;
+  height: 30px;
+  cursor: pointer;
+  transition: all .4s ease;
+
+  &:hover {
+    background: #d3d3d3;
     border-radius: 4px;
     
   }
