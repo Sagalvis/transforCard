@@ -56,9 +56,9 @@ const Client = () => {
 
       <ContainMain>
         <ContainCheck>
-          <Label htmlFor="checkbox">Empresas</Label>
+          <Label type="checkbox">Empresas</Label>
           <Input type="checkbox" />
-          <Label htmlFor="checkbox">Personas</Label>
+          <Label type="checkbox">Personas</Label>
         </ContainCheck>
 
         {/* Controladores */}
@@ -66,7 +66,7 @@ const Client = () => {
         <ContainControls>
           {/* Control "CANTIDAD DE REGISTROS" */}
           <ContainMaxData>
-            <Label htmlFor="select">Cantidad de registros</Label>
+            <Label type="select">Cantidad de registros</Label>
             <Select>
               <Option value="option1">10</Option>
               <Option value="option2">25</Option>

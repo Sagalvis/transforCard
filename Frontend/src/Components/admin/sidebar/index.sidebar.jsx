@@ -17,7 +17,7 @@ import Logo from "../../../assets/svg/transforCars-01.svg";
 import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   return (
     <ContaiSidebar>
       <ContainAll>
@@ -28,11 +28,8 @@ const Sidebar = () => {
         <Navbar>
           <NavbarContain>
             {ButtonNarbar1.map((item) => (
-              <NavConten key={item.id}
-              $isactive={pathname === item.to}
-              >
-                <NavLinks to={item.to} 
-                $isactive={pathname === item.to}>
+              <NavConten key={item.id} $isactive={pathname === item.to}>
+                <NavLinks to={item.to} $isactive={pathname === item.to}>
                   <NavIcon> {item.icon} </NavIcon>
                   <NavTittle>{item.title}</NavTittle>
                 </NavLinks>
@@ -42,14 +39,19 @@ const Sidebar = () => {
           <ContainPerfil>
             <ContenPerfil>
               <NavIcon>
-                <i className="fa-solid fa-user"></i>
+              <i className="fa-solid fa-user"></i>
               </NavIcon>
               <NavTittle>Sergio Andrés Galvis Smith</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
-              <NavIcon style={{color:"red", cursor:"pointer"}}>
-                <i className="fa-solid fa-power-off"></i>
+              <NavLinks to="/login"
+              style={{width:"25px"}}
+              > 
+
+              <NavIcon style={{ color: "red", cursor: "pointer" }}  >
+              <i className="fa-solid fa-power-off"></i>
               </NavIcon>
+              </NavLinks>
               <NavTittle>Administrador</NavTittle>
             </ContenPerfil>
           </ContainPerfil>
