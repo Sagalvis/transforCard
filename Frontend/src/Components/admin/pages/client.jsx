@@ -142,7 +142,9 @@ const Client = () => {
 
       {/* Componente footer */}
 
-      <Footer />
+      <Footer 
+      copyright='Copyright &copy; 2023 transforCAR. All Rights'
+      welcome='Te damos la bienvenida en transforCar 💚'/>
     </>
   );
 };
