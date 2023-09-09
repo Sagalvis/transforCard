@@ -1,7 +1,21 @@
+import { ContainForm, ContainLogin, ContenForm, ContenFotter, ContenTittle } from "./styled.login";
+
 const Login = () => {
   return ( 
-    <div><h1>login</h1></div>
-   );
+    <ContainLogin>
+      <ContainForm>
+        <ContenTittle>
+
+        </ContenTittle>
+        <ContenForm>
+          
+        </ContenForm>
+        <ContenFotter>
+
+        </ContenFotter>
+      </ContainForm>
+    </ContainLogin>
+  );
 }
 
 export default Login;
