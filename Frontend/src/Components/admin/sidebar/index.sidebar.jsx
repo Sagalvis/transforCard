@@ -48,7 +48,7 @@ const Sidebar = () => {
               style={{width:"25px"}}
               > 
 
-              <NavIcon style={{ color: "red", cursor: "pointer" }}  >
+              <NavIcon >
               <i className="fa-solid fa-power-off"></i>
               </NavIcon>
               </NavLinks>

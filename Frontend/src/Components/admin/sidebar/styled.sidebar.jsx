@@ -67,6 +67,11 @@ export const NavLinks = styled(Link)`
 
 export const NavIcon = styled.p`
   margin: 0 10px 0 0;
+  .fa-power-off:hover{
+    cursor: pointer;
+    color: red;
+    transition: all .5s ease;
+  }
 `
 
 export const NavTittle = styled.p`
