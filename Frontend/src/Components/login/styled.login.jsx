@@ -36,7 +36,7 @@ export const TittleLogin = styled.div`
 export const Paragrafh = styled.p`
   margin: 0;
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 400;
   color: #12213b;
 `;
 
