@@ -28,6 +28,7 @@ export const H2 = styled.h2`
   font-weight: 500;
 `;
 
+// Contenedor y boton para crear un cliente.
 export const ContainButtons = styled.div`
   /* background-color: purple; */
 `;
@@ -39,6 +40,9 @@ export const Button = styled.button`
   height: 30px;
   cursor: pointer;
   transition: all .4s ease;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 
   &:hover {
     background: #e7e7e7;
@@ -176,4 +180,35 @@ export const Tbody = styled.tbody`
 export const Td = styled.td`
   padding: 10px;
   border-bottom: 1px solid #ccc;
+`;
+
+//Contenedor y botones para editar, eliminar y crear vehiculo.
+export const Tdbuttons = styled.div`
+  .fa-pen-to-square {
+    font-size: 15px;
+  }
+
+  .fa-car {
+    font-size: 15px;
+  }
+
+  .fa-trash-can {
+    font-size: 15px;
+  }
+`;
+
+// Boton independiente del de crear un cliente.
+export const Buttons = styled.button`
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all .4s ease;
+
+  &:hover {
+    background: #e7e7e7;
+    border-radius: 4px;
+    
+  }
 `;
