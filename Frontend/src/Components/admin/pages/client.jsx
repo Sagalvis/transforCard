@@ -141,6 +141,7 @@ const Client = () => {
       </ContainMain>
 
       {/* Componente footer */}
+
       <Footer />
     </>
   );
