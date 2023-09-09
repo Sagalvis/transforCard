@@ -1,17 +1,17 @@
 import { ContainFooter, Copyright, FootText, Tag_P_Copy } from "./styledFooter";
 
 
-const Footer = () => {
+const Footer = ({copyright, welcome}) => {
   return (
     <>
     <ContainFooter>
       {/* Contenedor text Copyright */}
       <Copyright>
-        <Tag_P_Copy>Copyright &copy; 2023 Transfor CARS. All Rights</Tag_P_Copy>
+        <Tag_P_Copy>{copyright}</Tag_P_Copy>
       </Copyright>
 
       <FootText>
-        <Tag_P_Copy>Te damos la bienvenida en transforCar 💚</Tag_P_Copy>
+        <Tag_P_Copy>{welcome}</Tag_P_Copy>
       </FootText>
     </ContainFooter>
     </>
