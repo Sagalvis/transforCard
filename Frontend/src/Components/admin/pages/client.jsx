@@ -1,10 +1,33 @@
-import { Button, ContainButtons, ContainClient, ContainInfo, H2 } from "./styles/styledClient";
+import {
+  Button,
+  ContainButtons,
+  ContainHeader,
+  ContainInfo,
+  ContainMain,
+  H2,
+  Label,
+  Input,
+  ContainCheck,
+  ContainControls,
+  ContainMaxData,
+  Option,
+  Select,
+  ContainSearch,
+  ContainTable,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td
+} from "./styles/styledClient";
 
 const Client = () => {
   return (
     <>
-      <ContainClient>
-
+      {/* Contenedor principal HEADER*/}
+      <ContainHeader>
+        {/* Info de vista */}
         <ContainInfo>
           <i className="fa-solid fa-user-group"></i>
           <H2>Clientes</H2>
@@ -13,9 +36,93 @@ const Client = () => {
         {/* Botones */}
 
         <ContainButtons>
-          <Button><i className="fa-solid fa-plus"></i></Button>
+          <Button>
+            <i className="fa-solid fa-plus"></i>
+          </Button>
         </ContainButtons>
-      </ContainClient>
+      </ContainHeader>
+
+      {/* Contenedor principal MAIN */}
+
+      <ContainMain>
+        <ContainCheck>
+          <Label htmlFor="checkbox">Empresas</Label>
+          <Input type="checkbox" />
+          <Label htmlFor="checkbox">Personas</Label>
+        </ContainCheck>
+
+        {/* Controladores */}
+
+        <ContainControls>
+          {/* Control "CANTIDAD DE REGISTROS" */}
+          <ContainMaxData>
+            <Label htmlFor="select">Cantidad de registros</Label>
+            <Select>
+              <Option value="option1">10</Option>
+              <Option value="option2">25</Option>
+              <Option value="option3">50</Option>
+              <Option value="option4">100</Option>
+            </Select>
+          </ContainMaxData>
+
+          {/* BUSCADOR */}
+          <ContainSearch>
+            <Label className='search'>Buscar: </Label>
+            <Input type='text'></Input>
+          </ContainSearch>
+        </ContainControls>
+
+        {/* Contenedor de tabla */}
+
+        <ContainTable>
+          <Table>
+            <Thead>
+              <Tr>
+                <Th>Nombre</Th>
+                <Th>ID</Th>
+                <Th>Email</Th>
+                <Th>Celular</Th>
+                <Th>Dirección</Th>
+                <Th>Opciones</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>Johan</Td>
+                <Td>0001</Td>
+                <Td>dev.beecodes@gmail.com</Td>
+                <Td>+57 304 526 4366</Td>
+                <Td>KR 8C # 45- 71</Td>
+                <Td></Td>
+              </Tr>
+              <Tr>
+                <Td>Johan</Td>
+                <Td>0001</Td>
+                <Td>dev.beecodes@gmail.com</Td>
+                <Td>+57 304 526 4366</Td>
+                <Td>KR 8C # 45- 71</Td>
+                <Td></Td>
+              </Tr>
+              <Tr>
+                <Td>Johan</Td>
+                <Td>0001</Td>
+                <Td>dev.beecodes@gmail.com</Td>
+                <Td>+57 304 526 4366</Td>
+                <Td>KR 8C # 45- 71</Td>
+                <Td></Td>
+              </Tr>
+              <Tr>
+                <Td>Johan</Td>
+                <Td>0001</Td>
+                <Td>dev.beecodes@gmail.com</Td>
+                <Td>+57 304 526 4366</Td>
+                <Td>KR 8C # 45- 71</Td>
+                <Td></Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </ContainTable>
+      </ContainMain>
     </>
   );
 };
