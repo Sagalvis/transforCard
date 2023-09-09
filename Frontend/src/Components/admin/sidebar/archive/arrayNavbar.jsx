@@ -2,44 +2,44 @@ export const ButtonNarbar1 = [
   {
     id: 1,
     title:'Home',
-    icon:"home",
-    to: ""
+    icon:<i className="fa-solid fa-house"></i>,
+    to: "/"
   },
   {
     id:2 ,
     title : 'Clientes',
-    icon: "clientes",
-    to:"",
+    icon: <i className="fa-solid fa-user"></i>,
+    to:"/client",
   },
   {
     id:3,
     title:"Vehiculos",
-    icon:"vehiculo",
-    to:""
+    icon:<i className="fa-solid fa-car"></i>,
+    to:"/vehicle"
   },
   {
     id:4,
-    title:"Vehiculos",
-    icon:"vehiculo",
-    to:""
+    title:"Órdenes de servicio",
+    icon:<i className="fa-solid fa-receipt"></i>,
+    to:"/serviceorder"
   },
   {
     id:5,
-    title:"Vehiculos",
-    icon:"vehiculo",
-    to:""
+    title:"Facuras",
+    icon:<i className="fa-solid fa-file-invoice-dollar"></i>,
+    to:"/invoice"
   },
   {
     id:6,
-    title:"Vehiculos",
-    icon:"vehiculo",
-    to:""
+    title:"Empleados",
+    icon:<i className="fa-solid fa-people-group"></i>,
+    to:"/employees"
   },
   {
     id:7,
-    title:"Vehiculos",
-    icon:"vehiculo",
-    to:""
+    title:"Inventario",
+    icon:<i className="fa-solid fa-boxes-stacked"></i>,
+    to:"/inventory"
   },
 
 ];
