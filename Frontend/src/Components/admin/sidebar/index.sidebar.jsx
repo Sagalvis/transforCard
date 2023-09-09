@@ -47,7 +47,7 @@ const Sidebar = () => {
               <NavTittle>Sergio Andrés Galvis Smith</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
-              <NavIcon style={{color:"red"}}>
+              <NavIcon style={{color:"red", cursor:"pointer"}}>
                 <i className="fa-solid fa-power-off"></i>
               </NavIcon>
               <NavTittle>Administrador</NavTittle>
