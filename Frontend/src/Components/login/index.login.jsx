@@ -61,7 +61,7 @@ const Login = () => {
         </ContenForm>
         <ContainFooterLogin>
           <ContenFooterLogin>
-            <Paragrafh>Copyright 2023 Todos los derechos reservados</Paragrafh>
+            <Paragrafh>Copyright &copy; 2023 transforCAR. All Rights</Paragrafh>
           </ContenFooterLogin>
         </ContainFooterLogin>
       </ContenLogin>

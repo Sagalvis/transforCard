@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { ContainFooter, Copyright, FootText, Tag_P_Copy } from "./styledFooter";
 
 

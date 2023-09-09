@@ -39,18 +39,15 @@ const Sidebar = () => {
           <ContainPerfil>
             <ContenPerfil>
               <NavIcon>
-              <i className="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
               </NavIcon>
               <NavTittle>Sergio Andrés Galvis Smith</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
-              <NavLinks to="/login"
-              style={{width:"25px"}}
-              > 
-
-              <NavIcon >
-              <i className="fa-solid fa-power-off"></i>
-              </NavIcon>
+              <NavLinks to="/login" style={{ width: "25px" }}>
+                <NavIcon>
+                  <i className="fa-solid fa-power-off"></i>
+                </NavIcon>
               </NavLinks>
               <NavTittle>Administrador</NavTittle>
             </ContenPerfil>
