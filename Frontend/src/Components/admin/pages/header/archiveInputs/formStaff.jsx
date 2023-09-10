@@ -1,34 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios"
 
-const FormClient = () => {
-  const [identificacion, setIdentificacion] = useState("");
-  const [nombres, setNombres] = useState("");
-  const [apellidos, setApellidos] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [telefono, setTelefono] = useState("");
-
-  const handletSumit = async (e) => {
-    if (identificacion === "" || nombres === "" || apellidos === "" || correo === "" || direccion === "" || telefono === "") {
-      e.preventDefault();
-      alert("Por favor llenar todos los campos")
-    } else {
-      await axios.post("http://localhost:3005/postcustomer",{
-        identificacion: identificacion,
-        name: nombres,
-        last_name: apellidos,
-        email: correo,
-        adress: direccion,
-        phone : telefono
-      })
-      .then((Response) => {
-        console.log(Response.data);
-        alert("Cliente registrado")
-      }) 
-    }
-  }
+const FormStaff = () => {
   return (
     <>
       <ContainForm>
@@ -60,7 +32,7 @@ const FormClient = () => {
             <Input
               className="input-display"
               type="tel"
-              placeholder="Telefono"x
+              placeholder="Telefono"
               autoComplete="off"
             />
           </ContentInput>
@@ -79,15 +51,15 @@ const FormClient = () => {
           </ContentInput>
 
           {/* <ContentInput>
-<TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-</ContentInput> */}
+            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
+          </ContentInput> */}
         </Form>
       </ContainForm>
     </>
   );
 };
 
-export default FormClient;
+export default FormStaff;
 
 // Estilos de los inputs
 
