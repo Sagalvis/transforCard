@@ -69,7 +69,6 @@ const FormClient = () => {
               className="input-display"
               type="tel"
               placeholder="Telefono"
-              x
               autoComplete="off"
             />
           </ContentInput>
