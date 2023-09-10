@@ -1,14 +1,48 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+/* import { useState } from "react"; */
 // import Modals from "../archive/modals";
-import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMain, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledMain";
+import {
+  ButtonHandle,
+  ButtonOptions,
+  Buttons,
+  ContainCheck,
+  ContainControls,
+  ContainHandlePage,
+  ContainMain,
+  ContainMaxData,
+  ContainSearch,
+  ContainTable,
+  ContainTextHandle,
+  ControlHandle,
+  Input,
+  Label,
+  Li,
+  Option,
+  Select,
+  Table,
+  Tag_P_Handle,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Ul,
+} from "./styledMain";
 
-
-const Main = ({name, id, email, phone, address, editUser, createVehicle, deleteUser}) => {
-
+const Main = ({
+  name,
+  id,
+  email,
+  phone,
+  address,
+  editUser,
+  createVehicle,
+  deleteUser,
+}) => {
   return (
     <>
-    {/* Contenedor principal de la pagina */}
-    <ContainMain>
+      {/* Contenedor principal de la pagina */}
+      <ContainMain>
         <ContainCheck>
           <Label type="checkbox">Empresas</Label>
           <Input type="checkbox" />
@@ -80,21 +114,29 @@ const Main = ({name, id, email, phone, address, editUser, createVehicle, deleteU
         <ContainHandlePage>
           {/* Texto numero de registros */}
           <ContainTextHandle>
-          <Tag_P_Handle>Mostrando registros del 1 al 2 de un total de 2 registros</Tag_P_Handle>
+            <Tag_P_Handle>
+              Mostrando registros del 1 al 2 de un total de 2 registros
+            </Tag_P_Handle>
           </ContainTextHandle>
 
           {/* Manejo de paginas */}
           <ControlHandle>
             <Ul>
-              <Li><ButtonHandle>Anterior</ButtonHandle></Li>
-              <Li title='Pagina actual'className="button-li"><a href="/">1</a></Li>
-              <Li><ButtonHandle>Siguiente</ButtonHandle></Li>
+              <Li>
+                <ButtonHandle>Anterior</ButtonHandle>
+              </Li>
+              <Li title="Pagina actual" className="button-li">
+                <a href="/">1</a>
+              </Li>
+              <Li>
+                <ButtonHandle>Siguiente</ButtonHandle>
+              </Li>
             </Ul>
           </ControlHandle>
         </ContainHandlePage>
       </ContainMain>
     </>
   );
-}
+};
 
 export default Main;

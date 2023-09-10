@@ -1,4 +1,4 @@
-import Modals from "./archive/modals";
+/* import Modals from "./archive/modals"; */
 import Footer from "./footer/footer";
 import Header from "./header/header";
 import Main from "./main/main";

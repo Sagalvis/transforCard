@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable no-undef */
 import styled from 'styled-components';
 
 export const Overlay = styled.div`

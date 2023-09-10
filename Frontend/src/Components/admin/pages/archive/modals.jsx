@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { CloseButton, ContainModal, H2, HeaderModal, Overlay } from "./styledModals";
 
 const Modals = ({titleModal, children, status, changeStatus, changePosition}) => {
