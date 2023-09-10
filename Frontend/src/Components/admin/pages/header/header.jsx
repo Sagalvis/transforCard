@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Modals from "../archive/modals";
 import {
-  BtnRegister,
+  // BtnRegister,
   Button,
-  ButtonRegister,
+  // ButtonRegister,
   ContainButtons,
   ContainHeader,
   ContainInfo,
@@ -59,21 +59,11 @@ const Header = ({
         <ContainInfoModal>
           {/* FORMULARIOS DE TODAS LAS VISTAS */}
           {showContentClient && (
-            <>
               <FormClient />
-              <ButtonRegister>
-                <BtnRegister>Registrar</BtnRegister>
-              </ButtonRegister>
-            </>
           )}
 
           {showContentStaff && (
-            <>
               <FormStaff />
-              <ButtonRegister>
-                <BtnRegister>Registrar</BtnRegister>
-              </ButtonRegister>
-            </>
           )}
         </ContainInfoModal>
       </Modals>
