@@ -13,8 +13,16 @@ import {
   H2,
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
+import FormStaff from "./archiveInputs/formStaff";
 
-const Header = ({ indexIcon, index, titleButton, titleModalPages, showContentClient}) => {
+const Header = ({
+  indexIcon,
+  index,
+  titleButton,
+  titleModalPages,
+  showContentClient,
+  showContentStaff,
+}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
 
@@ -45,18 +53,28 @@ const Header = ({ indexIcon, index, titleButton, titleModalPages, showContentCli
         status={handleClose}
         changeStatus={setHandleClose}
         titleModal={titleModalPages}
-        changePosition={'start'}
+        changePosition={"start"}
       >
         {/* Aqui el contenido */}
         <ContainInfoModal>
-
           {/* FORMULARIOS DE TODAS LAS VISTAS */}
-        {showContentClient &&
-          <FormClient />
-        }
-          <ButtonRegister>
-            <BtnRegister>Registrar</BtnRegister>
-          </ButtonRegister>
+          {showContentClient && (
+            <>
+              <FormClient />
+              <ButtonRegister>
+                <BtnRegister>Registrar</BtnRegister>
+              </ButtonRegister>
+            </>
+          )}
+
+          {showContentStaff && (
+            <>
+              <FormStaff />
+              <ButtonRegister>
+                <BtnRegister>Registrar</BtnRegister>
+              </ButtonRegister>
+            </>
+          )}
         </ContainInfoModal>
       </Modals>
     </>

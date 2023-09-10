@@ -74,7 +74,6 @@ export const ButtonRegister = styled.div`
   box-sizing: border-box;
   margin-bottom: 2%;
   padding-right: 5px;
-
 `;
 
 export const BtnRegister = styled.button`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FormClient = () => {
+const FormStaff = () => {
   return (
     <>
       <ContainForm>
@@ -32,7 +32,7 @@ const FormClient = () => {
             <Input
               className="input-display"
               type="tel"
-              placeholder="Telefono"x
+              placeholder="Telefono"
               autoComplete="off"
             />
           </ContentInput>
@@ -51,15 +51,15 @@ const FormClient = () => {
           </ContentInput>
 
           {/* <ContentInput>
-<TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-</ContentInput> */}
+            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
+          </ContentInput> */}
         </Form>
       </ContainForm>
     </>
   );
 };
 
-export default FormClient;
+export default FormStaff;
 
 // Estilos de los inputs
 
