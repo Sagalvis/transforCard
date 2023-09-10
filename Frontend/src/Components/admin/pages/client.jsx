@@ -12,7 +12,8 @@ const Client = () => {
       index={'Clientes'}
       indexIcon={'fa-solid fa-user-group'}
       titleButton={'Crear cliente'}
-      titleModalPages={'Crear cliente nuevo'}>
+      titleModalPages={'Crear cliente nuevo'}
+      showContentClient={true}>
       </Header>
       
 

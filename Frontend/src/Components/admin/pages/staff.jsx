@@ -11,7 +11,8 @@ const Staff = () => {
     index='Empleados'
     indexIcon={'fa-solid fa-people-group'}
     titleButton={'Crear empleado'}
-    titleModalPages={'Crear empleado nuevo'}>
+    titleModalPages={'Crear empleado nuevo'}
+    >
     
     </Header>
     

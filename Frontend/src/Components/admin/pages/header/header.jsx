@@ -7,20 +7,14 @@ import {
   Button,
   ButtonRegister,
   ContainButtons,
-  ContainForm,
   ContainHeader,
   ContainInfo,
   ContainInfoModal,
-  ContentInput,
-  Form,
   H2,
-  Input,
-  Option,
-  Select,
-  TextArea,
 } from "./styledHeader";
+import FormClient from "./archiveInputs/formClient";
 
-const Header = ({ indexIcon, index, titleButton, titleModalPages }) => {
+const Header = ({ indexIcon, index, titleButton, titleModalPages, showContentClient}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
 
@@ -55,59 +49,11 @@ const Header = ({ indexIcon, index, titleButton, titleModalPages }) => {
       >
         {/* Aqui el contenido */}
         <ContainInfoModal>
-          <ContainForm>
-            <Form>
-              <ContentInput>
-                <Select>
-                  <Option value="0">-Seleccione tipo de persona-</Option>
-                  <Option value="company">EMPRESA</Option>
-                  <Option value="person">PERSONA</Option>
-                </Select>
-              </ContentInput>
 
-              <ContentInput>
-                <Input type="text" placeholder="Nombres" autoComplete="off" />
-              </ContentInput>
-
-              <ContentInput>
-                <Input type="text" placeholder="Apellidos" autoComplete="off" />
-              </ContentInput>
-
-              <ContentInput className="input-display">
-                <Select className="select-display">
-                  <Option value="0">-Seleccione su país-</Option>
-                </Select>
-                <Input
-                  className="input-display"
-                  type="tel"
-                  placeholder="Telefono"
-                  autoComplete="off"
-                />
-              </ContentInput>
-
-              <ContentInput>
-                <Input type="text" placeholder="Dirección" autoComplete="off" />
-              </ContentInput>
-
-              <ContentInput>
-                <Input
-                  type="email"
-                  placeholder="Correo electronico"
-                  autoComplete="off"
-                  required
-                />
-              </ContentInput>
-
-              <ContentInput>
-                <TextArea
-                  cols={30}
-                  rows={5}
-                  placeholder="Observaciones"
-                ></TextArea>
-              </ContentInput>
-            </Form>
-          </ContainForm>
-
+          {/* FORMULARIOS DE TODAS LAS VISTAS */}
+        {showContentClient &&
+          <FormClient />
+        }
           <ButtonRegister>
             <BtnRegister>Registrar</BtnRegister>
           </ButtonRegister>
