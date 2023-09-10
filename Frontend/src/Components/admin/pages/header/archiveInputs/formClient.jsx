@@ -68,7 +68,7 @@ const FormClient = () => {
             <Input
               className="input-display"
               type="tel"
-              placeholder="Telefono"x
+              placeholder="Telefono"
               autoComplete="off"
             />
           </ContentInput>
@@ -176,4 +176,34 @@ export const TextArea = styled.textarea`
   padding: 10px;
   font-family: "Outfit";
   font-size: 15px;
+`;
+
+export const ButtonRegister = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  margin-bottom: 2%;
+  padding-right: 5px;
+`;
+
+export const BtnRegister = styled.button`
+  display: inline-block;
+  padding: 8px 30px;
+  background-color: #041737;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #172b4c;
+  }
+  &:active {
+    background-color: #041737;
+  }
 `;
