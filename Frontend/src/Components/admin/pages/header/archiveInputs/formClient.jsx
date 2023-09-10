@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios"
+import axios from "axios";
 
 const FormClient = () => {
   const [identificacion, setIdentificacion] = useState("");
@@ -11,24 +11,32 @@ const FormClient = () => {
   const [telefono, setTelefono] = useState("");
 
   const handletSumit = async (e) => {
-    if (identificacion === "" || nombres === "" || apellidos === "" || correo === "" || direccion === "" || telefono === "") {
+    if (
+      identificacion === "" ||
+      nombres === "" ||
+      apellidos === "" ||
+      correo === "" ||
+      direccion === "" ||
+      telefono === ""
+    ) {
       e.preventDefault();
-      alert("Por favor llenar todos los campos")
+      alert("Por favor llenar todos los campos");
     } else {
-      await axios.post("http://localhost:3005/postcustomer",{
-        identificacion: identificacion,
-        name: nombres,
-        last_name: apellidos,
-        email: correo,
-        adress: direccion,
-        phone : telefono
-      })
-      .then((Response) => {
-        console.log(Response.data);
-        alert("Cliente registrado")
-      }) 
+      await axios
+        .post("http://localhost:3005/postcustomer", {
+          identificacion: identificacion,
+          name: nombres,
+          last_name: apellidos,
+          email: correo,
+          adress: direccion,
+          phone: telefono,
+        })
+        .then((Response) => {
+          console.log(Response.data);
+          alert("Cliente registrado");
+        });
     }
-  }
+  };
   return (
     <>
       <ContainForm>
@@ -60,7 +68,7 @@ const FormClient = () => {
             <Input
               className="input-display"
               type="tel"
-              placeholder="Telefono"
+              placeholder="Telefono"x
               autoComplete="off"
             />
           </ContentInput>
@@ -83,6 +91,10 @@ const FormClient = () => {
           </ContentInput> */}
         </Form>
       </ContainForm>
+
+      <ButtonRegister>
+        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
+      </ButtonRegister>
     </>
   );
 };
