@@ -1,7 +1,10 @@
+import { useState } from "react";
+// import Modals from "../archive/modals";
 import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMain, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledMain";
 
 
-const Main = ({name, id, email, phone, address, options}) => {
+const Main = ({name, id, email, phone, address, editUser, createVehicle, deleteUser}) => {
+
   return (
     <>
     {/* Contenedor principal de la pagina */}
@@ -57,13 +60,13 @@ const Main = ({name, id, email, phone, address, options}) => {
                 <Td>
                   <ButtonOptions>
                     <Buttons title="Editar cliente">
-                      <i className="fa-solid fa-pen-to-square"></i>
+                      <i className={editUser}></i>
                     </Buttons>
                     <Buttons title="Vehículos">
-                      <i className="fa-solid fa-car"></i>
+                      <i className={createVehicle}></i>
                     </Buttons>
                     <Buttons title="Eliminar cliente">
-                      <i className="fa-solid fa-trash-can"></i>
+                      <i className={deleteUser}></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>
