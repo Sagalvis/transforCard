@@ -37,7 +37,7 @@ const TableVehicle = ({
     } catch (error) {
       console.log(error);
     }
-    window.location.reload();
+    window.location.reload(); // Se coloca aquí para recargar la página después de eliminar el vehículo exitosamente
   };
 
   useEffect(() => {
