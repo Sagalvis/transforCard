@@ -54,11 +54,11 @@ const TableClient = ({
           <Tbody>
             {customer.map((item, i) => (
               <Tr key={i}>
-                <Td>{item.identification}</Td>
-                <Td>{item.name}</Td>
-                <Td>{item.last_name}</Td>
-                <Td>{item.email}</Td>
-                <Td>{item.adress}</Td>
+                <Td>{item.identificacion}</Td>
+                <Td>{item.nombre}</Td>
+                <Td>{item.apellido}</Td>
+                <Td>{item.correo}</Td>
+                <Td>{item.direccion}</Td>
                 <Td>{item.tel}</Td>
                 <Td>
                   <ButtonOptions>

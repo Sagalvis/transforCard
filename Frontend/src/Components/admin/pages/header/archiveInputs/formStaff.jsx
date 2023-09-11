@@ -30,13 +30,10 @@ const FormStaff = () => {
       await axios
         .post("http://localhost:3005/postemployees", {
           id_empleado: identification,
-          nombres: nombres,
-          apellidos: apellidos,
-          edad: edad,
+          nombre: nombres,
+          apellido: apellidos,
           correo: correo,
-          contraseña: contraseña,
-          direccion: direccion,
-          telefono: telefono,
+          contraseña: contraseña
         })
         .then((Response) => {
           console.log(Response.data);

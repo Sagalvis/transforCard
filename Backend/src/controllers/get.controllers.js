@@ -4,7 +4,7 @@ import {pool} from "../dbconfig.js";
 /* consulta para traer toda la tabla de clientes */
 export const getCustomer = async(req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM customer");
+    const [row] = await pool.query("SELECT * FROM cliente");
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -17,7 +17,7 @@ export const getCustomer = async(req, res) => {
 
 export const getEmployees = async(req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM employees");
+    const [row] = await pool.query("SELECT * FROM empleado");
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -30,7 +30,7 @@ export const getEmployees = async(req, res) => {
 
 export const getVehicle = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM vehicle");
+    const [row] = await pool.query("SELECT * FROM vehiculo");
     res.send(row)
   } catch (error) {
     return res.status(500).json({

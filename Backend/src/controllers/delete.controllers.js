@@ -9,7 +9,7 @@ export const deleteCustomer = async(req, res) => {
   try {
     const { identification} =  req.params;
     const [row] = await pool.query(
-      "DELETE FROM customer WHERE identification = ?",
+      "DELETE FROM cliente WHERE identificacion = ?",
       [identification]
     );
     if (row.affectedRows === 0){
@@ -35,7 +35,7 @@ export const deleteEmployees = async (req, res) => {
   try {
     const {id_empleado} = req.params;
     const [row] = await pool.query(
-      "DELETE FROM employees WHERE id_empleado = ?",
+      "DELETE FROM empleado WHERE id_empleado = ?",
       [id_empleado]
     );
     if (row.affectedRows === 0) {
@@ -60,7 +60,7 @@ export const deleteVehicle = async(req, res) => {
   try {
     const {matricula} = req.params;
     const [row] = await pool.query(
-      "DELETE FROM vehicle WHERE matricula = ?",
+      "DELETE FROM vehiculo WHERE matricula = ?",
       [matricula]
     );
     if (row.affectedRows === 0) {
