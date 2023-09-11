@@ -47,6 +47,7 @@ const TableVehicle = ({
               <Th>Modelo</Th>
               <Th>Año</Th>
               <Th>Color</Th>
+              <Th>TP</Th>
               <Th>Placa</Th>
               <Th>VIN</Th>
               <Th>Opciones</Th>
@@ -61,6 +62,7 @@ const TableVehicle = ({
                 <Td>{item.modelo}</Td>
                 <Td>{item.año}</Td>
                 <Td>{item.color}</Td>
+                <Td>{pending}</Td>
                 <Td>{item.matricula}</Td>
                 <Td>{item.vin}</Td>
                 <Td>

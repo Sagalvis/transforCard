@@ -167,6 +167,7 @@ export const ContentInput = styled.div`
   &.display {
     display: flex;
     flex-direction: row;
+    gap: 3px;
   }
 
   &.age-gender {
