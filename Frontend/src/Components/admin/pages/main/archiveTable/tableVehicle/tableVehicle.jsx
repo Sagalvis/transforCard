@@ -13,10 +13,7 @@ import {
 } from "./styledTableVehicle";
 import axios from "axios";
 
-const TableVehicle = ({
-  editUser,
-  deleteUser,
-}) => {
+const TableVehicle = ({editVehicleTable, deleteVehicleTable}) => {
   /* Consulta para traer la tabla clientes */
   const [vehicle, setVehicle] = useState([]);
 
@@ -39,17 +36,6 @@ const TableVehicle = ({
       console.log(error);
     }
   };
-
-/*   const deleteClient = async (item) => {
-    try {
-    const result = await axios.delete(`http://localhost:3005/deletecustomer/${item.identificacion}`
-    );
-    console.log(result);
-    window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
 
   useEffect(() => {
     getVehicle();
@@ -90,11 +76,11 @@ const TableVehicle = ({
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons title="Editar cliente">
-                      <i className={editUser}></i>
+                    <Buttons title="Editar vehículo">
+                      <i className={editVehicleTable}></i>
                     </Buttons>
-                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehicle">
-                      <i className={deleteUser}></i>
+                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
+                      <i className={deleteVehicleTable}></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>

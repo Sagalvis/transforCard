@@ -104,7 +104,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
-          <TableVehicle />
+          <TableVehicle 
+            editVehicleTable={"fa-solid fa-pen-to-square"}
+            deleteVehicleTable={"fa-solid fa-trash-can"}
+          />
           <ButtonRegister>
             <BtnRegister className="color-red" onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}>Cancelar</BtnRegister>
             <BtnRegister onClick={() => setHandleOpenFormVehicle(!handleOpenFormVehicle)}>Crear vehículo</BtnRegister>

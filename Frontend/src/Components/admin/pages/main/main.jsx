@@ -74,12 +74,13 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
         />
         )}
 
-        {/* Tabla de vehiculos */}
+        {/* Tabla de vehiculos ***VISTA*** NO MUESTRA ICONOS EN EL MODAL */}
+        {/* Componente temporal cuando este al 100% el modal de vehiculos */}
 
         {showTableVehicle && (
         <TableVehicle
-          editUser={"fa-solid fa-pen-to-square"}
-          deleteUser={"fa-solid fa-trash-can"}
+          editVehicleTable={"fa-solid fa-pen-to-square"}
+          deleteVehicleTable={"fa-solid fa-trash-can"}
         />
         )}
 
