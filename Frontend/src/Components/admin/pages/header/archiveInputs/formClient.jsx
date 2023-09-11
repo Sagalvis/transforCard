@@ -25,11 +25,11 @@ const FormClient = () => {
     } else {
       await axios
         .post("http://localhost:3005/postcustomer", {
-          identification: identification,
-          name: nombres,
-          last_name: apellidos,
-          email: correo,
-          adress: direccion,
+          identificacion: identification,
+          nombre: nombres,
+          apellido: apellidos,
+          correo: correo,
+          direccion: direccion,
           tel: telefono,
         })
         .then((Response) => {

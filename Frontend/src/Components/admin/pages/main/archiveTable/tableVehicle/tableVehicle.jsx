@@ -13,7 +13,10 @@ import {
 } from "./styledTableVehicle";
 import axios from "axios";
 
-const TableVehicle = ({ vehicle_type, editUser, deleteUser }) => {
+const TableVehicle = ({
+  editUser,
+  deleteUser,
+}) => {
   /* Consulta para traer la tabla clientes */
   const [vehicle, setVehicle] = useState([]);
 
@@ -38,6 +41,7 @@ const TableVehicle = ({ vehicle_type, editUser, deleteUser }) => {
           <Thead>
             <Tr>
               <Th>ID_Vehículo</Th>
+              <Th>Cedula</Th>
               <Th>Tipo</Th>
               <Th>Marca</Th>
               <Th>Modelo</Th>
@@ -53,12 +57,13 @@ const TableVehicle = ({ vehicle_type, editUser, deleteUser }) => {
             {vehicle.map((item, i) => (
               <Tr key={i}>
                 <Td>{i+100}</Td>
-                <Td>{vehicle_type}</Td>
+                <Td>{item.identificacion}</Td>
+                <Td>{item.id_tipo_vehiculo}</Td>
                 <Td>{item.marca}</Td>
                 <Td>{item.modelo}</Td>
                 <Td>{item.año}</Td>
                 <Td>{item.color}</Td>
-                <Td>{pending}</Td>
+                <Td>{item.tarjetaPropiedad}</Td>
                 <Td>{item.matricula}</Td>
                 <Td>{item.vin}</Td>
                 <Td>

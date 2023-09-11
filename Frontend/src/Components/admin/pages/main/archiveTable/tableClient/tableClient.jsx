@@ -12,10 +12,20 @@ import {
   Tr,
 } from "./styledTableClient";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
+import TableVehicle from "../tableVehicle/tableVehicle";
+import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 
 const TableClient = ({ editUser, createVehicle, deleteUser}) => {
-  /* Consulta para traer la tabla clientes */
+  /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
+
+  // Variable de estado para abrir y cerrar modal de tabla vehiculo 
+  const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
+  const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
+
+
 
   const getCustomer = async () => {
     try {
@@ -50,18 +60,18 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
           <Tbody>
             {customer.map((item, i) => (
               <Tr key={i}>
-                <Td>{item.identification}</Td>
-                <Td>{item.name}</Td>
-                <Td>{item.last_name}</Td>
-                <Td>{item.email}</Td>
-                <Td>{item.adress}</Td>
+                <Td>{item.identificacion}</Td>
+                <Td>{item.nombre}</Td>
+                <Td>{item.apellido}</Td>
+                <Td>{item.correo}</Td>
+                <Td>{item.direccion}</Td>
                 <Td>{item.tel}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons title="Editar cliente">
                       <i className={editUser}></i>
                     </Buttons>
-                    <Buttons title="Vehículos">
+                    <Buttons onClick={() => setHandleCloseVehicle(!handleCloseVehicle)} title="Vehículos">
                       <i className={createVehicle}></i>
                     </Buttons>
                     <Buttons title="Eliminar cliente">
@@ -74,6 +84,35 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      <Modals
+      status={handleCloseVehicle}
+      changeStatus={setHandleCloseVehicle}
+      titleModal={'Tus vehículos'}
+      changePosition={"start"}
+      >
+        <ContainInfoModal>
+          {/* Tabla de vehiculos registrados */}
+          <TableVehicle />
+          <ButtonRegister>
+            <BtnRegister className="color-red" onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}>Cancelar</BtnRegister>
+            <BtnRegister onClick={() => setHandleOpenFormVehicle(!handleOpenFormVehicle)}>Crear vehículo</BtnRegister>
+          </ButtonRegister>
+        </ContainInfoModal>
+      </Modals>
+
+      {/* Ventana modal para el formulario de vehículos */}
+      <Modals
+      status={handleOpenFormVehicle}
+      changeStatus={setHandleOpenFormVehicle}
+      titleModal={'Crear vehículo nuevo'}
+      changePosition={"start"}
+      >
+        <ContainInfoModal>
+          {/* Formaulario para registro de vehículos */}
+          <FormVehicle />
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };

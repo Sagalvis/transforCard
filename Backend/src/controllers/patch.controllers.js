@@ -8,25 +8,16 @@ sus valores actuales en la base de datos. */
 
 export const updateCustomer = async (req, res) => {
   try {
-    const { identification } = req.params;
-    const { name, last_name, email, adress, phone } = req.body;
-    const [row] = await pool.query(
-      "UPDATE customer SET name = COALESCE(?, name), last_name = COALESCE(?, last_name), email = COALESCE(?, email), adress = COALESCE(?, adress), phone = COALESCE(?, phone) WHERE identification = ?",
-      [name, last_name, email, adress, phone, identification]
-    );
+    const { identificacion } = req.params;
+    const { nombre,apellido,correo,direccion,tel } = req.body;
+    const [row] = await pool.query( "UPDATE cliente SET nombre = COALESCE(?, nombre), apellido = COALESCE(?, apellido), correo = COALESCE(?, correo), direccion = COALESCE(?, direccion), tel = COALESCE(?, tel) WHERE identificacion = ?",
+      [nombre,apellido,correo,direccion,tel,identificacion] );
     if (row.affectedRows === 0) {
       return res.status(404).json({
         message: "No se encontró al cliente",
       });
     }
-    res.send({
-      identification,
-      name,
-      last_name,
-      email,
-      adress,
-      phone,
-    });
+    res.send({identificacion,nombre,apellido,correo,direccion,tel});
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -40,26 +31,14 @@ export const updateCustomer = async (req, res) => {
 export const updateEmployees = async (req, res) => {
   try {
     const { id_empleado } = req.params;
-    const { nombres, apellidos, edad, direccion, telefono, correo, contraseña } = req.body;
-    const [row] = await pool.query(
-      "UPDATE employees SET nombres = COALESCE(?, nombres), apellidos = COALESCE(?, apellidos), edad = COALESCE(?, edad), direccion = COALESCE(?, direccion), telefono = COALESCE(?, telefono), correo = COALESCE(?, correo), contraseña = COALESCE(?, contraseña) WHERE id_empleado = ?",
-      [nombres, apellidos, edad, direccion, telefono, correo,contraseña, id_empleado]
-    );
+    const { nombre, apellido, correo, contraseña } = req.body;
+    const [row] = await pool.query("UPDATE employees SET nombre = COALESCE(?, nombre), apellido = COALESCE(?, apellido), correo = COALESCE(?, correo), contraseña = COALESCE(?, contraseña) WHERE id_empleado = ?",[nombre, apellido, correo,contraseña, id_empleado ]);
     if (row.affectedRows === 0) {
       return res.status(404).json({
         message: "No se encontró al empleado",
       });
     }
-    res.send({
-      id_empleado,
-      nombres,
-      apellidos,
-      edad,
-      direccion,
-      telefono,
-      correo,
-      contraseña
-    });
+    res.send({ id_empleado,nombre,apellido,correo,contraseña });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -72,27 +51,16 @@ export const updateEmployees = async (req, res) => {
 
 export const updateVehicle = async (req, res) => {
   try {
-    const {matricula} = req.params;
-    const {tarjetaPropiedad, marca, modelo,año, color, vin,observacion} = req.body;
-    const [row] = await pool.query(
-      "UPDATE vehicle SET tarjetaPropiedad = COALESCE(?, tarjetaPropiedad), marca = COALESCE(?, marca),modelo = COALESCE(?, modelo), año = COALESCE(?, año), color = COALESCE(?, color), vin = COALESCE(?, vin), observacion = COALESCE(?, observacion)",
-      [tarjetaPropiedad, marca,modelo, año, color, vin,observacion, matricula]
-    );
+    const { matricula } = req.params;
+    const { observacion } = req.body;
+    const [row] = await pool.query( "UPDATE vehicle SET observacion = COALESCE(?, observacion) WHERE matricula = ?",
+      [observacion, matricula] );
     if (row.affectedRows === 0) {
       return res.status(404).json({
-        message: "No se encontró al vehiculo",
+        message: "No se encontró el vehículo",
       });
     }
-    res.send({
-      matricula,
-      tarjetaPropiedad,
-      marca,
-      modelo,
-      año,
-      color,
-      vin,
-      observacion
-    })
+    res.send({ matricula,observacion })
   } catch (error) {
     console.log(error);
     return res.status(500).json({

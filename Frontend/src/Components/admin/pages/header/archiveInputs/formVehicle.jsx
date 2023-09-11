@@ -11,7 +11,9 @@ const FormVehicle = () => {
   const [color, setColor] = useState("");
   const [vin, setVin] = useState("");
   const [observacion, setObservacion] = useState("");
-
+  const [identificacion, setIdentificacion] = useState("");
+  const [tipo_vehiculo, setTipo_vehiculo] = useState("");
+  
   /* Funcion para crear vehiculos */
   const handletSumit = async (e) => {
     if (
@@ -22,7 +24,9 @@ const FormVehicle = () => {
       año === "" ||
       color === "" ||
       vin === "" ||
-      observacion === ""
+      observacion === "" ||
+      identificacion === "" ||
+      tipo_vehiculo === ""
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -37,6 +41,8 @@ const FormVehicle = () => {
           color: color,
           vin: vin,
           observacion: observacion,
+          identificacion: identificacion,
+          id_tipo_vehiculo: tipo_vehiculo 
         })
         .then((Response) => {
           console.log(Response.data);
@@ -58,6 +64,14 @@ const FormVehicle = () => {
               <Option value="bike">Moto</Option>
               <Option value="car">Carro</Option>
             </Select>
+          </ContentInput>
+
+          <ContentInput>
+            <Input type="text" 
+            placeholder="Cedula"
+            value={identificacion}
+            onChange={(e)=>setIdentificacion(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
 
           <ContentInput className="display">
@@ -122,6 +136,13 @@ const FormVehicle = () => {
           </ContentInput>
 
           <ContentInput>
+            <Input type="text" 
+            placeholder="tipo vehiculo"
+            value={tipo_vehiculo}
+            onChange={(e)=>setTipo_vehiculo(e.target.value)}
+            autoComplete="off" />
+          </ContentInput>
+          <ContentInput>
             <TextArea
               cols={30}
               rows={5}
@@ -130,11 +151,13 @@ const FormVehicle = () => {
               placeholder="Observaciones (Estado entrante del vehículo)"
             ></TextArea>
           </ContentInput>
+
+
         </Form>
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Crear vehículo</BtnRegister>
       </ButtonRegister>
     </>
   );
@@ -228,6 +251,7 @@ export const ButtonRegister = styled.div`
   box-sizing: border-box;
   margin-bottom: 2%;
   padding-right: 5px;
+  gap: 2px;
 `;
 
 export const BtnRegister = styled.button`
@@ -242,6 +266,14 @@ export const BtnRegister = styled.button`
   border: none;
   cursor: pointer;
   font-size: 14px;
+
+  &.color-red {
+    background-color: #dc3545;
+
+    &:hover {
+      background-color: #b83240;
+    }
+  }
 
   &:hover {
     background-color: #172b4c;

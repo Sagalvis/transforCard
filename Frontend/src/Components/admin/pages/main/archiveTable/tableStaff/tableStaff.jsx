@@ -13,7 +13,10 @@ import {
 } from "./styledTableStaff";
 import axios from "axios";
 
-const TableStaff = ({ gender, editUser, deleteUser }) => {
+const TableStaff = ({
+  editUser,
+  deleteUser,
+}) => {
   const [employees, setEmployees] = useState([]);
 
   const getEmployees = async () => {
@@ -38,10 +41,6 @@ const TableStaff = ({ gender, editUser, deleteUser }) => {
               <Th>ID_Empleado</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
-              <Th>Sexo</Th>
-              <Th>Edad</Th>
-              <Th>Celular</Th>
-              <Th>Dirección</Th>
               <Th>Email</Th>
               <Th>Opciones</Th>
             </Tr>
@@ -50,12 +49,8 @@ const TableStaff = ({ gender, editUser, deleteUser }) => {
             {employees.map((item, i) => (
               <Tr key={i}>
               <Td>{item.id_empleado}</Td>
-              <Td>{item.nombres}</Td>
-              <Td>{item.apellidos}</Td>
-              <Td>{gender}</Td>
-              <Td>{item.edad}</Td>
-              <Td>{item.telefono}</Td>
-              <Td>{item.direccion}</Td>
+              <Td>{item.nombre}</Td>
+              <Td>{item.apellido}</Td>
               <Td>{item.correo}</Td>
               <Td>
                 <ButtonOptions>
