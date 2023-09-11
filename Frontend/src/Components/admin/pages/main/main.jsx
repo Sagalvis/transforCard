@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 /* import { useState } from "react"; */
 // import Modals from "../archive/modals";
+import TableClient from "./archiveTable/tableClient/tableClient";
+import TableStaff from "./archiveTable/tableStaff/tableStaff";
+import TableVehicle from "./archiveTable/tableVehicle/tableVehicle";
 import {
   ButtonHandle,
-  ButtonOptions,
-  Buttons,
   ContainCheck,
   ContainControls,
   ContainHandlePage,
   ContainMain,
   ContainMaxData,
   ContainSearch,
-  ContainTable,
   ContainTextHandle,
   ControlHandle,
   Input,
@@ -19,26 +19,11 @@ import {
   Li,
   Option,
   Select,
-  Table,
   Tag_P_Handle,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
   Ul,
 } from "./styledMain";
 
-const Main = ({
-  name,
-  id,
-  email,
-  phone,
-  address,
-  editUser,
-  createVehicle,
-  deleteUser,
-}) => {
+const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
@@ -70,44 +55,54 @@ const Main = ({
           </ContainSearch>
         </ContainControls>
 
-        {/* Contenedor de tabla */}
+        {/* Tabla de clientes */}
 
-        <ContainTable>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>Nombre</Th>
-                <Th>ID</Th>
-                <Th>Email</Th>
-                <Th>Celular</Th>
-                <Th>Dirección</Th>
-                <Th>Opciones</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>{name}</Td>
-                <Td>{id}</Td>
-                <Td>{email}</Td>
-                <Td>{phone}</Td>
-                <Td>{address}</Td>
-                <Td>
-                  <ButtonOptions>
-                    <Buttons title="Editar cliente">
-                      <i className={editUser}></i>
-                    </Buttons>
-                    <Buttons title="Vehículos">
-                      <i className={createVehicle}></i>
-                    </Buttons>
-                    <Buttons title="Eliminar cliente">
-                      <i className={deleteUser}></i>
-                    </Buttons>
-                  </ButtonOptions>
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-        </ContainTable>
+        {showTableClient && (
+        <TableClient
+          id_employee={"0001"}
+          name="Sergio"
+          email={"dev.sershcodes@gmail.com"}
+          phone={"+57 300 000 0000"}
+          address={"Av. Kalet St Toronto 256"}
+          editUser={"fa-solid fa-pen-to-square"}
+          createVehicle={"fa-solid fa-car"}
+          deleteUser={"fa-solid fa-trash-can"}
+        />
+        )}
+
+        {/* Tabla de empleados */}
+
+        {showTableStaff && (
+        <TableStaff
+          id_employee={'1143168571'}
+          name={"Johan"}
+          lastname={'Díaz'}
+          gender={'Masculino'}
+          age={'23'}
+          phone={"+57 304 526 4366"}
+          address={"Av. Kalet St Toronto 256"}
+          email={"dev.beecodes@gmail.com"}
+          editUser={"fa-solid fa-pen-to-square"}
+          deleteUser={"fa-solid fa-trash-can"}
+        />
+        )}
+
+        {/* Tabla de vehiculos */}
+
+        {showTableVehicle && (
+        <TableVehicle
+          id_vehicle={'0001'}
+          vehicle_type={"Moto"}
+          brand={"Boxer"}
+          model={'CT KS'}
+          color={'Negro'}
+          year={'2022'}
+          patent={"AEP41G"}
+          vin={"1HG8902JJNS9S"}
+          editUser={"fa-solid fa-pen-to-square"}
+          deleteUser={"fa-solid fa-trash-can"}
+        />
+        )}
 
         {/* Contenedor manejo de paginas */}
 

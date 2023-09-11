@@ -24,6 +24,10 @@ export const ContainInfo = styled.div`
     font-size: 25px;
     margin-right: 5px;
   }
+  .fa-car {
+    font-size: 25px;
+    margin-right: 5px;
+  }
 `;
 
 export const H2 = styled.h2`

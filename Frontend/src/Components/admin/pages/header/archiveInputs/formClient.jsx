@@ -95,7 +95,7 @@ const FormClient = () => {
             />
           </ContentInput>
 
-          <ContentInput className="input-display">
+          <ContentInput className="display">
             <Select className="select-display">
               <Option value="0">-Seleccione su país-</Option>
             </Select>
@@ -169,7 +169,7 @@ export const ContentInput = styled.div`
   flex-direction: column;
   margin-bottom: 2%;
 
-  &.input-display {
+  &.display {
     display: flex;
     flex-direction: row;
   }

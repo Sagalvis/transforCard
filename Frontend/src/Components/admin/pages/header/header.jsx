@@ -3,9 +3,7 @@
 import { useState } from "react";
 import Modals from "../archive/modals";
 import {
-  // BtnRegister,
   Button,
-  // ButtonRegister,
   ContainButtons,
   ContainHeader,
   ContainInfo,
@@ -14,15 +12,9 @@ import {
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
+import FormVehicle from "./archiveInputs/formVehicle";
 
-const Header = ({
-  indexIcon,
-  index,
-  titleButton,
-  titleModalPages,
-  showContentClient,
-  showContentStaff,
-}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
 
@@ -55,6 +47,7 @@ const Header = ({
         titleModal={titleModalPages}
         changePosition={"start"}
       >
+        
         {/* Aqui el contenido */}
         <ContainInfoModal>
           {/* FORMULARIOS DE TODAS LAS VISTAS */}
@@ -64,6 +57,10 @@ const Header = ({
 
           {showContentStaff && (
               <FormStaff />
+          )}
+
+          { showContentVehicle && (
+            <FormVehicle />
           )}
         </ContainInfoModal>
       </Modals>
