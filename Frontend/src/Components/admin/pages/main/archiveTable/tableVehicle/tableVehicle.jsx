@@ -13,10 +13,7 @@ import {
 } from "./styledTableVehicle";
 import axios from "axios";
 
-const TableVehicle = ({
-  editUser,
-  deleteUser,
-}) => {
+const TableVehicle = ({editVehicleTable, deleteVehicleTable}) => {
   /* Consulta para traer la tabla clientes */
   const [vehicle, setVehicle] = useState([]);
 
@@ -24,6 +21,17 @@ const TableVehicle = ({
     try {
       const res = await axios.get("http://localhost:3005/vehicle");
       setVehicle(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteVehicle = async (item) => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.identificacion}`
+      );
+      console.log(result);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +66,7 @@ const TableVehicle = ({
               <Tr key={i}>
                 <Td>{i+100}</Td>
                 <Td>{item.identificacion}</Td>
-                <Td>{item.id_tipo_vehiculo}</Td>
+                <Td>{item.tipoVehiculo}</Td>
                 <Td>{item.marca}</Td>
                 <Td>{item.modelo}</Td>
                 <Td>{item.año}</Td>
@@ -68,11 +76,11 @@ const TableVehicle = ({
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons title="Editar cliente">
-                      <i className={editUser}></i>
+                    <Buttons title="Editar vehículo">
+                      <i className={editVehicleTable}></i>
                     </Buttons>
-                    <Buttons title="Eliminar cliente">
-                      <i className={deleteUser}></i>
+                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
+                      <i className={deleteVehicleTable}></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>

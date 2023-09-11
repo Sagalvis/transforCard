@@ -8,5 +8,6 @@ const getRouter = Router();
 getRouter.get('/customer', controllGet.getCustomer);
 getRouter.get('/employees', controllGet.getEmployees);
 getRouter.get('/vehicle', controllGet.getVehicle);
+getRouter.get('/tipovehicle', controllGet.getSelectypevehicle);
 
 export default getRouter

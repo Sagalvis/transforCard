@@ -1,5 +1,7 @@
 /* importacion de la base de la base de datos para hace las consultas */
 import { pool } from "../dbconfig.js";
+import jwt from 'jsonwebtoken';
+
 
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
@@ -43,3 +45,31 @@ export const postVehicle = async (req, res) => {
     });
   }
 };
+
+
+/* Consulta para loguear empleados*/
+
+export const postLoginEmployees = async (req, res) => {
+   try {
+    const{ correo, contraseña } = req.body;
+    const [rows] =await pool.query("SELECT * FROM empleado WHERE correo =? AND contraseña =?", [correo, contraseña]);
+    console.log(rows);
+    //crear el objeto payload
+    const payload = {
+      username:rows[0].correo,
+    }
+    console.log(payload);
+    //almacenar el token
+    const token = jwt.sign(payload, 'secretkey');
+    console.log(token);
+    res.setHeader('Authorization', `Bearer ${token}`);
+
+    return res.status(200).json({message: "usuario ingresado exitosamente"})
+   } catch (error) {
+    return res.status(500).json({
+     message: "Error al ingresar usuario"
+    });
+
+   }
+}
+ 
