@@ -10,12 +10,12 @@ export const Overlay = styled.div`
   left: 0;
   background: rgba(0,0,0,.5);
   display: flex;
-  align-items: ${props => props.changePosition ? props.changePosition : center};
+  align-items: ${props => props.changePosition ? props.changePosition : "center"};
   justify-content: center;
 `;
 
 export const ContainModal = styled.div`
-  width: 450px;
+  min-width: 450px;
   min-height: 100px;
   background: #fff;
   position: relative;

@@ -30,11 +30,27 @@ export const getEmployees = async(req, res) => {
 
 export const getVehicle = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM vehiculo");
+    const [row] = await pool.query("SELECT vehiculo.*, tipo_vehiculo.tipoVehiculo FROM vehiculo INNER JOIN tipo_vehiculo ON vehiculo.id_tipo_vehiculo = tipo_vehiculo.id_tipo_vehiculo ");
     res.send(row)
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor"
     });
   }
+};
+
+
+export const getSelectypevehicle = async(req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM tipo_vehiculo");
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}
+
+export const getSelectPais = async(req, res) => {
+  0
 }

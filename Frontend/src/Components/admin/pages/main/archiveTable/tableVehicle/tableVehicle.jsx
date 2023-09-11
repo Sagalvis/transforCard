@@ -29,6 +29,29 @@ const TableVehicle = ({
     }
   };
 
+  const deleteVehicle = async (item) => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.identificacion}`
+      );
+      console.log(result);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
+/*   const deleteClient = async (item) => {
+    try {
+    const result = await axios.delete(`http://localhost:3005/deletecustomer/${item.identificacion}`
+    );
+    console.log(result);
+    window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }; */
+
   useEffect(() => {
     getVehicle();
   }, [setVehicle]);
@@ -58,7 +81,7 @@ const TableVehicle = ({
               <Tr key={i}>
                 <Td>{i+100}</Td>
                 <Td>{item.identificacion}</Td>
-                <Td>{item.id_tipo_vehiculo}</Td>
+                <Td>{item.tipoVehiculo}</Td>
                 <Td>{item.marca}</Td>
                 <Td>{item.modelo}</Td>
                 <Td>{item.año}</Td>
@@ -71,7 +94,7 @@ const TableVehicle = ({
                     <Buttons title="Editar cliente">
                       <i className={editUser}></i>
                     </Buttons>
-                    <Buttons title="Eliminar cliente">
+                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehicle">
                       <i className={deleteUser}></i>
                     </Buttons>
                   </ButtonOptions>

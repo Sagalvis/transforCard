@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -10,6 +10,7 @@ const FormClient = () => {
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
 
+
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
     if (
@@ -18,7 +19,7 @@ const FormClient = () => {
       apellidos === "" ||
       correo === "" ||
       direccion === "" ||
-      telefono === ""
+      telefono === "" 
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -46,7 +47,9 @@ const FormClient = () => {
     setCorreo("");
     setDireccion("");
     setTelefono("");
+    
   };
+
 
   //funcion que permite solo escribir numeros en el input.
   function acceptNum(evt) {
@@ -192,7 +195,9 @@ export const Select = styled.select`
   }
 `;
 
-export const Option = styled.option``;
+export const Option = styled.option`
+  background-color: red;
+`;
 
 export const Input = styled.input`
   width: 100%;

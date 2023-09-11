@@ -7,10 +7,10 @@ import {pool} from "../dbconfig.js";
 
 export const deleteCustomer = async(req, res) => {
   try {
-    const { identification} =  req.params;
+    const { identificacion} =  req.params;
     const [row] = await pool.query(
       "DELETE FROM cliente WHERE identificacion = ?",
-      [identification]
+      [identificacion]
     );
     if (row.affectedRows === 0){
       return res.status(404).json({
@@ -19,7 +19,7 @@ export const deleteCustomer = async(req, res) => {
     };
     res.send({
       message:'Cliente eliminado correctamente',
-      identification
+      identificacion
     })
   } catch (error) {
     console.log(error);
@@ -56,22 +56,21 @@ export const deleteEmployees = async (req, res) => {
 
 /* Consulta para eliminar vehiculos  */
 
-export const deleteVehicle = async(req, res) => {
+export const deleteVehicle = async (req, res) => {
   try {
-    const {matricula} = req.params;
+    const { identificacion } = req.params;
     const [row] = await pool.query(
-      "DELETE FROM vehiculo WHERE matricula = ?",
-      [matricula]
+      "DELETE FROM vehiculo WHERE identificacion = ?",
+      [identificacion]
     );
     if (row.affectedRows === 0) {
       return res.status(404).json({
-        message:"No se encontró al vehiculo",
+        message: "No se encontró al vehiculo",
       });
     };
     res.send({
-      message : 'Vehiculo Eliminado Correctamente' ,
-      matricula
-
+      message:'vehiculo eliminado correctamente',
+      identificacion
     })
   } catch (error) {
     return res.status(500).json({
