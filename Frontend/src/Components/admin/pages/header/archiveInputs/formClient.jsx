@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -10,6 +10,7 @@ const FormClient = () => {
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
 
+
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
     if (
@@ -18,7 +19,7 @@ const FormClient = () => {
       apellidos === "" ||
       correo === "" ||
       direccion === "" ||
-      telefono === ""
+      telefono === "" 
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -46,31 +47,10 @@ const FormClient = () => {
     setCorreo("");
     setDireccion("");
     setTelefono("");
+    
   };
 
-  /* useEffect(() => {
-    const fetchData = async () => {
-      const responseVehicle = await Axios.get(
-        "http://localhost:3005/selectvechicle"
-      );
-      setTipoVehicle(responseVehicle.data);
-      const responseCombustible = await Axios.get(
-        "http://localhost:3005/selectcombustible"
-      );
-      setTipoCombustible(responseCombustible.data);
-      const responseCarroceria = await Axios.get(
-        "http://localhost:3005/selectcarroceria"
-      );
-      setTipoCarroceria(responseCarroceria.data);
-    };
-    fetchData();
-  }, []); */
 
-  useEffect(()=>{
-    const fetchdata = async () =>{
-      
-    }
-  },[])
   //funcion que permite solo escribir numeros en el input.
   function acceptNum(evt) {
     const input = evt.target.value;
@@ -215,7 +195,9 @@ export const Select = styled.select`
   }
 `;
 
-export const Option = styled.option``;
+export const Option = styled.option`
+  background-color: red;
+`;
 
 export const Input = styled.input`
   width: 100%;

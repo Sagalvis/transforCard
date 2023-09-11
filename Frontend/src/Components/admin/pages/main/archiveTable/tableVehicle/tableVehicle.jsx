@@ -58,7 +58,7 @@ const TableVehicle = ({
               <Tr key={i}>
                 <Td>{i+100}</Td>
                 <Td>{item.identificacion}</Td>
-                <Td>{item.id_tipo_vehiculo}</Td>
+                <Td>{item.tipoVehiculo}</Td>
                 <Td>{item.marca}</Td>
                 <Td>{item.modelo}</Td>
                 <Td>{item.año}</Td>

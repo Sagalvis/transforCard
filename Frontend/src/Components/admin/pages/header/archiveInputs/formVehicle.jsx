@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const FormVehicle = () => {
@@ -12,7 +12,10 @@ const FormVehicle = () => {
   const [vin, setVin] = useState("");
   const [observacion, setObservacion] = useState("");
   const [identificacion, setIdentificacion] = useState("");
-  const [tipo_vehiculo, setTipo_vehiculo] = useState("");
+  const [tipoVehiculo, setTipo_vehiculo] = useState([]);
+
+  
+  const [selectVehicle, setSelectVehicle] = useState(0);
   
   /* Funcion para crear vehiculos */
   const handletSumit = async (e) => {
@@ -26,7 +29,7 @@ const FormVehicle = () => {
       vin === "" ||
       observacion === "" ||
       identificacion === "" ||
-      tipo_vehiculo === ""
+      selectVehicle === ""
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -42,7 +45,7 @@ const FormVehicle = () => {
           vin: vin,
           observacion: observacion,
           identificacion: identificacion,
-          id_tipo_vehiculo: tipo_vehiculo 
+          id_tipo_vehiculo: selectVehicle 
         })
         .then((Response) => {
           console.log(Response.data);
@@ -52,17 +55,33 @@ const FormVehicle = () => {
     }
 
     /* Funcion que limpa los inputs */
+    setSelectVehicle(0);
   };
+
+  useEffect(()=>{
+    const fetchdata = async () =>{
+      const responseVehicle = await axios.get(
+        "http://localhost:3005/tipovehicle"
+      );
+      setTipo_vehiculo(responseVehicle.data)
+    }
+    fetchdata();
+  },[])
 
   return (
     <>
       <ContainForm>
         <Form>
           <ContentInput>
-            <Select>
-              <Option value="0">-Seleccione el tipo del vehiculo-</Option>
-              <Option value="bike">Moto</Option>
-              <Option value="car">Carro</Option>
+            <Select value={selectVehicle}
+            onChange={(e)=>setSelectVehicle(e.target.value)}
+            
+            >
+              <Option>-Seleccione el tipo del vehiculo-</Option>
+              {tipoVehiculo.map((item, i) => (
+
+                <Option key={i} value={item.id_tipo_vehiculo}>{item.tipoVehiculo}</Option>
+              ))}
             </Select>
           </ContentInput>
 
@@ -135,13 +154,6 @@ const FormVehicle = () => {
             autoComplete="off" />
           </ContentInput>
 
-          <ContentInput>
-            <Input type="text" 
-            placeholder="tipo vehiculo"
-            value={tipo_vehiculo}
-            onChange={(e)=>setTipo_vehiculo(e.target.value)}
-            autoComplete="off" />
-          </ContentInput>
           <ContentInput>
             <TextArea
               cols={30}
