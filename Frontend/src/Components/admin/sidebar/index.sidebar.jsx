@@ -14,10 +14,20 @@ import {
   NavbarContain,
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const Sidebar = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.removeItem("Token");
+    window.location.href = 'http://localhost:5173/login';
+  }
+
+
   return (
     <ContaiSidebar>
       <ContainAll>
@@ -44,12 +54,12 @@ const Sidebar = () => {
               <NavTittle>Sergio Andrés Galvis Smith</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
-              <NavLinks to="/login" style={{ width: "25px" }}>
+              <NavLinks onClick={logOut} style={{ width: "25px" }}>
                 <NavIcon>
                   <i className="fa-solid fa-power-off"></i>
                 </NavIcon>
               </NavLinks>
-              <NavTittle>Administrador</NavTittle>
+              <NavTittle >Administrador</NavTittle>
             </ContenPerfil>
           </ContainPerfil>
         </Navbar>
