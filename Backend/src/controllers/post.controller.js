@@ -20,7 +20,7 @@ export const postCustomer = async (req, res) => {
 export const postEmployees = async (req, res) => {
   try {
     const { id_empleado, nombre, apellido, correo, contraseña } = req.body;
-    const [row] = await pool.query("INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña) VALUE (?,?,?,?,?,?,?,?)",[id_empleado, nombre, apellido, correo, contraseña]);
+    const [row] = await pool.query("INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña) VALUE (?,?,?,?,?)",[id_empleado, nombre, apellido, correo, contraseña]);
     res.send({id_empleado,nombre,apellido,correo,contraseña});
   } catch (error) {
     console.log(error);
