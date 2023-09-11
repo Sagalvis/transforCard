@@ -68,6 +68,10 @@ export const deleteVehicle = async (req, res) => {
         message: "No se encontró al vehiculo",
       });
     };
+    res.send({
+      message:'vehiculo eliminado correctamente',
+      identificacion
+    })
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor",

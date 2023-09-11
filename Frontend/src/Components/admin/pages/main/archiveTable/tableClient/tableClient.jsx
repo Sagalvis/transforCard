@@ -40,6 +40,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
     const result = await axios.delete(`http://localhost:3005/deletecustomer/${item.identificacion}`
     );
     console.log(result);
+    window.location.reload();
     } catch (error) {
       console.log(error);
     }

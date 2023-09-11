@@ -31,14 +31,26 @@ const TableVehicle = ({
 
   const deleteVehicle = async (item) => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.identificacion}`);
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.identificacion}`
+      );
       console.log(result);
-      alert("vehiculo deleted");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
-    window.location.reload();
+
   };
+
+/*   const deleteClient = async (item) => {
+    try {
+    const result = await axios.delete(`http://localhost:3005/deletecustomer/${item.identificacion}`
+    );
+    console.log(result);
+    window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }; */
 
   useEffect(() => {
     getVehicle();
