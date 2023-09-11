@@ -157,7 +157,7 @@ const FormVehicle = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Crear vehículo</BtnRegister>
       </ButtonRegister>
     </>
   );
@@ -251,6 +251,7 @@ export const ButtonRegister = styled.div`
   box-sizing: border-box;
   margin-bottom: 2%;
   padding-right: 5px;
+  gap: 2px;
 `;
 
 export const BtnRegister = styled.button`
@@ -265,6 +266,14 @@ export const BtnRegister = styled.button`
   border: none;
   cursor: pointer;
   font-size: 14px;
+
+  &.color-red {
+    background-color: #dc3545;
+
+    &:hover {
+      background-color: #b83240;
+    }
+  }
 
   &:hover {
     background-color: #172b4c;
