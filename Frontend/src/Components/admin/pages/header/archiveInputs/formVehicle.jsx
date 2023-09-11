@@ -1,46 +1,32 @@
 import styled from "styled-components";
 
-const FormStaff = () => {
+const FormVehicle = () => {
   return (
     <>
       <ContainForm>
         <Form>
           <ContentInput>
             <Select>
-              <Option value="0">-Seleccione el rol-</Option>
-              <Option value="admin">Administrador</Option>
-              <Option value="manager">Gerente</Option>
-              <Option value="workshop-leader">Lider de taller</Option>
-              <Option value="parts-advisor">Asesor de repuestos</Option>
-              <Option value="service-advisor">Asesor de servicio</Option>
-              <Option value="mechanic">Mecanico</Option>
+              <Option value="0">-Seleccione el tipo del vehiculo-</Option>
+              <Option value="bike">Moto</Option>
+              <Option value="car">Carro</Option>
             </Select>
           </ContentInput>
 
           <ContentInput className="display">
-            <Input type="text" placeholder="Nombres" autoComplete="off" />
-            <Input type="text" placeholder="Apellidos" autoComplete="off" />
+            <Input type="text" placeholder="Marca" autoComplete="off" />
+            <Input type="text" placeholder="Modelo" autoComplete="off" />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Documento" autoComplete="off" />
+            <Input type="text" placeholder="Año" autoComplete="off" />
           </ContentInput>
 
-          
-
-          <ContentInput className="display">
-            <Select >
-              <Option value="0">-Seleccione el sexo-</Option>
-              <Option value="man">Hombre</Option>
-              <Option value="woman">Mujer</Option>
-            </Select>
-            <Input type="text" placeholder="Edad" autoComplete="off" />
-          </ContentInput>
 
           <ContentInput>
             <Input
-              type="email"
-              placeholder="Correo electrónico"
+              type="text"
+              placeholder="Placa del vehículo"
               autoComplete="off"
               required
             />
@@ -48,57 +34,21 @@ const FormStaff = () => {
 
           <ContentInput>
             <Input
-              type="password"
-              placeholder="Contraseña"
+              type="text"
+              placeholder="Color del vehículo"
               autoComplete="off"
               required
             />
-          </ContentInput>
-
-          {/* <ContentInput>
-            <Select className="select-display">
-              <Option value="0">-Estado civil-</Option>
-            </Select>
-
-          </ContentInput> */}
-          
+          </ContentInput>          
 
           <ContentInput>
-            <Input type="tel" placeholder="Teléfono" autoComplete="off" />
-          </ContentInput>
-
-          {/* <ContentInput>
-            <Input type="text" placeholder="Fecha de nacimiento" autoComplete="off" />
-          </ContentInput> */}
-
-          {/* <ContentInput>
-            <Input type="text" placeholder="Nacionalidad" autoComplete="off" />
+            <Input type="tel" placeholder="VIN" autoComplete="off" />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Ciudad de nacimiento" autoComplete="off" />
+            <TextArea cols={30} rows={5} placeholder="Observaciones (Estado entrante del vehículo)"></TextArea>
           </ContentInput>
 
-          <ContentInput>
-            <Input type="text" placeholder="Dpt de nacimiento" autoComplete="off" />
-          </ContentInput> */}
-
-
-          <ContentInput>
-            <Input type="text" placeholder="Dirección" autoComplete="off" />
-          </ContentInput>
-
-
-          {/* <ContentInput className="input-display">
-            <Select className="select-display">
-              <Option value="0">-EPS-</Option>
-            </Select>
-
-          </ContentInput> */}
-
-          {/* <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-          </ContentInput> */}
         </Form>
       </ContainForm>
 
@@ -109,7 +59,7 @@ const FormStaff = () => {
   );
 };
 
-export default FormStaff;
+export default FormVehicle;
 
 // Estilos de los inputs
 
@@ -134,6 +84,11 @@ export const ContentInput = styled.div`
   margin-bottom: 2%;
 
   &.display {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &.age-gender {
     display: flex;
     flex-direction: row;
   }
