@@ -25,8 +25,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
   const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
 
-
-
   const getCustomer = async () => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
@@ -35,6 +33,18 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
       console.log(error);
     }
   };
+
+  // Funcion para eliminar cliente de la tabla
+  const deleteClient = async (item) => {
+    try {
+    const result = await axios.delete(`http://localhost:3005/deletecustomer/${item.identificacion}`
+    );
+    console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
     getCustomer();
@@ -74,7 +84,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser}) => {
                     <Buttons onClick={() => setHandleCloseVehicle(!handleCloseVehicle)} title="Vehículos">
                       <i className={createVehicle}></i>
                     </Buttons>
-                    <Buttons title="Eliminar cliente">
+                    <Buttons onClick={() => deleteClient(item)} title="Eliminar cliente">
                       <i className={deleteUser}></i>
                     </Buttons>
                   </ButtonOptions>

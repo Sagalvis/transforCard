@@ -29,6 +29,17 @@ const TableVehicle = ({
     }
   };
 
+  const deleteVehicle = async (item) => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.identificacion}`);
+      console.log(result);
+      alert("vehiculo deleted");
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload();
+  };
+
   useEffect(() => {
     getVehicle();
   }, [setVehicle]);
@@ -71,7 +82,7 @@ const TableVehicle = ({
                     <Buttons title="Editar cliente">
                       <i className={editUser}></i>
                     </Buttons>
-                    <Buttons title="Eliminar cliente">
+                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehicle">
                       <i className={deleteUser}></i>
                     </Buttons>
                   </ButtonOptions>
