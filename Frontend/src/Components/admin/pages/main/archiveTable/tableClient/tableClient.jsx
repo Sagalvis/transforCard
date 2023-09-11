@@ -1,30 +1,65 @@
-import { ButtonOptions, Buttons, ContainTable, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableClient";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+import {
+  ButtonOptions,
+  Buttons,
+  ContainTable,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "./styledTableClient";
+import axios from "axios";
 
+const TableClient = ({
+  editUser,
+  createVehicle,
+  deleteUser,
+}) => {
+  /* Consulta para traer la tabla clientes */
+  const [customer, setCustomer] = useState([]);
 
-const TableClient = ({id_employee, name, email, phone, address, editUser, createVehicle, deleteUser}) => {
+  const getCustomer = async () => {
+    try {
+      const res = await axios.get("http://localhost:3005/customer");
+      setCustomer(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCustomer();
+  }, [setCustomer]);
+
   return (
     <>
-    {/* Contenedor de tabla */}
+      {/* Contenedor de tabla */}
 
-    <ContainTable>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>ID_Cliente</Th>
-                <Th>Nombre</Th>
-                <Th>Email</Th>
-                <Th>Celular</Th>
-                <Th>Dirección</Th>
-                <Th>Opciones</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>{id_employee}</Td>
-                <Td>{name}</Td>
-                <Td>{email}</Td>
-                <Td>{phone}</Td>
-                <Td>{address}</Td>
+      <ContainTable>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>ID_Cliente</Th>
+              <Th>Nombre</Th>
+              <Th>Apellido</Th>
+              <Th>Email</Th>
+              <Th>Celular</Th>
+              <Th>Dirección</Th>
+              <Th>Opciones</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {customer.map((item, i) => (
+              <Tr key={i}>
+                <Td>{item.identification}</Td>
+                <Td>{item.name}</Td>
+                <Td>{item.last_name}</Td>
+                <Td>{item.email}</Td>
+                <Td>{item.adress}</Td>
+                <Td>{item.tel}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons title="Editar cliente">
@@ -39,11 +74,12 @@ const TableClient = ({id_employee, name, email, phone, address, editUser, create
                   </ButtonOptions>
                 </Td>
               </Tr>
-            </Tbody>
-          </Table>
-        </ContainTable>
+            ))}
+          </Tbody>
+        </Table>
+      </ContainTable>
     </>
   );
-}
+};
 
 export default TableClient;

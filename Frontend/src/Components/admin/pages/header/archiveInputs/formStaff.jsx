@@ -1,6 +1,59 @@
+import axios from "axios";
+import { useState } from "react";
 import styled from "styled-components";
 
 const FormStaff = () => {
+  const [identification, setIdentification] = useState("");
+  const [nombres, setNombres] = useState("");
+  const [apellidos, setApellidos] = useState("");
+  const [edad, setEdad] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [telefono, setTelefono] = useState("");
+
+  /* Funcion para crear empleados */
+  const handleSumit = async (e) => {
+    if (
+      identification === "" ||
+      nombres === "" ||
+      apellidos === "" ||
+      edad === "" ||
+      correo === "" ||
+      contraseña === "" ||
+      direccion === "" ||
+      telefono === ""
+    ) {
+      e.preventDefault();
+      alert("Por favor llenar todos los campos");
+    } else {
+      await axios
+        .post("http://localhost:3005/postemployees", {
+          id_empleado: identification,
+          nombres: nombres,
+          apellidos: apellidos,
+          edad: edad,
+          correo: correo,
+          contraseña: contraseña,
+          direccion: direccion,
+          telefono: telefono,
+        })
+        .then((Response) => {
+          console.log(Response.data);
+          alert("Empleado registrado");
+        });
+      window.location.reload();
+    }
+    /* Funcion que limpa los inputs */
+    setIdentification("");
+    setNombres("");
+    setApellidos("") ;
+    setEdad("");
+    setCorreo("");
+    setContraseña("");
+    setDireccion("");
+    setTelefono("");
+  };
   return (
     <>
       <ContainForm>
@@ -18,29 +71,44 @@ const FormStaff = () => {
           </ContentInput>
 
           <ContentInput className="display">
-            <Input type="text" placeholder="Nombres" autoComplete="off" />
-            <Input type="text" placeholder="Apellidos" autoComplete="off" />
+            <Input type="text" 
+            placeholder="Nombres"
+            value={nombres}
+            onChange={(e)=> setNombres(e.target.value)}
+            autoComplete="off" />
+            <Input type="text" placeholder="Apellidos" 
+            value={apellidos}
+            onChange={(e)=> setApellidos(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Documento" autoComplete="off" />
+            <Input type="text" 
+            placeholder="Documento" 
+            value={identification}
+            onChange={(e)=> setIdentification(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
 
-          
-
           <ContentInput className="display">
-            <Select >
+            <Select>
               <Option value="0">-Seleccione el sexo-</Option>
               <Option value="man">Hombre</Option>
               <Option value="woman">Mujer</Option>
             </Select>
-            <Input type="text" placeholder="Edad" autoComplete="off" />
+            <Input type="text" 
+            placeholder="Edad" 
+            value={edad}
+            onChange={(e) => setEdad(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
 
           <ContentInput>
             <Input
               type="email"
               placeholder="Correo electrónico"
+              value={correo}
+              onChange ={(e) => setCorreo(e.target.value)}
               autoComplete="off"
               required
             />
@@ -50,6 +118,8 @@ const FormStaff = () => {
             <Input
               type="password"
               placeholder="Contraseña"
+              value={contraseña}
+              onChange = {(e)=> setContraseña(e.target.value)} 
               autoComplete="off"
               required
             />
@@ -61,10 +131,13 @@ const FormStaff = () => {
             </Select>
 
           </ContentInput> */}
-          
 
           <ContentInput>
-            <Input type="tel" placeholder="Teléfono" autoComplete="off" />
+            <Input type="tel" 
+            placeholder="Teléfono" 
+            value={telefono}
+            onChange={(e)=> setTelefono(e.target.value)} 
+            autoComplete="off" />
           </ContentInput>
 
           {/* <ContentInput>
@@ -83,11 +156,13 @@ const FormStaff = () => {
             <Input type="text" placeholder="Dpt de nacimiento" autoComplete="off" />
           </ContentInput> */}
 
-
           <ContentInput>
-            <Input type="text" placeholder="Dirección" autoComplete="off" />
+            <Input type="text" 
+            placeholder="Dirección" 
+            value={direccion}
+            onChange={(e) => setDireccion(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
-
 
           {/* <ContentInput className="input-display">
             <Select className="select-display">
@@ -103,7 +178,7 @@ const FormStaff = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister>Registrar</BtnRegister>
+        <BtnRegister onClick={handleSumit}>Registrar</BtnRegister>
       </ButtonRegister>
     </>
   );

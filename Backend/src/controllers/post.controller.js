@@ -34,30 +34,22 @@ export const postEmployees = async (req, res) => {
       nombres,
       apellidos,
       edad,
-      fechaNacimiento,
-      ciudadNacimiento,
-      dptoNacimiento,
-      nacionalidad,
       direccion,
       telefono,
       correo,
       contraseña,
     } = req.body;
     const [row] = await pool.query(
-      "INSERT INTO employees (id_empleado, nombres, apellidos, edad, fechaNacimiento, ciudadNacimiento, dptoNacimiento, nacionalidad, direccion,telefono, correo, contraseña) VALUE (?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO employees (id_empleado, nombres, apellidos, edad, direccion,telefono, correo, contraseña) VALUE (?,?,?,?,?,?,?,?)",
       [
         id_empleado,
         nombres,
         apellidos,
         edad,
-        fechaNacimiento,
-        ciudadNacimiento,
-        dptoNacimiento,
-        nacionalidad,
         direccion,
         telefono,
         correo,
-        contraseña,
+        contraseña
       ]
     );
     res.send({
@@ -65,14 +57,10 @@ export const postEmployees = async (req, res) => {
       nombres,
       apellidos,
       edad,
-      fechaNacimiento,
-      ciudadNacimiento,
-      dptoNacimiento,
-      nacionalidad,
       direccion,
       telefono,
       correo,
-      contraseña,
+      contraseña
     });
   } catch (error) {
     console.log(error);
@@ -81,6 +69,8 @@ export const postEmployees = async (req, res) => {
     });
   }
 };
+
+/* Consulta para crear vehiculos */
 
 export const postVehicle = async (req, res) => {
   try {

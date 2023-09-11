@@ -60,10 +60,10 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
         {showTableClient && (
         <TableClient
           id_employee={"0001"}
-          name="Sergio"
+/*           name="Sergio"
           email={"dev.sershcodes@gmail.com"}
           phone={"+57 300 000 0000"}
-          address={"Av. Kalet St Toronto 256"}
+          address={"Av. Kalet St Toronto 256"} */
           editUser={"fa-solid fa-pen-to-square"}
           createVehicle={"fa-solid fa-car"}
           deleteUser={"fa-solid fa-trash-can"}
@@ -74,14 +74,14 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
 
         {showTableStaff && (
         <TableStaff
-          id_employee={'1143168571'}
+          /* id_employee={'1143168571'}
           name={"Johan"}
-          lastname={'Díaz'}
+          lastname={'Díaz'} */
           gender={'Masculino'}
-          age={'23'}
+          /* age={'23'}
           phone={"+57 304 526 4366"}
           address={"Av. Kalet St Toronto 256"}
-          email={"dev.beecodes@gmail.com"}
+          email={"dev.beecodes@gmail.com"} */
           editUser={"fa-solid fa-pen-to-square"}
           deleteUser={"fa-solid fa-trash-can"}
         />
@@ -91,14 +91,14 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
 
         {showTableVehicle && (
         <TableVehicle
-          id_vehicle={'0001'}
+          id_vehicle={"0001"}
           vehicle_type={"Moto"}
-          brand={"Boxer"}
-          model={'CT KS'}
-          color={'Negro'}
-          year={'2022'}
+          /* brand={"Boxer"}
+          model={'CT KS'} */
+          /* color={'Negro'} */
+          /* year={'2022'}
           patent={"AEP41G"}
-          vin={"1HG8902JJNS9S"}
+          vin={"1HG8902JJNS9S"} */
           editUser={"fa-solid fa-pen-to-square"}
           deleteUser={"fa-solid fa-trash-can"}
         />

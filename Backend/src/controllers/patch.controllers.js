@@ -68,6 +68,7 @@ export const updateEmployees = async (req, res) => {
   }
 };
 
+/* Consulta para actualizar vehiculos */
 
 export const updateVehicle = async (req, res) => {
   try {

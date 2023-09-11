@@ -10,6 +10,7 @@ const FormClient = () => {
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
 
+  /* Funcion para crear clientes */
   const handletSumit = async (e) => {
     if (
       identification === "" ||
@@ -35,6 +36,7 @@ const FormClient = () => {
           console.log(Response.data);
           alert("Cliente registrado");
         });
+        window.location.reload();
     }
 
     /* Funcion que limpa los inputs */

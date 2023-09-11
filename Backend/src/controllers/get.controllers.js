@@ -26,6 +26,7 @@ export const getEmployees = async(req, res) => {
   }
 }
 
+/* Consulta para traer toda la tabla vehicle */
 
 export const getVehicle = async (req, res) => {
   try {

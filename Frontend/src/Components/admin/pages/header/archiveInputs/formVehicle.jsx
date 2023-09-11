@@ -1,6 +1,53 @@
+import axios from "axios";
+import { useState } from "react";
 import styled from "styled-components";
 
 const FormVehicle = () => {
+  const [matricula, setMatricula] = useState("");
+  const [tarjetaPropiedad, setTarjetaPropiedad] = useState("");
+  const [marca, setMarca] = useState("");
+  const [modelo, setModelo] = useState("");
+  const [año, setAño] = useState("");
+  const [color, setColor] = useState("");
+  const [vin, setVin] = useState("");
+  const [observacion, setObservacion] = useState("");
+
+  /* Funcion para crear vehiculos */
+  const handletSumit = async (e) => {
+    if (
+      matricula === "" ||
+      tarjetaPropiedad === "" ||
+      marca === "" ||
+      modelo === "" ||
+      año === "" ||
+      color === "" ||
+      vin === "" ||
+      observacion === ""
+    ) {
+      e.preventDefault();
+      alert("Por favor llenar todos los campos");
+    } else {
+      await axios
+        .post("http://localhost:3005/postvehicle", {
+          matricula: matricula,
+          tarjetaPropiedad: tarjetaPropiedad,
+          marca: marca,
+          modelo: modelo,
+          año: año,
+          color: color,
+          vin: vin,
+          observacion: observacion,
+        })
+        .then((Response) => {
+          console.log(Response.data);
+          alert("Vehiculo registrado");
+        });
+      window.location.reload();
+    }
+
+    /* Funcion que limpa los inputs */
+  };
+
   return (
     <>
       <ContainForm>
@@ -14,20 +61,43 @@ const FormVehicle = () => {
           </ContentInput>
 
           <ContentInput className="display">
-            <Input type="text" placeholder="Marca" autoComplete="off" />
-            <Input type="text" placeholder="Modelo" autoComplete="off" />
+            <Input type="text" 
+            placeholder="Marca" 
+            value={marca}
+            onChange={(e)=>setMarca(e.target.value)}
+            autoComplete="off" />
+            <Input type="text" 
+            placeholder="Modelo"
+            value={modelo}
+            onChange={(e)=>setModelo(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Año" autoComplete="off" />
+            <Input type="text" 
+            placeholder="Año" 
+            value={año}
+            onChange={(e)=>setAño(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
-
 
           <ContentInput>
             <Input
               type="text"
               placeholder="Placa del vehículo"
               autoComplete="off"
+              value={matricula}
+              onChange={(e)=>setMatricula(e.target.value)}
+              required
+            />
+          </ContentInput>
+          <ContentInput>
+            <Input
+              type="text"
+              placeholder="Tarjeta de propiedad"
+              autoComplete="off"
+              value={tarjetaPropiedad}
+              onChange={(e)=>setTarjetaPropiedad(e.target.value)}
               required
             />
           </ContentInput>
@@ -36,24 +106,35 @@ const FormVehicle = () => {
             <Input
               type="text"
               placeholder="Color del vehículo"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
               autoComplete="off"
               required
             />
-          </ContentInput>          
-
-          <ContentInput>
-            <Input type="tel" placeholder="VIN" autoComplete="off" />
           </ContentInput>
 
           <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones (Estado entrante del vehículo)"></TextArea>
+            <Input type="tel" 
+            placeholder="VIN"
+            value={vin}
+            onChange={(e)=>setVin(e.target.value)}
+            autoComplete="off" />
           </ContentInput>
 
+          <ContentInput>
+            <TextArea
+              cols={30}
+              rows={5}
+              value={observacion}
+              onChange={(e)=>setObservacion(e.target.value)}
+              placeholder="Observaciones (Estado entrante del vehículo)"
+            ></TextArea>
+          </ContentInput>
         </Form>
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister>Registrar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
       </ButtonRegister>
     </>
   );

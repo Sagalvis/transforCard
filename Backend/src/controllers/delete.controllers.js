@@ -54,6 +54,8 @@ export const deleteEmployees = async (req, res) => {
   }
 };
 
+/* Consulta para eliminar vehiculos  */
+
 export const deleteVehicle = async(req, res) => {
   try {
     const {matricula} = req.params;
