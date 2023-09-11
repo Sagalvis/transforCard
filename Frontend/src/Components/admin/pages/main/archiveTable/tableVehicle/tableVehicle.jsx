@@ -13,11 +13,7 @@ import {
 } from "./styledTableVehicle";
 import axios from "axios";
 
-const TableVehicle = ({
-  vehicle_type,
-  editUser,
-  deleteUser,
-}) => {
+const TableVehicle = ({ vehicle_type, editUser, deleteUser }) => {
   /* Consulta para traer la tabla clientes */
   const [vehicle, setVehicle] = useState([]);
 

@@ -13,11 +13,7 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 
-const TableClient = ({
-  editUser,
-  createVehicle,
-  deleteUser,
-}) => {
+const TableClient = ({ editUser, createVehicle, deleteUser}) => {
   /* Consulta para traer la tabla clientes */
   const [customer, setCustomer] = useState([]);
 

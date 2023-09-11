@@ -13,11 +13,7 @@ import {
 } from "./styledTableStaff";
 import axios from "axios";
 
-const TableStaff = ({
-  gender,
-  editUser,
-  deleteUser,
-}) => {
+const TableStaff = ({ gender, editUser, deleteUser }) => {
   const [employees, setEmployees] = useState([]);
 
   const getEmployees = async () => {
