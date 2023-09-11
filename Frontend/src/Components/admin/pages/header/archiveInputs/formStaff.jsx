@@ -8,7 +8,7 @@ const FormStaff = () => {
           <ContentInput>
             <Select>
               <Option value="0">-Seleccione tipo de persona-</Option>
-              {/* <Option value="company">EMPRESA</Option> */}
+              <Option value="company">EMPRESA</Option>
               <Option value="person">PERSONA</Option>
             </Select>
           </ContentInput>
@@ -25,17 +25,43 @@ const FormStaff = () => {
             <Input type="text" placeholder="Documento" autoComplete="off" />
           </ContentInput>
 
-          <ContentInput className="input-display">
-            <Select className="select-display">
-              <Option value="0">-Seleccione su país-</Option>
-            </Select>
-            <Input
-              className="input-display"
-              type="tel"
-              placeholder="Telefono"
-              autoComplete="off"
-            />
+          
+
+          <ContentInput>
+            <Input type="text" placeholder="Edad" autoComplete="off" />
           </ContentInput>
+
+          <ContentInput className="input-display">
+            {/* <Select className="select-display">
+              <Option value="0">-Estado civil-</Option>
+            </Select> */}
+            <Select className="select-display">
+              <Option value="0">-Sexo-</Option>
+            </Select>
+
+          </ContentInput>
+          
+
+          <ContentInput>
+            <Input type="tel" placeholder="Telefono" autoComplete="off" />
+          </ContentInput>
+
+          {/* <ContentInput>
+            <Input type="text" placeholder="Fecha de nacimiento" autoComplete="off" />
+          </ContentInput> */}
+
+          {/* <ContentInput>
+            <Input type="text" placeholder="Nacionalidad" autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput>
+            <Input type="text" placeholder="Ciudad de nacimiento" autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput>
+            <Input type="text" placeholder="Dpt de nacimiento" autoComplete="off" />
+          </ContentInput> */}
+
 
           <ContentInput>
             <Input type="text" placeholder="Dirección" autoComplete="off" />
@@ -49,6 +75,13 @@ const FormStaff = () => {
               required
             />
           </ContentInput>
+
+          {/* <ContentInput className="input-display">
+            <Select className="select-display">
+              <Option value="0">-EPS-</Option>
+            </Select>
+
+          </ContentInput> */}
 
           {/* <ContentInput>
             <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>

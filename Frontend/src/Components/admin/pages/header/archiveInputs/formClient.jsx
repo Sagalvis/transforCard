@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const FormClient = () => {
-  const [identificacion, setIdentificacion] = useState("");
+  const [identification, setIdentificacion] = useState("");
   const [nombres, setNombres] = useState("");
   const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
@@ -12,7 +12,7 @@ const FormClient = () => {
 
   const handletSumit = async (e) => {
     if (
-      identificacion === "" ||
+      identification === "" ||
       nombres === "" ||
       apellidos === "" ||
       correo === "" ||
@@ -24,19 +24,33 @@ const FormClient = () => {
     } else {
       await axios
         .post("http://localhost:3005/postcustomer", {
-          identificacion: identificacion,
+          identification: identification,
           name: nombres,
           last_name: apellidos,
           email: correo,
           adress: direccion,
-          phone: telefono,
+          tel: telefono,
         })
         .then((Response) => {
           console.log(Response.data);
           alert("Cliente registrado");
         });
     }
+
+    /* Funcion que limpa los inputs */
+    setIdentificacion("");
+    setNombres("");
+    setApellidos("");
+    setCorreo("");
+    setDireccion("");
+    setTelefono("");
   };
+
+  //funcion que permite solo escribir numeros en el input.
+  function acceptNum(evt) {
+    const input = evt.target.value;
+    evt.target.value = input.replace(/[^\d]/g, "");
+  }
   return (
     <>
       <ContainForm>
@@ -50,15 +64,35 @@ const FormClient = () => {
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Nombres" autoComplete="off" />
+            <Input
+              type="text"
+              value={nombres}
+              onChange={(e) => setNombres(e.target.value)}
+              placeholder="Nombres"
+              autoComplete="off"
+            />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Apellidos" autoComplete="off" />
+            <Input
+              type="text"
+              placeholder="Apellidos"
+              value={apellidos}
+              onChange={(e) => setApellidos(e.target.value)}
+              autoComplete="off"
+            />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Documento" autoComplete="off" />
+            <Input
+              type="numb"
+              placeholder="Documento"
+              value={identification}
+              onChange={(e) => setIdentificacion(e.target.value)}
+              onInput={(evt) => acceptNum(evt)}
+              maxLength={15}
+              autoComplete="off"
+            />
           </ContentInput>
 
           <ContentInput className="input-display">
@@ -69,12 +103,22 @@ const FormClient = () => {
               className="input-display"
               type="tel"
               placeholder="Telefono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              onInput={(evt) => acceptNum(evt)}
+              maxLength={10}
               autoComplete="off"
             />
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" placeholder="Dirección" autoComplete="off" />
+            <Input
+              type="text"
+              placeholder="Dirección"
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+              autoComplete="off"
+            />
           </ContentInput>
 
           <ContentInput>
@@ -82,6 +126,8 @@ const FormClient = () => {
               type="email"
               placeholder="Correo electronico"
               autoComplete="off"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
               required
             />
           </ContentInput>
