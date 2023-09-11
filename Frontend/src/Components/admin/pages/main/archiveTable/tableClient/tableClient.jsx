@@ -58,8 +58,8 @@ const TableClient = ({
                 <Td>{item.name}</Td>
                 <Td>{item.last_name}</Td>
                 <Td>{item.email}</Td>
-                <Td>{item.adress}</Td>
                 <Td>{item.tel}</Td>
+                <Td>{item.adress}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons title="Editar cliente">

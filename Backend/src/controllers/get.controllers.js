@@ -1,7 +1,7 @@
 /* importacion de la base de la base de datos para hace las consultas */
 import {pool} from "../dbconfig.js";
 
-/* consulta para traer toda la tabla de clientes */
+/* consulta para traer toda la tabla de customer */
 export const getCustomer = async(req, res) => {
   try {
     const [row] = await pool.query("SELECT * FROM customer");
@@ -13,7 +13,7 @@ export const getCustomer = async(req, res) => {
   }
 };
 
-/* Consulta para traer toda la tabla empleados */
+/* Consulta para traer toda la tabla employees */
 
 export const getEmployees = async(req, res) => {
   try {
