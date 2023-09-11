@@ -12,3 +12,28 @@ export const getCustomer = async(req, res) => {
     });
   }
 };
+
+/* Consulta para traer toda la tabla empleados */
+
+export const getEmployees = async(req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM employees");
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}
+
+
+export const getVehicle = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM vehicle");
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}
