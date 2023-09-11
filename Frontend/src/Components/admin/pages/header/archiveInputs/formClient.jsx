@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -48,6 +48,29 @@ const FormClient = () => {
     setTelefono("");
   };
 
+  /* useEffect(() => {
+    const fetchData = async () => {
+      const responseVehicle = await Axios.get(
+        "http://localhost:3005/selectvechicle"
+      );
+      setTipoVehicle(responseVehicle.data);
+      const responseCombustible = await Axios.get(
+        "http://localhost:3005/selectcombustible"
+      );
+      setTipoCombustible(responseCombustible.data);
+      const responseCarroceria = await Axios.get(
+        "http://localhost:3005/selectcarroceria"
+      );
+      setTipoCarroceria(responseCarroceria.data);
+    };
+    fetchData();
+  }, []); */
+
+  useEffect(()=>{
+    const fetchdata = async () =>{
+      
+    }
+  },[])
   //funcion que permite solo escribir numeros en el input.
   function acceptNum(evt) {
     const input = evt.target.value;

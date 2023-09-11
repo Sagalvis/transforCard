@@ -37,4 +37,13 @@ export const getVehicle = async (req, res) => {
       message: "Error en el servidor"
     });
   }
+};
+
+
+export const getSelectypevehicle = async(req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM tipo_vehiculo")
+  } catch (error) {
+    
+  }
 }
