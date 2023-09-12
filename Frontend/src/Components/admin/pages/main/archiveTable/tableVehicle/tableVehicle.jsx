@@ -13,14 +13,15 @@ import {
 } from "./styledTableVehicle";
 import axios from "axios";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable}) => {
+const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer}) => {
   /* Consulta para traer la tabla clientes */
   const [vehicle, setVehicle] = useState([]);
 
   const getVehicle = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/vehicle");
+      const res = await axios.get(`http://localhost:3005/vehicle/${getCustomer.identificacion}`);
       setVehicle(res.data);
+      console.log("res vehiculo",res)
     } catch (error) {
       console.log(error);
     }
