@@ -157,6 +157,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         </ControlHandle>
       </ContainHandlePage>
 
+      {/* MODALES  */}
+      
       <Modals
         status={handleCloseVehicle}
         changeStatus={setHandleCloseVehicle}
@@ -208,7 +210,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       >
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}
-          
+
           <EditFormClient />
         </ContainInfoModal>
       </Modals>
