@@ -42,7 +42,7 @@ const EditFormClient = ({getCustomer}) => {
         })
         .then((Response) => {
           console.log("actualizador",Response.data);
-          alert("Cliente registrado");
+          alert("Cliente actualizado");
         });
         window.location.reload();
     }
