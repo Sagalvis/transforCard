@@ -25,6 +25,7 @@ export const postCustomer = async (req, res) => {
 export const postEmployees = async (req, res) => {
   try {
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } = req.body;
+    const nueva = await pool.query()
     const [row] = await pool.query(
       "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
       [id_empleado, nombre, apellido, correo, contraseña,id_rol]
