@@ -21,6 +21,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState('');
 
+  // Variable de estado para capturar al cliente
+  const [id, setId] = useState(null);
+
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
@@ -28,10 +31,16 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   //Metodo de filtrado (en espera...)
 
+  //Metodo para capturar al cliente en modal edit
+  const Captura = (item) => {
+    setId(item)
+    setHandleEdit(!handleEdit)
+  }
   const getCustomer = async () => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
       setCustomer(res.data);
+      console.log("get usuario",res.data)
     } catch (error) {
       console.log(error);
     }
@@ -93,8 +102,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
               <Th>Nombre</Th>
               <Th>Apellido</Th>
               <Th>Email</Th>
-              <Th>Celular</Th>
               <Th>Dirección</Th>
+              <Th>Celular</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -109,7 +118,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                 <Td>{item.tel}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons onClick={() => setHandleEdit(!handleEdit)} title="Editar cliente">
+                    <Buttons onClick={() => Captura(item)} title="Editar cliente">
                       <i className={editUser}></i>
                     </Buttons>
                     <Buttons
@@ -208,7 +217,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       >
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}
-          <EditFormClient />
+          <EditFormClient getCustomer={id}/>
         </ContainInfoModal>
       </Modals>
     </>
