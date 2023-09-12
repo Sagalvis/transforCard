@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import TableClient from "./archiveTable/tableClient/tableClient";
+import TableInventory from "./archiveTable/tableInventory/tableInventory";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
 // import TableVehicle from "./archiveTable/tableVehicle/tableVehicle";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
+const Main = ({showTableClient, showTableStaff, showTableVehicle, showTableInventory}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
@@ -37,6 +38,13 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle}) => {
           deleteVehicleTable={"fa-solid fa-trash-can"}
         />
         )} */}
+
+        {showTableInventory &&
+        <TableInventory
+        editVehicleTable={"fa-solid fa-pen-to-square"}
+        deleteVehicleTable={"fa-solid fa-trash-can"}
+        />
+        }
       </ContainMain>
     </>
   );

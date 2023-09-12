@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch,ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul, } from "./styledTableClient";
+import {ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch,ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul} from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
@@ -20,14 +20,15 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState('');
-
-  // Variable de estado para capturar al cliente
-  const [id, setId] = useState(null);
-
+  
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
+
+  // Variable de estado para capturar al cliente
+  const [id, setId] = useState(null);
+
 
   //Metodo de filtrado (en espera...)
 
