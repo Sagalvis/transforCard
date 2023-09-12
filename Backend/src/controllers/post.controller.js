@@ -5,13 +5,13 @@ import jwt from "jsonwebtoken";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
-    const { identificacion, nombre, apellido, correo, direccion, tel } =
+    const { identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente } =
       req.body;
     const [row] = await pool.query(
-      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel) VALUE(?,?,?,?,?,?)",
-      [identificacion, nombre, apellido, correo, direccion, tel]
+      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente) VALUE(?,?,?,?,?,?,?,?)",
+      [identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente]
     );
-    res.send({ identificacion, nombre, apellido, correo, direccion, tel });
+    res.send({ identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
