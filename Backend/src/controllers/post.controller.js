@@ -1,6 +1,7 @@
 /* importacion de la base de la base de datos para hace las consultas */
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt"
 
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
@@ -25,11 +26,13 @@ export const postCustomer = async (req, res) => {
 export const postEmployees = async (req, res) => {
   try {
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } = req.body;
+    const password = req.body.password;
+    bcrypt.hash(password, 8)
     const [row] = await pool.query(
       "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
       [id_empleado, nombre, apellido, correo, contraseña,id_rol]
-    );
-    res.send({ id_empleado, nombre, apellido, correo, contraseña,id_rol });
+      );
+      res.send({ id_empleado, nombre, apellido, correo, contraseña,id_rol });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
