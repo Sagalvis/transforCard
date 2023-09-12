@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
+import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
 
 const TableStaff = ({editUser, deleteUser}) => {
   const [employees, setEmployees] = useState([]);
@@ -93,7 +94,7 @@ const TableStaff = ({editUser, deleteUser}) => {
       changePosition={"start"}
       >
         <ContainInfoModal>
-          <>Informacion del modal empleado</>
+          <EditFormStaff />
         </ContainInfoModal>
       </Modals>
     </>
