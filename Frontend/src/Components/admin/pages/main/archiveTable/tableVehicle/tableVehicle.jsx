@@ -28,6 +28,14 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
     }
   };
 
+  /* const UpdateVehicle = async () => {
+    try {
+      const result = await axios.patch(`http://localhost:3005/patchvehicle/${}`);
+    } catch (error) {
+      console.log(error)
+    }
+  } */
+
   const deleteVehicle = async (item) => {
     try {
       const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`);

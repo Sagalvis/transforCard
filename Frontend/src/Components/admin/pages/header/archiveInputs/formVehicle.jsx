@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const FormVehicle = () => {
+const FormVehicle = ({getCustomer3}) => {
   const [matricula, setMatricula] = useState("");
   const [tarjetaPropiedad, setTarjetaPropiedad] = useState("");
   const [marca, setMarca] = useState("");
@@ -28,7 +29,6 @@ const FormVehicle = () => {
       color === "" ||
       vin === "" ||
       observacion === "" ||
-      identificacion === "" ||
       selectVehicle === ""
     ) {
       e.preventDefault();
@@ -58,6 +58,12 @@ const FormVehicle = () => {
     setSelectVehicle(0);
   };
 
+  useEffect(() => {
+    if (getCustomer3) {
+      setIdentificacion(getCustomer3)
+    }
+}, [getCustomer3]);
+
   useEffect(()=>{
     const fetchdata = async () =>{
       const responseVehicle = await axios.get(
@@ -86,11 +92,9 @@ const FormVehicle = () => {
           </ContentInput>
 
           <ContentInput>
-            <Input type="text" 
-            placeholder="Cedula"
-            value={identificacion}
-            onChange={(e)=>setIdentificacion(e.target.value)}
-            autoComplete="off" />
+            <Cedula 
+            value={identificacion} 
+            onChange={(e)=>setIdentificacion(e.target.value)}>{identificacion}</Cedula>
           </ContentInput>
 
           <ContentInput className="display">
@@ -222,7 +226,11 @@ export const Select = styled.select`
   font-size: 15px;
   font-family: "Outfit";
 `;
-
+export const Cedula = styled.div`
+  background-color: red;
+  height: 30px;
+  width: 100%;
+`
 export const Option = styled.option``;
 
 export const Input = styled.input`
