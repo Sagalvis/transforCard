@@ -12,12 +12,15 @@ import {
   Tr,
 } from "./styledTableStaff";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
+import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
 
-const TableStaff = ({
-  editUser,
-  deleteUser,
-}) => {
+const TableStaff = ({editUser, deleteUser}) => {
   const [employees, setEmployees] = useState([]);
+
+  // Variable de estado para modal de editar empleado
+  const [handleEditEmployee, setHandleEditEmployee] = useState(false);
 
   const getEmployees = async () => {
     try {
@@ -27,6 +30,19 @@ const TableStaff = ({
       console.log(error);
     }
   };
+
+  const deleteStaff = async (item) => {
+    try {
+      const result = await axios.delete(
+        `http://localhost:3005/deleteemployees/${item.id_empleado}`
+      );
+      console.log(result);
+      alert("empleado eliminado");
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     getEmployees();
   }, [setEmployees]);
@@ -39,6 +55,7 @@ const TableStaff = ({
           <Thead>
             <Tr>
               <Th>ID_Empleado</Th>
+              <Th>Rol</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
               <Th>Email</Th>
@@ -49,15 +66,16 @@ const TableStaff = ({
             {employees.map((item, i) => (
               <Tr key={i}>
               <Td>{item.id_empleado}</Td>
+              <Td>{item.rol}</Td>
               <Td>{item.nombre}</Td>
               <Td>{item.apellido}</Td>
               <Td>{item.correo}</Td>
               <Td>
                 <ButtonOptions>
-                  <Buttons title="Editar cliente">
+                  <Buttons onClick={() => setHandleEditEmployee(!handleEditEmployee)} title="Editar cliente">
                     <i className={editUser}></i>
                   </Buttons>
-                  <Buttons title="Eliminar cliente">
+                  <Buttons onClick={()=> deleteStaff(item)} title="Eliminar cliente">
                     <i className={deleteUser}></i>
                   </Buttons>
                 </ButtonOptions>
@@ -67,6 +85,18 @@ const TableStaff = ({
           </Tbody>
         </Table>
       </ContainTable>
+
+      {/* Modal editar empleado  */}
+      <Modals
+      status={handleEditEmployee}
+      changeStatus={setHandleEditEmployee}
+      titleModal={"Editar empleado"}
+      changePosition={"start"}
+      >
+        <ContainInfoModal>
+          <EditFormStaff />
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };
