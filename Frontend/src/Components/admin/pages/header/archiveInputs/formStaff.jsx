@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const FormStaff = () => {
@@ -11,6 +11,10 @@ const FormStaff = () => {
   const [contraseña, setContraseña] = useState("");
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [tipoRol, setTipoRol] = useState([]);
+
+  const [selectRol, setSeletRol] = useState(0);
+
 
   /* Funcion para crear empleados */
   const handleSumit = async (e) => {
@@ -22,7 +26,8 @@ const FormStaff = () => {
       correo === "" ||
       contraseña === "" ||
       direccion === "" ||
-      telefono === ""
+      telefono === ""||
+      selectRol === ""
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -33,7 +38,8 @@ const FormStaff = () => {
           nombre: nombres,
           apellido: apellidos,
           correo: correo,
-          contraseña: contraseña
+          contraseña: contraseña,
+          id_rol: selectRol
         })
         .then((Response) => {
           console.log(Response.data);
@@ -50,20 +56,31 @@ const FormStaff = () => {
     setContraseña("");
     setDireccion("");
     setTelefono("");
+    setSeletRol(0);
   };
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      const responseRol = await axios.get("http://localhost:3005/tiporol");
+      setTipoRol(responseRol.data)
+    }
+    fetchdata()
+  },[])
   return (
     <>
       <ContainForm>
         <Form>
           <ContentInput>
-            <Select>
+            <Select value={selectRol} 
+            onChange={(e)=>setSeletRol(e.target.value)} 
+            >
               <Option value="0">-Seleccione el rol-</Option>
-              <Option value="admin">Administrador</Option>
-              <Option value="manager">Gerente</Option>
-              <Option value="workshop-leader">Lider de taller</Option>
-              <Option value="parts-advisor">Asesor de repuestos</Option>
-              <Option value="service-advisor">Asesor de servicio</Option>
-              <Option value="mechanic">Mecanico</Option>
+              {tipoRol.map((item,i)=>(
+                
+                <Option key={i} value={item.id_rol}>{item.rol}</Option>
+              ))
+
+              }
             </Select>
           </ContentInput>
 

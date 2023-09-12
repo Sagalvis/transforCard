@@ -28,7 +28,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable}) => {
 
   const deleteVehicle = async (item) => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.identificacion}`
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`
       );
       console.log(result);
       window.location.reload();

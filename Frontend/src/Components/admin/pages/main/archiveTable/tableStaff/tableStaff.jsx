@@ -27,6 +27,19 @@ const TableStaff = ({
       console.log(error);
     }
   };
+
+  const deleteStaff = async (item) => {
+    try {
+      const result = await axios.delete(
+        `http://localhost:3005/deleteemployees/${item.id_empleado}`
+      );
+      console.log(result);
+      alert("empleado eliminado");
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     getEmployees();
   }, [setEmployees]);
@@ -39,6 +52,7 @@ const TableStaff = ({
           <Thead>
             <Tr>
               <Th>ID_Empleado</Th>
+              <Th>Rol</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
               <Th>Email</Th>
@@ -49,6 +63,7 @@ const TableStaff = ({
             {employees.map((item, i) => (
               <Tr key={i}>
               <Td>{item.id_empleado}</Td>
+              <Td>{item.rol}</Td>
               <Td>{item.nombre}</Td>
               <Td>{item.apellido}</Td>
               <Td>{item.correo}</Td>
@@ -57,7 +72,7 @@ const TableStaff = ({
                   <Buttons title="Editar cliente">
                     <i className={editUser}></i>
                   </Buttons>
-                  <Buttons title="Eliminar cliente">
+                  <Buttons onClick={()=> deleteStaff(item)} title="Eliminar cliente">
                     <i className={deleteUser}></i>
                   </Buttons>
                 </ButtonOptions>
