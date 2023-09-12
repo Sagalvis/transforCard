@@ -138,18 +138,6 @@ const FormClient = () => {
                 </Option>
               ))}
             </Select>
-{/*             <SelectSearch list="opciones" 
-            onChange={(e)=>setSelectTipoPais(e.target.value)}
-            placeholder="Seleccione el pais..." />
-            <Datalist id="opciones" value={selectTipoPais}
-            >
-              {console.log(`hola ${selectTipoPais}`)}
-              {tipoPais.map((item, i) => (
-                <Option key={i} value={item.id_pais}>
-                  {item.nombrePais}
-                </Option>
-              ))}
-            </Datalist> */}
             <Input
               className="input-display"
               type="tel"
@@ -239,21 +227,6 @@ export const Select = styled.select`
   }
 `;
 
-export const SelectSearch = styled.input`
-  width: 100%;
-  padding: 2px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  outline: none;
-  background-color: #fff;
-  color: #000;
-  font-size: 15px;
-  font-family: "Outfit";
-`;
-
-export const Datalist = styled.datalist`
-
-`;
 
 export const Option = styled.option`
   /* background-color: red; */
