@@ -22,6 +22,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   // Variable de estado para capturar al cliente
   const [id, setId] = useState(null);
+  const [id2, setId2] = useState(null);
 
   const searching = (e) => {
     setSearch(e.target.value);
@@ -48,6 +49,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
+    setId2(item)
     console.log("la cedula aqui: ",item)
     if(item){
       setHandleCloseVehicle(!handleCloseVehicle)
@@ -192,7 +194,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
           <TableVehicle 
-            getCustomer = {id}
+            getCustomer2 = {id2}
             editVehicleTable={"fa-solid fa-pen-to-square"}
             deleteVehicleTable={"fa-solid fa-trash-can"}
           />

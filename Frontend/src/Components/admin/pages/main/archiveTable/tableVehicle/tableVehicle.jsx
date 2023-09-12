@@ -13,13 +13,14 @@ import {
 } from "./styledTableVehicle";
 import axios from "axios";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer}) => {
+const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
+  console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
 
   const getVehicle = async () => {
     try {
-      const res = await axios.get(`http://localhost:3005/vehicle/${getCustomer.identificacion}`);
+      const res = await axios.get(`http://localhost:3005/vehicle/${getCustomer2}`);
       setVehicle(res.data);
       console.log("res vehiculo",res)
     } catch (error) {
@@ -29,8 +30,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer}) => {
 
   const deleteVehicle = async (item) => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`
-      );
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`);
       console.log(result);
       window.location.reload();
     } catch (error) {
