@@ -160,7 +160,7 @@ const FormVehicle = () => {
               rows={5}
               value={observacion}
               onChange={(e)=>setObservacion(e.target.value)}
-              placeholder="Observaciones (Estado entrante del vehículo)"
+              placeholder="Observaciones, (Estado entrante del vehículo)"
             ></TextArea>
           </ContentInput>
 
@@ -214,7 +214,8 @@ export const ContentInput = styled.div`
 export const Select = styled.select`
   width: 100%;
   padding: 2px;
-  border-radius: 3px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   outline: none;
   background-color: #fff;
   color: #000;
@@ -226,7 +227,6 @@ export const Option = styled.option``;
 
 export const Input = styled.input`
   width: 100%;
-  border: none;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
@@ -247,7 +247,8 @@ export const Input = styled.input`
 
 export const TextArea = styled.textarea`
   width: 100%;
-  border: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 0;
   resize: none;
   box-sizing: border-box;

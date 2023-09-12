@@ -177,13 +177,15 @@ export const ContentInput = styled.div`
   &.display {
     display: flex;
     flex-direction: row;
+    gap: 3px;
   }
 `;
 
 export const Select = styled.select`
   width: 100%;
   padding: 2px;
-  border-radius: 3px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   outline: none;
   background-color: #fff;
   color: #000;
