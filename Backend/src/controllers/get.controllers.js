@@ -17,7 +17,7 @@ export const getCustomer = async(req, res) => {
 
 export const getEmployees = async(req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM empleado");
+    const [row] = await pool.query("SELECT empleado.*, rol_empleado.rol FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol ");
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -25,6 +25,18 @@ export const getEmployees = async(req, res) => {
     });
   }
 }
+
+export const getSelectRol = async (req,res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM rol_empleado")
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}
+
 
 /* Consulta para traer toda la tabla vehicle */
 
