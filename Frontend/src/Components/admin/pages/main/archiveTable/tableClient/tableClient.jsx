@@ -174,6 +174,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         titleModal={"Tus vehículos"}
         changePosition={"start"}
         showHeader={true}
+        showCloseButton={true}
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
@@ -205,6 +206,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         titleModal={"Crear vehículo nuevo"}
         changePosition={"start"}
         showHeader={true}
+        showCloseButton={true}
       >
         <ContainInfoModal>
           {/* Formaulario para registro de vehículos */}
@@ -219,6 +221,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         titleModal={"Editar cliente"}
         changePosition={"start"}
         showHeader={true}
+        showCloseButton={true}
       >
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}
