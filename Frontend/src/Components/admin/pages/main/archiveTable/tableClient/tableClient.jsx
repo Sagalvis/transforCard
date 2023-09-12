@@ -208,6 +208,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       >
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}
+          
           <EditFormClient />
         </ContainInfoModal>
       </Modals>

@@ -79,20 +79,13 @@ const FormStaff = () => {
             autoComplete="off" />
           </ContentInput>
 
-          <ContentInput>
+          <ContentInput className="display">
             <Input type="text" 
             placeholder="Documento" 
             value={identification}
             onChange={(e)=> setIdentification(e.target.value)}
             autoComplete="off" />
-          </ContentInput>
 
-          <ContentInput className="display">
-            <Select>
-              <Option value="0">-Seleccione el sexo-</Option>
-              <Option value="man">Hombre</Option>
-              <Option value="woman">Mujer</Option>
-            </Select>
             <Input type="text" 
             placeholder="Edad" 
             value={edad}
@@ -122,13 +115,6 @@ const FormStaff = () => {
             />
           </ContentInput>
 
-          {/* <ContentInput>
-            <Select className="select-display">
-              <Option value="0">-Estado civil-</Option>
-            </Select>
-
-          </ContentInput> */}
-
           <ContentInput>
             <Input type="tel" 
             placeholder="Teléfono" 
@@ -137,22 +123,6 @@ const FormStaff = () => {
             autoComplete="off" />
           </ContentInput>
 
-          {/* <ContentInput>
-            <Input type="text" placeholder="Fecha de nacimiento" autoComplete="off" />
-          </ContentInput> */}
-
-          {/* <ContentInput>
-            <Input type="text" placeholder="Nacionalidad" autoComplete="off" />
-          </ContentInput>
-
-          <ContentInput>
-            <Input type="text" placeholder="Ciudad de nacimiento" autoComplete="off" />
-          </ContentInput>
-
-          <ContentInput>
-            <Input type="text" placeholder="Dpt de nacimiento" autoComplete="off" />
-          </ContentInput> */}
-
           <ContentInput>
             <Input type="text" 
             placeholder="Dirección" 
@@ -160,17 +130,6 @@ const FormStaff = () => {
             onChange={(e) => setDireccion(e.target.value)}
             autoComplete="off" />
           </ContentInput>
-
-          {/* <ContentInput className="input-display">
-            <Select className="select-display">
-              <Option value="0">-EPS-</Option>
-            </Select>
-
-          </ContentInput> */}
-
-          {/* <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-          </ContentInput> */}
         </Form>
       </ContainForm>
 
