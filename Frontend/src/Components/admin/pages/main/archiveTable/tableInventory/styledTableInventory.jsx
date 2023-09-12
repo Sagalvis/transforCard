@@ -8,6 +8,23 @@ export const ContainCheck = styled.div`
   margin-bottom: 1.55rem;
 `;
 
+export const Btn_Create_Product = styled.button`
+  background: #041737;
+  display: inline-block;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Outfit';
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: #0c244e;
+  }
+`;
+
 export const Input = styled.input`
   padding: 4px;
   border: 1px solid #ccc;
@@ -68,9 +85,8 @@ export const ContainSearch = styled.div`
 export const ContainTable = styled.div`
   background-color: #fff;
   width: 100%;
-  max-height: 80%;
+  max-height: 75%;
   margin-bottom: 15px;
-  overflow-y: scroll;
 `;
 
 export const Table = styled.table`

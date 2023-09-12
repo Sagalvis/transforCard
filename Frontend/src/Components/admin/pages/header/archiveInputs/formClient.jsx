@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -9,7 +9,10 @@ const FormClient = () => {
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
-
+  const [tipoCliente, setTipoCliente] = useState([]);
+  const [tipoPais, setTipoPais] = useState([]);
+  const [selectTipoPais, setSelectTipoPais] = useState(0);
+  const [seletTipoCliente, setSelectTipoCliente] = useState(0);
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -19,7 +22,9 @@ const FormClient = () => {
       apellidos === "" ||
       correo === "" ||
       direccion === "" ||
-      telefono === "" 
+      telefono === "" ||
+      seletTipoCliente === "" ||
+      selectTipoPais === ""
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -32,12 +37,14 @@ const FormClient = () => {
           correo: correo,
           direccion: direccion,
           tel: telefono,
+          idpais: selectTipoPais,
+          id_tipo_cliente: seletTipoCliente,
         })
         .then((Response) => {
           console.log(Response.data);
           alert("Cliente registrado");
         });
-        window.location.reload();
+      window.location.reload();
     }
 
     /* Funcion que limpa los inputs */
@@ -47,9 +54,21 @@ const FormClient = () => {
     setCorreo("");
     setDireccion("");
     setTelefono("");
-    
+    setSelectTipoCliente(0);
+    setSelectTipoPais(0);
   };
 
+  useEffect(() => {
+    const fetchdata = async () => {
+      const responsePais = await axios.get("http://localhost:3005/tipopais");
+      setTipoPais(responsePais.data);
+      const responseCliente = await axios.get(
+        "http://localhost:3005/tipocliente"
+      );
+      setTipoCliente(responseCliente.data);
+    };
+    fetchdata();
+  }, []);
 
   //funcion que permite solo escribir numeros en el input.
   function acceptNum(evt) {
@@ -61,10 +80,16 @@ const FormClient = () => {
       <ContainForm>
         <Form>
           <ContentInput>
-            <Select>
+            <Select
+              value={seletTipoCliente}
+              onChange={(e) => setSelectTipoCliente(e.target.value)}
+            >
               <Option value="0">-Seleccione tipo de persona-</Option>
-              {/* <Option value="company">EMPRESA</Option> */}
-              <Option value="person">PERSONA</Option>
+              {tipoCliente.map((item, i) => (
+                <Option key={i} value={item.id_tipo_cliente}>
+                  {item.cliente_tipo}
+                </Option>
+              ))}
             </Select>
           </ContentInput>
 
@@ -101,8 +126,17 @@ const FormClient = () => {
           </ContentInput>
 
           <ContentInput className="display">
-            <Select className="select-display">
-              <Option value="0">-Seleccione su país-</Option>
+            <Select
+              className="select-display"
+              value={selectTipoPais}
+              onChange={(e) => setSelectTipoPais(e.target.value)}
+            >
+              <Option value="0">-Seleccione tipo de país-</Option>
+              {tipoPais.map((item, i) => (
+                <Option key={i} value={item.id_pais}>
+                  {item.id_pais}-{item.nombrePais}
+                </Option>
+              ))}
             </Select>
             <Input
               className="input-display"
@@ -136,10 +170,6 @@ const FormClient = () => {
               required
             />
           </ContentInput>
-
-          {/* <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-          </ContentInput> */}
         </Form>
       </ContainForm>
 
@@ -197,8 +227,9 @@ export const Select = styled.select`
   }
 `;
 
+
 export const Option = styled.option`
-  background-color: red;
+  /* background-color: red; */
 `;
 
 export const Input = styled.input`
