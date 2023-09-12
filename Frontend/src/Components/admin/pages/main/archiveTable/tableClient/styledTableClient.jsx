@@ -68,8 +68,9 @@ export const ContainSearch = styled.div`
 export const ContainTable = styled.div`
   background-color: #fff;
   width: 100%;
-  max-height: 75%;
+  max-height: 80%;
   margin-bottom: 15px;
+  overflow-y: scroll;
 `;
 
 export const Table = styled.table`
