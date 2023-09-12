@@ -10,5 +10,7 @@ getRouter.get('/employees', controllGet.getEmployees);
 getRouter.get('/vehicle', controllGet.getVehicle);
 getRouter.get('/tipovehicle', controllGet.getSelectypevehicle);
 getRouter.get('/tiporol', controllGet.getSelectRol);
+getRouter.get('/tipopais', controllGet.getSelectPais);
+getRouter.get('/tipocliente', controllGet.getTypeClient)
 
 export default getRouter
