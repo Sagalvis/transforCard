@@ -173,6 +173,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         changeStatus={setHandleCloseVehicle}
         titleModal={"Tus vehículos"}
         changePosition={"start"}
+        showHeader={true}
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
@@ -203,6 +204,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         changeStatus={setHandleOpenFormVehicle}
         titleModal={"Crear vehículo nuevo"}
         changePosition={"start"}
+        showHeader={true}
       >
         <ContainInfoModal>
           {/* Formaulario para registro de vehículos */}
@@ -216,6 +218,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         changeStatus={setHandleEdit}
         titleModal={"Editar cliente"}
         changePosition={"start"}
+        showHeader={true}
       >
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}

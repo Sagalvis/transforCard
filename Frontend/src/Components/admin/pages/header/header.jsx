@@ -46,6 +46,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
         changeStatus={setHandleClose}
         titleModal={titleModalPages}
         changePosition={"start"}
+        showHeader={true}
       >
         
         {/* Aqui el contenido */}

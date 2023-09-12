@@ -92,6 +92,8 @@ const TableStaff = ({editUser, deleteUser}) => {
       changeStatus={setHandleEditEmployee}
       titleModal={"Editar empleado"}
       changePosition={"start"}
+      showHeader={true}
+      showCloseButton={true}
       >
         <ContainInfoModal>
           <EditFormStaff />
