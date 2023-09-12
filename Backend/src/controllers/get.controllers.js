@@ -53,6 +53,18 @@ export const getVehicle = async (req, res) => {
   }
 };
 
+/* Consulta para traer el vehiculo por la identificacion del usuario*/
+export const getVehicleId = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT vehiculo.*, tipo_vehiculo.tipoVehiculo FROM vehiculo INNER JOIN tipo_vehiculo ON vehiculo.id_tipo_vehiculo = tipo_vehiculo.id_tipo_vehiculo WHERE identificacion = ?",[req.params.identificacion]);
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+};
+
 /* Consulta para traer toda la tabla tipo de vehiculo */
 
 export const getSelectypevehicle = async(req, res) => {

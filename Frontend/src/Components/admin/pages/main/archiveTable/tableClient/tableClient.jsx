@@ -1,17 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch,ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul, } from "./styledTableClient";
+import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul, } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
-import FormVehicle, {BtnRegister, ButtonRegister} from "../../../header/archiveInputs/formVehicle";
+import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
 const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
-
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
   const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
@@ -23,6 +22,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   // Variable de estado para capturar al cliente
   const [id, setId] = useState(null);
+  const [id2, setId2] = useState(null);
 
   const searching = (e) => {
     setSearch(e.target.value);
@@ -36,15 +36,28 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
     setId(item)
     setHandleEdit(!handleEdit)
   }
+
   const getCustomer = async () => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
       setCustomer(res.data);
-      console.log("get usuario",res.data)
+      console.log("get usuario", res.data)
     } catch (error) {
       console.log(error);
     }
   };
+  
+  //Metodo para mostrar los vehiculos por la cedula
+  const CapVehiculo = (item) => {
+    setId2(item)
+    console.log("la cedula aqui: ",item)
+    if(item){
+      setHandleCloseVehicle(!handleCloseVehicle)
+    }else{
+      alert("vergas")
+    }
+    
+  }
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async (item) => {
@@ -121,12 +134,14 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                     <Buttons onClick={() => Captura(item)} title="Editar cliente">
                       <i className={editUser}></i>
                     </Buttons>
+
                     <Buttons
-                      onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}
+                      onClick={() => CapVehiculo(item.identificacion)}
                       title="Vehículos"
                     >
                       <i className={createVehicle}></i>
                     </Buttons>
+
                     <Buttons
                       onClick={() => deleteClient(item)}
                       title="Eliminar cliente"
@@ -167,7 +182,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       </ContainHandlePage>
 
       {/* MODALES  */}
-      
+
       <Modals
         status={handleCloseVehicle}
         changeStatus={setHandleCloseVehicle}
@@ -178,7 +193,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
-          <TableVehicle
+          <TableVehicle 
+            getCustomer2 = {id2}
             editVehicleTable={"fa-solid fa-pen-to-square"}
             deleteVehicleTable={"fa-solid fa-trash-can"}
           />
@@ -225,7 +241,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       >
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}
-          <EditFormClient getCustomer={id}/>
+          <EditFormClient getCustomer={id} />
         </ContainInfoModal>
       </Modals>
     </>
