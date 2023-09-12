@@ -5,10 +5,8 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
-import FormVehicle, {
-  BtnRegister,
-  ButtonRegister,
-} from "../../../header/archiveInputs/formVehicle";
+import FormVehicle, {BtnRegister, ButtonRegister} from "../../../header/archiveInputs/formVehicle";
+import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
 const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   /* Variable de estado para traer clientes */
@@ -17,6 +15,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
   const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
+  const [handleEdit, setHandleEdit] = useState(false);
+
 
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState('');
@@ -109,7 +109,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                 <Td>{item.tel}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons title="Editar cliente">
+                    <Buttons onClick={() => setHandleEdit(!handleEdit)} title="Editar cliente">
                       <i className={editUser}></i>
                     </Buttons>
                     <Buttons
@@ -196,6 +196,19 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         <ContainInfoModal>
           {/* Formaulario para registro de vehículos */}
           <FormVehicle />
+        </ContainInfoModal>
+      </Modals>
+
+      {/* Modal para editar clientes  */}
+      <Modals
+        status={handleEdit}
+        changeStatus={setHandleEdit}
+        titleModal={"Editar cliente"}
+        changePosition={"start"}
+      >
+        <ContainInfoModal>
+          {/* Formaulario para editar clientes */}
+          <EditFormClient />
         </ContainInfoModal>
       </Modals>
     </>
