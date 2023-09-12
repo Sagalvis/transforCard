@@ -15,9 +15,13 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
+import AdvDelete from "../advdelete";
 
 const TableStaff = ({editUser, deleteUser}) => {
   const [employees, setEmployees] = useState([]);
+
+  // Variable de estado para modal de eliminar empleado
+  const [handleAdvDelete, setHandleAdvDelete] = useState(false)
 
   // Variable de estado para modal de editar empleado
   const [handleEditEmployee, setHandleEditEmployee] = useState(false);
@@ -75,7 +79,7 @@ const TableStaff = ({editUser, deleteUser}) => {
                   <Buttons onClick={() => setHandleEditEmployee(!handleEditEmployee)} title="Editar cliente">
                     <i className={editUser}></i>
                   </Buttons>
-                  <Buttons onClick={()=> deleteStaff(item)} title="Eliminar cliente">
+                  <Buttons onClick={() => setHandleAdvDelete(!handleAdvDelete)} title="Eliminar cliente">
                     <i className={deleteUser}></i>
                   </Buttons>
                 </ButtonOptions>
@@ -92,9 +96,23 @@ const TableStaff = ({editUser, deleteUser}) => {
       changeStatus={setHandleEditEmployee}
       titleModal={"Editar empleado"}
       changePosition={"start"}
+      showHeader={true}
+      showCloseButton={true}
       >
         <ContainInfoModal>
           <EditFormStaff />
+        </ContainInfoModal>
+      </Modals>
+
+      <Modals
+      status={handleAdvDelete}
+      changeStatus={setHandleAdvDelete}
+      changePosition={"center"}
+      showHeader={false}
+      showCloseButton={false}
+      >
+        <ContainInfoModal>
+          <AdvDelete/>
         </ContainInfoModal>
       </Modals>
     </>
@@ -102,3 +120,4 @@ const TableStaff = ({editUser, deleteUser}) => {
 };
 
 export default TableStaff;
+/* onClick={()=> deleteStaff(item)} */

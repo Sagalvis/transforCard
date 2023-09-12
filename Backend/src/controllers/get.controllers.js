@@ -24,7 +24,9 @@ export const getEmployees = async(req, res) => {
       message: "Error en el servidor"
     });
   }
-}
+};
+
+/* Consulta para traer toda la tabla rol de empleados */
 
 export const getSelectRol = async (req,res) => {
   try {
@@ -35,7 +37,7 @@ export const getSelectRol = async (req,res) => {
       message: "Error en el servidor"
     });
   }
-}
+};
 
 
 /* Consulta para traer toda la tabla vehicle */
@@ -51,6 +53,19 @@ export const getVehicle = async (req, res) => {
   }
 };
 
+/* Consulta para traer el vehiculo por la identificacion del usuario*/
+export const getVehicleId = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT vehiculo.*, tipo_vehiculo.tipoVehiculo FROM vehiculo INNER JOIN tipo_vehiculo ON vehiculo.id_tipo_vehiculo = tipo_vehiculo.id_tipo_vehiculo WHERE identificacion = ?",[req.params.identificacion]);
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+};
+
+/* Consulta para traer toda la tabla tipo de vehiculo */
 
 export const getSelectypevehicle = async(req, res) => {
   try {
@@ -61,8 +76,30 @@ export const getSelectypevehicle = async(req, res) => {
       message: "Error en el servidor"
     });
   }
-}
+};
+
+/* Conulta para traer toda la tabla tipo de cliente */ 
+
+export const getTypeClient = async(req, res) =>{
+  try {
+    const [row] = await pool.query("SELECT * FROM tipo_cliente")
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+};
+
+/* Consulta para traer toda la tabla tipo de pais */
 
 export const getSelectPais = async(req, res) => {
-  0
-}
+    try {
+      const [row] = await pool.query("SELECT * FROM pais")
+      res.send(row)
+    } catch (error) {
+      return res.status(500).json({
+        message: "Error en el servidor"
+      });
+    }
+};
