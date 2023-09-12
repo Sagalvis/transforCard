@@ -6,7 +6,6 @@ const FormStaff = () => {
   const [identification, setIdentification] = useState("");
   const [nombres, setNombres] = useState("");
   const [apellidos, setApellidos] = useState("");
-  const [edad, setEdad] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [direccion, setDireccion] = useState("");
@@ -22,7 +21,6 @@ const FormStaff = () => {
       identification === "" ||
       nombres === "" ||
       apellidos === "" ||
-      edad === "" ||
       correo === "" ||
       contraseña === "" ||
       direccion === "" ||
@@ -51,7 +49,6 @@ const FormStaff = () => {
     setIdentification("");
     setNombres("");
     setApellidos("") ;
-    setEdad("");
     setCorreo("");
     setContraseña("");
     setDireccion("");
