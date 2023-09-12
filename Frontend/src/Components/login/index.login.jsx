@@ -38,10 +38,10 @@ const Login = () => {
             correo: correo,
             contraseña: contraseña,
           }
-        ).then((response) => {
+        )
           window.location.href = "http://localhost:5173/";
           console.log(response);
-        });
+        
       } catch (error) {
         console.error(error);
         alert("Usuario y/o contraseña no validos");

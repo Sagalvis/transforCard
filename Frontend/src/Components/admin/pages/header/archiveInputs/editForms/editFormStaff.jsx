@@ -1,53 +1,47 @@
-/* eslint-disable react/prop-types */
-import {  useState, useEffect } from "react";
+import {  useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditFormClient = ({getCustomer}) => {
-  const [nombre, setNombres] = useState("");
-  const [apellido, setApellidos] = useState("");
+const EditFormStaff = () => {
+  const [identification, setIdentificacion] = useState("");
+  const [nombres, setNombres] = useState("");
+  const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
-  const [tel, setTelefono] = useState("");
-//TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
-  useEffect(() => {
-    if (getCustomer) {
-      setNombres(getCustomer.nombre);
-      setApellidos(getCustomer.apellido);
-      setCorreo(getCustomer.correo);
-      setDireccion(getCustomer.direccion);
-      setTelefono(getCustomer.tel)
-    }
-}, [getCustomer]);
+  const [telefono, setTelefono] = useState("");
+
+
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
     if (
-      nombre === "" ||
-      apellido === "" ||
+      identification === "" ||
+      nombres === "" ||
+      apellidos === "" ||
       correo === "" ||
       direccion === "" ||
-      tel === "" 
+      telefono === "" 
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
     } else {
       await axios
-        .patch(`http://localhost:3005/patchcustomer/${getCustomer.identificacion}`, {
-          // eslint-disable-next-line no-undef
-          nombre,
-          apellido,
-          correo,
-          direccion,
-          tel
+        .post("http://localhost:3005/postcustomer", {
+          identificacion: identification,
+          nombre: nombres,
+          apellido: apellidos,
+          correo: correo,
+          direccion: direccion,
+          tel: telefono,
         })
         .then((Response) => {
-          console.log("actualizador",Response.data);
+          console.log(Response.data);
           alert("Cliente registrado");
         });
         window.location.reload();
     }
 
     /* Funcion que limpa los inputs */
+    setIdentificacion("");
     setNombres("");
     setApellidos("");
     setCorreo("");
@@ -66,17 +60,18 @@ const EditFormClient = ({getCustomer}) => {
     <>
       <ContainForm>
         <Form>
-          {/* <ContentInput>
+          <ContentInput>
             <Select>
               <Option value="0">-Seleccione tipo de persona-</Option>
+              {/* <Option value="company">EMPRESA</Option> */}
               <Option value="person">PERSONA</Option>
             </Select>
-          </ContentInput> */}
+          </ContentInput>
 
           <ContentInput>
             <Input
               type="text"
-              value={nombre}
+              value={nombres}
               onChange={(e) => setNombres(e.target.value)}
               placeholder="Nombres"
               autoComplete="off"
@@ -87,13 +82,13 @@ const EditFormClient = ({getCustomer}) => {
             <Input
               type="text"
               placeholder="Apellidos"
-              value={apellido}
+              value={apellidos}
               onChange={(e) => setApellidos(e.target.value)}
               autoComplete="off"
             />
           </ContentInput>
 
-          {/* <ContentInput>
+          <ContentInput>
             <Input
               type="numb"
               placeholder="Documento"
@@ -103,8 +98,23 @@ const EditFormClient = ({getCustomer}) => {
               maxLength={15}
               autoComplete="off"
             />
-          </ContentInput> */}
+          </ContentInput>
 
+          <ContentInput className="display">
+            <Select className="select-display">
+              <Option value="0">-Seleccione su país-</Option>
+            </Select>
+            <Input
+              className="input-display"
+              type="tel"
+              placeholder="Telefono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              onInput={(evt) => acceptNum(evt)}
+              maxLength={10}
+              autoComplete="off"
+            />
+          </ContentInput>
 
           <ContentInput>
             <Input
@@ -116,22 +126,6 @@ const EditFormClient = ({getCustomer}) => {
             />
           </ContentInput>
 
-          <ContentInput className="display">
-            {/* <Select className="select-display">
-              <Option value="0">-Seleccione su país-</Option>
-            </Select> */}
-            <Input
-              className="input-display"
-              type="tel"
-              placeholder="Telefono"
-              value={tel}
-              onChange={(e) => setTelefono(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
-              maxLength={10}
-              autoComplete="off"
-            />
-          </ContentInput>
-          
           <ContentInput>
             <Input
               type="email"
@@ -150,13 +144,13 @@ const EditFormClient = ({getCustomer}) => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Actualizar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
       </ButtonRegister>
     </>
   );
 };
 
-export default EditFormClient;
+export default EditFormStaff;
 
 // Estilos de los inputs
 

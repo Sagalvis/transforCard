@@ -12,12 +12,15 @@ import {
   Tr,
 } from "./styledTableStaff";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
+import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
 
-const TableStaff = ({
-  editUser,
-  deleteUser,
-}) => {
+const TableStaff = ({editUser, deleteUser}) => {
   const [employees, setEmployees] = useState([]);
+
+  // Variable de estado para modal de editar empleado
+  const [handleEditEmployee, setHandleEditEmployee] = useState(false);
 
   const getEmployees = async () => {
     try {
@@ -69,7 +72,7 @@ const TableStaff = ({
               <Td>{item.correo}</Td>
               <Td>
                 <ButtonOptions>
-                  <Buttons title="Editar cliente">
+                  <Buttons onClick={() => setHandleEditEmployee(!handleEditEmployee)} title="Editar cliente">
                     <i className={editUser}></i>
                   </Buttons>
                   <Buttons onClick={()=> deleteStaff(item)} title="Eliminar cliente">
@@ -82,6 +85,18 @@ const TableStaff = ({
           </Tbody>
         </Table>
       </ContainTable>
+
+      {/* Modal editar empleado  */}
+      <Modals
+      status={handleEditEmployee}
+      changeStatus={setHandleEditEmployee}
+      titleModal={"Editar empleado"}
+      changePosition={"start"}
+      >
+        <ContainInfoModal>
+          <EditFormStaff />
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };

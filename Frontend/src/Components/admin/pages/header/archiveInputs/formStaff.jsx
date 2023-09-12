@@ -6,7 +6,6 @@ const FormStaff = () => {
   const [identification, setIdentification] = useState("");
   const [nombres, setNombres] = useState("");
   const [apellidos, setApellidos] = useState("");
-  const [edad, setEdad] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [direccion, setDireccion] = useState("");
@@ -22,7 +21,6 @@ const FormStaff = () => {
       identification === "" ||
       nombres === "" ||
       apellidos === "" ||
-      edad === "" ||
       correo === "" ||
       contraseña === "" ||
       direccion === "" ||
@@ -51,7 +49,6 @@ const FormStaff = () => {
     setIdentification("");
     setNombres("");
     setApellidos("") ;
-    setEdad("");
     setCorreo("");
     setContraseña("");
     setDireccion("");
@@ -86,27 +83,23 @@ const FormStaff = () => {
 
           <ContentInput className="display">
             <Input type="text" 
-            placeholder="Nombres"
-            value={nombres}
-            onChange={(e)=> setNombres(e.target.value)}
-            autoComplete="off" />
-            <Input type="text" placeholder="Apellidos" 
-            value={apellidos}
-            onChange={(e)=> setApellidos(e.target.value)}
-            autoComplete="off" />
-          </ContentInput>
-
-          <ContentInput className="display">
-            <Input type="text" 
             placeholder="Documento" 
             value={identification}
             onChange={(e)=> setIdentification(e.target.value)}
             autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput className="display">
 
             <Input type="text" 
-            placeholder="Edad" 
-            value={edad}
-            onChange={(e) => setEdad(e.target.value)}
+            placeholder="Nombres"
+            value={nombres}
+            onChange={(e)=> setNombres(e.target.value)}
+            autoComplete="off" />
+            
+            <Input type="text" placeholder="Apellidos" 
+            value={apellidos}
+            onChange={(e)=> setApellidos(e.target.value)}
             autoComplete="off" />
           </ContentInput>
 
@@ -132,6 +125,13 @@ const FormStaff = () => {
             />
           </ContentInput>
 
+          {/* <ContentInput>
+            <Select className="select-display">
+              <Option value="0">-Estado civil-</Option>
+            </Select>
+
+          </ContentInput> */}
+
           <ContentInput>
             <Input type="tel" 
             placeholder="Teléfono" 
@@ -140,6 +140,22 @@ const FormStaff = () => {
             autoComplete="off" />
           </ContentInput>
 
+          {/* <ContentInput>
+            <Input type="text" placeholder="Fecha de nacimiento" autoComplete="off" />
+          </ContentInput> */}
+
+          {/* <ContentInput>
+            <Input type="text" placeholder="Nacionalidad" autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput>
+            <Input type="text" placeholder="Ciudad de nacimiento" autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput>
+            <Input type="text" placeholder="Dpt de nacimiento" autoComplete="off" />
+          </ContentInput> */}
+
           <ContentInput>
             <Input type="text" 
             placeholder="Dirección" 
@@ -147,6 +163,17 @@ const FormStaff = () => {
             onChange={(e) => setDireccion(e.target.value)}
             autoComplete="off" />
           </ContentInput>
+
+          {/* <ContentInput className="input-display">
+            <Select className="select-display">
+              <Option value="0">-EPS-</Option>
+            </Select>
+
+          </ContentInput> */}
+
+          {/* <ContentInput>
+            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
+          </ContentInput> */}
         </Form>
       </ContainForm>
 
