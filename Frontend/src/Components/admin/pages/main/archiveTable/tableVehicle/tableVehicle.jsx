@@ -17,7 +17,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
+const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
@@ -98,6 +98,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
                     <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
                     </Buttons>
+                    <Buttons title="Observaciones" onClick={() => setHandleRemarks(!handleRemarks)}>
+                      <i className={showRemarks}></i>
+                    </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>
@@ -112,14 +115,13 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
       <Modals
       status={handleEditVehicle}
       changeStatus={setHandleEditVehicle}
-      titleModal={"Actualizar vehiculos"}
+      titleModal={"Actualizar vehículo actual"}
       showHeader={true}
       showCloseButton={true}
       changePosition={"start"}
       >
         <ContainInfoModal>
-          <EditFormVehicle
-          getVehicle={idVehicle}/>
+          <EditFormVehicle getVehicle={idVehicle}/>
         </ContainInfoModal>
       </Modals>
       
@@ -133,7 +135,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
       showCloseButton={true}
       >
         <ContainInfoModal>
-          Vehículo con una falla en la culata del motor.
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore voluptatem tenetur atque deleniti non quas consectetur adipisci repudiandae praesentium ipsa?</p>
         </ContainInfoModal>
       </Modals>
     </>
