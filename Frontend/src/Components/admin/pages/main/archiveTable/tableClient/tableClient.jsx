@@ -13,7 +13,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
   const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
-  const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(true);
+  const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
   const [handleEdit, setHandleEdit] = useState(false);
 
 
