@@ -13,14 +13,25 @@ import {
   Tr,
 } from "./styledTableVehicle";
 import axios from "axios";
-import Modals from "../../../archive/modals"
-const TableVehicle = ({editVehicleTable, showRemarks, deleteVehicleTable, getCustomer2}) => {
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
+import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
+
+const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
   // Variable de estado para filtrar busqueda
 
-
+  //Variable de estado modal
+  const [handleEditVehicle, setHandleEditVehicle] = useState(false)
+  //Variable de estado para capturar vehiculo 
+  const [idVehicle, setIdVehicle] = useState(null);
+  //Metodo para captura la placa en el modal
+  const CapturaVehicle = (item) => {
+    setIdVehicle(item)
+    setHandleEditVehicle(!handleEditVehicle)
+  }
 
   const getVehicle = async () => {
     try {
@@ -84,9 +95,6 @@ const TableVehicle = ({editVehicleTable, showRemarks, deleteVehicleTable, getCus
                     <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
                     </Buttons>
-                    <Buttons onClick={() => setHandleRemarks(!handleRemarks)} title="Editar vehículo">
-                      <i className={showRemarks}></i>
-                    </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>
@@ -112,7 +120,6 @@ const TableVehicle = ({editVehicleTable, showRemarks, deleteVehicleTable, getCus
           />
         </ContainInfoModal>
       </Modals>
-
     </>
   );
 };

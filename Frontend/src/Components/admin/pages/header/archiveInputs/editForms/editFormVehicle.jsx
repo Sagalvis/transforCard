@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditFormVehicle = ({ getVehicle, changeStatus }) => {
+const EditFormVehicle = ({ getVehicle/* , changeStatus */ }) => {
     //const [cedula, setCedula] = useState("");
     //const [tipo, setTipo] = useState("");
     const [marca, setMarca] = useState("");
