@@ -90,9 +90,9 @@ const FormVehicle = ({getCustomer3}) => {
           </ContentInput>
 
           <ContentInput>
-            <Cedula 
+            <ShowCedula 
             value={identificacion} 
-            onChange={(e)=>setIdentificacion(e.target.value)}>{identificacion}</Cedula>
+            onChange={(e)=>setIdentificacion(e.target.value)}>{identificacion}1143168571</ShowCedula>
           </ContentInput>
 
           <ContentInput className="display">
@@ -159,7 +159,7 @@ const FormVehicle = ({getCustomer3}) => {
           <ContentInput>
             <TextArea
               cols={30}
-              rows={5}
+              rows={3}
               value={observacion}
               onChange={(e)=>setObservacion(e.target.value)}
               placeholder="Observaciones, (Estado entrante del vehículo)"
@@ -224,10 +224,19 @@ export const Select = styled.select`
   font-size: 15px;
   font-family: "Outfit";
 `;
-export const Cedula = styled.div`
-  background-color: red;
-  height: 30px;
+export const ShowCedula = styled.div`
+  /* background-color: red; */
   width: 100%;
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f1f0f3;
+  color: #041737;
+  font-size: 17px;
+  font-family: "Outfit";
+  letter-spacing: 10px;
 `
 export const Option = styled.option``;
 
@@ -261,6 +270,7 @@ export const TextArea = styled.textarea`
   padding: 10px;
   font-family: "Outfit";
   font-size: 15px;
+  overflow-y: scroll;
 `;
 
 export const ButtonRegister = styled.div`
