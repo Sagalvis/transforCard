@@ -82,4 +82,7 @@ export const Buttons = styled.button`
     border-radius: 4px;
     
   }
+  .fa-clipboard {
+    font-size: 15px;
+  }
 `;

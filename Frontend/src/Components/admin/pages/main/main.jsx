@@ -5,13 +5,12 @@ import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient, showTableStaff, showTableVehicle, showTableInventory}) => {
+const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicleControl, showTableInventory}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
       <ContainMain>
         {/* Tabla de clientes */}
-
         {showTableClient && (
         <TableClient
           editUser={"fa-solid fa-pen-to-square"}
@@ -21,7 +20,6 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle, showTableInven
         )}
 
         {/* Tabla de empleados */}
-
         {showTableStaff && (
         <TableStaff
           editUser={"fa-solid fa-pen-to-square"}
@@ -30,13 +28,13 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle, showTableInven
         )}
 
         {/* Tabla de control de vehiculos */}
-        {showTableVehicle && (
+        {showTableVehicleControl && (
         <TableVehicleControl
           editVehicleTable={"fa-solid fa-pen-to-square"}
           deleteVehicleTable={"fa-solid fa-trash-can"}
         />
         )}
-
+        {/* Tabla de inventarios */}
         {showTableInventory &&
         <TableInventory
         editVehicleTable={"fa-solid fa-pen-to-square"}

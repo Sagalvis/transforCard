@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-undef */
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Overlay = styled.div`
   width: 100vw;
@@ -14,6 +14,15 @@ export const Overlay = styled.div`
   justify-content: center;
 `;
 
+/* Transitions */
+const right = keyframes`
+  from {
+    transform: translateY(-200%);
+  }
+  to {
+    transform: translateY(0)
+  }
+`
 export const ContainModal = styled.div`
   width: ${props => props.changeWidth ? props.changeWidth : "400px"};
   min-height: 150px;
@@ -23,15 +32,9 @@ export const ContainModal = styled.div`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 10px;
   top: 10px;
-    /* Transitions */
-    -webkit-transition-duration: 2s;
-  -webkit-transition-delay: 0.5s;
-  -webkit-transition-timing-function: linear;
-  transition-property: width height background-color font-size left top color;
-  transition-duration: 2s;
-  transition-delay: 0.5s;
-  transition-timing-function: linear;
+  animation: ${right} .5s ease;
 `;
+
 
 export const HeaderModal = styled.div`
   display: flex;

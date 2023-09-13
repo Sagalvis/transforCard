@@ -18,7 +18,7 @@ const Vehicle = () => {
 
     {/* Componente MAIN */}
     <Main
-    showTableVehicle={true}
+    showTableVehicleControl={true}
     />
 
     {/* Componente FOOTER */}
