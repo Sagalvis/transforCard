@@ -12,6 +12,7 @@ const Inventory = () => {
     titleButton={'Crear inventario'}
     titleModalPages={'Crear item nuevo'}
     showContentStaff={true}
+    showPlusButton={false}
     />
 
     {/* Componente MAIN  */}

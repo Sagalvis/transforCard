@@ -14,7 +14,7 @@ import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 
-const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
 
@@ -29,7 +29,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
         </ContainInfo>
 
         {/* Botones */}
-
+        {showPlusButton &&
         <ContainButtons>
           <Button
             title={titleButton}
@@ -38,6 +38,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
             <i className="fa-solid fa-plus"></i>
           </Button>
         </ContainButtons>
+        }
       </ContainHeader>
 
       {/* Modal reutilizable */}

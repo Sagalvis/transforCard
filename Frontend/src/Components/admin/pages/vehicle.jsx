@@ -13,6 +13,7 @@ const Vehicle = () => {
     titleButton={'Crear vehiculo'}
     titleModalPages={'Crear vehiculo nuevo'}
     showContentVehicle={true}
+    showPlusButton={true}
     />
 
     {/* Componente MAIN */}
