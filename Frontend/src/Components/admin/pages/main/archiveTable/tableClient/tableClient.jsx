@@ -203,7 +203,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         status={handleCloseVehicle}
         changeStatus={setHandleCloseVehicle}
         titleModal={"Tus vehículos"}
-        changePosition={"center"}
+        changePosition={"start"}
         showHeader={true}
         showCloseButton={true}
       >
