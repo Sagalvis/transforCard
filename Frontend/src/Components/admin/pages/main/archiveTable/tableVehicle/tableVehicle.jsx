@@ -17,7 +17,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
+const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
@@ -97,6 +97,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
                   <ButtonOptions>
                     <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
+                    </Buttons>
+                    <Buttons title="Observaciones">
+                      <i className={showRemarks}></i>
                     </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
