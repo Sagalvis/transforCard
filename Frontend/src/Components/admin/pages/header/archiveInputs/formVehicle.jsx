@@ -92,7 +92,7 @@ const FormVehicle = ({getCustomer3}) => {
           <ContentInput>
             <ShowCedula 
             value={identificacion} 
-            onChange={(e)=>setIdentificacion(e.target.value)}>{identificacion}1143168571</ShowCedula>
+            onChange={(e)=>setIdentificacion(e.target.value)}>{identificacion}</ShowCedula>
           </ContentInput>
 
           <ContentInput className="display">
