@@ -15,8 +15,8 @@ export const Overlay = styled.div`
 `;
 
 export const ContainModal = styled.div`
-  min-width: 450px;
-  min-height: 100px;
+  width: ${props => props.changeWidth ? props.changeWidth : "400px"};
+  min-height: 150px;
   background: #fff;
   position: relative;
   border-radius: 4px;
@@ -24,6 +24,13 @@ export const ContainModal = styled.div`
   padding: 10px;
   top: 10px;
     /* Transitions */
+    -webkit-transition-duration: 2s;
+  -webkit-transition-delay: 0.5s;
+  -webkit-transition-timing-function: linear;
+  transition-property: width height background-color font-size left top color;
+  transition-duration: 2s;
+  transition-delay: 0.5s;
+  transition-timing-function: linear;
 `;
 
 export const HeaderModal = styled.div`
