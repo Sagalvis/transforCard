@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import {
@@ -17,6 +18,16 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
+  // Variable de estado para filtrar busqueda
+  const [search, setSearch] = useState("")
+  //Función de busqueda
+  const searching = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
+
+  let resultsVehicle = []
+
 
   const getVehicle = async () => {
     try {

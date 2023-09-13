@@ -20,17 +20,40 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState('');
 
-  // Variable de estado para capturar al cliente
-  const [id, setId] = useState(null);
-  const [id2, setId2] = useState(null);
-  const [id3, setId3] = useState(null);
+  //funcion para traer los datos de la tabla a buscar
 
+  const searchTableClient = async () => {
+    try {
+      const responseSearch = await axios.get(
+        "http://localhost:3005/customer"
+      );
+      console.log(responseSearch.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  //Función de busqueda
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
 
-  //Metodo de filtrado (en espera...)
+  //Metodo de filtrado tabla cliente
+  let resultsCustomer = []
+
+  if(!search){
+    resultsCustomer = customer || []
+  }else{
+    resultsCustomer = customer.filter((dato) => 
+    dato.identificacion && dato.identificacion.toString().includes(search.toString())
+    )
+  }
+
+  // Variable de estado para capturar al cliente
+  const [id, setId] = useState(null);
+  const [id2, setId2] = useState(null);
+  const [id3, setId3] = useState(null);
 
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
@@ -38,6 +61,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
     setHandleEdit(!handleEdit)
   }
 
+  // Funcion para traer toda la tabla clientes
   const getCustomer = async () => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
@@ -56,7 +80,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
     if(item){
       setHandleCloseVehicle(!handleCloseVehicle)
     }else{
-      alert("vergas")
+      alert("Error")
     }
     
   }
@@ -76,6 +100,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   useEffect(() => {
     getCustomer();
+    searchTableClient();
   }, [setCustomer]);
 
   return (
@@ -123,7 +148,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {customer.map((item, i) => (
+            {resultsCustomer.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.nombre}</Td>
