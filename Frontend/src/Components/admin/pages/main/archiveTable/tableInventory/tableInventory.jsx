@@ -15,31 +15,6 @@ const TableInventory = ({ editVehicleTable, deleteVehicleTable}) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
-  
-  
-  const getVehicle = async () => {
-    try {
-      const res = await axios.get("http://localhost:3005/vehicle");
-      setVehicle(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteVehicle = async (item) => {
-    try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`
-      );
-      console.log(result);
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getVehicle();
-  }, [setVehicle]);
   return (
     <>
       <ContainCheck>
@@ -73,32 +48,23 @@ const TableInventory = ({ editVehicleTable, deleteVehicleTable}) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID_Vehículo</Th>
-              <Th>Cedula</Th>
+              <Th>Nombre</Th>
               <Th>Tipo</Th>
-              <Th>Marca</Th>
-              <Th>Modelo</Th>
-              <Th>Año</Th>
-              <Th>Color</Th>
-              <Th>TP</Th>
-              <Th>Placa</Th>
-              <Th>VIN</Th>
+              <Th>Codigo</Th>
+              <Th>Costo</Th>
+              <Th>Precio/Venta</Th>
+              <Th>Cant/Disponible</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {vehicle.map((item, i) => (
-              <Tr key={i}>
-                <Td>{i+100}</Td>
-                <Td>{item.identificacion}</Td>
-                <Td>{item.tipoVehiculo}</Td>
-                <Td>{item.marca}</Td>
-                <Td>{item.modelo}</Td>
-                <Td>{item.año}</Td>
-                <Td>{item.color}</Td>
-                <Td>{item.tarjetaPropiedad}</Td>
-                <Td>{item.matricula}</Td>
-                <Td>{item.vin}</Td>
+              <Tr>
+                <Td>...en espera</Td>
+                <Td>...en espera</Td>
+                <Td>...en espera</Td>
+                <Td>...en espera</Td>
+                <Td>...en espera</Td>
+                <Td>...en espera</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons title="Editar vehículo">
@@ -110,7 +76,6 @@ const TableInventory = ({ editVehicleTable, deleteVehicleTable}) => {
                   </ButtonOptions>
                 </Td>
               </Tr>
-            ))}
           </Tbody>
         </Table>
       </ContainTable>

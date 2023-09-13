@@ -13,12 +13,16 @@ import {
   Tr,
 } from "./styledTableVehicle";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
+const TableVehicle = ({editVehicleTable, showRemarks, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
   // Variable de estado para filtrar busqueda
+  // Variable de estado para abrir modal de observacion vehiculo.
+  const [handleRemarks, setHandleRemarks] = useState(false);
 
 
 
@@ -92,6 +96,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
                     <Buttons title="Editar vehículo">
                       <i className={editVehicleTable}></i>
                     </Buttons>
+                    <Buttons onClick={() => setHandleRemarks(!handleRemarks)} title="Editar vehículo">
+                      <i className={showRemarks}></i>
+                    </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>
@@ -102,6 +109,20 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      {/* Modal de Observaciones del vehículo */}
+      <Modals
+      status={handleRemarks}
+      changeStatus={setHandleRemarks}
+      titleModal={"Observaciones del vehículo"}
+      changePosition={"start"}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          Vehículo con una falla en la culata del motor.
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };

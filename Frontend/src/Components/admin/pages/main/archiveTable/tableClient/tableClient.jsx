@@ -214,6 +214,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
             getCustomer2 = {id2}
             editVehicleTable={"fa-solid fa-pen-to-square"}
             deleteVehicleTable={"fa-solid fa-trash-can"}
+            showRemarks={"fa-regular fa-clipboard"}
           />
           <ButtonRegister>
             <BtnRegister
