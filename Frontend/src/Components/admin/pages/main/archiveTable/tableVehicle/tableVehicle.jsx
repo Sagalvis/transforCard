@@ -25,7 +25,6 @@ const TableVehicle = ({editVehicleTable, showRemarks, deleteVehicleTable, getCus
   const [handleRemarks, setHandleRemarks] = useState(false);
 
 
-
   const getVehicle = async () => {
     try {
       const res = await axios.get(`http://localhost:3005/vehicle/${getCustomer2}`);

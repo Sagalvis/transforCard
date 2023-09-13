@@ -5,7 +5,7 @@ const Modals = ({titleModal, children, status, changeStatus, changePosition, sho
   return (
     <>
     {status &&
-    <Overlay changePosition={changePosition}>
+    <Overlay changePosition={changePosition} onClick={() => changeStatus(false)}>
       <ContainModal changeWidth={changeWidth}>
         {showHeader &&
         <HeaderModal>
