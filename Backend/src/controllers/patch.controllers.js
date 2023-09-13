@@ -52,15 +52,15 @@ export const updateEmployees = async (req, res) => {
 export const updateVehicle = async (req, res) => {
   try {
     const { matricula } = req.params;
-    const { observacion } = req.body;
-    const [row] = await pool.query( "UPDATE vehicle SET observacion = COALESCE(?, observacion) WHERE matricula = ?",
-      [observacion, matricula] );
+    const { tarjetaPropiedad,marca,modelo,año,color,vin } = req.body;
+    const [row] = await pool.query( "UPDATE vehiculo SET tarjetaPropiedad = COALESCE(?, tarjetaPropiedad), marca = COALESCE(?, marca), modelo = COALESCE(?, modelo), año = COALESCE(?, año), color = COALESCE(?, color), vin = COALESCE(?, vin) WHERE matricula = ?",
+      [tarjetaPropiedad,marca,modelo,año,color,vin,matricula] );
     if (row.affectedRows === 0) {
       return res.status(404).json({
         message: "No se encontró el vehículo",
       });
     }
-    res.send({ matricula,observacion })
+    res.send({ matricula })
   } catch (error) {
     console.log(error);
     return res.status(500).json({

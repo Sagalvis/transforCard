@@ -13,6 +13,9 @@ import {
   Tr,
 } from "./styledTableVehicle";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
+import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -20,7 +23,15 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   const [vehicle, setVehicle] = useState([]);
   // Variable de estado para filtrar busqueda
 
-
+  //Variable de estado modal
+  const [handleEditVehicle, setHandleEditVehicle] = useState(false)
+  //Variable de estado para capturar vehiculo 
+  const [idVehicle, setIdVehicle] = useState(null);
+  //Metodo para captura la placa en el modal
+  const CapturaVehicle = (item) => {
+    setIdVehicle(item)
+    setHandleEditVehicle(!handleEditVehicle)
+  }
 
   const getVehicle = async () => {
     try {
@@ -31,14 +42,6 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
       console.log(error);
     }
   };
-
-  /* const UpdateVehicle = async () => {
-    try {
-      const result = await axios.patch(`http://localhost:3005/patchvehicle/${}`);
-    } catch (error) {
-      console.log(error)
-    }
-  } */
 
   const deleteVehicle = async (item) => {
     try {
@@ -89,7 +92,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons title="Editar vehículo">
+                    <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
                     </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
@@ -102,6 +105,21 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      <Modals
+      status={handleEditVehicle}
+      changeStatus={setHandleEditVehicle}
+      titleModal={"Actualizar vehiculos"}
+      showHeader={true}
+      showCloseButton={true}
+      changePosition={"start"}
+      >
+        <ContainInfoModal>
+          <EditFormVehicle
+          getVehicle={idVehicle}
+          />
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };
