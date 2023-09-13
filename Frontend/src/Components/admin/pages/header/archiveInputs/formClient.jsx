@@ -213,7 +213,7 @@ export const ContentInput = styled.div`
 
 export const Select = styled.select`
   width: 100%;
-  padding: 2px;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   outline: none;

@@ -18,6 +18,7 @@ const Modals = ({titleModal, children, status, changeStatus, changePosition, sho
 
         {/* Contenido del modal */}
         {children}
+        
       </ContainModal>
     </Overlay>
     }

@@ -2,7 +2,7 @@
 import TableClient from "./archiveTable/tableClient/tableClient";
 import TableInventory from "./archiveTable/tableInventory/tableInventory";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
-// import TableVehicle from "./archiveTable/tableVehicle/tableVehicle";
+import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
 import {ContainMain} from "./styledMain";
 
 const Main = ({showTableClient, showTableStaff, /* showTableVehicle, */ showTableInventory}) => {
@@ -29,15 +29,13 @@ const Main = ({showTableClient, showTableStaff, /* showTableVehicle, */ showTabl
         />
         )}
 
-        {/* Tabla de vehiculos ***VISTA***, NO MUESTRA ICONOS EN EL MODAL */}
-        {/* Componente temporal cuando este al 100% el modal de vehiculos */}
-
-        {/* {showTableVehicle && (
-        <TableVehicle
+        {/* Tabla de control de vehiculos */}
+        {showTableVehicle && (
+        <TableVehicleControl
           editVehicleTable={"fa-solid fa-pen-to-square"}
           deleteVehicleTable={"fa-solid fa-trash-can"}
         />
-        )} */}
+        )}
 
         {showTableInventory &&
         <TableInventory
