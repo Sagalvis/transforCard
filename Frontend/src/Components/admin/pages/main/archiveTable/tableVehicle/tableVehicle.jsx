@@ -17,7 +17,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
+const TableVehicle = ({editVehicleTable, showRemarks, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
@@ -32,6 +32,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
     setIdVehicle(item)
     setHandleEditVehicle(!handleEditVehicle)
   }
+  // Variable de estado para abrir modal de observacion vehiculo.
+  const [handleRemarks, setHandleRemarks] = useState(false);
+
 
   const getVehicle = async () => {
     try {
@@ -95,6 +98,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
                     <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
                     </Buttons>
+                    <Buttons onClick={() => setHandleRemarks(!handleRemarks)} title="Editar vehículo">
+                      <i className={showRemarks}></i>
+                    </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>
@@ -116,8 +122,21 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
       >
         <ContainInfoModal>
           <EditFormVehicle
-          getVehicle={idVehicle}
-          />
+          getVehicle={idVehicle}/>
+        </ContainInfoModal>
+      </Modals>
+      
+      {/* Modal de Observaciones del vehículo */}
+      <Modals
+      status={handleRemarks}
+      changeStatus={setHandleRemarks}
+      titleModal={"Observaciones del vehículo"}
+      changePosition={"start"}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          Vehículo con una falla en la culata del motor.
         </ContainInfoModal>
       </Modals>
     </>

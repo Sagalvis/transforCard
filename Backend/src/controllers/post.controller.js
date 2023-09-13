@@ -27,7 +27,7 @@ export const postEmployees = async (req, res) => {
   try {
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } = req.body;
     const passwordHash = await bcrypt.hash(contraseña, 8);
-    await postLoginEmployees (req, res, passwordHash)
+    /* await postLoginEmployees (req, res, passwordHash) */
     const [row] = await pool.query(
       "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
       [id_empleado, nombre, apellido, correo, passwordHash,id_rol]

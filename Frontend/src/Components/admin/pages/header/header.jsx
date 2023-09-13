@@ -13,10 +13,28 @@ import {
 import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
+import axios from "axios";
 
-const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
+
+  
+  
+  const handleDownloadCustomer = async () => {
+    try {
+      const response = await axios.get('http://localhost:3005/downdloadcustomer', { responseType: 'arraybuffer' });
+      const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'customer.xlsx';
+      link.click();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
 
   return (
     <>
@@ -29,7 +47,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
         </ContainInfo>
 
         {/* Botones */}
-
+        {showPlusButton &&
         <ContainButtons>
           <Button
             title={titleButton}
@@ -37,7 +55,9 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           >
             <i className="fa-solid fa-plus"></i>
           </Button>
+          <button onClick={handleDownloadCustomer}>Exportar</button>
         </ContainButtons>
+        }
       </ContainHeader>
 
       {/* Modal reutilizable */}
