@@ -94,11 +94,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   return (
     <>
-      <ContainCheck>
+      {/* <ContainCheck>
         <Label type="checkbox">Empresas</Label>
         <Input type="checkbox" />
         <Label type="checkbox">Personas</Label>
-      </ContainCheck>
+      </ContainCheck> */}
 
       {/* Controladores */}
 
@@ -106,12 +106,12 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         {/* Control "CANTIDAD DE REGISTROS" */}
         <ContainMaxData>
           <Label type="select">Cantidad de registros</Label>
-          <Select>
+          {/* <Select>
             <Option value="option1">10</Option>
             <Option value="option2">25</Option>
             <Option value="option3">50</Option>
             <Option value="option4">100</Option>
-          </Select>
+          </Select> */}
         </ContainMaxData>
 
         {/* BUSCADOR */}
@@ -174,15 +174,15 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
       {/* Contenedor manejo de paginas */}
 
-      <ContainHandlePage>
+      {/* <ContainHandlePage>
         <ContainTextHandle>
           <Tag_P_Handle>
             Mostrando registros del 1 al 2 de un total de 2 registros
           </Tag_P_Handle>
-        </ContainTextHandle>
+        </ContainTextHandle> */}
 
         {/* Manejo de paginas */}
-        <ControlHandle>
+        {/* <ControlHandle>
           <Ul>
             <Li>
               <ButtonHandle>Anterior</ButtonHandle>
@@ -195,7 +195,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
             </Li>
           </Ul>
         </ControlHandle>
-      </ContainHandlePage>
+      </ContainHandlePage> */}
 
       {/* MODALES  */}
 
@@ -203,7 +203,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         status={handleCloseVehicle}
         changeStatus={setHandleCloseVehicle}
         titleModal={"Tus vehículos"}
-        changePosition={"start"}
+        changePosition={"center"}
         showHeader={true}
         showCloseButton={true}
       >

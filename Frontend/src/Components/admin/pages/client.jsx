@@ -13,6 +13,7 @@ const Client = () => {
       titleButton={'Crear cliente'}
       titleModalPages={'Crear cliente nuevo'}
       showContentClient={true}
+      showPlusButton={true}
       />
       
       {/* Componente MAIN */}

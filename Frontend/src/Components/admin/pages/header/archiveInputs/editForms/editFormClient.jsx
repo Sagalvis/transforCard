@@ -3,7 +3,7 @@ import {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditFormClient = ({getCustomer, changeStatus}) => {
+const EditFormClient = ({getCustomer}) => {
   const [nombre, setNombres] = useState("");
   const [apellido, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
