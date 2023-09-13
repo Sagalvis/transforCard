@@ -13,6 +13,7 @@ const Staff = () => {
     titleButton={'Crear empleado'}
     titleModalPages={'Crear empleado nuevo'}
     showContentStaff={true}
+    showPlusButton={true}
     />
     
     {/* Componente MAIN */}

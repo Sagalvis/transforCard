@@ -13,11 +13,12 @@ const Vehicle = () => {
     titleButton={'Crear vehiculo'}
     titleModalPages={'Crear vehiculo nuevo'}
     showContentVehicle={true}
+    showPlusButton={true}
     />
 
     {/* Componente MAIN */}
     <Main
-    showTableVehicle={true}
+    showTableVehicleControl={true}
     />
 
     {/* Componente FOOTER */}
