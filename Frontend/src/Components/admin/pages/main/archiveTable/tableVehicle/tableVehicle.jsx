@@ -32,6 +32,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
     setIdVehicle(item)
     setHandleEditVehicle(!handleEditVehicle)
   }
+  // Variable de estado para abrir modal de observacion vehiculo.
+  const [handleRemarks, setHandleRemarks] = useState(false);
+
 
   const getVehicle = async () => {
     try {
@@ -116,8 +119,21 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
       >
         <ContainInfoModal>
           <EditFormVehicle
-          getVehicle={idVehicle}
-          />
+          getVehicle={idVehicle}/>
+        </ContainInfoModal>
+      </Modals>
+      
+      {/* Modal de Observaciones del vehículo */}
+      <Modals
+      status={handleRemarks}
+      changeStatus={setHandleRemarks}
+      titleModal={"Observaciones del vehículo"}
+      changePosition={"start"}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          Vehículo con una falla en la culata del motor.
         </ContainInfoModal>
       </Modals>
     </>
