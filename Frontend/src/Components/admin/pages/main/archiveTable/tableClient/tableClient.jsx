@@ -206,6 +206,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         changePosition={"start"}
         showHeader={true}
         showCloseButton={true}
+        changeWidth={"1100px"}
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}

@@ -37,6 +37,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           >
             <i className="fa-solid fa-plus"></i>
           </Button>
+          <button>Exportar</button>
         </ContainButtons>
         }
       </ContainHeader>
