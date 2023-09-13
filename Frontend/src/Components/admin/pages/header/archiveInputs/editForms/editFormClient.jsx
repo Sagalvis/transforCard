@@ -3,12 +3,14 @@ import {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditFormClient = ({getCustomer}) => {
+const EditFormClient = ({getCustomer, changeStatus}) => {
   const [nombre, setNombres] = useState("");
   const [apellido, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [tel, setTelefono] = useState("");
+
+
 //TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
   useEffect(() => {
     if (getCustomer) {
@@ -73,7 +75,7 @@ const EditFormClient = ({getCustomer}) => {
             </Select>
           </ContentInput> */}
 
-          <ContentInput>
+          <ContentInput className="display">
             <Input
               type="text"
               value={nombre}
@@ -81,9 +83,6 @@ const EditFormClient = ({getCustomer}) => {
               placeholder="Nombres"
               autoComplete="off"
             />
-          </ContentInput>
-
-          <ContentInput>
             <Input
               type="text"
               placeholder="Apellidos"
@@ -121,9 +120,8 @@ const EditFormClient = ({getCustomer}) => {
               <Option value="0">-Seleccione su país-</Option>
             </Select> */}
             <Input
-              className="input-display"
               type="tel"
-              placeholder="Telefono"
+              placeholder="Teléfono"
               value={tel}
               onChange={(e) => setTelefono(e.target.value)}
               onInput={(evt) => acceptNum(evt)}
@@ -142,15 +140,11 @@ const EditFormClient = ({getCustomer}) => {
               required
             />
           </ContentInput>
-
-          {/* <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-          </ContentInput> */}
         </Form>
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Actualizar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Actualizar datos</BtnRegister>
       </ButtonRegister>
     </>
   );
@@ -219,10 +213,6 @@ export const Input = styled.input`
   font-size: 16px;
   font-family: "Outfit";
 
-  &.input-display {
-    width: 50%;
-  }
-
   &::placeholder {
     font-size: 15px;
   }
@@ -242,6 +232,7 @@ export const TextArea = styled.textarea`
 export const ButtonRegister = styled.div`
   width: 100%;
   display: flex;
+  gap: 5px;
   justify-content: flex-end;
   box-sizing: border-box;
   margin-bottom: 2%;
@@ -266,5 +257,8 @@ export const BtnRegister = styled.button`
   }
   &:active {
     background-color: #041737;
+  }
+  &.btn_cancel {
+    background-color: #dc3545;
   }
 `;

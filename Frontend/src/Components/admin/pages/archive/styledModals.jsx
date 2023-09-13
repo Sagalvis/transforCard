@@ -44,7 +44,7 @@ export const H2 = styled.h2`
 export const CloseButton = styled.button`
   position: absolute;
   top: 34px;
-  right: 25px;
+  right: 8px;
   width: 30px;
   height: 30px;
   border: none;

@@ -1,19 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {
-  ButtonOptions,
-  Buttons,
-  ContainTable,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "./styledTableVehicle";
+import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul} from "./styledTableVehicleControl";
 import axios from "axios";
 
-const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
+const TableVehicleControl = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
@@ -27,14 +17,6 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
       console.log(error);
     }
   };
-
-  /* const UpdateVehicle = async () => {
-    try {
-      const result = await axios.patch(`http://localhost:3005/patchvehicle/${}`);
-    } catch (error) {
-      console.log(error)
-    }
-  } */
 
   const deleteVehicle = async (item) => {
     try {
@@ -51,6 +33,33 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
   }, [setVehicle]);
   return (
     <>
+      <ContainCheck>
+        <Label type="checkbox">Empresas</Label>
+        <Input type="checkbox" />
+        <Label type="checkbox">Personas</Label>
+      </ContainCheck>
+
+      {/* Controladores */}
+
+      <ContainControls>
+        {/* Control "CANTIDAD DE REGISTROS" */}
+        <ContainMaxData>
+          <Label type="select">Cantidad de registros</Label>
+          <Select>
+            <Option value="option1">10</Option>
+            <Option value="option2">25</Option>
+            <Option value="option3">50</Option>
+            <Option value="option4">100</Option>
+          </Select>
+        </ContainMaxData>
+
+        {/* BUSCADOR */}
+        <ContainSearch>
+          <Label className="search">Buscar: </Label>
+          <Input type="text" title="Buscar cliente"></Input>
+        </ContainSearch>
+      </ContainControls>
+
       {/* Contenedor de tabla */}
 
       <ContainTable>
@@ -98,8 +107,33 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      {/* Contenedor manejo de paginas */}
+
+      <ContainHandlePage>
+        <ContainTextHandle>
+          <Tag_P_Handle>
+            Mostrando registros del 1 al 2 de un total de 2 registros
+          </Tag_P_Handle>
+        </ContainTextHandle>
+
+        {/* Manejo de paginas */}
+        <ControlHandle>
+          <Ul>
+            <Li>
+              <ButtonHandle>Anterior</ButtonHandle>
+            </Li>
+            <Li title="Pagina actual" className="button-li">
+              <a href="/">1</a>
+            </Li>
+            <Li>
+              <ButtonHandle>Siguiente</ButtonHandle>
+            </Li>
+          </Ul>
+        </ControlHandle>
+      </ContainHandlePage>
     </>
   );
 };
 
-export default TableVehicle;
+export default TableVehicleControl;

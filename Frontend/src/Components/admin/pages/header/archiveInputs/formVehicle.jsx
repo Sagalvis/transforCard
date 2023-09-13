@@ -81,11 +81,9 @@ const FormVehicle = ({getCustomer3}) => {
           <ContentInput>
             <Select value={selectVehicle}
             onChange={(e)=>setSelectVehicle(e.target.value)}
-            
             >
-              <Option>-Seleccione el tipo del vehiculo-</Option>
+              <Option>-Seleccione el tipo del vehículo-</Option>
               {tipoVehiculo.map((item, i) => (
-
                 <Option key={i} value={item.id_tipo_vehiculo}>{item.tipoVehiculo}</Option>
               ))}
             </Select>
@@ -217,7 +215,7 @@ export const ContentInput = styled.div`
 
 export const Select = styled.select`
   width: 100%;
-  padding: 2px;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   outline: none;

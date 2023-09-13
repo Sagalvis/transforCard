@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul, } from "./styledTableClient";
+import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
@@ -14,7 +14,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
   const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
-  const [handleEdit, setHandleEdit] = useState(false);
+  const [handleEdit, setHandleEdit] = useState(true);
 
 
   // Variable de estado para filtrar busqueda
@@ -236,7 +236,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
       <Modals
         status={handleEdit}
         changeStatus={setHandleEdit}
-        titleModal={"Editar cliente"}
+        titleModal={"Editar cliente actual"}
         changePosition={"start"}
         showHeader={true}
         showCloseButton={true}
