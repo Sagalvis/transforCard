@@ -5,7 +5,7 @@ import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient, showTableStaff, /* showTableVehicle, */ showTableInventory}) => {
+const Main = ({showTableClient, showTableStaff, showTableVehicle, showTableInventory}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}

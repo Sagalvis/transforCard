@@ -22,16 +22,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   //funcion para traer los datos de la tabla a buscar
 
-  const searchTableClient = async () => {
-    try {
-      const responseSearch = await axios.get(
-        "http://localhost:3005/customer"
-      );
-      console.log(responseSearch.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   //Función de busqueda
   const searching = (e) => {
@@ -100,7 +90,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   useEffect(() => {
     getCustomer();
-    searchTableClient();
   }, [setCustomer]);
 
   return (
