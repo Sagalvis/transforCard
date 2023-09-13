@@ -25,7 +25,7 @@ const TableStaff = ({editUser, deleteUser}) => {
     }
   };
 
-  const deleteStaff = async (item) => {
+/*   const deleteStaff = async (item) => {
     try {
       const result = await axios.delete(
         `http://localhost:3005/deleteemployees/${item.id_empleado}`
@@ -36,7 +36,7 @@ const TableStaff = ({editUser, deleteUser}) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  } */
   useEffect(() => {
     getEmployees();
   }, [setEmployees]);
