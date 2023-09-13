@@ -40,10 +40,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const [handleCloseVehicle, setHandleCloseVehicle] = useState(false);
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
   const [handleEdit, setHandleEdit] = useState(false);
-
+  const [handleDelete, setHandleDelete] = useState(false);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
-
+  // Variable de estado para capturar id del usuario y eliminarlo
+  const [selectedItem, setSelectedItem] = useState(null);
   //funcion para traer los datos de la tabla a buscar
 
   //Función de busqueda
@@ -100,10 +101,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   };
 
   // Funcion para eliminar cliente de la tabla
-  const deleteClient = async (item) => {
+  const deleteClient = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:3005/deletecustomer/${item.identificacion}`
+        `http://localhost:3005/deletecustomer/${selectedItem.identificacion}`
       );
       console.log(result);
       window.location.reload();
@@ -191,7 +192,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                     </Buttons>
 
                     <Buttons
-                      onClick={() => deleteClient(item)}
+                      onClick={() => {
+                        setSelectedItem(item)
+                        setHandleDelete(!handleDelete)
+                      }}
                       title="Eliminar cliente"
                     >
                       <i className={deleteUser}></i>
@@ -292,6 +296,18 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         <ContainInfoModal>
           {/* Formaulario para editar clientes */}
           <EditFormClient getCustomer={id} />
+        </ContainInfoModal>
+      </Modals>
+
+      <Modals
+      status={handleDelete}
+      changeStatus={setHandleDelete}
+      titleModal={"eliminar"}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          ¿Seguro que quieres eliminar este cliente?
+          <button onClick={deleteClient}></button>
         </ContainInfoModal>
       </Modals>
     </>
