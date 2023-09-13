@@ -98,7 +98,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
                     <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
                     </Buttons>
-                    <Buttons title="Observaciones">
+                    <Buttons title="Observaciones" onClick={() => setHandleRemarks(!handleRemarks)}>
                       <i className={showRemarks}></i>
                     </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
@@ -115,14 +115,13 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       <Modals
       status={handleEditVehicle}
       changeStatus={setHandleEditVehicle}
-      titleModal={"Actualizar vehiculos"}
+      titleModal={"Actualizar vehículo actual"}
       showHeader={true}
       showCloseButton={true}
       changePosition={"start"}
       >
         <ContainInfoModal>
-          <EditFormVehicle
-          getVehicle={idVehicle}/>
+          <EditFormVehicle getVehicle={idVehicle}/>
         </ContainInfoModal>
       </Modals>
       
@@ -136,7 +135,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       showCloseButton={true}
       >
         <ContainInfoModal>
-          Vehículo con una falla en la culata del motor.
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore voluptatem tenetur atque deleniti non quas consectetur adipisci repudiandae praesentium ipsa?</p>
         </ContainInfoModal>
       </Modals>
     </>
