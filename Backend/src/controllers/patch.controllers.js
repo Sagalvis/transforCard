@@ -31,14 +31,14 @@ export const updateCustomer = async (req, res) => {
 export const updateEmployees = async (req, res) => {
   try {
     const { id_empleado } = req.params;
-    const { nombre, apellido, correo, contraseña } = req.body;
-    const [row] = await pool.query("UPDATE employees SET nombre = COALESCE(?, nombre), apellido = COALESCE(?, apellido), correo = COALESCE(?, correo), contraseña = COALESCE(?, contraseña) WHERE id_empleado = ?",[nombre, apellido, correo,contraseña, id_empleado ]);
+    const { nombre, apellido, correo, contraseña, id_rol } = req.body;
+    const [row] = await pool.query("UPDATE empleado SET nombre = COALESCE(?, nombre), apellido = COALESCE(?, apellido), correo = COALESCE(?, correo), contraseña = COALESCE(?, contraseña), id_rol = COALESCE(?,id_rol) WHERE id_empleado = ?",[nombre, apellido, correo,contraseña, id_rol, id_empleado ]);
     if (row.affectedRows === 0) {
       return res.status(404).json({
         message: "No se encontró al empleado",
       });
     }
-    res.send({ id_empleado,nombre,apellido,correo,contraseña });
+    res.send({ id_empleado,nombre,apellido,correo,contraseña,id_rol });
   } catch (error) {
     console.log(error);
     return res.status(500).json({

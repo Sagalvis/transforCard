@@ -15,6 +15,8 @@ const Client = () => {
       titleModalPages={'Crear cliente nuevo'}
       showContentClient={true}
       showPlusButton={true}
+      btnExport={true}
+      btnCreateProduct={false}
       />
       
       {/* Componente MAIN */}
