@@ -43,11 +43,12 @@ const EditFormStaff = ({getEmpleado}) => {
           nombre,
           apellido,
           correo,
-          contraseña
+          contraseña,
+          id_rol: selectRol
         })
         .then((Response) => {
           console.log(Response.data);
-          alert("Cliente registrado");
+          alert("Empleado actualizado");
         });
         window.location.reload();
     }
@@ -56,6 +57,7 @@ const EditFormStaff = ({getEmpleado}) => {
     setNombres("");
     setApellidos("");
     setCorreo("");
+    setPass("");
   };
 
   //funcion que permite solo escribir numeros en el input.
