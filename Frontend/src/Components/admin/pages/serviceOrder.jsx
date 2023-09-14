@@ -13,6 +13,7 @@ const ServiceOrder = () => {
       titleModalPages={'Crear orden nueva'}
       showContentClient={true}
       showPlusButton={true}
+      btnExport={true}
       />
 
 

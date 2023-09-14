@@ -47,6 +47,8 @@ export const H2 = styled.h2`
 export const ContainButtons = styled.div`
   /* background-color: purple; */
   display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const Button = styled.button`
@@ -74,11 +76,14 @@ export const Button = styled.button`
 
 export const ExptButton = styled.button`
   background: none;
+  padding: 10px 20px;
+  font-weight: 400;
   border: none;
-  border: 1px solid #ccc;
-  cursor: pointer;
   border-radius: 1px;
+  cursor: pointer;
+  border: 1px solid #ccc;
   transition: .3s ease;
+  
   &:hover {
     background: #e8e8e8;
   }
