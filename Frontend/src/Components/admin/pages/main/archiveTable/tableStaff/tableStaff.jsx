@@ -16,6 +16,13 @@ const TableStaff = ({editUser, deleteUser}) => {
   // Variable de estado para modal de editar empleado
   const [handleEditEmployee, setHandleEditEmployee] = useState(false);
 
+  //Variable de estado para capturar empleado
+  const [empleadoId, setEmpleadoId] = useState(null)
+  //Funcion para pasar la variable de estado como parametro al componente
+  const CapturaEmpleado = (item) => {
+    setHandleEditEmployee(!handleEditEmployee)
+    setEmpleadoId(item)
+  }
   const getEmployees = async () => {
     try {
       const res = await axios.get("http://localhost:3005/employees");
@@ -93,7 +100,7 @@ const TableStaff = ({editUser, deleteUser}) => {
               <Td>{item.correo}</Td>
               <Td>
                 <ButtonOptions>
-                  <Buttons onClick={() => setHandleEditEmployee(!handleEditEmployee)} title="Editar cliente">
+                  <Buttons onClick={() => CapturaEmpleado(item)} title="Editar cliente">
                     <i className={editUser}></i>
                   </Buttons>
                   <Buttons onClick={() => setHandleAdvDelete(!handleAdvDelete)} title="Eliminar cliente">
@@ -142,7 +149,9 @@ const TableStaff = ({editUser, deleteUser}) => {
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <EditFormStaff />
+          <EditFormStaff
+            getEmpleado = {empleadoId}
+           />
         </ContainInfoModal>
       </Modals>
 
