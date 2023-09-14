@@ -1,37 +1,39 @@
-import {  useState } from "react";
+/* eslint-disable react/prop-types */
+import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditFormStaff = () => {
-  const [identification, setIdentificacion] = useState("");
-  const [nombres, setNombres] = useState("");
-  const [apellidos, setApellidos] = useState("");
+const EditFormStaff = ({getEmpleado}) => {
+  const [nombre, setNombres] = useState("");
+  const [apellido, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [telefono, setTelefono] = useState("");
-
+  const [contraseña, setPass] = useState("");
+  
+  useEffect ( () =>{
+    if(getEmpleado){
+      setNombres(getEmpleado.nombre);
+      setApellidos(getEmpleado.apellido);
+      setCorreo(getEmpleado.correo);
+      setPass(getEmpleado.contraseña);
+    }  
+  },[getEmpleado])
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
     if (
-      identification === "" ||
-      nombres === "" ||
-      apellidos === "" ||
-      correo === "" ||
-      direccion === "" ||
-      telefono === "" 
+      nombre === "" ||
+      apellido === "" ||
+      correo === "" 
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
     } else {
       await axios
-        .post("http://localhost:3005/postcustomer", {
-          identificacion: identification,
-          nombre: nombres,
-          apellido: apellidos,
-          correo: correo,
-          direccion: direccion,
-          tel: telefono,
+        .patch(`http://localhost:3005/patchemployees/${getEmpleado.id_empleado}`, {
+          nombre,
+          apellido,
+          correo,
+          contraseña
         })
         .then((Response) => {
           console.log(Response.data);
@@ -41,15 +43,10 @@ const EditFormStaff = () => {
     }
 
     /* Funcion que limpa los inputs */
-    setIdentificacion("");
     setNombres("");
     setApellidos("");
     setCorreo("");
-    setDireccion("");
-    setTelefono("");
-    
   };
-
 
   //funcion que permite solo escribir numeros en el input.
   function acceptNum(evt) {
@@ -62,8 +59,8 @@ const EditFormStaff = () => {
         <Form>
           <ContentInput>
             <Select>
-              <Option value="0">-Seleccione tipo de persona-</Option>
-              {/* <Option value="company">EMPRESA</Option> */}
+              <Option value="0">-Seleccione su rol-</Option>
+              
               <Option value="person">PERSONA</Option>
             </Select>
           </ContentInput>
@@ -71,7 +68,7 @@ const EditFormStaff = () => {
           <ContentInput>
             <Input
               type="text"
-              value={nombres}
+              value={nombre}
               onChange={(e) => setNombres(e.target.value)}
               placeholder="Nombres"
               autoComplete="off"
@@ -82,46 +79,8 @@ const EditFormStaff = () => {
             <Input
               type="text"
               placeholder="Apellidos"
-              value={apellidos}
+              value={apellido}
               onChange={(e) => setApellidos(e.target.value)}
-              autoComplete="off"
-            />
-          </ContentInput>
-
-          <ContentInput>
-            <Input
-              type="numb"
-              placeholder="Documento"
-              value={identification}
-              onChange={(e) => setIdentificacion(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
-              maxLength={15}
-              autoComplete="off"
-            />
-          </ContentInput>
-
-          <ContentInput className="display">
-            <Select className="select-display">
-              <Option value="0">-Seleccione su país-</Option>
-            </Select>
-            <Input
-              className="input-display"
-              type="tel"
-              placeholder="Telefono"
-              value={telefono}
-              onChange={(e) => setTelefono(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
-              maxLength={10}
-              autoComplete="off"
-            />
-          </ContentInput>
-
-          <ContentInput>
-            <Input
-              type="text"
-              placeholder="Dirección"
-              value={direccion}
-              onChange={(e) => setDireccion(e.target.value)}
               autoComplete="off"
             />
           </ContentInput>
@@ -137,14 +96,23 @@ const EditFormStaff = () => {
             />
           </ContentInput>
 
-          {/* <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-          </ContentInput> */}
+          <ContentInput>
+            <Input
+              type="text"
+              placeholder="Contraseña"
+              //value={}
+              //onChange={(e) => setIdentificacion(e.target.value)}
+              onInput={(evt) => acceptNum(evt)}
+              maxLength={15}
+              autoComplete="off"
+            />
+          </ContentInput>
+
         </Form>
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Actualizar</BtnRegister>
       </ButtonRegister>
     </>
   );
