@@ -45,7 +45,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
     try {
       const result = await axios.delete(`http://localhost:3005/deletevehicle/${delIdVehicle.matricula}`);
       console.log(result);
-      setVehicle(vehic.filter((v) => v.matricula !== delIdVehicle.matricula));
+      setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
       console.log(error);
     }
@@ -157,7 +157,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
         <ContainInfoModal>
           <P>¿Estas seguro de querer eliminar este vehículo?</P>
           <ButtonDelete>
-          <Btn_Delete onClick={deleteVehicle}>Eliminar</Btn_Delete>
+          <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); deleteVehicle()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
