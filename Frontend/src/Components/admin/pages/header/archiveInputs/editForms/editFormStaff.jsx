@@ -8,7 +8,9 @@ const EditFormStaff = ({getEmpleado}) => {
   const [apellido, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setPass] = useState("");
-  
+  const [tipoRol, setTipoRol] = useState([]);
+  const [selectRol, setSeletRol] = useState(0);
+
   useEffect ( () =>{
     if(getEmpleado){
       setNombres(getEmpleado.nombre);
@@ -17,6 +19,14 @@ const EditFormStaff = ({getEmpleado}) => {
       setPass(getEmpleado.contraseña);
     }  
   },[getEmpleado])
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      const responseRol = await axios.get("http://localhost:3005/tiporol");
+      setTipoRol(responseRol.data)
+    }
+    fetchdata()
+  },[])
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -57,11 +67,17 @@ const EditFormStaff = ({getEmpleado}) => {
     <>
       <ContainForm>
         <Form>
-          <ContentInput>
-            <Select>
-              <Option value="0">-Seleccione su rol-</Option>
-              
-              <Option value="person">PERSONA</Option>
+        <ContentInput>
+            <Select value={selectRol} 
+            onChange={(e)=>setSeletRol(e.target.value)} 
+            >
+              <Option value="0">-Seleccione el rol-</Option>
+              {tipoRol.map((item,i)=>(
+                
+                <Option key={i} value={item.id_rol}>{item.rol}</Option>
+              ))
+
+              }
             </Select>
           </ContentInput>
 
@@ -166,7 +182,7 @@ export const Select = styled.select`
 `;
 
 export const Option = styled.option`
-  background-color: red;
+  //background-color: red;
 `;
 
 export const Input = styled.input`

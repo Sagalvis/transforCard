@@ -5,11 +5,11 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
-import AdvDelete from "../advdelete";
+import { ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableStaff = ({editUser, deleteUser}) => {
   const [employees, setEmployees] = useState([]);
-
+  const [idempleado, setIdEmpleado] = useState("")
   // Variable de estado para modal de eliminar empleado
   const [handleAdvDelete, setHandleAdvDelete] = useState(false)
 
@@ -32,10 +32,10 @@ const TableStaff = ({editUser, deleteUser}) => {
     }
   };
 
-/*   const deleteStaff = async (item) => {
+  const deleteStaff = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:3005/deleteemployees/${item.id_empleado}`
+        `http://localhost:3005/deleteemployees/${idempleado.id_empleado}`
       );
       console.log(result);
       alert("empleado eliminado");
@@ -43,7 +43,7 @@ const TableStaff = ({editUser, deleteUser}) => {
     } catch (error) {
       console.log(error);
     }
-  } */
+  }
   useEffect(() => {
     getEmployees();
   }, [setEmployees]);
@@ -103,7 +103,10 @@ const TableStaff = ({editUser, deleteUser}) => {
                   <Buttons onClick={() => CapturaEmpleado(item)} title="Editar cliente">
                     <i className={editUser}></i>
                   </Buttons>
-                  <Buttons onClick={() => setHandleAdvDelete(!handleAdvDelete)} title="Eliminar cliente">
+                  <Buttons onClick={() => {
+                    setHandleAdvDelete(!handleAdvDelete)
+                    setIdEmpleado(item)
+                    }} title="Eliminar cliente">
                     <i className={deleteUser}></i>
                   </Buttons>
                 </ButtonOptions>
@@ -151,7 +154,7 @@ const TableStaff = ({editUser, deleteUser}) => {
         <ContainInfoModal>
           <EditFormStaff
             getEmpleado = {empleadoId}
-           />
+          />
         </ContainInfoModal>
       </Modals>
 
@@ -163,7 +166,10 @@ const TableStaff = ({editUser, deleteUser}) => {
       showCloseButton={false}
       >
         <ContainInfoModal>
-          <AdvDelete/>
+          ¿Estas seguro que quieres eliminar este cliente?
+          <ButtonDelete>
+          <button onClick={deleteStaff}>Eliminar</button>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
     </>
@@ -171,4 +177,3 @@ const TableStaff = ({editUser, deleteUser}) => {
 };
 
 export default TableStaff;
-/* onClick={()=> deleteStaff(item)} */
