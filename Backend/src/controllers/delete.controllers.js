@@ -58,10 +58,10 @@ export const deleteEmployees = async (req, res) => {
 
 export const deleteVehicle = async (req, res) => {
   try {
-    const { identificacion } = req.params;
+    const { matricula } = req.params;
     const [row] = await pool.query(
-      "DELETE FROM vehiculo WHERE identificacion = ?",
-      [identificacion]
+      "DELETE FROM vehiculo WHERE matricula = ?",
+      [matricula]
     );
     if (row.affectedRows === 0) {
       return res.status(404).json({
