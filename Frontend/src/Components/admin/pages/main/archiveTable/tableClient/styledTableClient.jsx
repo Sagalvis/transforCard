@@ -222,7 +222,7 @@ export const ButtonDelete = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 5px;
-  margin-top: 3%;
+  margin: 3% 1%;
 `;
 
 export const Btn_Delete = styled.button`

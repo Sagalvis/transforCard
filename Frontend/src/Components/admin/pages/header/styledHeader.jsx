@@ -48,7 +48,7 @@ export const ContainButtons = styled.div`
   /* background-color: purple; */
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const Button = styled.button`
