@@ -114,7 +114,7 @@ const TableStaff = ({editUser, deleteUser}) => {
             ))}
           </Tbody>
         </Table>
-      </ContainTable>
+      </ContainTable>4
 
       {/* Contenedor manejo de paginas */}
 
