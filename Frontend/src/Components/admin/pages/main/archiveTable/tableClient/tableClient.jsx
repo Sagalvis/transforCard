@@ -110,7 +110,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         `http://localhost:3005/deletecustomer/${selectedItem.identificacion}`
       );
       console.log(result);
-      window.location.reload();
+      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem.identificacion))
     } catch (error) {
       console.log(error);
     }
