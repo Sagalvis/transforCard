@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableVehicleControl";
 import axios from "axios";
 
-const TableVehicleControl = ({editVehicleTable, deleteVehicleTable, getCustomer2}) => {
+const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
@@ -29,7 +29,7 @@ const TableVehicleControl = ({editVehicleTable, deleteVehicleTable, getCustomer2
   
   const getVehicle = async () => {
     try {
-      const res = await axios.get(`http://localhost:3005/vehicle/${getCustomer2}`);
+      const res = await axios.get(`http://localhost:3005/vehicle`);
       setVehicle(res.data);
       console.log("res vehiculo",res)
     } catch (error) {
@@ -101,9 +101,6 @@ const TableVehicleControl = ({editVehicleTable, deleteVehicleTable, getCustomer2
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons title="Editar vehículo">
-                      <i className={editVehicleTable}></i>
-                    </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>

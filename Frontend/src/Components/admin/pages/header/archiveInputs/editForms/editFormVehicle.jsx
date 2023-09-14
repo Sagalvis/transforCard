@@ -50,7 +50,7 @@ const EditFormVehicle = ({ getVehicle/* , changeStatus */ }) => {
         })
         .then((Response) => {
             console.log("actualizador", Response.data);
-            alert("Cliente actualizado");
+            alert("Vehiculo actualizado");
         });
     window.location.reload();
 }
