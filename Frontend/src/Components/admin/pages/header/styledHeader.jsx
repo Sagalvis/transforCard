@@ -88,3 +88,7 @@ export const ContainInfoModal = styled.div`
   width: 100%;
 `;
 
+export const P = styled.p`
+  margin: 5px;
+  font-size: 17px;
+`;
