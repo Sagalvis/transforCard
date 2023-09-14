@@ -2,6 +2,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Alert from '@mui/material/Alert'
+import { ContainAlert } from "./formClient";
 
 const FormVehicle = ({getCustomer3}) => {
   const [matricula, setMatricula] = useState("");
@@ -14,7 +16,7 @@ const FormVehicle = ({getCustomer3}) => {
   const [observacion, setObservacion] = useState("");
   const [identificacion, setIdentificacion] = useState("");
   const [tipoVehiculo, setTipo_vehiculo] = useState([]);
-
+  const [showAlert, setShowAlert] = useState(false);
   
   const [selectVehicle, setSelectVehicle] = useState(0);
   
@@ -49,7 +51,7 @@ const FormVehicle = ({getCustomer3}) => {
         })
         .then((Response) => {
           console.log(Response.data);
-          alert("Vehiculo registrado");
+          setShowAlert(true);
         });
       window.location.reload();
     }
@@ -76,6 +78,14 @@ const FormVehicle = ({getCustomer3}) => {
 
   return (
     <>
+          {showAlert && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Vehiculo creado!
+          </Alert>
+        </ContainAlert>
+
+      )}
       <ContainForm>
         <Form>
           <ContentInput>
