@@ -7,7 +7,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, ContainSearch, Input, Label } from "../tableClient/styledTableClient";
-import { Modal } from "@mui/material";
+
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -45,7 +45,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
     try {
       const result = await axios.delete(`http://localhost:3005/deletevehicle/${delIdVehicle.matricula}`);
       console.log(result);
-      setVehicle(vehicle.filter((v) => v.matricula !== item.matricula));
+      setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
       console.log(error);
     }
