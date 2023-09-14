@@ -1,7 +1,8 @@
 /* importacion de la base de la base de datos para hace las consultas */
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
-import bcrypt, {  compare } from "bcrypt"
+import bcrypt from "bcrypt";
+const SECRET = "roylegustayuliperonolodice";
 
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
@@ -25,14 +26,15 @@ export const postCustomer = async (req, res) => {
 
 export const postEmployees = async (req, res) => {
   try {
-    const { id_empleado, nombre, apellido, correo, contraseña, id_rol } = req.body;
+    const { id_empleado, nombre, apellido, correo, contraseña, id_rol } =
+      req.body;
     const passwordHash = await bcrypt.hash(contraseña, 8);
     /* await postLoginEmployees (req, res, passwordHash) */
     const [row] = await pool.query(
       "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
-      [id_empleado, nombre, apellido, correo, passwordHash,id_rol]
-      );
-      res.send({ id_empleado, nombre, apellido, correo, passwordHash,id_rol });
+      [id_empleado, nombre, apellido, correo, passwordHash, id_rol]
+    );
+    res.send({ id_empleado, nombre, apellido, correo, passwordHash, id_rol });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -92,32 +94,33 @@ export const postVehicle = async (req, res) => {
 
 /* Consulta para loguear empleados*/
 
-export const postLoginEmployees = async (req, res, passwordHash) => {
+export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
+    console.log(req.body);
 
-    const hasehSave = compare(contraseña, passwordHash)
-    console.log(hasehSave)
-  if (hasehSave) {
     const [rows] = await pool.query(
-      "SELECT * FROM empleado WHERE correo =? AND contraseña =?",
-      [correo, contraseña]
-      );
-      console.log(rows);
-      //crear el objeto payload
-      const payload = {
-        username: rows[0].correo,
-      };
-      console.log(payload);
-      //almacenar el token
-      const token = jwt.sign(payload, "secretkey");
-      console.log(token);
-      res.setHeader("Authorization", `Bearer ${token}`);
+      "SELECT * FROM empleado WHERE correo = ?",
+      [correo]
+    );
+    // console.log(rows[0])
+    if (rows.length > 0) {
+      const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
+      console.log(`CONOSLE:LOG DEL COMPASSWORD -> ${compassword}`);
+
+      // console.log({id: rows[0].id_empleado});
+      if (compassword) {
+        const token = jwt.sign({ id: rows[0].id_empleado }, SECRET, {
+          expiresIn: "1h",
+        });
+        res.status(200).json(token);
+        console.log(token)
+      }
+    } else {
+      res.status(404).send("El usuario no existe 🤦‍♂️ 🤦‍♂️");
     }
-    return res.status(200).json({ message: "usuario ingresado exitosamente" });
-  } /*--> el catch*/ catch (error) {
-    return res.status(500).json({
-      message: "Error al ingresar usuario",
-    });
+  } catch (error) {
+    res.status(500).json({ error: "Error del servidor 💀💀💀" });
   }
 };
+
