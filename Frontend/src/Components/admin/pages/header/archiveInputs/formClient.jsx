@@ -187,6 +187,7 @@ const FormClient = () => {
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}
               required
+              maxLength={32}
             />
           </ContentInput>
         </Form>

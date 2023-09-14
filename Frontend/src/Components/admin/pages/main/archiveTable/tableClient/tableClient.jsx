@@ -314,7 +314,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         <ContainInfoModal>
           <P>¿Estas seguro de querer eliminar este cliente?</P>
           <ButtonDelete>
-            <Btn_Delete onClick={deleteClient}>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); deleteClient()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
