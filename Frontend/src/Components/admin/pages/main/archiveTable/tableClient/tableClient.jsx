@@ -5,10 +5,13 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
-import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
+import FormVehicle, {
+  BtnRegister,
+  ButtonRegister,
+} from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
-const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
+const TableClient = ({ editUser, createVehicle, deleteUser/* , cancelButton */ }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -23,7 +26,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
 
   //funcion para traer los datos de la tabla a buscar
 
-
   //Función de busqueda
   const searching = (e) => {
     setSearch(e.target.value);
@@ -31,14 +33,16 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
   };
 
   //Metodo de filtrado tabla cliente
-  let resultsCustomer = []
+  let resultsCustomer = [];
 
-  if(!search){
-    resultsCustomer = customer || []
-  }else{
-    resultsCustomer = customer.filter((dato) => 
-    dato.identificacion && dato.identificacion.toString().includes(search.toString())
-    )
+  if (!search) {
+    resultsCustomer = customer || [];
+  } else {
+    resultsCustomer = customer.filter(
+      (dato) =>
+        dato.identificacion &&
+        dato.identificacion.toString().includes(search.toString())
+    );
   }
 
   // Variable de estado para capturar al cliente
@@ -48,33 +52,32 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
 
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
-    setId(item)
-    setHandleEdit(!handleEdit)
-  }
+    setId(item);
+    setHandleEdit(!handleEdit);
+  };
 
   // Funcion para traer toda la tabla clientes
   const getCustomer = async () => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
       setCustomer(res.data);
-      console.log("get usuario", res.data)
+      console.log("get usuario", res.data);
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
-    setId2(item)
-    setId3(item)
-    console.log("la cedula aqui: ",item)
-    if(item){
-      setHandleCloseVehicle(!handleCloseVehicle)
-    }else{
-      alert("Error")
+    setId2(item);
+    setId3(item);
+    console.log("la cedula aqui: ", item);
+    if (item) {
+      setHandleCloseVehicle(!handleCloseVehicle);
+    } else {
+      alert("Error");
     }
-    
-  }
+  };
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -118,7 +121,12 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
         {/* BUSCADOR */}
         <ContainSearch>
           <Label className="search">Buscar: </Label>
-          <Input value={search} onChange={searching} type="text" title="Buscar cliente"></Input>
+          <Input
+            value={search}
+            onChange={searching}
+            type="text"
+            title="Buscar cliente"
+          ></Input>
         </ContainSearch>
       </ContainControls>
 
@@ -148,7 +156,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
                 <Td>{item.tel}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons onClick={() => Captura(item)} title="Editar cliente">
+                    <Buttons
+                      onClick={() => Captura(item)}
+                      title="Editar cliente"
+                    >
                       <i className={editUser}></i>
                     </Buttons>
 
@@ -161,8 +172,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
 
                     <Buttons
                       onClick={() => {
-                        setSelectedItem(item)
-                        setHandleDelete(!handleDelete)
+                        setSelectedItem(item);
+                        setHandleDelete(!handleDelete);
                       }}
                       title="Eliminar cliente"
                     >
@@ -185,8 +196,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
           </Tag_P_Handle>
         </ContainTextHandle> */}
 
-        {/* Manejo de paginas */}
-        {/* <ControlHandle>
+      {/* Manejo de paginas */}
+      {/* <ControlHandle>
           <Ul>
             <Li>
               <ButtonHandle>Anterior</ButtonHandle>
@@ -214,8 +225,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
-          <TableVehicle 
-            getCustomer2 = {id2}
+          <TableVehicle
+            getCustomer2={id2}
             editVehicleTable={"fa-solid fa-pen-to-square"}
             deleteVehicleTable={"fa-solid fa-trash-can"}
             showRemarks={"fa-regular fa-clipboard"}
@@ -248,7 +259,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
       >
         <ContainInfoModal>
           {/* Formaulario para registro de vehículos */}
-          <FormVehicle getCustomer3={id3}/>
+          <FormVehicle getCustomer3={id3} />
         </ContainInfoModal>
       </Modals>
 
@@ -266,7 +277,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
           <EditFormClient getCustomer={id} />
         </ContainInfoModal>
       </Modals>
-
 
       <Modals
       status={handleDelete}
