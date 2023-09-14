@@ -2,6 +2,8 @@
 import {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { ContainAlert } from "../formClient";
+import Alert from "@mui/material/Alert";
 
 const EditFormClient = ({getCustomer}) => {
   const [nombre, setNombres] = useState("");
@@ -9,6 +11,7 @@ const EditFormClient = ({getCustomer}) => {
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [tel, setTelefono] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
 
 //TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
@@ -44,7 +47,7 @@ const EditFormClient = ({getCustomer}) => {
         })
         .then((Response) => {
           console.log("actualizador",Response.data);
-          alert("Cliente actualizado");
+          setShowAlert(true)
         });
         window.location.reload();
     }
@@ -66,6 +69,16 @@ const EditFormClient = ({getCustomer}) => {
   }
   return (
     <>
+          <>
+      {showAlert && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Cliente actualizado!
+          </Alert>
+        </ContainAlert>
+
+      )}
+      </>
       <ContainForm>
         <Form>
           {/* <ContentInput>

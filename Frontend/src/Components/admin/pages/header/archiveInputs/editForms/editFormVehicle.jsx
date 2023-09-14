@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { ContainAlert } from "../formClient";
+import Alert from "@mui/material/Alert";
 
 const EditFormVehicle = ({ getVehicle/* , changeStatus */ }) => {
     //const [cedula, setCedula] = useState("");
@@ -13,6 +15,7 @@ const EditFormVehicle = ({ getVehicle/* , changeStatus */ }) => {
     const [tarjetaPropiedad, setTpropiedad] = useState("");
     const [placa, setPlaca] = useState("");
     const [vin, setVin] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
 
     //TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
     useEffect(() => {
@@ -50,7 +53,7 @@ const EditFormVehicle = ({ getVehicle/* , changeStatus */ }) => {
         })
         .then((Response) => {
             console.log("actualizador", Response.data);
-            alert("Cliente actualizado");
+            setShowAlert(true)
         });
     window.location.reload();
 }
@@ -75,6 +78,16 @@ setVin("")
 } */
 return (
     <>
+              <>
+      {showAlert && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Vehiculo actualizado!
+          </Alert>
+        </ContainAlert>
+
+      )}
+      </>
         <ContainForm>
             <Form>
                 <ContentInput className="display">

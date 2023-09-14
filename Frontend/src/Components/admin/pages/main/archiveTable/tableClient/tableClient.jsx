@@ -1,6 +1,32 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { Btn_Delete, ButtonDelete, ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledTableClient";
+import {
+  Btn_Delete,
+  ButtonDelete,
+  /* ButtonHandle, */ ButtonOptions,
+  Buttons,
+  /* ContainCheck,
+ */  ContainControls,
+  /* ContainHandlePage,
+ */  ContainMaxData,
+  ContainSearch,
+  ContainTable,
+  /* ContainTextHandle,
+  ControlHandle, */
+  Input,
+  Label,
+  /* Li,
+  Option,
+  Select, */
+  Table,
+  /* Tag_P_Handle, */
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  /* Ul, */
+} from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
@@ -11,7 +37,11 @@ import FormVehicle, {
 } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
-const TableClient = ({ editUser, createVehicle, deleteUser/* , cancelButton */ }) => {
+const TableClient = ({
+  editUser,
+  createVehicle,
+  deleteUser /* , cancelButton */,
+}) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -19,10 +49,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser/* , cancelButton */ }
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
   const [handleEdit, setHandleEdit] = useState(false);
   const [handleDelete, setHandleDelete] = useState(false);
+    // Variable de estado para capturar id del usuario y eliminarlo
+    const [selectedItem, setSelectedItem] = useState(null);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
-  // Variable de estado para capturar id del usuario y eliminarlo
-  const [selectedItem, setSelectedItem] = useState(null);
+
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -279,18 +310,18 @@ const TableClient = ({ editUser, createVehicle, deleteUser/* , cancelButton */ }
       </Modals>
 
       <Modals
-      status={handleDelete}
-      changeStatus={setHandleDelete}
-      titleModal={'Eliminar cliente'}
-      changePosition={'start'}
-      showHeader={true}
-      showCloseButton={true}
-      changePadding={"0px"}
+        status={handleDelete}
+        changeStatus={setHandleDelete}
+        titleModal={"Eliminar cliente"}
+        changePosition={"start"}
+        showHeader={true}
+        showCloseButton={true}
+        changePadding={"0px"}
       >
         <ContainInfoModal>
           <P>¿Estas seguro que quieres eliminar este cliente?</P>
           <ButtonDelete>
-          <Btn_Delete onClick={deleteClient}>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={deleteClient}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
