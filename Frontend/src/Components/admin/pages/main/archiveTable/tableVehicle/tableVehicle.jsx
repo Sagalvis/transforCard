@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainTable, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableVehicle";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal } from "../../../header/styledHeader";
+import { ContainInfoModal, P } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
-import { ContainControls, ContainMaxData, ContainSearch, Input, Label } from "../tableClient/styledTableClient";
+import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, ContainSearch, Input, Label } from "../tableClient/styledTableClient";
+import { Modal } from "@mui/material";
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -16,6 +17,8 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
 
   //Variable de estado modal
   const [handleEditVehicle, setHandleEditVehicle] = useState(false)
+  const [handleDeleteVehicle, setHandleDeleteVehicle] = useState(false)
+  const [delIdVehicle, setDelIdVehicle] = useState(null)
   //Variable de estado para capturar vehiculo 
   const [idVehicle, setIdVehicle] = useState(null);
   const [observacion, setObservacion] = useState(null)
@@ -38,9 +41,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
     }
   };
 
-  const deleteVehicle = async (item) => {
+  const deleteVehicle = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`);
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${delIdVehicle.matricula}`);
       console.log(result);
       window.location.reload();
     } catch (error) {
@@ -105,7 +108,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
                     <Buttons title="Observaciones" onClick={() => {setObservacion(item.observacion); setHandleRemarks(!handleRemarks)}}>
                       <i className={showRemarks}></i>
                     </Buttons>
-                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
+                    <Buttons onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); setDelIdVehicle(item)}} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>
                   </ButtonOptions>
@@ -139,7 +142,23 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <p>{observacion}</p>
+          <P>{observacion}</P>
+        </ContainInfoModal>
+      </Modals>
+
+      <Modals
+      status={handleDeleteVehicle}
+      changeStatus={setHandleDeleteVehicle}
+      titleModal={'Eliminar vehículo'}
+      changePosition={'start'}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          <P>¿Estas seguro de querer eliminar este vehículo?</P>
+          <ButtonDelete>
+          <Btn_Delete onClick={deleteVehicle}>Eliminar</Btn_Delete>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
     </>

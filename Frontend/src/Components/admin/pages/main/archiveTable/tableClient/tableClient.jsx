@@ -31,17 +31,10 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
-import FormVehicle, {
-  BtnRegister,
-  ButtonRegister,
-} from "../../../header/archiveInputs/formVehicle";
+import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
-const TableClient = ({
-  editUser,
-  createVehicle,
-  deleteUser /* , cancelButton */,
-}) => {
+const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -319,7 +312,7 @@ const TableClient = ({
         changePadding={"0px"}
       >
         <ContainInfoModal>
-          <P>¿Estas seguro que quieres eliminar este cliente?</P>
+          <P>¿Estas seguro de querer eliminar este cliente?</P>
           <ButtonDelete>
             <Btn_Delete onClick={deleteClient}>Eliminar</Btn_Delete>
           </ButtonDelete>
