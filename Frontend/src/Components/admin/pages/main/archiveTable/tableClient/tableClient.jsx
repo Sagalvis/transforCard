@@ -20,11 +20,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
   const [search, setSearch] = useState("");
   // Variable de estado para capturar id del usuario y eliminarlo
   const [selectedItem, setSelectedItem] = useState(null);
-  const [handleIsClose, setHandleIsClose] = useState(false);
-
-  const closeModal = () => {
-    setHandleIsClose(false);
-  };
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -280,11 +275,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
       changePosition={'start'}
       showHeader={true}
       showCloseButton={true}
+      changePadding={"0px"}
       >
         <ContainInfoModal>
-          ¿Seguro que quieres eliminar este cliente?
+          ¿Estas seguro que quieres eliminar este cliente?
           <ButtonDelete>
-          <button onClick={() => closeModal()}>Cancelar</button>
           <button onClick={deleteClient}>Eliminar</button>
           </ButtonDelete>
         </ContainInfoModal>
