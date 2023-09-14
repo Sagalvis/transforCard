@@ -14,6 +14,7 @@ const ServiceOrder = () => {
       showContentClient={true}
       showPlusButton={true}
       btnExport={true}
+      btnCreateProduct={false}
       />
 
 

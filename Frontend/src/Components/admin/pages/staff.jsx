@@ -15,6 +15,7 @@ const Staff = () => {
     showContentStaff={true}
     showPlusButton={true}
     btnExport={true}
+    btnCreateProduct={false}
     />
     
     {/* Componente MAIN */}

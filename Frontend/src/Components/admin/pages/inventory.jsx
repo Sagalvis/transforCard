@@ -14,6 +14,7 @@ const Inventory = () => {
     showContentStaff={true}
     showPlusButton={false}
     btnExport={true}
+    btnCreateProduct={true}
     />
 
     {/* Componente MAIN  */}

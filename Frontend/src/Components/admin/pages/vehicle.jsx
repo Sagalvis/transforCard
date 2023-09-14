@@ -14,6 +14,7 @@ const Vehicle = () => {
     showContentVehicle={true}
     showPlusButton={false}
     btnExport={true}
+    btnCreateProduct={false}
     />
 
     {/* Componente MAIN */}

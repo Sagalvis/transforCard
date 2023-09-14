@@ -13,10 +13,6 @@ const TableInventory = ({ editProduct, deleteProduct}) => {
   };
   return (
     <>
-      <ContainCheck>
-        <Btn_Create_Product>Crear producto</Btn_Create_Product>
-      </ContainCheck> 
-
       {/* Controladores */}
 
       <ContainControls>
