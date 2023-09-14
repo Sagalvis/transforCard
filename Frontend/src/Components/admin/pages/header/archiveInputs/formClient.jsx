@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Alert from '@mui/material/Alert'
 
 const FormClient = () => {
   const [identification, setIdentificacion] = useState("");
@@ -78,7 +79,6 @@ const FormClient = () => {
   }
   return (
     <>
-      <>
       {showAlert && (
         <ContainAlert>
         <Alert severity="success" color="success">
@@ -87,7 +87,6 @@ const FormClient = () => {
         </ContainAlert>
 
       )}
-      </>
 
 
       <ContainForm>
