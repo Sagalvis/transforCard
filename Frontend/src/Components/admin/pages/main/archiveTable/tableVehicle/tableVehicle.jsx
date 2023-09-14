@@ -57,7 +57,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   return (
     <>
     <ContainControls>
-        {/* Control "CANTIDAD DE REGISTROS" */}
+        {/* CONTROL "CANTIDAD DE REGISTROS" */}
         <ContainMaxData>
           <Label type="select">Cantidad de registros</Label>
         </ContainMaxData>
