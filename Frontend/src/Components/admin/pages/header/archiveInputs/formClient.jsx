@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 
 const FormClient = () => {
   const [identification, setIdentificacion] = useState("");
@@ -13,6 +14,7 @@ const FormClient = () => {
   const [tipoPais, setTipoPais] = useState([]);
   const [selectTipoPais, setSelectTipoPais] = useState(0);
   const [seletTipoCliente, setSelectTipoCliente] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -42,10 +44,11 @@ const FormClient = () => {
         })
         .then((Response) => {
           console.log(Response.data);
-          alert("Cliente registrado");
+          setShowAlert(true)
         });
       window.location.reload();
     }
+
 
     /* Funcion que limpa los inputs */
     setIdentificacion("");
@@ -56,6 +59,7 @@ const FormClient = () => {
     setTelefono("");
     setSelectTipoCliente(0);
     setSelectTipoPais(0);
+
   };
 
   useEffect(() => {
@@ -77,6 +81,18 @@ const FormClient = () => {
   }
   return (
     <>
+      <>
+      {showAlert && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Cliente registrado!
+          </Alert>
+        </ContainAlert>
+
+      )}
+      </>
+
+
       <ContainForm>
         <Form>
           <ContentInput>
@@ -183,6 +199,7 @@ const FormClient = () => {
       <ButtonRegister>
         <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
       </ButtonRegister>
+
     </>
   );
 };
@@ -233,7 +250,6 @@ export const Select = styled.select`
     width: 50%;
   }
 `;
-
 
 export const Option = styled.option`
   /* background-color: red; */
@@ -300,3 +316,10 @@ export const BtnRegister = styled.button`
     background-color: #041737;
   }
 `;
+
+export const ContainAlert = styled.div`
+  position: absolute;
+  bottom: 87%;
+  left: 25%;
+
+`
