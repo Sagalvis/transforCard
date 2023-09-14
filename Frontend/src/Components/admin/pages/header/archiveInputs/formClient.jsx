@@ -97,9 +97,11 @@ const FormClient = () => {
             <Input
               type="text"
               value={nombres}
-              onChange={(e) => setNombres(e.target.value)}
+              onChange={(e) => setNombres(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
               placeholder="Nombres"
               autoComplete="off"
+              required
+              maxLength={20}
             />
           </ContentInput>
 
@@ -108,20 +110,23 @@ const FormClient = () => {
               type="text"
               placeholder="Apellidos"
               value={apellidos}
-              onChange={(e) => setApellidos(e.target.value)}
+              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
               autoComplete="off"
+              required
+              maxLength={20}
             />
           </ContentInput>
 
           <ContentInput>
             <Input
-              type="numb"
+              type="text"
               placeholder="Documento"
               value={identification}
               onChange={(e) => setIdentificacion(e.target.value)}
               onInput={(evt) => acceptNum(evt)}
-              maxLength={15}
+              maxLength={13}
               autoComplete="off"
+              required
             />
           </ContentInput>
 
@@ -141,12 +146,13 @@ const FormClient = () => {
             <Input
               className="input-display"
               type="tel"
-              placeholder="Telefono"
+              placeholder="Teléfono"
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               onInput={(evt) => acceptNum(evt)}
               maxLength={10}
               autoComplete="off"
+              required
             />
           </ContentInput>
 
@@ -155,8 +161,9 @@ const FormClient = () => {
               type="text"
               placeholder="Dirección"
               value={direccion}
-              onChange={(e) => setDireccion(e.target.value)}
+              onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
               autoComplete="off"
+              required
             />
           </ContentInput>
 
@@ -166,7 +173,7 @@ const FormClient = () => {
               placeholder="Correo electronico"
               autoComplete="off"
               value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              onChange={(e) => setCorreo(e.target.value.toLowerCase())}
               required
             />
           </ContentInput>
