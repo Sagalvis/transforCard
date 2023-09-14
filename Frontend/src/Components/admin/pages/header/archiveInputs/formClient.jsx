@@ -85,7 +85,7 @@ const FormClient = () => {
       {showAlert && (
         <ContainAlert>
         <Alert severity="success" color="success">
-          ¡Cliente registrado
+          ¡Cliente registrado!
           </Alert>
         </ContainAlert>
 
