@@ -1,21 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {
-  ButtonOptions,
-  Buttons,
-  ContainTable,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "./styledTableVehicle";
+import { ButtonOptions, Buttons, ContainTable, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableVehicle";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
+import { ContainControls, ContainMaxData, ContainSearch, Input, Label } from "../tableClient/styledTableClient";
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -61,6 +52,18 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   }, [setVehicle]);
   return (
     <>
+    <ContainControls>
+        {/* Control "CANTIDAD DE REGISTROS" */}
+        <ContainMaxData>
+          <Label type="select">Cantidad de registros</Label>
+        </ContainMaxData>
+
+        {/* BUSCADOR */}
+        <ContainSearch>
+          <Label className="search">Buscar: </Label>
+          <Input type="text" title="Buscar cliente"></Input>
+        </ContainSearch>
+      </ContainControls>
       {/* Contenedor de tabla */}
 
       <ContainTable>

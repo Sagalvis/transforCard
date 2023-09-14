@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import TableClient from "./archiveTable/tableClient/tableClient";
 import TableInventory from "./archiveTable/tableInventory/tableInventory";
+import TableServiceOrder from "./archiveTable/tableServiceOrder/tableServiceOrder";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicleControl, showTableInventory}) => {
+const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicleControl, showTableInventory, showTableServiceOrder}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
@@ -14,7 +15,7 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicl
         {showTableClient && (
         <TableClient
           editUser={"fa-solid fa-pen-to-square"}
-          createVehicle={"fa-solid fa-car"}
+          createVehicle={"fa-solid fa-car"} 
           deleteUser={"fa-solid fa-trash-can"}
         />
         )}
@@ -22,8 +23,8 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicl
         {/* Tabla de empleados */}
         {showTableStaff && (
         <TableStaff
-          editUser={"fa-solid fa-pen-to-square"}
-          deleteUser={"fa-solid fa-trash-can"}
+          editStaff={"fa-solid fa-pen-to-square"}
+          deletStaff={"fa-solid fa-trash-can"}
         />
         )}
 
@@ -34,13 +35,22 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicl
           deleteVehicleTable={"fa-solid fa-trash-can"}
         />
         )}
+
         {/* Tabla de inventarios */}
-        {showTableInventory &&
+        {showTableInventory && (
         <TableInventory
-        editVehicleTable={"fa-solid fa-pen-to-square"}
-        deleteVehicleTable={"fa-solid fa-trash-can"}
+        editProduct={"fa-solid fa-pen-to-square"}
+        deleteProduct={"fa-solid fa-trash-can"}
         />
-        }
+        )}
+
+        {/* Tabla de Orden de servicio */}
+        {showTableServiceOrder && (
+          <TableServiceOrder 
+          editOrder={"fa-solid fa-pen-to-square"}
+          deleteOrder={"fa-solid fa-trash-can"}
+          />
+        )}
       </ContainMain>
     </>
   );
