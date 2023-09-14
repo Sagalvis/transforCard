@@ -68,6 +68,18 @@ export const Button = styled.button`
   }
 `;
 
+export const ExptButton = styled.button`
+  background: none;
+  border: none;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: .3s ease;
+  &:hover {
+    background: #e8e8e8;
+  }
+`;
+
 export const ContainInfoModal = styled.div`
   /* background-color: green; */
   display: flex;

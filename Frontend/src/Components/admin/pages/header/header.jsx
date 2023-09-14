@@ -8,6 +8,7 @@ import {
   ContainHeader,
   ContainInfo,
   ContainInfoModal,
+  ExptButton,
   H2,
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
@@ -15,7 +16,7 @@ import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
 
-const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
 
@@ -55,7 +56,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           >
             <i className="fa-solid fa-plus"></i>
           </Button>
-          <button onClick={handleDownloadCustomer}>Exportar</button>
+          <ExptButton title={exportButton} onClick={handleDownloadCustomer}>Exportar</ExptButton>
         </ContainButtons>
         }
       </ContainHeader>

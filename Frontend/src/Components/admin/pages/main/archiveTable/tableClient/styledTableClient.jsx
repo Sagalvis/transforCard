@@ -217,3 +217,10 @@ export const ButtonHandle = styled.button`
     
   }
 `;
+
+export const ButtonDelete = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 3%;
+`;

@@ -11,6 +11,7 @@ const Client = () => {
       index={'Clientes'}
       indexIcon={'fa-solid fa-user-group'}
       titleButton={'Crear cliente'}
+      exportButton={'Exportar tabla cliente'}
       titleModalPages={'Crear cliente nuevo'}
       showContentClient={true}
       showPlusButton={true}

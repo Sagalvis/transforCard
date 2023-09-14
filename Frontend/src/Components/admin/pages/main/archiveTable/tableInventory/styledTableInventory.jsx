@@ -4,24 +4,23 @@ import styled from 'styled-components';
 
 export const ContainCheck = styled.div`
   padding-left: 1rem;
+  display: flex;
+  justify-content: flex-end;
   /* background-color: yellow; */
   margin-bottom: 1.55rem;
 `;
 
 export const Btn_Create_Product = styled.button`
-  background: #041737;
-  display: inline-block;
-  color: white;
+  background: none;
   padding: 10px 20px;
-  font-family: 'Outfit';
-  font-size: 14px;
   font-weight: 400;
   border: none;
-  border-radius: 5px;
+  border-radius: 1px;
   cursor: pointer;
-
+  border: 1px solid #ccc;
+  transition: .3s ease;
   &:hover {
-    background: #0c244e;
+    background: #e8e8e8;
   }
 `;
 

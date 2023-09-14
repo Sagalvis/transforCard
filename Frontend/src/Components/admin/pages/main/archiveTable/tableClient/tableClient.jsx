@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledTableClient";
+import { ButtonDelete, ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
@@ -8,7 +8,7 @@ import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
-const TableClient = ({ editUser, createVehicle, deleteUser }) => {
+const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -20,6 +20,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const [search, setSearch] = useState("");
   // Variable de estado para capturar id del usuario y eliminarlo
   const [selectedItem, setSelectedItem] = useState(null);
+  const [handleIsClose, setHandleIsClose] = useState(false);
+
+  const closeModal = () => {
+    setHandleIsClose(false);
+  };
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -267,15 +272,21 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
         </ContainInfoModal>
       </Modals>
 
+
       <Modals
       status={handleDelete}
       changeStatus={setHandleDelete}
-      titleModal={"eliminar"}
+      titleModal={'Eliminar cliente'}
+      changePosition={'start'}
+      showHeader={true}
       showCloseButton={true}
       >
         <ContainInfoModal>
           ¿Seguro que quieres eliminar este cliente?
-          <button onClick={deleteClient}></button>
+          <ButtonDelete>
+          <button onClick={() => closeModal()}>Cancelar</button>
+          <button onClick={deleteClient}>Eliminar</button>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
     </>

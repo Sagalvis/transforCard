@@ -4,9 +4,6 @@ import {Btn_Create_Product, ButtonHandle, ButtonOptions, Buttons, ContainCheck, 
 import axios from "axios";
 
 const TableInventory = ({ editVehicleTable, deleteVehicleTable}) => {
-  /* Consulta para traer la tabla clientes */
-  const [vehicle, setVehicle] = useState([]);
-
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState('');
 
@@ -19,7 +16,7 @@ const TableInventory = ({ editVehicleTable, deleteVehicleTable}) => {
     <>
       <ContainCheck>
         <Btn_Create_Product>Crear producto</Btn_Create_Product>
-      </ContainCheck>
+      </ContainCheck> 
 
       {/* Controladores */}
 
