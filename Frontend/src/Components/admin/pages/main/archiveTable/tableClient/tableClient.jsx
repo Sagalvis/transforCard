@@ -34,7 +34,7 @@ import FormVehicle, {
 } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 
-const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
+const TableClient = ({ editUser, createVehicle, deleteUser/* , cancelButton */ }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -46,11 +46,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
   const [search, setSearch] = useState("");
   // Variable de estado para capturar id del usuario y eliminarlo
   const [selectedItem, setSelectedItem] = useState(null);
-  const [handleIsClose, setHandleIsClose] = useState(false);
-
-  const closeModal = () => {
-    setHandleIsClose(false);
-  };
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -307,18 +302,18 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
       </Modals>
 
       <Modals
-        status={handleDelete}
-        changeStatus={setHandleDelete}
-        titleModal={"Eliminar cliente"}
-        changePosition={"start"}
-        showHeader={true}
-        showCloseButton={true}
+      status={handleDelete}
+      changeStatus={setHandleDelete}
+      titleModal={'Eliminar cliente'}
+      changePosition={'start'}
+      showHeader={true}
+      showCloseButton={true}
+      changePadding={"0px"}
       >
         <ContainInfoModal>
-          ¿Seguro que quieres eliminar este cliente?
+          ¿Estas seguro que quieres eliminar este cliente?
           <ButtonDelete>
-            <button onClick={() => closeModal()}>Cancelar</button>
-            <button onClick={deleteClient}>Eliminar</button>
+          <button onClick={deleteClient}>Eliminar</button>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
