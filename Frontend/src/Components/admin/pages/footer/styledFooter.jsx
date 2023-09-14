@@ -6,7 +6,7 @@ export const ContainFooter = styled.div`
   width: 100%;
   padding: 0 24px;
   box-sizing: border-box;
-  height: 7.9%;
+  height: 8.3%;
 `;
 
 export const Copyright = styled.div`
