@@ -41,7 +41,7 @@ export const HeaderModal = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  padding-bottom: 10px;
+  padding-bottom: ${props => props.changePadding ? props.changePadding : "10px"};
   border-bottom: 1px solid #e8e8e8;
 `;
 
