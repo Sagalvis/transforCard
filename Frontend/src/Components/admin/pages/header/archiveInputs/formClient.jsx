@@ -13,6 +13,7 @@ const FormClient = () => {
   const [tipoPais, setTipoPais] = useState([]);
   const [selectTipoPais, setSelectTipoPais] = useState(0);
   const [seletTipoCliente, setSelectTipoCliente] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -42,7 +43,7 @@ const FormClient = () => {
         })
         .then((Response) => {
           console.log(Response.data);
-          alert("Cliente registrado");
+          setShowAlert(true);
         });
       window.location.reload();
     }
