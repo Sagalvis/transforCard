@@ -45,7 +45,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
     try {
       const result = await axios.delete(`http://localhost:3005/deletevehicle/${delIdVehicle.matricula}`);
       console.log(result);
-      setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
+      setVehicle(vehic.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
       console.log(error);
     }
