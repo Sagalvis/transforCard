@@ -18,6 +18,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   const [handleEditVehicle, setHandleEditVehicle] = useState(false)
   //Variable de estado para capturar vehiculo 
   const [idVehicle, setIdVehicle] = useState(null);
+  const [observacion, setObservacion] = useState(null)
   //Metodo para captura la placa en el modal
   const CapturaVehicle = (item) => {
     setIdVehicle(item)
@@ -101,7 +102,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
                     <Buttons title="Editar vehículo" onClick={() => CapturaVehicle(item)}>
                       <i className={editVehicleTable}></i>
                     </Buttons>
-                    <Buttons title="Observaciones" onClick={() => setHandleRemarks(!handleRemarks)}>
+                    <Buttons title="Observaciones" onClick={() => {setObservacion(item.observacion); setHandleRemarks(!handleRemarks)}}>
                       <i className={showRemarks}></i>
                     </Buttons>
                     <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
@@ -138,7 +139,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore voluptatem tenetur atque deleniti non quas consectetur adipisci repudiandae praesentium ipsa?</p>
+          <p>{observacion}</p>
         </ContainInfoModal>
       </Modals>
     </>
