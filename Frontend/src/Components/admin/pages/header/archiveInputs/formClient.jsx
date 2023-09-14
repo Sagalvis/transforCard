@@ -182,7 +182,7 @@ const FormClient = () => {
           <ContentInput>
             <Input
               type="email"
-              placeholder="Correo electronico"
+              placeholder="Correo electrónico"
               autoComplete="off"
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}

@@ -91,21 +91,25 @@ return (
         <ContainForm>
             <Form>
                 <ContentInput className="display">
-                    <Input
+                    <Input className="matricula"
                         type="text"
-                        placeholder="matricula"
+                        placeholder="Matrícula"
                         value={placa}
-                        onChange={(e) => setPlaca(e.target.value)}
+                        onChange={(e) => setPlaca(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
                         autoComplete="off"
+                        maxLength={6}
+                        required
                     />
                 </ContentInput>
                 <ContentInput>
                     <Input
                         type="text"
-                        placeholder="Tarjeta Propiedad"
+                        placeholder="Tarjeta propiedad"
                         value={tarjetaPropiedad}
-                        onChange={(e) => setTpropiedad(e.target.value)}
-                        //autoComplete="off"
+                        onChange={(e) => setTpropiedad(e.target.value.replace(/[^0-9]/g, ''))}
+                        autoComplete="off"
+                        maxLength={12}
+                        required
                     />
                 </ContentInput>
                 <ContentInput className="display">
@@ -231,9 +235,12 @@ export const Input = styled.input`
   color: #000;
   font-size: 16px;
   font-family: "Outfit";
-
+  &.matricula {
+    text-transform: uppercase;
+  }
   &::placeholder {
     font-size: 15px;
+    text-transform: capitalize;
   }
 `;
 
