@@ -224,3 +224,16 @@ export const ButtonDelete = styled.div`
   gap: 5px;
   margin-top: 3%;
 `;
+
+export const Btn_Delete = styled.button`
+  background: #212529;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: #292d31;
+  }
+`;

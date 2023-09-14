@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { ButtonDelete, ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledTableClient";
+import { Btn_Delete, ButtonDelete, ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal } from "../../../header/styledHeader";
+import { ContainInfoModal, P } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
@@ -278,9 +278,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser, cancelButton }) => {
       changePadding={"0px"}
       >
         <ContainInfoModal>
-          ¿Estas seguro que quieres eliminar este cliente?
+          <P>¿Estas seguro que quieres eliminar este cliente?</P>
           <ButtonDelete>
-          <button onClick={deleteClient}>Eliminar</button>
+          <Btn_Delete onClick={deleteClient}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
