@@ -77,6 +77,18 @@ const FormClient = () => {
   }
   return (
     <>
+      <>
+      {showAlert && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Cliente registrado
+          </Alert>
+        </ContainAlert>
+
+      )}
+      </>
+
+
       <ContainForm>
         <Form>
           <ContentInput>
@@ -300,3 +312,10 @@ export const BtnRegister = styled.button`
     background-color: #041737;
   }
 `;
+
+export const ContainAlert = styled.div`
+  position: absolute;
+  bottom: 86%;
+  left: 25%;
+
+`
