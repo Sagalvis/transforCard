@@ -85,7 +85,7 @@ const FormClient = () => {
       {showAlert && (
         <ContainAlert>
         <Alert severity="success" color="success">
-          ¡Cliente registrado!
+          ¡Cliente registrado
           </Alert>
         </ContainAlert>
 
@@ -319,7 +319,7 @@ export const BtnRegister = styled.button`
 
 export const ContainAlert = styled.div`
   position: absolute;
-  bottom: 87%;
+  bottom: 86%;
   left: 25%;
 
 `
