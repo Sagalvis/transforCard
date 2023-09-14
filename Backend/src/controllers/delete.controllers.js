@@ -56,9 +56,9 @@ export const deleteEmployees = async (req, res) => {
 
 /* Consulta para eliminar vehiculos  */
 
-export const deleteVehicle = async (req, res) => {
+export const deleteVehicle = async(req, res) => {
   try {
-    const { matricula } = req.params;
+    const { matricula} = req.params;
     const [row] = await pool.query(
       "DELETE FROM vehiculo WHERE matricula = ?",
       [matricula]
@@ -70,11 +70,37 @@ export const deleteVehicle = async (req, res) => {
     };
     res.send({
       message:'vehiculo eliminado correctamente',
-      identificacion
+      matricula
     })
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor",
     });
   }
-}
+};
+
+
+/* export const deleteCustomer = async(req, res) => {
+  try {
+    const { identificacion} =  req.params;
+    const [row] = await pool.query(
+      "DELETE FROM cliente WHERE identificacion = ?",
+      [identificacion]
+    );
+    if (row.affectedRows === 0){
+      return res.status(404).json({
+        message:"No se encontró al cliente",
+      });
+    };
+    res.send({
+      message:'Cliente eliminado correctamente',
+      identificacion
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+};
+ */
