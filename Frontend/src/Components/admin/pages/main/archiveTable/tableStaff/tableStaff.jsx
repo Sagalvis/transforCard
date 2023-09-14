@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { ButtonHandle, ButtonOptions, Buttons, ContainCheck, ContainControls, ContainHandlePage, ContainMaxData, ContainSearch, ContainTable, ContainTextHandle, ControlHandle, Input, Label, Li, Option, Select, Table, Tag_P_Handle, Tbody, Td, Th, Thead, Tr, Ul  } from "./styledTableStaff";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal } from "../../../header/styledHeader";
+import { ContainInfoModal, P } from "../../../header/styledHeader";
 import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
-import { ButtonDelete } from "../tableClient/styledTableClient";
+import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableStaff = ({editUser, deleteUser}) => {
   const [employees, setEmployees] = useState([]);
@@ -38,7 +38,6 @@ const TableStaff = ({editUser, deleteUser}) => {
         `http://localhost:3005/deleteemployees/${idempleado.id_empleado}`
       );
       console.log(result);
-      alert("empleado eliminado");
       window.location.reload()
     } catch (error) {
       console.log(error);
@@ -161,14 +160,16 @@ const TableStaff = ({editUser, deleteUser}) => {
       <Modals
       status={handleAdvDelete}
       changeStatus={setHandleAdvDelete}
-      changePosition={"center"}
-      showHeader={false}
-      showCloseButton={false}
+      titleModal={'Eliminar empleado'}
+      changePosition={'start'}
+      showHeader={true}
+      showCloseButton={true}
+      changePadding={"0px"}
       >
         <ContainInfoModal>
-          ¿Estas seguro que quieres eliminar este cliente?
+          <P>¿Estas seguro que quieres eliminar este cliente?</P>
           <ButtonDelete>
-          <button onClick={deleteStaff}>Eliminar</button>
+          <Btn_Delete onClick={deleteStaff}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
