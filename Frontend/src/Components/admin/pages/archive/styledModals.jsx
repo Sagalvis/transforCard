@@ -24,7 +24,7 @@ const right = keyframes`
   }
 `
 export const ContainModal = styled.div`
-  width: ${props => props.changeWidth ? props.changeWidth : "400px"};
+  min-width: ${props => props.changeWidth ? props.changeWidth : "400px"};
   min-height: 150px;
   background: #fff;
   position: relative;

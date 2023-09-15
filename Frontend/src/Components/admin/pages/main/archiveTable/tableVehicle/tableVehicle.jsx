@@ -143,6 +143,9 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       >
         <ContainInfoModal>
           <P>{observacion}</P>
+          <ButtonDelete>
+          <Btn_Delete onClick={() => setHandleRemarks(!handleRemarks)}>Cerrar</Btn_Delete>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
 

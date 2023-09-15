@@ -93,12 +93,12 @@ return (
                 <ContentInput className="display">
                     <Input className="matricula"
                         type="text"
-                        placeholder="Matrícula"
+                        placeholder="Placa del vehículo"
                         value={placa}
                         onChange={(e) => setPlaca(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
                         autoComplete="off"
                         maxLength={6}
-                        required
+                        required="true"
                     />
                 </ContentInput>
                 <ContentInput>
@@ -109,7 +109,7 @@ return (
                         onChange={(e) => setTpropiedad(e.target.value.replace(/[^0-9]/g, ''))}
                         autoComplete="off"
                         maxLength={12}
-                        required
+                        required="true"
                     />
                 </ContentInput>
                 <ContentInput className="display">
@@ -120,6 +120,7 @@ return (
                         onChange={(e) => setMarca(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                         maxLength={10}
                         autoComplete="off"
+                        required="true"
                     />
                 </ContentInput>
                 <ContentInput>
@@ -129,7 +130,7 @@ return (
                         autoComplete="off"
                         value={modelo}
                         onChange={(e) => setModelo(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-                        required={true}
+                        required="true"
                         maxLength={10}
                     />
                 </ContentInput>
@@ -140,18 +141,18 @@ return (
                         autoComplete="off"
                         value={año}
                         onChange={(e) => setAño(e.target.value.replace(/[^0-9]/g, ''))}
-                        required
+                        required="true"
                         maxLength={4}
                     />
                 </ContentInput>
                 <ContentInput>
                     <Input
                         type="text"
-                        placeholder="Color"
+                        placeholder="Color del vehículo"
                         autoComplete="off"
                         value={color}
                         onChange={(e) => setColor(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-                        required
+                        required="true"
                         maxLength={20}
                     />
                 </ContentInput>
@@ -161,8 +162,8 @@ return (
                         placeholder="VIN"
                         autoComplete="off"
                         value={vin}
-                        onChange={(e) => setVin(e.target.value.replace(/[^a-z0-9]/g, '').toLowerCase())}
-                        required
+                        onChange={(e) => setVin(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
+                        required="true"
                         maxLength={17}
                     />
                 </ContentInput>
@@ -242,7 +243,7 @@ export const Input = styled.input`
 
   &::placeholder {
     font-size: 15px;
-    text-transform: capitalize;
+    text-transform: none;
   }
 `;
 
