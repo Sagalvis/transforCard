@@ -3,7 +3,10 @@ import Header from "./header/header";
 import Main from "./main/main";
 
 
+
+
 const Client = () => {
+
   return (
     <>
       {/* Componente HEADER */}

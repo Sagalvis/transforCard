@@ -3,7 +3,7 @@ export const ButtonNarbar1 = [
     id: 1,
     title:'Home',
     icon:<i className="fa-solid fa-house"></i>,
-    to: "/"
+    to: "/user"
   },
   {
     id:2 ,
