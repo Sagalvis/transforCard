@@ -75,7 +75,7 @@ export const updateInventoryProduct = async (req,res)=>{
     const {id_producto} = req.params;
     const {tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida} = req.body;
     const [row] = await pool.query(
-      "UPDATE inventario SET nombre = COALESCE(?, nombre), costo = COALESCE(?,costo), cantidad_comprada = COALESCE(?, cantidad_comprada), precio_unitario = COALESCE(?, precio_unitario),cantidad_en_stock = COALESCE (?, cantidad_en_stock), cantidad_vendida = COALESCE(?, cantidad_vendida) WHERE id_producto = ?",[tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, id_producto]
+      "UPDATE inventario SET nombre = COALESCE(?, nombre), costo = COALESCE(?,costo), cantidad_comprada = COALESCE(?, cantidad_comprada), precio_unitario = COALESCE(?, precio_unitario),cantidad_en_stock = COALESCE (?, cantidad_en_stock), cantidad_vendida = COALESCE(?, cantidad_vendida) WHERE id_producto = ?",[tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, id_producto],
     );
     if (row.affectedRows === 0){
       return res.status(404).json({
