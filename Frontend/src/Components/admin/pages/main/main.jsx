@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import TableClient from "./archiveTable/tableClient/tableClient";
 import TableInventory from "./archiveTable/tableInventory/tableInventory";
+import TableInvoice from "./archiveTable/tableInvoice/tableInvoice";
 import TableServiceOrder from "./archiveTable/tableServiceOrder/tableServiceOrder";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicleControl, showTableInventory, showTableServiceOrder}) => {
+const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
@@ -49,6 +50,13 @@ const Main = ({showTableClient, showTableStaff, showTableVehicle,showTableVehicl
           <TableServiceOrder 
           editOrder={"fa-solid fa-pen-to-square"}
           deleteOrder={"fa-solid fa-trash-can"}
+          />
+        )}
+
+        {/* Tabla de Facturación */}
+        {showTableInvoice && (
+          <TableInvoice 
+          // props de iconos pendientes
           />
         )}
       </ContainMain>

@@ -3,13 +3,17 @@
 import { useState } from "react";
 import Modals from "../archive/modals";
 import {
+  Btn_Create_Order,
   Button,
+  CardService,
   ContainButtons,
   ContainHeader,
   ContainInfo,
   ContainInfoModal,
+  ContainServices,
   ExptButton,
   H2,
+  TitleService,
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
@@ -18,11 +22,13 @@ import axios from "axios";
 import { Btn_Create_Product } from "../main/archiveTable/tableInventory/styledTableInventory";
 import FormInventory from "./archiveInputs/formInventory";
 
-const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateOrder}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
   // Variable de estado para abrir modal de crear item de inventario
   const [handleFormInventory, setHandleFormInventory] = useState(false);
+  // Variable de estado para abrir modal de ordenes de servicio.
+  const [handleOrders, setHandleOrders] = useState(false);
 
   
   
@@ -68,6 +74,10 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           {btnExport &&
           <ExptButton title={exportButton} onClick={handleDownloadCustomer}>Exportar</ExptButton>
         }
+
+        {btnCreateOrder &&
+        <Btn_Create_Order title="Crear orden de servicio" onClick={() => setHandleOrders(!handleOrders)}>Crear orden</Btn_Create_Order>
+        }
         </ContainButtons>
       </ContainHeader>
 
@@ -110,6 +120,53 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
         <ContainInfoModal>
           <FormInventory />
         </ContainInfoModal>
+      </Modals>
+
+      <Modals
+      status={handleOrders}
+      changeStatus={setHandleOrders}
+      titleModal={'Selecciona el servicio requerido por el cliente'}
+      showCloseButton={true}
+      showHeader={true}
+      changePosition={'start'}
+      changeWidth={'1400px'}
+      >
+        <ContainInfoModal>
+            <TitleService>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, exercitationem.</p>
+            </TitleService>
+          <ContainServices>
+
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+          </ContainServices>
+        </ContainInfoModal>
+
+        <ContainInfoModal>
+            <TitleService>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, exercitationem.</p>
+            </TitleService>
+          <ContainServices>
+
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+          </ContainServices>
+        </ContainInfoModal>
+        
       </Modals>
     </>
   );

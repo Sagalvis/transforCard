@@ -316,5 +316,4 @@ export const ContainAlert = styled.div`
   position: absolute;
   bottom: 86%;
   left: 25%;
-
 `

@@ -1,8 +1,32 @@
+import Header from './header/header'
+import Main from './main/main';
+import Footer from './footer/footer';
+
 const Invoice = () => {
   return (
-    <div>
-      <h1>Invoice</h1>
-    </div>
+    <>
+    {/* Componente HEADER */}
+    <Header
+    index='Facturación'
+    indexIcon={'fa-solid fa-file-invoice'}
+    titleButton={'Crear factura'}
+    titleModalPages={'Crear factura nueva'}
+    showContentInvoice={true}
+    showPlusButton={true}
+    btnExport={true}
+    />
+
+    {/* Componente MAIN */}
+    <Main
+    showTableInvoice={true}
+    />
+
+    {/* Componente FOOTER */}
+    <Footer
+    copyright='Copyright &copy; 2023 transforCAR. All Rights'
+    welcome='Te damos la bienvenida en transforCar 💚'
+    />
+    </>
   );
 };
 

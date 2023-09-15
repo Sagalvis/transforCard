@@ -16,7 +16,6 @@ const Client = () => {
       showContentClient={true}
       showPlusButton={true}
       btnExport={true}
-      btnCreateProduct={false}
       />
       
       {/* Componente MAIN */}
