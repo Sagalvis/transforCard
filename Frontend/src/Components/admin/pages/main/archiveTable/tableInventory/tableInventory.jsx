@@ -2,12 +2,15 @@
 import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableInventory";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal } from "../../../header/styledHeader";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
   // Variable de estado para traer toda la tabla inventario
   const [invetario, setInventario] = useState([]);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
+  const [handleFormInventory, setHandleFormInventory] = useState(false);
 
   const getInventario = async () => {
     try {
@@ -78,7 +81,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 <Td>{item.cantidad_vendida}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons title="Editar producto">
+                    <Buttons onClick={() => setHandleFormInventory(!handleFormInventory)} title="Editar producto">
                       <i className={editProduct}></i>
                     </Buttons>
                     <Buttons title="Eliminar producto">
@@ -91,6 +94,18 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      <Modals
+        status={handleFormInventory}
+        changeStatus={setHandleFormInventory}
+        titleModal={"Editar item"}
+        changePosition={"start"}
+        showHeader={true}
+        showCloseButton={true}>
+        <ContainInfoModal>
+          <h5>aqui va el formulario de edit.</h5>
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };

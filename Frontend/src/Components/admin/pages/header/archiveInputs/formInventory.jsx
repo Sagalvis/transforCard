@@ -107,13 +107,13 @@ const FormInventory = () => {
           <ContentInput>
             <TextArea
             placeholder="Descripcion del item">
-
             </TextArea>
           </ContentInput>
         </Form>
       </ContainForm>
 
-      <ButtonRegister>
+      <ButtonRegister className="gap">
+        <BtnRegister className="btn_red">Cancelar</BtnRegister>
         <BtnRegister>Registrar</BtnRegister>
       </ButtonRegister>
     </>
@@ -214,6 +214,11 @@ export const ButtonRegister = styled.div`
   box-sizing: border-box;
   margin-bottom: 2%;
   padding-right: 5px;
+  &.gap {
+    display: flex;
+    gap: 4px;
+    margin-top: 2%;
+  }
 `;
 
 export const BtnRegister = styled.button`
@@ -229,6 +234,12 @@ export const BtnRegister = styled.button`
   cursor: pointer;
   font-size: 14px;
 
+  &.btn_red {
+    background-color: #dc3545;
+    &:hover {
+      background-color: #c74753;
+    }
+  }
   &:hover {
     background-color: #172b4c;
   }
