@@ -27,6 +27,8 @@ const FormInventory = () => {
           <ContentInput>
             <Select>
               <Option value="0">-Seleccione tipo de item-</Option>
+              <Option value="product">Producto</Option>
+              <Option value="service">Servicio</Option>
             </Select>
           </ContentInput>
 
