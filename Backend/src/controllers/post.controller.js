@@ -121,3 +121,23 @@ export const postLoginEmployees = async (req, res, passwordHash) => {
     });
   }
 };
+
+
+/* consulta para crear productos en el inventario */
+
+export const postInventario = async (req, res) => {
+  try {
+    const {id_producto, tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida} = req.body;
+    const [row] = await pool.query(
+      "INSERT INTO inventario (id_producto, tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida) VALUEs(?,?,?,?,?,?,?,?)",
+      [id_producto, tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida]
+    );
+    res.send({
+      id_producto, tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}

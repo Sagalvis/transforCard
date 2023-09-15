@@ -104,3 +104,15 @@ export const getSelectPais = async(req, res) => {
     }
 };
 
+/* Consulta para traer toda la tabla inventario */
+
+export const getInventario = async(req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM inventario");
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}

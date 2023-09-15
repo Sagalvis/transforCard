@@ -80,27 +80,3 @@ export const deleteVehicle = async(req, res) => {
 };
 
 
-/* export const deleteCustomer = async(req, res) => {
-  try {
-    const { identificacion} =  req.params;
-    const [row] = await pool.query(
-      "DELETE FROM cliente WHERE identificacion = ?",
-      [identificacion]
-    );
-    if (row.affectedRows === 0){
-      return res.status(404).json({
-        message:"No se encontró al cliente",
-      });
-    };
-    res.send({
-      message:'Cliente eliminado correctamente',
-      identificacion
-    })
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
-  }
-};
- */

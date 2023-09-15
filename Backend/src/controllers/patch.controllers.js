@@ -68,3 +68,27 @@ export const updateVehicle = async (req, res) => {
     });
   }
 }
+
+/* Consulta para actualizar productos en el inventario */
+export const updateInventoryProduct = async (req,res)=>{
+  try {
+    const {id_producto} = req.params;
+    const {tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida} = req.body;
+    const [row] = await pool.query(
+      "UPDATE inventario SET nombre = COALESCE(?, nombre), costo = COALESCE(?,costo), cantidad_comprada = COALESCE(?, cantidad_comprada), precio_unitario = COALESCE(?, precio_unitario),cantidad_en_stock = COALESCE (?, cantidad_en_stock), cantidad_vendida = COALESCE(?, cantidad_vendida) WHERE id_producto = ?",[tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, id_producto]
+    );
+    if (row.affectedRows === 0){
+      return res.status(404).json({
+        message: "No se encontró al procuto",
+      });
+    }
+    res.send({
+      id_producto, tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
