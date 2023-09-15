@@ -191,8 +191,6 @@ const FormVehicle = ({getCustomer3}) => {
               placeholder="Observaciones, (Estado entrante del vehículo)"
             ></TextArea>
           </ContentInput>
-
-
         </Form>
       </ContainForm>
 

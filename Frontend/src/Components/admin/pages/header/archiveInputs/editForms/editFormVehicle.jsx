@@ -243,7 +243,7 @@ export const Input = styled.input`
 
   &::placeholder {
     font-size: 15px;
-    text-transform: capitalize;
+    text-transform: none;
   }
 `;
 
