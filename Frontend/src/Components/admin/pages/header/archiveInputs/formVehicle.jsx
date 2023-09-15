@@ -109,21 +109,31 @@ const FormVehicle = ({getCustomer3}) => {
             <Input type="text" 
             placeholder="Marca" 
             value={marca}
-            onChange={(e)=>setMarca(e.target.value)}
-            autoComplete="off" />
+            onChange={(e)=>setMarca(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off"
+            maxLength={10}
+            required="true"
+            />
+
             <Input type="text" 
             placeholder="Modelo"
             value={modelo}
-            onChange={(e)=>setModelo(e.target.value)}
-            autoComplete="off" />
+            onChange={(e)=>setModelo(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" 
+            maxLength={10}
+            required="true"
+            />
           </ContentInput>
 
           <ContentInput>
             <Input type="text" 
             placeholder="Año" 
             value={año}
-            onChange={(e)=>setAño(e.target.value)}
-            autoComplete="off" />
+            onChange={(e)=>setAño(e.target.value.replace(/[^0-9]/g, ''))}
+            autoComplete="off"
+            maxLength={4}
+            required="true"
+            />
           </ContentInput>
 
           <ContentInput>
@@ -132,8 +142,9 @@ const FormVehicle = ({getCustomer3}) => {
               placeholder="Placa del vehículo"
               autoComplete="off"
               value={matricula}
-              onChange={(e)=>setMatricula(e.target.value)}
-              required
+              onChange={(e)=>setMatricula(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
+              maxLength={6}
+              required="true"
             />
           </ContentInput>
           <ContentInput>
@@ -142,8 +153,9 @@ const FormVehicle = ({getCustomer3}) => {
               placeholder="Tarjeta de propiedad"
               autoComplete="off"
               value={tarjetaPropiedad}
-              onChange={(e)=>setTarjetaPropiedad(e.target.value)}
-              required
+              onChange={(e)=>setTarjetaPropiedad(e.target.value.replace(/[^0-9]/g, ''))}
+              maxLength={12}
+              required="true"
             />
           </ContentInput>
 
@@ -152,18 +164,22 @@ const FormVehicle = ({getCustomer3}) => {
               type="text"
               placeholder="Color del vehículo"
               value={color}
-              onChange={(e) => setColor(e.target.value)}
+              onChange={(e) => setColor(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               autoComplete="off"
-              required
+              required="true"
+              maxLength={20}
             />
           </ContentInput>
 
           <ContentInput>
-            <Input type="tel" 
+            <Input type="text" 
             placeholder="VIN"
             value={vin}
-            onChange={(e)=>setVin(e.target.value)}
-            autoComplete="off" />
+            onChange={(e)=>setVin(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
+            autoComplete="off" 
+            required="true"
+            maxLength={17}
+            />
           </ContentInput>
 
           <ContentInput>
