@@ -122,3 +122,23 @@ export const postLoginEmployees = async (req, res) => {
     res.status(500).json({ error: "Error del servidor 💀💀💀" });
   }
 };
+
+/* consulta para crear productos en el inventario */
+
+export const postInventario = async (req, res) => {
+  try {
+    const {tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, tipo_item, tipo_medida} = req.body;
+    const [row] = await pool.query(
+      "INSERT INTO inventario (tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida) VALUEs(?,?,?,?,?,?,?,?,?)",
+      [ tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida]
+    );
+    res.json({
+      id_producto: row.insertId,
+      tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
