@@ -16,6 +16,7 @@ import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
 import { Btn_Create_Product } from "../main/archiveTable/tableInventory/styledTableInventory";
+import FormInventory from "./archiveInputs/formInventory";
 
 const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
@@ -107,7 +108,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
       showCloseButton={true}
       >
         <ContainInfoModal>
-
+          <FormInventory />
         </ContainInfoModal>
       </Modals>
     </>
