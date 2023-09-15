@@ -3,12 +3,18 @@
 import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableVehicleControl";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
   const [search, setSearch] = useState('');
+  // Variables de estado, modal eliminar
+  const [delVehicle, setDelVehicle] = useState(null);
+  const [handleDeleteControlVehicle, setHandleDeleteControlVehicle] = useState(false);
   
     //Función de busque
     const searching = (e) => {
@@ -37,9 +43,9 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
     }
   };
 
-  const deleteVehicle = async (item) => {
+  const deleteVehicle = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${item.matricula}`);
+      const result = await axios.delete(`http://localhost:3005/deletevehicle/${delVehicle.matricula}`);
       console.log(result);
       window.location.reload();
     } catch (error) {
@@ -101,7 +107,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons onClick={() => deleteVehicle(item)} title="Eliminar vehículo">
+                    <Buttons onClick={() => {setHandleDeleteControlVehicle(!handleDeleteControlVehicle); setDelVehicle(item)}} title="Eliminar vehículo">
                       <i className={deleteVehicleTable}></i>
                     </Buttons>
                   </ButtonOptions>
@@ -111,6 +117,22 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      <Modals
+      status={handleDeleteControlVehicle}
+      changeStatus={setHandleDeleteControlVehicle}
+      titleModal={'Eliminar vehículo'}
+      changePosition={'start'}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          <P>¿Estas seguro de querer eliminar este vehículo?</P>
+          <ButtonDelete>
+            <Btn_Delete onClick={() => {setHandleDeleteControlVehicle(!handleDeleteControlVehicle); deleteVehicle()}} >Eliminar</Btn_Delete>
+          </ButtonDelete>
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };

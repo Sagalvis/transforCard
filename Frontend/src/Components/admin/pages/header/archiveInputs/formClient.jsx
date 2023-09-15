@@ -134,8 +134,7 @@ const FormClient = () => {
               type="text"
               placeholder="Documento"
               value={identification}
-              onChange={(e) => setIdentificacion(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
+              onChange={(e) => setIdentificacion(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={13}
               autoComplete="off"
               required={true}

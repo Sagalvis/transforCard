@@ -118,7 +118,7 @@ const FormVehicle = ({getCustomer3}) => {
             <Input type="text" 
             placeholder="Modelo"
             value={modelo}
-            onChange={(e)=>setModelo(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            onChange={(e)=>setModelo(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
             autoComplete="off" 
             maxLength={10}
             required="true"
@@ -184,11 +184,12 @@ const FormVehicle = ({getCustomer3}) => {
 
           <ContentInput>
             <TextArea
-              cols={30}
+              cols={50}
               rows={3}
               value={observacion}
               onChange={(e)=>setObservacion(e.target.value)}
               placeholder="Observaciones, (Estado entrante del vehículo)"
+              maxLength={250}
             ></TextArea>
           </ContentInput>
         </Form>
