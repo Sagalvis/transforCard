@@ -85,7 +85,7 @@ const EditFormClient = ({getCustomer}) => {
             <Input
               type="text"
               value={nombre}
-              onChange={(e) => setNombres(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
+              onChange={(e) => setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               placeholder="Nombres"
               autoComplete="off"
             />
@@ -93,7 +93,7 @@ const EditFormClient = ({getCustomer}) => {
               type="text"
               placeholder="Apellidos"
               value={apellido}
-              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
+              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               autoComplete="off"
             />
           </ContentInput>
@@ -113,8 +113,7 @@ const EditFormClient = ({getCustomer}) => {
               type="tel"
               placeholder="Teléfono"
               value={tel}
-              onChange={(e) => setTelefono(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
+              onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={10}
               autoComplete="off"
               required
