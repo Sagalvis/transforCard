@@ -175,7 +175,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                 <Td>{item.identificacion}</Td>
                 <Td>{item.nombre}</Td>
                 <Td>{item.apellido}</Td>
-                <Td>{item.correo}</Td>
+                <Td className="email">{item.correo}</Td>
                 <Td>{item.direccion}</Td>
                 <Td>{item.tel}</Td>
                 <Td>

@@ -117,8 +117,7 @@ return (
                         type="text"
                         placeholder="Marca"
                         value={marca}
-                        onChange={(e) => setMarca(e.target.value)}
-                        //onInput={(evt) => acceptNum(evt)}
+                        onChange={(e) => setMarca(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                         maxLength={10}
                         autoComplete="off"
                     />
@@ -129,8 +128,9 @@ return (
                         placeholder="Modelo"
                         autoComplete="off"
                         value={modelo}
-                        onChange={(e) => setModelo(e.target.value)}
-                        required
+                        onChange={(e) => setModelo(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+                        required={true}
+                        maxLength={10}
                     />
                 </ContentInput>
                 <ContentInput>
@@ -139,8 +139,9 @@ return (
                         placeholder="Año"
                         autoComplete="off"
                         value={año}
-                        onChange={(e) => setAño(e.target.value)}
+                        onChange={(e) => setAño(e.target.value.replace(/[^0-9]/g, ''))}
                         required
+                        maxLength={4}
                     />
                 </ContentInput>
                 <ContentInput>
@@ -149,18 +150,20 @@ return (
                         placeholder="Color"
                         autoComplete="off"
                         value={color}
-                        onChange={(e) => setColor(e.target.value)}
+                        onChange={(e) => setColor(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                         required
+                        maxLength={20}
                     />
                 </ContentInput>
                 <ContentInput>
                     <Input
                         type="text"
-                        placeholder="vin"
+                        placeholder="VIN"
                         autoComplete="off"
                         value={vin}
-                        onChange={(e) => setVin(e.target.value)}
+                        onChange={(e) => setVin(e.target.value.replace(/[^a-z0-9]/g, '').toLowerCase())}
                         required
+                        maxLength={17}
                     />
                 </ContentInput>
                 
@@ -235,9 +238,8 @@ export const Input = styled.input`
   color: #000;
   font-size: 16px;
   font-family: "Outfit";
-  &.matricula {
-    text-transform: uppercase;
-  }
+  text-transform: uppercase;
+
   &::placeholder {
     font-size: 15px;
     text-transform: capitalize;
