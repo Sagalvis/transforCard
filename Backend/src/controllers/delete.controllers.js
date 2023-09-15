@@ -1,4 +1,5 @@
 /* importacion de la base de la base de datos para hace las consultas */
+
 import {pool} from "../dbconfig.js";
 /*--- NOTA: USAR SOLO SI ES ESTRICAMENTE NECESARIO ---*/
 
@@ -80,3 +81,26 @@ export const deleteVehicle = async(req, res) => {
 };
 
 
+/* Consulta para eliminar productos de la tabla inventario */
+
+export const deleteProductoInventario = async (req, res) => {
+  try {
+    const {id_producto} = req.params;
+    const [row] = await pool.query(
+      "DELETE FROM inventario WHERE id_producto = ? ",[id_producto]
+    )
+    if (row.affectedRows === 0) {
+      return res.status(404).json({
+        message: "No se encontró al vehiculo",
+      });
+    };
+    res.send({
+      message:'producto eliminado correctamente',
+      id_producto
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
