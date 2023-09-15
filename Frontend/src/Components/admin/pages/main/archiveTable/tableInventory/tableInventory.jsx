@@ -1,21 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {
-  /* Btn_Create_Product, */ ButtonOptions,
-  Buttons,
-  /* ContainCheck, */ ContainControls,
-  ContainMaxData,
-  ContainSearch,
-  ContainTable,
-  Input,
-  Label,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "./styledTableInventory";
+import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableInventory";
 import axios from "axios";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
