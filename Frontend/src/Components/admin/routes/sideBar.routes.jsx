@@ -6,11 +6,12 @@ import ServiceOder from "../pages/serviceOrder"
 import Invocice from "../pages/invoice"
 import Inventory from "../pages/inventory"
 import Staff from "../pages/staff";
+
 const SidebarRoutes = () => {
   return (  
     <>
     <Routes>
-      <Route path="*" element={<Home/>}/>
+      <Route path="/user" element={<Home/>}/>
       <Route path="/client" element={<Client/>}/>
       <Route path="/vehicle" element={<Vehicle/>}/>
       <Route path="/serviceorder" element={<ServiceOder/>}/>

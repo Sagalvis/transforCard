@@ -14,19 +14,24 @@ import {
   NavbarContain,
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react"
 
 
 const Sidebar = () => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
+  const useData = localStorage.getItem(("user"));
+ 
   const logOut = () => {
-    localStorage.removeItem("Token");
-    window.location.href = 'http://localhost:5173/login';
+    localStorage.removeItem("user");
+    
   }
-
+  
+  useEffect(() => {
+    if (!useData){
+      window.location.href = 'http://localhost:5173/login';
+    }
+  },[useData]);
 
   return (
     <ContaiSidebar>
