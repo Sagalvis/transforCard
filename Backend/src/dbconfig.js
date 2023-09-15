@@ -6,4 +6,5 @@ export const pool = createPool({
   password: '',
   port:"3306",
   database:"tranforcaroficial"
+
 })

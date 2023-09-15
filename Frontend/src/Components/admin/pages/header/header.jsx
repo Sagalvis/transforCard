@@ -16,10 +16,13 @@ import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
 import { Btn_Create_Product } from "../main/archiveTable/tableInventory/styledTableInventory";
+import FormInventory from "./archiveInputs/formInventory";
 
 const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
+  // Variable de estado para abrir modal de crear item de inventario
+  const [handleFormInventory, setHandleFormInventory] = useState(false);
 
   
   
@@ -59,7 +62,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           </Button>
         }
         {btnCreateProduct &&
-        <Btn_Create_Product>Crear producto</Btn_Create_Product>
+        <Btn_Create_Product onClick={() => setHandleFormInventory(!handleFormInventory)}>Crear producto</Btn_Create_Product>
         }
 
           {btnExport &&
@@ -68,7 +71,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
         </ContainButtons>
       </ContainHeader>
 
-      {/* Modal reutilizable */}
+      {/* Modal reutilizable para el boton plus*/}
       <Modals
         status={handleClose}
         changeStatus={setHandleClose}
@@ -92,6 +95,20 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           { showContentVehicle && (
             <FormVehicle />
           )}
+        </ContainInfoModal>
+      </Modals>
+
+      {/* Modal del boton crear producto */}
+      <Modals
+      status={handleFormInventory}
+      changeStatus={setHandleFormInventory}
+      titleModal={'Crear producto'}
+      changePosition={"start"}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          <FormInventory />
         </ContainInfoModal>
       </Modals>
     </>

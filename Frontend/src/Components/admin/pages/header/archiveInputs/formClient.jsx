@@ -109,10 +109,10 @@ const FormClient = () => {
             <Input
               type="text"
               value={nombres}
-              onChange={(e) => setNombres(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
+              onChange={(e) => setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               placeholder="Nombres"
               autoComplete="off"
-              required
+              required={true}
               maxLength={20}
             />
           </ContentInput>
@@ -122,9 +122,9 @@ const FormClient = () => {
               type="text"
               placeholder="Apellidos"
               value={apellidos}
-              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
+              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               autoComplete="off"
-              required
+              required={true}
               maxLength={20}
             />
           </ContentInput>
@@ -134,11 +134,10 @@ const FormClient = () => {
               type="text"
               placeholder="Documento"
               value={identification}
-              onChange={(e) => setIdentificacion(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
+              onChange={(e) => setIdentificacion(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={13}
               autoComplete="off"
-              required
+              required={true}
             />
           </ContentInput>
 
@@ -160,11 +159,10 @@ const FormClient = () => {
               type="tel"
               placeholder="Teléfono"
               value={telefono}
-              onChange={(e) => setTelefono(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
+              onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={10}
               autoComplete="off"
-              required
+              required={true}
             />
           </ContentInput>
 
@@ -175,19 +173,19 @@ const FormClient = () => {
               value={direccion}
               onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
               autoComplete="off"
-              required
+              required={true}
             />
           </ContentInput>
 
           <ContentInput>
             <Input
               type="email"
-              placeholder="Correo electronico"
+              placeholder="Correo electrónico"
               autoComplete="off"
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}
-              required
-              maxLength={32}
+              required={true}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>
         </Form>
