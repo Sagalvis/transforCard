@@ -11,8 +11,10 @@ import {
   ContainInfo,
   ContainInfoModal,
   ContainServices,
+  Cuadro,
   ExptButton,
   H2,
+  P,
   TitleService,
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
@@ -133,10 +135,28 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
       >
         <ContainInfoModal>
             <TitleService>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, exercitationem.</p>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
             </TitleService>
           <ContainServices>
 
+            <CardService>
+              <Cuadro>
+
+              </Cuadro>
+              <Title>
+                <P>Cambio de aceite</P>
+              </Title>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
             <CardService>
 
             </CardService>
@@ -150,23 +170,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
 
             </CardService>
           </ContainServices>
-        </ContainInfoModal>
-
-        <ContainInfoModal>
-            <TitleService>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, exercitationem.</p>
-            </TitleService>
-          <ContainServices>
-
-            <CardService>
-
-            </CardService>
-            <CardService>
-
-            </CardService>
-          </ContainServices>
-        </ContainInfoModal>
-        
+        </ContainInfoModal>        
       </Modals>
     </>
   );
