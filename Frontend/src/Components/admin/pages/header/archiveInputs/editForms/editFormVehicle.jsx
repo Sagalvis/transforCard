@@ -91,21 +91,25 @@ return (
         <ContainForm>
             <Form>
                 <ContentInput className="display">
-                    <Input
+                    <Input className="matricula"
                         type="text"
-                        placeholder="matricula"
+                        placeholder="Placa del vehículo"
                         value={placa}
-                        onChange={(e) => setPlaca(e.target.value)}
+                        onChange={(e) => setPlaca(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
                         autoComplete="off"
+                        maxLength={6}
+                        required="true"
                     />
                 </ContentInput>
                 <ContentInput>
                     <Input
                         type="text"
-                        placeholder="Tarjeta Propiedad"
+                        placeholder="Tarjeta propiedad"
                         value={tarjetaPropiedad}
-                        onChange={(e) => setTpropiedad(e.target.value)}
-                        //autoComplete="off"
+                        onChange={(e) => setTpropiedad(e.target.value.replace(/[^0-9]/g, ''))}
+                        autoComplete="off"
+                        maxLength={12}
+                        required="true"
                     />
                 </ContentInput>
                 <ContentInput className="display">
@@ -113,10 +117,10 @@ return (
                         type="text"
                         placeholder="Marca"
                         value={marca}
-                        onChange={(e) => setMarca(e.target.value)}
-                        //onInput={(evt) => acceptNum(evt)}
+                        onChange={(e) => setMarca(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                         maxLength={10}
                         autoComplete="off"
+                        required="true"
                     />
                 </ContentInput>
                 <ContentInput>
@@ -125,8 +129,9 @@ return (
                         placeholder="Modelo"
                         autoComplete="off"
                         value={modelo}
-                        onChange={(e) => setModelo(e.target.value)}
-                        required
+                        onChange={(e) => setModelo(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+                        required="true"
+                        maxLength={10}
                     />
                 </ContentInput>
                 <ContentInput>
@@ -135,28 +140,31 @@ return (
                         placeholder="Año"
                         autoComplete="off"
                         value={año}
-                        onChange={(e) => setAño(e.target.value)}
-                        required
+                        onChange={(e) => setAño(e.target.value.replace(/[^0-9]/g, ''))}
+                        required="true"
+                        maxLength={4}
                     />
                 </ContentInput>
                 <ContentInput>
                     <Input
                         type="text"
-                        placeholder="Color"
+                        placeholder="Color del vehículo"
                         autoComplete="off"
                         value={color}
-                        onChange={(e) => setColor(e.target.value)}
-                        required
+                        onChange={(e) => setColor(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+                        required="true"
+                        maxLength={20}
                     />
                 </ContentInput>
                 <ContentInput>
                     <Input
                         type="text"
-                        placeholder="vin"
+                        placeholder="VIN"
                         autoComplete="off"
                         value={vin}
-                        onChange={(e) => setVin(e.target.value)}
-                        required
+                        onChange={(e) => setVin(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
+                        required="true"
+                        maxLength={17}
                     />
                 </ContentInput>
                 
@@ -231,9 +239,11 @@ export const Input = styled.input`
   color: #000;
   font-size: 16px;
   font-family: "Outfit";
+  text-transform: uppercase;
 
   &::placeholder {
     font-size: 15px;
+    text-transform: none;
   }
 `;
 

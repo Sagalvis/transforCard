@@ -142,7 +142,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <P>{observacion}</P>
+          <div>{observacion}</div>
+          <ButtonDelete>
+          <Btn_Delete onClick={() => setHandleRemarks(!handleRemarks)}>Cerrar</Btn_Delete>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
 
@@ -157,7 +160,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
         <ContainInfoModal>
           <P>¿Estas seguro de querer eliminar este vehículo?</P>
           <ButtonDelete>
-          <Btn_Delete onClick={deleteVehicle}>Eliminar</Btn_Delete>
+          <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); deleteVehicle()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

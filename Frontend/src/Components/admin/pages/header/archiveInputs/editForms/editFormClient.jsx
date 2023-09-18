@@ -81,18 +81,11 @@ const EditFormClient = ({getCustomer}) => {
       </>
       <ContainForm>
         <Form>
-          {/* <ContentInput>
-            <Select>
-              <Option value="0">-Seleccione tipo de persona-</Option>
-              <Option value="person">PERSONA</Option>
-            </Select>
-          </ContentInput> */}
-
           <ContentInput className="display">
             <Input
               type="text"
               value={nombre}
-              onChange={(e) => setNombres(e.target.value)}
+              onChange={(e) => setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               placeholder="Nombres"
               autoComplete="off"
             />
@@ -100,46 +93,30 @@ const EditFormClient = ({getCustomer}) => {
               type="text"
               placeholder="Apellidos"
               value={apellido}
-              onChange={(e) => setApellidos(e.target.value)}
+              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               autoComplete="off"
             />
           </ContentInput>
-
-          {/* <ContentInput>
-            <Input
-              type="numb"
-              placeholder="Documento"
-              value={identification}
-              onChange={(e) => setIdentificacion(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
-              maxLength={15}
-              autoComplete="off"
-            />
-          </ContentInput> */}
-
 
           <ContentInput>
             <Input
               type="text"
               placeholder="Dirección"
               value={direccion}
-              onChange={(e) => setDireccion(e.target.value)}
+              onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
               autoComplete="off"
             />
           </ContentInput>
 
           <ContentInput className="display">
-            {/* <Select className="select-display">
-              <Option value="0">-Seleccione su país-</Option>
-            </Select> */}
             <Input
               type="tel"
               placeholder="Teléfono"
               value={tel}
-              onChange={(e) => setTelefono(e.target.value)}
-              onInput={(evt) => acceptNum(evt)}
+              onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={10}
               autoComplete="off"
+              required
             />
           </ContentInput>
           
@@ -149,8 +126,9 @@ const EditFormClient = ({getCustomer}) => {
               placeholder="Correo electronico"
               autoComplete="off"
               value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              onChange={(e) => setCorreo(e.target.value.toLowerCase())}
               required
+              maxLength={32}
             />
           </ContentInput>
         </Form>

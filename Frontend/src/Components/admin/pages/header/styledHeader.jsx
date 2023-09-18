@@ -36,6 +36,10 @@ export const ContainInfo = styled.div`
     font-size: 25px;
     margin-right: 5px;
   }
+  .fa-file-invoice {
+    font-size: 25px;
+    margin-right: 5px;
+  }
 `;
 
 export const H2 = styled.h2`
@@ -77,12 +81,31 @@ export const Button = styled.button`
 export const ExptButton = styled.button`
   background: none;
   padding: 10px 20px;
-  font-weight: 400;
+  font-weight: 500;
+  font-family: 'Outfit';
   border: none;
   border-radius: 1px;
   cursor: pointer;
   border: 1px solid #ccc;
   transition: .3s ease;
+  text-transform: uppercase;
+  
+  &:hover {
+    background: #e8e8e8;
+  }
+`;
+
+export const Btn_Create_Order = styled.button`
+  background: none;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-family: 'Outfit';
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: .3s ease;
+  text-transform: uppercase;
   
   &:hover {
     background: #e8e8e8;
@@ -92,6 +115,7 @@ export const ExptButton = styled.button`
 export const ContainInfoModal = styled.div`
   /* background-color: green; */
   display: flex;
+  gap: 10px;
   justify-content: center;
   flex-direction: column;
   width: 100%;
@@ -100,4 +124,23 @@ export const ContainInfoModal = styled.div`
 export const P = styled.p`
   margin: 5px;
   font-size: 17px;
+`;
+
+export const ContainServices = styled.div`
+  background-color: red;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+`;
+
+export const TitleService = styled.div`
+  
+`;
+
+export const CardService = styled.div`
+  background-color: green;
+  width: 160px;
+  height: 190px;
+  
 `;

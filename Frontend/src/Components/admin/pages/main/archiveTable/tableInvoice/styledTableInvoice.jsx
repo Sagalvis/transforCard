@@ -4,8 +4,24 @@ import styled from 'styled-components';
 
 export const ContainCheck = styled.div`
   padding-left: 1rem;
+  display: flex;
+  justify-content: flex-end;
   /* background-color: yellow; */
   margin-bottom: 1.55rem;
+`;
+
+export const Btn_Create_Product = styled.button`
+  background: none;
+  padding: 10px 20px;
+  font-weight: 400;
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: .3s ease;
+  &:hover {
+    background: #e8e8e8;
+  }
 `;
 
 export const Input = styled.input`
@@ -68,9 +84,8 @@ export const ContainSearch = styled.div`
 export const ContainTable = styled.div`
   background-color: #fff;
   width: 100%;
-  max-height: 80%;
+  max-height: 75%;
   margin-bottom: 15px;
-  overflow-y: scroll;
 `;
 
 export const Table = styled.table`
@@ -113,12 +128,7 @@ export const Tbody = styled.tbody`
 
 export const Td = styled.td`
   padding: 10px;
-  text-transform: capitalize;
   border-bottom: 1px solid #ccc;
-
-  &.email {
-    text-transform: lowercase;
-  }
 `;
 
 
@@ -220,25 +230,5 @@ export const ButtonHandle = styled.button`
     background: #d3d3d3;
     border-radius: 4px;
     
-  }
-`;
-
-export const ButtonDelete = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 5px;
-  margin: 3% 1%;
-`;
-
-export const Btn_Delete = styled.button`
-  background: #212529;
-  border: none;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background: #292d31;
   }
 `;

@@ -15,18 +15,23 @@ import {
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
 import { useLocation } from "react-router-dom";
-// import axios from "axios";
-// import jwt_decode from "jwt-decode";
+import { useEffect } from "react"
 
 
 const Sidebar = () => {
   const { pathname } = useLocation();
-
+  const useData = localStorage.getItem(("user"));
+ 
   const logOut = () => {
-    localStorage.removeItem(DataTransfer);
-    window.location.href = 'http://localhost:5173/login';
+    localStorage.removeItem("user");
+    
   }
-// const userToken = jwt_decode(localStorage.getItem("Token"))
+  
+  useEffect(() => {
+    if (!useData){
+      window.location.href = 'http://localhost:5173/login';
+    }
+  },[useData]);
 
   return (
     <ContaiSidebar>

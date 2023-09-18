@@ -48,6 +48,7 @@ export const Tbody = styled.tbody`
 `;
 
 export const Td = styled.td`
+text-transform: uppercase;
   padding: 10px;
   border-bottom: 1px solid #ccc;
 `;

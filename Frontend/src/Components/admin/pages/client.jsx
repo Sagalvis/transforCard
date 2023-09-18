@@ -3,7 +3,10 @@ import Header from "./header/header";
 import Main from "./main/main";
 
 
+
+
 const Client = () => {
+
   return (
     <>
       {/* Componente HEADER */}
@@ -16,7 +19,6 @@ const Client = () => {
       showContentClient={true}
       showPlusButton={true}
       btnExport={true}
-      btnCreateProduct={false}
       />
       
       {/* Componente MAIN */}

@@ -87,9 +87,11 @@ const EditFormStaff = ({getEmpleado}) => {
             <Input
               type="text"
               value={nombre}
-              onChange={(e) => setNombres(e.target.value)}
+              onChange={(e) => setNombres(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
               placeholder="Nombres"
               autoComplete="off"
+              required
+              maxLength={20}
             />
           </ContentInput>
 
@@ -98,19 +100,22 @@ const EditFormStaff = ({getEmpleado}) => {
               type="text"
               placeholder="Apellidos"
               value={apellido}
-              onChange={(e) => setApellidos(e.target.value)}
+              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zñáéíóúü\s]/g, '').toLowerCase())}
               autoComplete="off"
+              required
+              maxLength={20}
             />
           </ContentInput>
 
           <ContentInput>
             <Input
               type="email"
-              placeholder="Correo electronico"
+              placeholder="Correo electrónico"
               autoComplete="off"
               value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              onChange={(e) => setCorreo(e.target.value.toLowerCase())}
               required
+              maxLength={32}
             />
           </ContentInput>
 
@@ -121,7 +126,7 @@ const EditFormStaff = ({getEmpleado}) => {
               //value={}
               //onChange={(e) => setIdentificacion(e.target.value)}
               onInput={(evt) => acceptNum(evt)}
-              maxLength={15}
+              maxLength={13}
               autoComplete="off"
             />
           </ContentInput>

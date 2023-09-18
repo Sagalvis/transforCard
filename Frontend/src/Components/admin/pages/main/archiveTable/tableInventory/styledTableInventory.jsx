@@ -13,12 +13,14 @@ export const ContainCheck = styled.div`
 export const Btn_Create_Product = styled.button`
   background: none;
   padding: 10px 20px;
-  font-weight: 400;
+  font-weight: 500;
+  font-family: 'Outfit';
   border: none;
   border-radius: 1px;
   cursor: pointer;
   border: 1px solid #ccc;
   transition: .3s ease;
+  text-transform: uppercase;
   &:hover {
     background: #e8e8e8;
   }

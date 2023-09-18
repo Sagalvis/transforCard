@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableInventory";
+import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 
-const TableInventory = ({ editProduct, deleteProduct }) => {
+const TableInvoice = ({ editProduct, deleteProduct }) => {
   // Variable de estado para traer toda la tabla inventario
   const [invetario, setInventario] = useState([]);
   // Variable de estado para filtrar busqueda
@@ -110,4 +110,4 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   );
 };
 
-export default TableInventory;
+export default TableInvoice;

@@ -39,10 +39,19 @@ const Login = () => {
             correo: correo,
             contraseña: contraseña,
           }
-        )
-          window.location.href = "http://localhost:5173/";
-          console.log(response);
-        
+        ).then((response) => {
+          console.log(response.data, "😎😎😎"); 
+          const result= response.data;
+          if(response.data === ""){
+            alert("el usario no existe")
+          }else{
+            localStorage.setItem("user", JSON?.stringify(result));
+            setTimeout(()=>{
+              window.location.href ="http://localhost:5173";
+            }, 100)
+          }
+          
+        })
       } catch (error) {
         console.error(error);
         alert("Usuario y/o contraseña no validos");

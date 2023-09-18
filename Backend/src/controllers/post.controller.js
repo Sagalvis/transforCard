@@ -1,9 +1,8 @@
 /* importacion de la base de la base de datos para hace las consultas */
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-const SECRET = "roylegustayuliperonolodice";
-
+import bcrypt from "bcrypt"
+const SECRET = "jesusessimpdehelena"
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
@@ -39,8 +38,8 @@ export const postEmployees = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "Error en el servidor",
-    });
-  }
+    });
+  }
 };
 /* Consulta para crear vehiculos */
 
@@ -103,24 +102,44 @@ export const postLoginEmployees = async (req, res) => {
       "SELECT * FROM empleado WHERE correo = ?",
       [correo]
     );
-    // console.log(rows[0])
+    console.log(rows[0])
     if (rows.length > 0) {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
-      console.log(`CONOSLE:LOG DEL COMPASSWORD -> ${compassword}`);
-
-      // console.log({id: rows[0].id_empleado});
+      console.log(compassword);
+      console.log({id: rows[0].id_empleado});
       if (compassword) {
-        const token = jwt.sign({ id: rows[0].id_empleado, username: rows[0].nombre, lastname: rows[0].apellido }, SECRET, {
+        const token = jwt.sign({ id: rows[0].id_empleado }, SECRET, {
           expiresIn: "1h",
         });
         res.status(200).json(token);
-        console.log(token)
+        
+      } else {
+        res.status(400).send("El usuario no existe 🤣🤣");
       }
     } else {
-      res.status(404).send("El usuario no existe 🤦‍♂️ 🤦‍♂️");
+      res.status(400).send("El usuario no existe🤦‍♂🤦‍♂");
     }
   } catch (error) {
-    res.status(500).json({ error: "Error del servidor 💀💀💀" });
-  }
+    res.status(500).json({ error: "Error del servidor 💀💀💀" });
+  }
 };
 
+/* consulta para crear productos en el inventario */
+
+export const postInventario = async (req, res) => {
+  try {
+    const {tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, tipo_item, tipo_medida} = req.body;
+    const [row] = await pool.query(
+      "INSERT INTO inventario (tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida) VALUEs(?,?,?,?,?,?,?,?,?)",
+      [ tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida]
+    );
+    res.json({
+      id_producto: row.insertId,
+      tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
