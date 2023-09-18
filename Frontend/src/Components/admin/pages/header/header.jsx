@@ -11,22 +11,26 @@ import {
   ContainInfo,
   ContainInfoModal,
   ContainServices,
+  Cuadro,
   ExptButton,
   H2,
+  P,
   TitleService,
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
-import { Btn_Create_Product } from "../main/archiveTable/tableInventory/styledTableInventory";
+import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
 import FormInventory from "./archiveInputs/formInventory";
 
-const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateOrder}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateOrder, btnCreateInvoice}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
   // Variable de estado para abrir modal de crear item de inventario
   const [handleFormInventory, setHandleFormInventory] = useState(false);
+  // Variable de estado para abrir modal crear nueva factura
+  const [handleFormInvoice, setHandleFormInvoice] = useState(false)
   // Variable de estado para abrir modal de ordenes de servicio.
   const [handleOrders, setHandleOrders] = useState(false);
 
@@ -68,9 +72,11 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           </Button>
         }
         {btnCreateProduct &&
-        <Btn_Create_Product onClick={() => setHandleFormInventory(!handleFormInventory)}>Crear producto</Btn_Create_Product>
+        <BtnCreate onClick={() => setHandleFormInventory(!handleFormInventory)}>Crear producto</BtnCreate>
         }
-
+        {btnCreateInvoice && 
+        <BtnCreate onClick={() => setHandleFormInvoice(!handleFormInvoice)}>Crear factura</BtnCreate>
+        }
           {btnExport &&
           <ExptButton title={exportButton} onClick={handleDownloadCustomer}>Exportar</ExptButton>
         }
@@ -133,10 +139,28 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
       >
         <ContainInfoModal>
             <TitleService>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, exercitationem.</p>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
             </TitleService>
           <ContainServices>
 
+            <CardService>
+              <Cuadro>
+
+              </Cuadro>
+              <Title>
+                <P>Cambio de aceite</P>
+              </Title>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
+            <CardService>
+
+            </CardService>
             <CardService>
 
             </CardService>
@@ -150,23 +174,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
 
             </CardService>
           </ContainServices>
-        </ContainInfoModal>
-
-        <ContainInfoModal>
-            <TitleService>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, exercitationem.</p>
-            </TitleService>
-          <ContainServices>
-
-            <CardService>
-
-            </CardService>
-            <CardService>
-
-            </CardService>
-          </ContainServices>
-        </ContainInfoModal>
-        
+        </ContainInfoModal>        
       </Modals>
     </>
   );

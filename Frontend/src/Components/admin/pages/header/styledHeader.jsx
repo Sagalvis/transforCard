@@ -139,8 +139,20 @@ export const TitleService = styled.div`
 `;
 
 export const CardService = styled.div`
+  background-color: yellow;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 12.5%;
+  height: 250px;
+`;
+
+export const Cuadro = styled.div`
   background-color: green;
-  width: 160px;
-  height: 190px;
+  width: 100%;
+  height: 55%;
+  border-radius: 10px;
+`;
+
+export const Title = styled.div`
   
 `;
