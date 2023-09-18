@@ -110,7 +110,7 @@ export const postLoginEmployees = async (req, res) => {
 
       // console.log({id: rows[0].id_empleado});
       if (compassword) {
-        const token = jwt.sign({ id: rows[0].id_empleado }, SECRET, {
+        const token = jwt.sign({ id: rows[0].id_empleado, username: rows[0].nombre, lastname: rows[0].apellido }, SECRET, {
           expiresIn: "1h",
         });
         res.status(200).json(token);

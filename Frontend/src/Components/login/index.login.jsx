@@ -32,6 +32,7 @@ const Login = () => {
     evt.preventDefault();
     if (correo && contraseña) {
       try {
+        alert("usuario registrado")
         const response = await axios.post(
           "http://localhost:3005/postLoginEmployees",
           {
