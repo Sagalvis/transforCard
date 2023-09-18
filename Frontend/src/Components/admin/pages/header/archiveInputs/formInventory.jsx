@@ -10,6 +10,10 @@ const FormInventory = () => {
 
     /* Funcion que limpa los inputs */
 
+
+    useEffect(()=>{
+      setShowAlert(true)
+    },[])
   return (
     <>
       {showAlert && (
