@@ -3,24 +3,14 @@
 import { useState } from "react";
 import Modals from "../archive/modals";
 import {
-  AddPlus,
   Btn_Create_Order,
   Button,
-  CardService,
   ContainButtons,
   ContainHeader,
   ContainInfo,
   ContainInfoModal,
-  ContainPrice,
-  ContainServices,
-  Cuadro,
   ExptButton,
-  H2,
-  Img,
-  P,
-  Price,
-  Title,
-  TitleService,
+  H2
 } from "./styledHeader";
 import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
@@ -28,17 +18,14 @@ import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
 import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
 import FormInventory from "./archiveInputs/formInventory";
-import aceite from '../../../../assets/img/aceite.png'
 
-const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateOrder, btnCreateInvoice}) => {
+const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateInvoice}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
   const [handleClose, setHandleClose] = useState(false);
   // Variable de estado para abrir modal de crear item de inventario
   const [handleFormInventory, setHandleFormInventory] = useState(false);
   // Variable de estado para abrir modal crear nueva factura
   const [handleFormInvoice, setHandleFormInvoice] = useState(false)
-  // Variable de estado para abrir modal de ordenes de servicio.
-  const [handleOrders, setHandleOrders] = useState(false);
 
   
   
@@ -78,17 +65,13 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
           </Button>
         }
         {btnCreateProduct &&
-        <BtnCreate onClick={() => setHandleFormInventory(!handleFormInventory)}>Crear producto</BtnCreate>
+        <BtnCreate onClick={() => setHandleFormInventory(!handleFormInventory)}>Crear P/S</BtnCreate>
         }
         {btnCreateInvoice && 
         <BtnCreate onClick={() => setHandleFormInvoice(!handleFormInvoice)}>Crear factura</BtnCreate>
         }
           {btnExport &&
           <ExptButton title={exportButton} onClick={handleDownloadCustomer}>Exportar</ExptButton>
-        }
-
-        {btnCreateOrder &&
-        <Btn_Create_Order title="Crear orden de servicio" onClick={() => setHandleOrders(!handleOrders)}>Crear orden</Btn_Create_Order>
         }
         </ContainButtons>
       </ContainHeader>
@@ -132,115 +115,6 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
         <ContainInfoModal>
           <FormInventory />
         </ContainInfoModal>
-      </Modals>
-
-      <Modals
-      status={handleOrders}
-      changeStatus={setHandleOrders}
-      titleModal={'Selecciona el servicio requerido por el cliente'}
-      showCloseButton={true}
-      showHeader={true}
-      changePosition={'start'}
-      changeWidth={'800px'}
-      >
-        <ContainInfoModal>
-            <TitleService>
-              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
-            </TitleService>
-          <ContainServices>
-
-            <CardService>
-              <Cuadro>
-                <Img src={aceite} alt="hh" />
-              </Cuadro>
-              <Title>
-                <P className="size">Cambio de aceite</P>
-              </Title>
-              <ContainPrice>
-                <Price>
-                  <P className="desde">Desde</P>
-                  <P className="precio">$ 30.000</P>
-                </Price>
-                <AddPlus>
-                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
-                </AddPlus>
-              </ContainPrice>
-            </CardService>
-
-            <CardService>
-              <Cuadro>
-                <Img src={aceite} alt="hh" />
-              </Cuadro>
-              <Title>
-                <P className="size">Cambio de aceite</P>
-              </Title>
-              <ContainPrice>
-                <Price>
-                  <P className="desde">Desde</P>
-                  <P className="precio">$ 30.000</P>
-                </Price>
-                <AddPlus>
-                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
-                </AddPlus>
-              </ContainPrice>
-            </CardService>
-
-            <CardService>
-              <Cuadro>
-                <Img src={aceite} alt="hh" />
-              </Cuadro>
-              <Title>
-                <P className="size">Cambio de aceite</P>
-              </Title>
-              <ContainPrice>
-                <Price>
-                  <P className="desde">Desde</P>
-                  <P className="precio">$ 30.000</P>
-                </Price>
-                <AddPlus>
-                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
-                </AddPlus>
-              </ContainPrice>
-            </CardService>
-
-            <CardService>
-              <Cuadro>
-                <Img src={aceite} alt="hh" />
-              </Cuadro>
-              <Title>
-                <P className="size">Cambio de aceite</P>
-              </Title>
-              <ContainPrice>
-                <Price>
-                  <P className="desde">Desde</P>
-                  <P className="precio">$ 30.000</P>
-                </Price>
-                <AddPlus>
-                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
-                </AddPlus>
-              </ContainPrice>
-            </CardService>
-
-            <CardService>
-              <Cuadro>
-                <Img src={aceite} alt="hh" />
-              </Cuadro>
-              <Title>
-                <P className="size">Cambio de aceite</P>
-              </Title>
-              <ContainPrice>
-                <Price>
-                  <P className="desde">Desde</P>
-                  <P className="precio">$ 30.000</P>
-                </Price>
-                <AddPlus>
-                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
-                </AddPlus>
-              </ContainPrice>
-            </CardService>
-
-          </ContainServices>
-        </ContainInfoModal>        
       </Modals>
     </>
   );

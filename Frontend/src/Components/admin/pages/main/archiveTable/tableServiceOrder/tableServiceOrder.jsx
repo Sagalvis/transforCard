@@ -38,15 +38,13 @@ const TableServiceOrder = ({ editOrder, deleteOrder}) => {
               <Th>ID_Cliente</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
-              <Th>Email</Th>
-              <Th>Dirección</Th>
-              <Th>Celular</Th>
+              <Th>Tipo de servicio</Th>
+              <Th>Total a pagar</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
           <Tbody>
               <Tr>
-                <Td>...</Td>
                 <Td>...</Td>
                 <Td>...</Td>
                 <Td>...</Td>

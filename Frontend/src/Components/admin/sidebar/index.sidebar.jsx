@@ -29,7 +29,7 @@ const Sidebar = () => {
   
   useEffect(() => {
     if (!useData){
-      window.location.href = 'http://localhost:5173/login';
+      window.location.href = 'http://localhost:5173';
     }
   },[useData]);
 

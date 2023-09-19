@@ -18,6 +18,7 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
           editUser={"fa-solid fa-pen-to-square"}
           createVehicle={"fa-solid fa-car"} 
           deleteUser={"fa-solid fa-trash-can"}
+          orderService={"fa-solid fa-clipboard-check"}
         />
         )}
 
