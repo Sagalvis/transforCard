@@ -130,6 +130,9 @@ export const ButtonOptions = styled.div`
   .fa-trash-can {
     font-size: 15px;
   }
+  .fa-file-invoice-dollar {
+    font-size: 15px;
+  }
 `;
 
 // Boton de Opciones independiente del de crear un cliente.

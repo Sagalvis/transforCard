@@ -87,13 +87,13 @@ const TableStaff = ({editStaff, deletStaff}) => {
               <Td>{item.correo}</Td>
               <Td>
                 <ButtonOptions>
-                  <Buttons onClick={() => CapturaEmpleado(item)} title="Editar cliente">
+                  <Buttons onClick={() => CapturaEmpleado(item)} title="Editar empleado">
                     <i className={editStaff}></i>
                   </Buttons>
                   <Buttons onClick={() => {
                     setHandleAdvDelete(!handleAdvDelete)
                     setIdEmpleado(item)
-                    }} title="Eliminar cliente">
+                    }} title="Eliminar empleado">
                     <i className={deletStaff}></i>
                   </Buttons>
                 </ButtonOptions>
