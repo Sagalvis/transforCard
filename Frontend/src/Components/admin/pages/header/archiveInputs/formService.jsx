@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 
 const FormInventory = () => {
-  //Varibles de estado para crear un producto
-
   const [nombre, setNombre] = useState("");
   const [costo, setCosto] = useState("");
   const [cantidadComprada, setCantidadComprada] = useState("");
@@ -19,9 +17,8 @@ const FormInventory = () => {
   const [selectProducto, setSelectProducto] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
 
-  //Funcion para crear un producto
-
-  const handletSumit = async (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (
       nombre === "" ||
       costo === "" ||
@@ -32,67 +29,62 @@ const FormInventory = () => {
       selectMedida === 0 ||
       selectProducto === 0
     ) {
-      e.preventDefault();
-      alert("llenar todos los campos");
-    } else {
-      await axios
-        .post("http://localhost:3005/postinventory", {
-          nombre: nombre,
-          costo: parseInt(costo),
-          cantidad_comprada: parseInt(cantidadComprada),
-          precio_unitario: parseInt(precioUnitario),
-          cantidad_en_stock: parseInt(cantidadStock),
-          id_item: selectItem,
-          id_medida: selectMedida,
-          id_producto: selectProducto,
-        })
-        .then((Response) => {
-          console.log(Response.data);
-          setShowAlert(true);
-          window.location.reload();
-        });
+      alert("Por favor, completa todos los campos");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3005/postinventory", {
+        nombre,
+        costo: parseInt(costo),
+        cantidad_comprada: parseInt(cantidadComprada),
+        precio_unitario: parseInt(precioUnitario),
+        cantidad_en_stock: parseInt(cantidadStock),
+        id_item: selectItem,
+        id_medida: selectMedida,
+        id_producto: selectProducto,
+      });
+      console.log(response.data);
+      setShowAlert(true);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
     }
   };
-  /* Funcion que limpa los inputs */
 
   useEffect(() => {
-    const fetchdata = async () => {
+    const fetchData = async () => {
       try {
         const responseItem = await axios.get("http://localhost:3005/tipoitem");
         setTipoItem(responseItem.data);
 
-        const responseMedida = await axios.get(
-          "http://localhost:3005/tipomedida"
-        );
-
+        const responseMedida = await axios.get("http://localhost:3005/tipomedida");
         setTipoMedida(responseMedida.data);
-        const responseProducto = await axios.get(
-          "http://localhost:3005/tipoproducto"
-        );
+
+        const responseProducto = await axios.get("http://localhost:3005/tipoproducto");
         setTipoProducto(responseProducto.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
-    fetchdata();
+
+    fetchData();
   }, []);
+
   return (
     <>
       {showAlert && (
         <ContainAlert>
           <Alert severity="success" color="success">
-            ¡Cliente registrado!
+            ¡Producto registrado!
           </Alert>
         </ContainAlert>
       )}
 
       <ContainForm>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <ContentInput>
-            <Select
-              value={selectItem}
-              onChange={(e) => setSelectItem(parseInt((e.target.value)))}
-            >
+            <Select value={selectItem} onChange={(e) => setSelectItem(parseInt(e.target.value))}>
               <Option value={0}>-Seleccione tipo de item-</Option>
               {tipoItem.map((item, index) => (
                 <Option key={index} value={item.id_item}>
@@ -101,14 +93,15 @@ const FormInventory = () => {
               ))}
             </Select>
           </ContentInput>
-          {selectItem === 1 && (
+
+          {selectItem === 2 && (
             <>
               <ContentInput>
                 <Select
                   value={selectProducto}
-                  onChange={(e) => setSelectProducto(e.target.value)}
+                  onChange={(e) => setSelectProducto(parseInt(e.target.value))}
                 >
-                  <Option value="0">-Seleccione tipo de producto-</Option>
+                  <Option value={0}>-Seleccione tipo de producto-</Option>
                   {tipoProducto.map((item, index) => (
                     <Option key={index} value={item.id_producto}>
                       {item.tipo_producto}
@@ -132,9 +125,9 @@ const FormInventory = () => {
               <ContentInput>
                 <Select
                   value={selectMedida}
-                  onChange={(e) => setSelectMedida(e.target.val)}
+                  onChange={(e) => setSelectMedida(parseInt(e.target.value))}
                 >
-                  <Option value="0">-Seleccione tipo de medida-</Option>
+                  <Option value={0}>-Seleccione tipo de medida-</Option>
                   {tipoMedida.map((item, index) => (
                     <Option key={index} value={item.id_medida}>
                       {item.tipo_medida}
@@ -171,7 +164,7 @@ const FormInventory = () => {
                   type="text"
                   value={cantidadComprada}
                   onChange={(e) => setCantidadComprada(e.target.value)}
-                  placeholder="Cantidad en comprada"
+                  placeholder="Cantidad comprada"
                   autoComplete="off"
                   required={true}
                 />
@@ -189,66 +182,12 @@ const FormInventory = () => {
               </ContentInput>
             </>
           )}
-          {selectItem === 2 && (
-            <>
-              <ContentInput>
-                <Input
-                  type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  placeholder="Nombre del servicio"
-                  autoComplete="off"
-                  required={true}
-                  maxLength={20}
-                />
-              </ContentInput>
-
-              <ContentInput className="display">
-                <Input
-                  className="width"
-                  type="text"
-                  value={costo}
-                  onChange={(e) => setCosto(e.target.value)}
-                  placeholder="Costo"
-                  autoComplete="off"
-                  required={true}
-                  maxLength={20}
-                  />
-                <Input
-                  className="input-display"
-                  type="text"
-                  value={precioUnitario}
-                  onChange={(e) => setPrecioUnitario(e.target.value)}
-                  placeholder="Mano"
-                  maxLength={10}
-                  autoComplete="off"
-                  required={true}
-                />
-              </ContentInput>
-              <ContentInput>
-                <Input
-                  type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  placeholder="Tiempo estimado"
-                  autoComplete="off"
-                  required={true}
-                  maxLength={20}
-                />
-              </ContentInput>
-              <ContentInput>
-                <TextArea placeholder="Descripción del servicio"></TextArea>
-              </ContentInput>
-              
-
-            </>
-          )}
         </Form>
       </ContainForm>
 
       <ButtonRegister className="gap">
         <BtnRegister className="btn_red">Cancelar</BtnRegister>
-        <BtnRegister onClick={handletSumit}>Crear</BtnRegister>
+        <BtnRegister onClick={handleSubmit}>Crear</BtnRegister>
       </ButtonRegister>
     </>
   );
@@ -256,10 +195,7 @@ const FormInventory = () => {
 
 export default FormInventory;
 
-// Estilos de los inputs
-
-export const ContainForm = styled.div`
-  /* background-color: red; */
+const ContainForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -268,11 +204,11 @@ export const ContainForm = styled.div`
   border-bottom: solid 1px #e5e4e4;
 `;
 
-export const Form = styled.form`
+const Form = styled.form`
   width: 100%;
 `;
 
-export const ContentInput = styled.div`
+const ContentInput = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -285,7 +221,7 @@ export const ContentInput = styled.div`
   }
 `;
 
-export const Select = styled.select`
+const Select = styled.select`
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -301,11 +237,9 @@ export const Select = styled.select`
   }
 `;
 
-export const Option = styled.option`
-  /* background-color: red; */
-`;
+const Option = styled.option``;
 
-export const Input = styled.input`
+const Input = styled.input`
   width: 100%;
   border: none;
   padding: 10px;
@@ -320,6 +254,7 @@ export const Input = styled.input`
   &.input-display {
     width: 50%;
   }
+
   &.width {
     width: 50%;
   }
@@ -329,25 +264,14 @@ export const Input = styled.input`
   }
 `;
 
-export const TextArea = styled.textarea`
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 0;
-  resize: none;
-  box-sizing: border-box;
-  padding: 10px;
-  font-family: "Outfit";
-  font-size: 15px;
-  border-radius: 5px;
-`;
-
-export const ButtonRegister = styled.div`
+const ButtonRegister = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
   margin-bottom: 2%;
   padding-right: 5px;
+
   &.gap {
     display: flex;
     gap: 4px;
@@ -355,7 +279,7 @@ export const ButtonRegister = styled.div`
   }
 `;
 
-export const BtnRegister = styled.button`
+const BtnRegister = styled.button`
   display: inline-block;
   padding: 8px 30px;
   background-color: #041737;
@@ -370,19 +294,22 @@ export const BtnRegister = styled.button`
 
   &.btn_red {
     background-color: #dc3545;
+
     &:hover {
       background-color: #c74753;
     }
   }
+
   &:hover {
     background-color: #172b4c;
   }
+
   &:active {
     background-color: #041737;
   }
 `;
 
-export const ContainAlert = styled.div`
+const ContainAlert = styled.div`
   position: absolute;
   bottom: 86%;
   left: 25%;

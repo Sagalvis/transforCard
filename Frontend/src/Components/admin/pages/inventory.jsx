@@ -5,7 +5,6 @@ import Main from "./main/main";
 
 
 const Inventory = () => {
- 
   
   return (  
     <>
