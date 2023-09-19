@@ -57,7 +57,9 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
         {/* Tabla de Facturación */}
         {showTableInvoice && (
           <TableInvoice 
-          // props de iconos pendientes
+          editInvoice={"fa-solid fa-pen-to-square"}
+          deleteInvoice={"fa-solid fa-trash-can"}
+          printInvoice={"fa-solid fa-eye"}
           />
         )}
       </ContainMain>
