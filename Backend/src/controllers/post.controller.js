@@ -195,3 +195,43 @@ export const postInventario = async (req, res) => {
     });
   }
 };
+
+/* post para crear la factura */
+
+
+export const postInvoices = async (req, res) => {
+  try {
+    const {
+      id_factura,
+      identificacion,
+      id_orden,
+      fecha_emision,
+      cantidad_pagada,
+      estado_pago
+    } = req.body;
+    console.log(req.body,'los campos estan correctos 🤔🤔🤔');
+    const [row] = await pool.query(
+      "INSERT INTO factura (id_factura, identificacion, id_orden, fecha_emision, cantidad_pagada, estado_pago) VALUES (?, ?, ?, ?, ?, ?)",
+      [id_factura, identificacion, id_orden, fecha_emision, cantidad_pagada, estado_pago]
+    );
+    console.log(row, 'no hay fallas 😎😎😎');
+    res.json({
+      id_factura,
+      identificacion,
+      id_orden,
+      fecha_emision,
+      cantidad_pagada,
+      estado_pago
+    })    
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+};
+
+
+
+
+

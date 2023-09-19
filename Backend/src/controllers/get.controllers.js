@@ -151,3 +151,18 @@ export const getProducto = async (req, res) => {
     });
   }
 }
+
+
+/* consultas para traer facturas */
+
+export const getInvoices = async (req, res) => {
+   try {
+    const [row] = await pool.query(`SELECT * FROM factura WHERE id_orden = ?`,[req.params.id_orden]);
+    console.log(row);
+    res.send(row[0]);
+   } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+   }
+}
