@@ -5,7 +5,7 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 
-const TableInvoice = ({ editProduct, deleteProduct }) => {
+const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   // Variable de estado para traer toda la tabla inventario
   const [invetario, setInventario] = useState([]);
   // Variable de estado para filtrar busqueda
@@ -82,10 +82,13 @@ const TableInvoice = ({ editProduct, deleteProduct }) => {
                 <Td>
                   <ButtonOptions>
                     <Buttons onClick={() => setHandleFormInventory(!handleFormInventory)} title="Editar producto">
-                      <i className={editProduct}></i>
+                      <i className={editInvoice}></i>
                     </Buttons>
                     <Buttons title="Eliminar producto">
-                      <i className={deleteProduct}></i>
+                      <i className={deleteInvoice}></i>
+                    </Buttons>
+                    <Buttons title="Ver factura">
+                      <i className={printInvoice}></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>
