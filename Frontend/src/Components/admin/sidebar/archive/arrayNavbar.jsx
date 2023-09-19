@@ -25,7 +25,7 @@ export const ButtonNarbar1 = [
   },
   {
     id:5,
-    title:"Facuras",
+    title:"Facturas",
     icon:<i className="fa-solid fa-file-invoice-dollar"></i>,
     to:"/invoice"
   },

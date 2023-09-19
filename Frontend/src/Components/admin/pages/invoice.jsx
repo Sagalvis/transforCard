@@ -13,8 +13,8 @@ const Invoice = () => {
     titleButton={'Crear factura'}
     titleModalPages={'Crear factura nueva'}
     showContentInvoice={true}
-    showPlusButton={true}
     btnExport={true}
+    btnCreateInvoice={true}
     />
 
     {/* Componente MAIN */}

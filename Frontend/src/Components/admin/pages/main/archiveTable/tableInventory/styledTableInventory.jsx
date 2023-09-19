@@ -10,7 +10,7 @@ export const ContainCheck = styled.div`
   margin-bottom: 1.55rem;
 `;
 
-export const Btn_Create_Product = styled.button`
+export const BtnCreate = styled.button`
   background: none;
   padding: 10px 20px;
   font-weight: 500;
