@@ -73,10 +73,8 @@ const FormStaff = () => {
             >
               <Option value="0">-Seleccione el rol-</Option>
               {tipoRol.map((item,i)=>(
-                
                 <Option key={i} value={item.id_rol}>{item.rol}</Option>
               ))
-
               }
             </Select>
           </ContentInput>
@@ -85,7 +83,7 @@ const FormStaff = () => {
             <Input type="text" 
             placeholder="Documento" 
             value={identification}
-            onChange={(e)=> setIdentification(e.target.value)}
+            onChange={(e)=> setIdentification(e.target.value.replace(/[^0-9]/g, ''))}
             autoComplete="off" />
           </ContentInput>
 
@@ -94,12 +92,12 @@ const FormStaff = () => {
             <Input type="text" 
             placeholder="Nombres"
             value={nombres}
-            onChange={(e)=> setNombres(e.target.value)}
+            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
             
             <Input type="text" placeholder="Apellidos" 
             value={apellidos}
-            onChange={(e)=> setApellidos(e.target.value)}
+            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
           </ContentInput>
 
@@ -108,9 +106,10 @@ const FormStaff = () => {
               type="email"
               placeholder="Correo electrónico"
               value={correo}
-              onChange ={(e) => setCorreo(e.target.value)}
+              onChange ={(e) => setCorreo(e.target.value.toLowerCase())}
               autoComplete="off"
               required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>
 
@@ -126,55 +125,24 @@ const FormStaff = () => {
             />
           </ContentInput>
 
-          {/* <ContentInput>
-            <Select className="select-display">
-              <Option value="0">-Estado civil-</Option>
-            </Select>
-
-          </ContentInput> */}
-
           <ContentInput>
             <Input type="tel" 
             placeholder="Teléfono" 
             value={telefono}
-            onChange={(e)=> setTelefono(e.target.value)} 
-            autoComplete="off" />
+            onChange={(e)=> setTelefono(e.target.value.replace(/[^0-9]/g, ''))} 
+            autoComplete="off"
+            />
           </ContentInput>
-
-          {/* <ContentInput>
-            <Input type="text" placeholder="Fecha de nacimiento" autoComplete="off" />
-          </ContentInput> */}
-
-          {/* <ContentInput>
-            <Input type="text" placeholder="Nacionalidad" autoComplete="off" />
-          </ContentInput>
-
-          <ContentInput>
-            <Input type="text" placeholder="Ciudad de nacimiento" autoComplete="off" />
-          </ContentInput>
-
-          <ContentInput>
-            <Input type="text" placeholder="Dpt de nacimiento" autoComplete="off" />
-          </ContentInput> */}
 
           <ContentInput>
             <Input type="text" 
             placeholder="Dirección" 
             value={direccion}
-            onChange={(e) => setDireccion(e.target.value)}
-            autoComplete="off" />
+            onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
+            autoComplete="off" 
+            required
+            />
           </ContentInput>
-
-          {/* <ContentInput className="input-display">
-            <Select className="select-display">
-              <Option value="0">-EPS-</Option>
-            </Select>
-
-          </ContentInput> */}
-
-          {/* <ContentInput>
-            <TextArea cols={30} rows={5} placeholder="Observaciones"></TextArea>
-          </ContentInput> */}
         </Form>
       </ContainForm>
 

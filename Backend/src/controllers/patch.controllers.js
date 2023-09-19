@@ -95,15 +95,15 @@ export const updateInventoryProduct = async (req,res)=>{
 
 export const updateProcutoInventario = async (req, res) => {
   try {
-    const {id_producto} = req.params;
-    const {tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida} = req.body;
-    const [row] = await pool.query("UPDATE inventario SET tipo_producto = COALESCE(?, tipo_producto),nombre = COALESCE(?, nombre), costo = COALESCE(?, costo), cantidad_comprada = COALESCE(?,cantidad_comprada), precio_unitario = COALESCE(?,precio_unitario), cantidad_en_stock = COALESCE(?, cantidad_en_stock), cantidad_vendida = COALESCE(?, cantidad_vendida) WHERE id_producto = ?", [tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,id_producto]);
+    const {id_inventario} = req.params;
+    const {nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, id_item, id_medida, id_producto} = req.body;
+    const [row] = await pool.query("UPDATE inventario SET nombre = COALESCE(?, nombre), costo = COALESCE(?, costo), cantidad_comprada = COALESCE(?,cantidad_comprada), precio_unitario = COALESCE(?,precio_unitario), cantidad_en_stock = COALESCE(?, cantidad_en_stock), cantidad_vendida = COALESCE(?, cantidad_vendida), id_item = COALESCE (?, id_item), id_medida = COALESCE (?, id_medida), id_producto = COALESCE (?, id_producto)  WHERE id_inventario = ?", [ nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,id_item, id_medida, id_producto, id_inventario]);
     if (row.affectedRows === 0) {
       return res.status(404).json({
         message: "No se encontró el producto",
       });
     }
-    res.send({id_producto, tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida})
+    res.send({id_inventario, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,id_item, id_medida, id_producto})
   } catch (error) { 
     console.log(error);
     return res.status(500).json({

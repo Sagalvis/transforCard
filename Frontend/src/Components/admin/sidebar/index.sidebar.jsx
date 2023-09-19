@@ -27,12 +27,12 @@ const Sidebar = () => {
 
   const logOut = () => {
     localStorage.removeItem("user");
-    navigate("/login")
+    navigate("http://localhost:5173")
   }
   
   useEffect(() => {
     if (!useData){
-      navigate("/login");
+      navigate("http://localhost:5173");
     }
   },[useData, navigate]);
 
