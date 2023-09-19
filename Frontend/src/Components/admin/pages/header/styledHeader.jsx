@@ -158,7 +158,7 @@ export const CardService = styled.div`
   background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 10px;
-  width: 11%;
+  width: 20%;
   height: 100%;
 `;
 
