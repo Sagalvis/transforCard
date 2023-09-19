@@ -34,6 +34,7 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
         <TableVehicleControl
           editVehicleTable={"fa-solid fa-pen-to-square"}
           deleteVehicleTable={"fa-solid fa-trash-can"}
+          
         />
         )}
 
