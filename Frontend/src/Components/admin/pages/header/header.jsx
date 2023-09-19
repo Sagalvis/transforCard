@@ -162,7 +162,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
                   <P className="precio">$ 30.000</P>
                 </Price>
                 <AddPlus>
-                <P className="no-margin"><i class="fa-solid fa-square-plus"></i></P>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
                 </AddPlus>
               </ContainPrice>
             </CardService>
@@ -180,7 +180,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
                   <P className="precio">$ 30.000</P>
                 </Price>
                 <AddPlus>
-                <P className="no-margin"><i class="fa-solid fa-square-plus"></i></P>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
                 </AddPlus>
               </ContainPrice>
             </CardService>
@@ -198,7 +198,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
                   <P className="precio">$ 30.000</P>
                 </Price>
                 <AddPlus>
-                <P className="no-margin"><i class="fa-solid fa-square-plus"></i></P>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
                 </AddPlus>
               </ContainPrice>
             </CardService>
@@ -216,7 +216,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
                   <P className="precio">$ 30.000</P>
                 </Price>
                 <AddPlus>
-                <P className="no-margin"><i class="fa-solid fa-square-plus"></i></P>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
                 </AddPlus>
               </ContainPrice>
             </CardService>
@@ -234,7 +234,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
                   <P className="precio">$ 30.000</P>
                 </Price>
                 <AddPlus>
-                <P className="no-margin"><i class="fa-solid fa-square-plus"></i></P>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
                 </AddPlus>
               </ContainPrice>
             </CardService>
