@@ -5,8 +5,7 @@ import Alert from "@mui/material/Alert";
 
 const FormInventory = () => {
   //Varibles de estado para crear un producto
-const FormCreateProduct = () => {
-  //Varibles de estado para crear un producto 
+
   const [nombre, setNombre] = useState("");
   const [costo, setCosto] = useState("");
   const [cantidadComprada, setCantidadComprada] = useState("");
@@ -255,7 +254,7 @@ const FormCreateProduct = () => {
   );
 };
 
-export default FormCreateProduct;
+export default FormInventory;
 
 // Estilos de los inputs
 
