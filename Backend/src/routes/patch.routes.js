@@ -9,7 +9,7 @@ const patchRouter = Router();
 patchRouter.patch('/patchcustomer/:identificacion', controllpatch.updateCustomer);
 patchRouter.patch('/patchemployees/:id_empleado', controllpatch.updateEmployees);
 patchRouter.patch('/patchvehicle/:matricula', controllpatch.updateVehicle);
-patchRouter.patch('/patchinventario/:id_producto', controllpatch.updateProcutoInventario);
+patchRouter.patch('/patchinventario/:id_inventario', controllpatch.updateProcutoInventario);
 
 
 export default patchRouter

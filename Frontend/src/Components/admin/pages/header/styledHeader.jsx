@@ -124,14 +124,30 @@ export const ContainInfoModal = styled.div`
 export const P = styled.p`
   margin: 5px;
   font-size: 17px;
+  &.size {
+    font-size: 15px;
+  }
+  &.desde {
+    font-size: 14px;
+  }
+  &.precio {
+    font-size: 15px;
+  }
+  .fa-square-plus {
+    font-size: 25px;
+  }
+  &.no-margin {
+    margin: 0;
+  }
 `;
 
 export const ContainServices = styled.div`
-  background-color: red;
+  /* background-color: red; */
+  box-sizing: border-box;
   display: flex;
   gap: 10px;
   width: 100%;
-  height: auto;
+  height: 230px;
 `;
 
 export const TitleService = styled.div`
@@ -139,20 +155,57 @@ export const TitleService = styled.div`
 `;
 
 export const CardService = styled.div`
-  background-color: yellow;
+  background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 10px;
-  width: 12.5%;
-  height: 250px;
+  width: 11%;
+  height: 100%;
 `;
 
 export const Cuadro = styled.div`
-  background-color: green;
+  background-color: #fff;
   width: 100%;
-  height: 55%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
   border-radius: 10px;
 `;
 
 export const Title = styled.div`
-  
+  /* background-color: pink; */
+`;
+
+export const ContainPrice = styled.div`
+  /* background-color: orange; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2px;
+  margin-top: 1rem;
+  height: 30%;
+  box-sizing: border-box;
+  /* padding: 0 8px; */
+`;
+
+export const Price = styled.div`
+  /* background-color: #fff; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 80%;
+  height: 100%;
+`;
+
+export const AddPlus = styled.div`
+  /* background-color: #fff; */
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+`;
+
+export const Img = styled.img`
+  object-fit: cover;
+  width: 100%;
 `;

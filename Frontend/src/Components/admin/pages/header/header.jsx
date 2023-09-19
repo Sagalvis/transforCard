@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Modals from "../archive/modals";
 import {
+  AddPlus,
   Btn_Create_Order,
   Button,
   CardService,
@@ -10,11 +11,14 @@ import {
   ContainHeader,
   ContainInfo,
   ContainInfoModal,
+  ContainPrice,
   ContainServices,
   Cuadro,
   ExptButton,
   H2,
+  Img,
   P,
+  Price,
   Title,
   TitleService,
 } from "./styledHeader";
@@ -24,6 +28,7 @@ import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
 import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
 import FormInventory from "./archiveInputs/formInventory";
+import aceite from '../../../../assets/img/aceite.png'
 
 const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateOrder, btnCreateInvoice}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
@@ -146,34 +151,94 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
 
             <CardService>
               <Cuadro>
-
+                <Img src={aceite} alt="hh" />
               </Cuadro>
               <Title>
-                <P>Cambio de aceite</P>
+                <P className="size">Cambio de aceite</P>
               </Title>
-
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ 30.000</P>
+                </Price>
+                <AddPlus>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                </AddPlus>
+              </ContainPrice>
             </CardService>
+
             <CardService>
-
+              <Cuadro>
+                <Img src={aceite} alt="hh" />
+              </Cuadro>
+              <Title>
+                <P className="size">Cambio de aceite</P>
+              </Title>
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ 30.000</P>
+                </Price>
+                <AddPlus>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                </AddPlus>
+              </ContainPrice>
             </CardService>
+
             <CardService>
-
+              <Cuadro>
+                <Img src={aceite} alt="hh" />
+              </Cuadro>
+              <Title>
+                <P className="size">Cambio de aceite</P>
+              </Title>
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ 30.000</P>
+                </Price>
+                <AddPlus>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                </AddPlus>
+              </ContainPrice>
             </CardService>
+
             <CardService>
-
+              <Cuadro>
+                <Img src={aceite} alt="hh" />
+              </Cuadro>
+              <Title>
+                <P className="size">Cambio de aceite</P>
+              </Title>
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ 30.000</P>
+                </Price>
+                <AddPlus>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                </AddPlus>
+              </ContainPrice>
             </CardService>
+
             <CardService>
-
+              <Cuadro>
+                <Img src={aceite} alt="hh" />
+              </Cuadro>
+              <Title>
+                <P className="size">Cambio de aceite</P>
+              </Title>
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ 30.000</P>
+                </Price>
+                <AddPlus>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                </AddPlus>
+              </ContainPrice>
             </CardService>
-            <CardService>
 
-            </CardService>
-            <CardService>
-
-            </CardService>
-            <CardService>
-
-            </CardService>
           </ContainServices>
         </ContainInfoModal>        
       </Modals>

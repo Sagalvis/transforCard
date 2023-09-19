@@ -153,41 +153,41 @@ export const postLoginEmployees = async (req, res) => {
 export const postInventario = async (req, res) => {
   try {
     const {
-      tipo_producto,
       nombre,
       costo,
       cantidad_comprada,
       precio_unitario,
       cantidad_en_stock,
       cantidad_vendida,
-      tipo_item,
-      tipo_medida,
+      id_item,
+      id_medida,
+      id_producto
     } = req.body;
     const [row] = await pool.query(
-      "INSERT INTO inventario (tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida) VALUEs(?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO inventario (nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,id_item, id_medida,id_producto) VALUES(?,?,?,?,?,?,?,?,?)",
       [
-        tipo_producto,
         nombre,
         costo,
         cantidad_comprada,
         precio_unitario,
         cantidad_en_stock,
         cantidad_vendida,
-        tipo_item,
-        tipo_medida,
+        id_item,
+        id_medida,
+        id_producto,
       ]
     );
     res.json({
-      id_producto: row.insertId,
-      tipo_producto,
+      id_inventario: row.insertId,
       nombre,
       costo,
       cantidad_comprada,
       precio_unitario,
       cantidad_en_stock,
       cantidad_vendida,
-      tipo_item,
-      tipo_medida,
+      id_item,
+      id_medida,
+      id_producto
     });
   } catch (error) {
     return res.status(500).json({

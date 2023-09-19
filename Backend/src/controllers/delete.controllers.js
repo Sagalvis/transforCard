@@ -85,13 +85,13 @@ export const deleteVehicle = async(req, res) => {
 
 export const deleteProductoInventario = async (req, res) => {
   try {
-    const {id_producto} = req.params;
+    const {id_inventario} = req.params;
     const [row] = await pool.query(
-      "DELETE FROM inventario WHERE id_producto = ? ",[id_producto]
+      "DELETE FROM inventario WHERE id_inventario = ? ",[id_inventario]
     )
     if (row.affectedRows === 0) {
       return res.status(404).json({
-        message: "No se encontró al vehiculo",
+        message: "No se encontró el producto",
       });
     };
     res.send({

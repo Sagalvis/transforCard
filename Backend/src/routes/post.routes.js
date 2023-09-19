@@ -9,6 +9,6 @@ postRouter.post('/postcustomer', controllpost.postCustomer);
 postRouter.post('/postemployees', controllpost.postEmployees);
 postRouter.post('/postvehicle', controllpost.postVehicle);
 postRouter.post('/postLoginEmployees', controllpost.postLoginEmployees);
-postRouter.post('/postinventario', controllpost.postInventario);
+postRouter.post('/postinventory', controllpost.postInventario);
 
 export default postRouter
