@@ -141,7 +141,7 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
       showCloseButton={true}
       showHeader={true}
       changePosition={'start'}
-      changeWidth={'1400px'}
+      changeWidth={'800px'}
       >
         <ContainInfoModal>
             <TitleService>
