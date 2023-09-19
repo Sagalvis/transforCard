@@ -12,7 +12,7 @@ const SidebarRoutes = () => {
     <>
     <Routes>
       <Route path="/user" element={<Home/>}/>
-      <Route path="/client" element={<Client/>}/>
+      <Route path="/cliente" element={<Client/>}/>
       <Route path="/vehicle" element={<Vehicle/>}/>
       <Route path="/serviceorder" element={<ServiceOder/>}/>
       <Route path="/invoice" element={<Invocice/>}/>

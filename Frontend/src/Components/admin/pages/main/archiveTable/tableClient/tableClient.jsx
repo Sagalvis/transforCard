@@ -29,12 +29,13 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { AddPlus, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Title, TitleService } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
+import aceite from '../../../../../../assets/img/aceite.png'
 
-const TableClient = ({ editUser, createVehicle, deleteUser }) => {
+const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -42,8 +43,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
   const [handleEdit, setHandleEdit] = useState(false);
   const [handleDelete, setHandleDelete] = useState(false);
-    // Variable de estado para capturar id del usuario y eliminarlo
-    const [selectedItem, setSelectedItem] = useState(null);
+  // Variable de estado para abrir modal de ordenes de servicio.
+  const [handleOrders, setHandleOrders] = useState(false);
+  // Variable de estado para capturar id del usuario y eliminarlo
+  const [selectedItem, setSelectedItem] = useState(null);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
 
@@ -203,6 +206,13 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                     >
                       <i className={deleteUser}></i>
                     </Buttons>
+
+                    <Buttons
+                      onClick={() => setHandleOrders(!handleOrders)}
+                      title="Crear orden de servicio"
+                    >
+                      <i className={orderService}></i>
+                    </Buttons>
                   </ButtonOptions>
                 </Td>
               </Tr>
@@ -317,6 +327,44 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
             <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); deleteClient()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
+      </Modals>
+
+      {/* Modal de orden de servicio */}
+      <Modals
+      status={handleOrders}
+      changeStatus={setHandleOrders}
+      titleModal={'Selecciona el servicio requerido por el cliente'}
+      showCloseButton={true}
+      showHeader={true}
+      changePosition={'start'}
+      changeWidth={'800px'}
+      >
+        <ContainInfoModal>
+            <TitleService>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
+            </TitleService>
+          <ContainServices>
+
+            <CardService>
+              <Cuadro>
+                <Img src={aceite} alt="hh" />
+              </Cuadro>
+              <Title>
+                <P className="size">Cambio de aceite</P>
+              </Title>
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ 30.000</P>
+                </Price>
+                <AddPlus>
+                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                </AddPlus>
+              </ContainPrice>
+            </CardService>
+
+          </ContainServices>
+        </ContainInfoModal>        
       </Modals>
     </>
   );

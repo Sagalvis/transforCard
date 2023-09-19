@@ -32,7 +32,7 @@ const Login = () => {
     evt.preventDefault();
     if (correo && contraseña) {
       try {
-        const response = await axios.post(
+        await axios.post(
           "http://localhost:3005/postLoginEmployees",
           {
             correo: correo,
@@ -46,7 +46,7 @@ const Login = () => {
           }else{
             localStorage.setItem("user", JSON?.stringify(result));
             setTimeout(()=>{
-              window.location.href ="http://localhost:5173";
+              window.location.href ="http://localhost:5173/admin";
             }, 100)
           }
           
