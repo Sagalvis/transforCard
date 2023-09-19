@@ -23,15 +23,17 @@ import {
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-
+  
   const Log = async (evt) => {
     evt.preventDefault();
     if (correo && contraseña) {
       try {
+        // console.log(response)
         alert("usuario registrado")
         const response = await axios.post(
           "http://localhost:3005/postLoginEmployees",
@@ -39,29 +41,29 @@ const Login = () => {
             correo: correo,
             contraseña: contraseña,
           }
-        ).then((response) => {
-          console.log(response.data, "😎😎😎"); 
-          const result= response.data;
-          if(response.data === ""){
-            alert("el usario no existe")
-          }else{
-            localStorage.setItem("user", JSON?.stringify(result));
-            setTimeout(()=>{
-              window.location.href ="http://localhost:5173";
-            }, 100)
-          }
-          
-        })
-      } catch (error) {
-        console.error(error);
-        alert("Usuario y/o contraseña no validos");
-      }
-    } else {
-      alert(
-        "Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos"
-      );
-    }
-  };
+          ).then((response) => {
+            console.log(response.data, "😎😎😎"); 
+            const result = response.data;
+            if(result === ""){
+              alert("el usario no existe")
+            }else{
+              localStorage.setItem("user", JSON?.stringify(result));
+              setTimeout(()=>{
+                window.location.href ="http://localhost:5173";
+              }, 100)
+            }
+            
+          })
+        } catch (error) {
+          console.error(error);
+          alert("Usuario y/o contraseña no validos");
+        }
+      } else {
+        alert(
+          "Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos"
+          );
+        }
+      };
   return (
     <ContainLogin>
       <ContenLogin>

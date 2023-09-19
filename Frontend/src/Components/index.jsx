@@ -7,7 +7,7 @@ const IndexRoutes = () => {
   return ( 
     <ContainerMain>
       <Routes>
-        <Route path="*" element={<Dashboard/>}/>yt 
+        <Route path="*" element={<Dashboard/>}/> 
         <Route path="/login" element={<Login/>}/>
       </Routes>
     </ContainerMain>

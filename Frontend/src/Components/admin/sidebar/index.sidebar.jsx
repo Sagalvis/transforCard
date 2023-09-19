@@ -14,24 +14,27 @@ import {
   NavbarContain,
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
-import { useLocation } from "react-router-dom";
+import jwt_decode from "jwt-decode"
+import { useLocation , useNavigate } from "react-router-dom";
 import { useEffect } from "react"
 
 
 const Sidebar = () => {
   const { pathname } = useLocation();
-  const useData = localStorage.getItem(("user"));
- 
+  const useData = jwt_decode(localStorage.getItem("user"));
+  console.log(useData)
+  let navigate = useNavigate()
+
   const logOut = () => {
     localStorage.removeItem("user");
-    
+    navigate("/login")
   }
   
   useEffect(() => {
     if (!useData){
-      window.location.href = 'http://localhost:5173/login';
+      navigate("/login");
     }
-  },[useData]);
+  },[useData, navigate]);
 
   return (
     <ContaiSidebar>
@@ -56,7 +59,7 @@ const Sidebar = () => {
               <NavIcon>
                 <i className="fa-solid fa-user"></i>
               </NavIcon>
-              <NavTittle>DB</NavTittle>
+              <NavTittle>{useData.nombre}</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
               <NavLinks onClick={logOut} style={{ width: "25px" }}>

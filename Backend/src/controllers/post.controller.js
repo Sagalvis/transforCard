@@ -108,13 +108,10 @@ export const postLoginEmployees = async (req, res) => {
       console.log(compassword);
       console.log({id: rows[0].id_empleado});
       if (compassword) {
-        const token = jwt.sign({ id: rows[0].id_empleado }, SECRET, {
+        const token = jwt.sign({ id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0] }, SECRET, {
           expiresIn: "1h",
         });
         res.status(200).json(token);
-        
-      } else {
-        res.status(400).send("El usuario no existe 🤣🤣");
       }
     } else {
       res.status(400).send("El usuario no existe🤦‍♂🤦‍♂");
