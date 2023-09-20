@@ -18,5 +18,7 @@ getRouter.get('/tipoitem1', controllGet.getItem1);
 getRouter.get('/tipoitem2', controllGet.getItem2);
 getRouter.get('/tipomedida', controllGet.getMedida);
 getRouter.get('/tipoproducto', controllGet.getProducto);
+getRouter.get('/getService', controllGet.getService);
+getRouter.get('/getServiceCliente', controllGet.getServiceCliente);
 
 export default getRouter

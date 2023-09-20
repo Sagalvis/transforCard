@@ -11,27 +11,29 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   // Variables de estado, modal eliminar
   const [delVehicle, setDelVehicle] = useState(null);
   const [handleDeleteControlVehicle, setHandleDeleteControlVehicle] = useState(false);
   
-    //Función de busque
-    const searching = (e) => {
-      setSearch(e.target.value);
-      console.log(e.target.value);
-    };
+  //Función de busqueda
+  const searching = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
   
-    //Metodo de filtrado tabla cliente
-    let resultsVehicle = []
-  
-    if(!search){
-      resultsVehicle = vehicle || []
-    }else{
-      resultsVehicle = vehicle.filter((dato) => 
-      dato.identificacion && dato.identificacion.toString().includes(search.toString())
-      )
-    }
+  //Metodo de filtrado tabla cliente
+  let resultsVehicleControl = [];
+
+  if (!search) {
+    resultsVehicleControl = vehicle || [];
+  } else {
+    resultsVehicleControl = vehicle.filter(
+      (dato) =>
+        dato.matricula &&
+        dato.matricula.toLowerCase().includes(search.toLowerCase())
+    );
+  }
   
   const getVehicle = async () => {
     try {
@@ -68,8 +70,8 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
 
         {/* BUSCADOR */}
         <ContainSearch>
-          <Label value={search} onClick={searching} className="search">Buscar: </Label>
-          <Input type="text" title="Buscar cliente"></Input>
+          <Label className="search">Buscar: </Label>
+          <Input value={search} onChange={searching} type="text" title="Buscar vehículo" placeholder="¿Que placa buscas?"></Input>
         </ContainSearch>
       </ContainControls>
 
@@ -93,7 +95,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
             </Tr>
           </Thead>
           <Tbody>
-            {resultsVehicle.map((item, i) => (
+            {resultsVehicleControl.map((item, i) => (
               <Tr key={i}>
                 <Td>{i+100}</Td>
                 <Td>{item.identificacion}</Td>
