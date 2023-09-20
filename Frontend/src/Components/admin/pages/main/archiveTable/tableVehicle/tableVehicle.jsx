@@ -21,14 +21,14 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   //Variable de estado para capturar vehiculo 
   const [idVehicle, setIdVehicle] = useState(null);
   const [observacion, setObservacion] = useState(null)
+  // Variable de estado para abrir modal de observacion vehiculo.
+  const [handleRemarks, setHandleRemarks] = useState(false);
+  const [search, setSearch] = useState("");
   //Metodo para captura la placa en el modal
   const CapturaVehicle = (item) => {
     setIdVehicle(item)
     setHandleEditVehicle(!handleEditVehicle)
   }
-  // Variable de estado para abrir modal de observacion vehiculo.
-  const [handleRemarks, setHandleRemarks] = useState(false);
-
 
   const getVehicle = async () => {
     try {
@@ -87,7 +87,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
             </Tr>
           </Thead>
           <Tbody>
-            {vehicle.map((item, i) => (
+            {resultsVehicle.map((item, i) => (
               <Tr key={i}>
                 <Td>{i+100}</Td>
                 <Td>{item.identificacion}</Td>

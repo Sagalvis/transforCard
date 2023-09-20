@@ -58,7 +58,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
-  };
+  }; 
 
   //Metodo de filtrado tabla cliente
   let resultsCustomer = [];
