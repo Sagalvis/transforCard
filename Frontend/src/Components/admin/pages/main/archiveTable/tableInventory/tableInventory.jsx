@@ -30,8 +30,6 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   const [handleFormInventory, setHandleFormInventory] = useState(false);
   const [buttonInventory, setButtonInventory] = useState(0);
 
-
-
   const getInventario = async () => {
     try {
       const res = await axios.get("http://localhost:3005/inventario");
@@ -45,6 +43,19 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
+
+  //Metodo de filtrado tabla cliente
+  let resultsInventory = [];
+
+  if (!search) {
+    resultsInventory = invetario || [];
+  } else {
+    resultsInventory = invetario.filter(
+      (dato) =>
+        dato.identificacion &&
+        dato.identificacion.toString().includes(search.toString())
+    );
+  }
 
   useEffect(() => {
     getInventario();
@@ -95,7 +106,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {invetario.map((item, i) => (
+                {resultsInventory.map((item, i) => (
                   <Tr key={i}>
                     <Td>{item.id_inventario}</Td>
                     <Td>{item.tipo_producto}</Td>
