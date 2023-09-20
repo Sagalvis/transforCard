@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceOrder";
 import axios from "axios";
 
-const TableServiceOrder = ({ editOrder, deleteOrder}) => {
+const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   //Función de busqueda
   /* const searching = (e) => {
     setSearch(e.target.value);
@@ -72,6 +72,11 @@ const TableServiceOrder = ({ editOrder, deleteOrder}) => {
                     <Buttons
                       title="Eliminar orden">
                       <i className={deleteOrder}></i>
+                    </Buttons>
+
+                    <Buttons
+                      title="Crear factura">
+                      <i className={createServiceOrder}></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>

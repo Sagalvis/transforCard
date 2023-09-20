@@ -108,7 +108,7 @@ export const getSelectPais = async(req, res) => {
 
 export const getInventario = async(req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM inventario");
+    const [row] = await pool.query("SELECT inventario.*, medida.tipo_medida, producto.tipo_producto FROM inventario INNER JOIN medida ON inventario.id_medida = medida.id_medida INNER JOIN producto ON inventario.id_producto = producto.id_producto");
     res.send(row)
   } catch (error) {
     return res.status(500).json({

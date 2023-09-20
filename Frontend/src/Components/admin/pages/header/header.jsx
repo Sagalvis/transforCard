@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Modals from "../archive/modals";
 import {
-  Btn_Create_Order,
   Button,
   ContainButtons,
   ContainHeader,
@@ -17,7 +16,8 @@ import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 import axios from "axios";
 import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
-import FormInventory from "./archiveInputs/formInventory";
+import FormCreateProduct from "./archiveInputs/formCreateProduct";
+import FormCreateService from "./archiveInputs/formCreateService";
 
 const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClient, showContentStaff, showContentVehicle, showPlusButton, exportButton, btnExport, btnCreateProduct, btnCreateInvoice}) => {
   // Variable de estado para abrir y cerrar el modal de crear cliente
@@ -113,7 +113,8 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <FormInventory />
+          <FormCreateProduct />
+          <FormCreateService />
         </ContainInfoModal>
       </Modals>
     </>

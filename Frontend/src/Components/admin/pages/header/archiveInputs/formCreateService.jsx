@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Alert from '@mui/material/Alert'
 
-const FormInventory = () => {
+const FormCreateService = () => {
   //Varibles de estado para crear un producto 
   const [nombre, setNombre] = useState("");
   const [costo, setCosto] = useState("");
@@ -177,7 +177,7 @@ const FormInventory = () => {
   );
 };
 
-export default FormInventory;
+export default FormCreateService;
 
 // Estilos de los inputs
 
