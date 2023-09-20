@@ -119,9 +119,19 @@ export const getInventario = async(req, res) => {
 
 /* Inicio de consultas para traer tipo item, medida y producto */
 
-export const getItem = async (req, res) => {
+export const getItem1 = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM item ")
+    const [row] = await pool.query("SELECT * FROM item WHERE id_item = 1 ")
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+};
+export const getItem2 = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM item WHERE id_item = 2 ")
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -151,3 +161,4 @@ export const getProducto = async (req, res) => {
     });
   }
 }
+

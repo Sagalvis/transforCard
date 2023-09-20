@@ -14,6 +14,7 @@ import {
 import FormClient from "./archiveInputs/formClient";
 import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
+import FormInventory from "./archiveInputs/formInventory"
 import axios from "axios";
 import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
 
@@ -110,6 +111,9 @@ const Header = ({indexIcon, index, titleButton, titleModalPages, showContentClie
       showHeader={true}
       showCloseButton={true}
       >
+        <ContainInfoModal>
+          <FormInventory/>
+        </ContainInfoModal>
       </Modals>
     </>
   );

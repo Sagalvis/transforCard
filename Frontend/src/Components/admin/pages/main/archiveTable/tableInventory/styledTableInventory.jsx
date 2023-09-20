@@ -247,6 +247,7 @@ export const ButtonInventory = styled.div`
 export const Button = styled.div`
   background: none;
   padding: 10px 20px;
+  font-size: 15px;
   font-weight: 500;
   font-family: 'Outfit';
   border: none;
