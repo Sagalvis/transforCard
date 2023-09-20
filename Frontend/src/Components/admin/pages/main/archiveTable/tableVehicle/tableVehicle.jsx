@@ -11,7 +11,6 @@ import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, ContainSearc
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
-  console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
   // Variable de estado para filtrar busqueda
 
