@@ -41,14 +41,14 @@ const Login = () => {
           }
         ).then((response) => {
           console.log(response.data, "😎😎😎"); 
-          const result= response.data;
+          const result = response.data;
           if(response.data === ""){
             alert("el usario no existe")
           }else{
             localStorage.setItem("user", JSON?.stringify(result));
             setTimeout(()=>{
               window.location.href ="http://localhost:5173/admin";
-            }, 100)
+            },1000)
           }
           
         })

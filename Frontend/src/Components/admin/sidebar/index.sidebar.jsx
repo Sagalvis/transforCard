@@ -15,26 +15,26 @@ import {
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
 import jwt_decode from "jwt-decode"
-import { useLocation , useNavigate } from "react-router-dom";
+import { useLocation  } from "react-router-dom";
 import { useEffect } from "react"
 
 
 const Sidebar = () => {
   const { pathname } = useLocation();
-  const useData = jwt_decode(localStorage.getItem("user"));
+  const useData = jwt_decode (localStorage.getItem("user"));
   console.log(useData)
-  let navigate = useNavigate()
+
 
   const logOut = () => {
-    localStorage.removeItem("user");
-    navigate("http://localhost:5173")
+    localStorage.removeItem("user"); 
+    window.location.href ="http://localhost:5173/"
   }
   
   useEffect(() => {
     if (!useData){
-      navigate("http://localhost:5173");
+      window.location.href ="http://localhost:5173/admin"
     }
-  },[useData, navigate]);
+  },[useData]);
 
   return (
     <ContaiSidebar>
@@ -59,7 +59,7 @@ const Sidebar = () => {
               <NavIcon>
                 <i className="fa-solid fa-user"></i>
               </NavIcon>
-              <NavTittle>{useData.nombre}</NavTittle>
+              <NavTittle>{useData.nombre} {useData.apellido}</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
               <NavLinks onClick={logOut} style={{ width: "25px" }}>
@@ -67,7 +67,7 @@ const Sidebar = () => {
                   <i className="fa-solid fa-power-off"></i>
                 </NavIcon>
               </NavLinks>
-              <NavTittle >Administrador</NavTittle>
+              <NavTittle >{useData.rol}</NavTittle>
             </ContenPerfil>
           </ContainPerfil>
         </Navbar>
