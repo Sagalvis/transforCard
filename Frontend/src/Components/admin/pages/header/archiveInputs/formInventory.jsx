@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import { Button } from "../../main/archiveTable/tableInventory/styledTableInventory";
-import { ShowCedula } from "./formVehicle";
 
 const FormInventory = () => {
   //Varibles de estado para crear un producto
@@ -13,18 +12,22 @@ const FormInventory = () => {
   const [precioUnitario, setPrecioUnitario] = useState("");
   const [cantidadStock, setCantidadStock] = useState("");
   const [tipoMedida, setTipoMedida] = useState([]);
-  const [tipoItem, setTipoItem] = useState([]);
-  const [tipoItem2, setTipoItem2] = useState([]);
   const [tipoProducto, setTipoProducto] = useState([]);
   const [selectMedida, setSelectMedida] = useState("");
-  const [selectItem, setSelectItem] = useState(0);
   const [selectProducto, setSelectProducto] = useState("");
+
+  //Variable de estado para crear servicio
+  const [ordenServicio, setOrdenServicio] = useState("")
+  const [nombreServicio, setNombreServicio] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [precioServicio, setPrecioServicio] = useState("");
+  const [tiempoEstimado, setTiempoEstimado] = useState("");
+
+  //Variable de estado para mostrar alertas
   const [showAlert, setShowAlert] = useState(false);
+    //Variable de estado para cambiar vista de item
   const [showItem, setShowItem] = useState(true);
 
-  const handleSelectItemChange = (value) => {
-    setSelectItem(value);
-  };
   //Funcion para cambiar de inputs
   const handleClickButton = (value) => {
     if (value === "producto") {
@@ -36,7 +39,7 @@ const FormInventory = () => {
 
   //Funcion para crear un producto
 
-  const handletSumit = async (e) => {
+  const handletSumitProduct = async (e) => {
     if (
       nombre === "" ||
       costo === "" ||
@@ -58,7 +61,6 @@ const FormInventory = () => {
           cantidad_comprada: parseInt(cantidadComprada),
           precio_unitario: parseInt(precioUnitario),
           cantidad_en_stock: parseInt(cantidadStock),
-          id_item:selectItem,
           id_medida: selectMedida,
           id_producto: selectProducto,
         })
@@ -70,22 +72,22 @@ const FormInventory = () => {
     }
   };
 
-  const getItem1 = async () => {
-    try {
-      const result = await axios.get("http://localhost:3005/tipoitem1");
-      setTipoItem(result.data);
-    } catch (error) {
-      console.log(error);
+  const handleSumitService = async (e) => {
+    if ( ordenServicio === "" || nombreServicio === "" || descripcion === "" || precioServicio === "" || 
+    tiempoEstimado === "" ) {
+      e.preventDefault();
+      alert("Llenar todos los campos")
+    }else {
+      await axios.post("http://localhost:3005/postservice",{
+        id_orden: ordenServicio,
+        nombre_serv: nombreServicio,
+        descripcion: descripcion,
+        precio: parseInt(precioServicio),
+        tiempo_estimado :parseInt(tiempoEstimado)
+      })
     }
-  };
-  const getItem2 = async () => {
-    try {
-      const result = await axios.get("http://localhost:3005/tipoitem2");
-      setTipoItem2(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }
+
   /* Funcion que limpa los inputs */
 
   useEffect(() => {
@@ -100,15 +102,13 @@ const FormInventory = () => {
       setTipoProducto(responseProducto.data);
     };
     fetchdata();
-    getItem1();
-    getItem2();
   }, []);
   return (
     <>
       {showAlert && (
         <ContainAlert>
           <Alert severity="success" color="success">
-            ¡Cliente registrado!
+            ¡Producto registrado!
           </Alert>
         </ContainAlert>
       )}
@@ -131,16 +131,6 @@ const FormInventory = () => {
           </ContentInput>
           {showItem && (
             <>
-              {tipoItem.map((item, index) => (
-                <ContentInput key={index}>
-                  <ShowCedula
-                    defaultValue={item.id_item}
-                    onSelectItemChange={handleSelectItemChange}
-                  >
-                  {item.tipo_item}
-                  </ShowCedula>
-                </ContentInput>
-              ))}
               <ContentInput>
                 <Select
                   value={selectProducto}
@@ -225,25 +215,29 @@ const FormInventory = () => {
                   required={true}
                 />
               </ContentInput>
+              <ButtonRegister className="gap">
+                <BtnRegister className="btn_red">Cancelar</BtnRegister>
+                <BtnRegister onClick={handletSumitProduct}>Crear</BtnRegister>
+              </ButtonRegister>
             </>
           )}
           {!showItem && (
             <>
-              {tipoItem2.map((item, index) => (
-                <ContentInput key={index}>
-                  <ShowCedula
-                    value={item.id_item}
-                  
-                  >
-                    {item.tipo_item}
-                  </ShowCedula>
-                </ContentInput>
-              ))}
+            <ContentInput>
+                <Input
+                  type="text"
+                  value={ordenServicio}
+                  onChange={(e) => setOrdenServicio(e.target.value)}
+                  placeholder="id del servicio"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
               <ContentInput>
                 <Input
                   type="text"
-                  value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  value={nombreServicio}
+                  onChange={(e) => setNombreServicio(e.target.value)}
                   placeholder="Nombre del servicio"
                   autoComplete="off"
                   required={true}
@@ -252,8 +246,8 @@ const FormInventory = () => {
               <ContentInput>
                 <Input
                   type="text"
-                  value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  value={precioServicio}
+                  onChange={(e) => setPrecioServicio(e.target.value)}
                   placeholder="Precio del servicio"
                   autoComplete="off"
                   required={true}
@@ -262,8 +256,8 @@ const FormInventory = () => {
               <ContentInput>
                 <Input
                   type="text"
-                  value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  value={tiempoEstimado}
+                  onChange={(e) => setTiempoEstimado(e.target.value)}
                   placeholder="Tiempo estidamdo del servicio"
                   autoComplete="off"
                   required={true}
@@ -272,22 +266,21 @@ const FormInventory = () => {
               <ContentInput>
                 <TextArea
                   type="text"
-                  value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  value={descripcion}
+                  onChange={(e) => setDescripcion(e.target.value)}
                   placeholder="Descripcion del servicio"
                   autoComplete="off"
                   required={true}
                 />
               </ContentInput>
+              <ButtonRegister className="gap">
+                <BtnRegister className="btn_red">Cancelar</BtnRegister>
+                <BtnRegister onClick={handleSumitService}>Crear orden</BtnRegister>
+              </ButtonRegister>
             </>
           )}
         </Form>
       </ContainForm>
-
-      <ButtonRegister className="gap">
-        <BtnRegister className="btn_red">Cancelar</BtnRegister>
-        <BtnRegister onClick={handletSumit}>Crear</BtnRegister>
-      </ButtonRegister>
     </>
   );
 };

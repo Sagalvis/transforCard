@@ -23,11 +23,12 @@ import {
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-
+  
   const Log = async (evt) => {
     evt.preventDefault();
     if (correo && contraseña) {
@@ -40,14 +41,14 @@ const Login = () => {
           }
         ).then((response) => {
           console.log(response.data, "😎😎😎"); 
-          const result= response.data;
+          const result = response.data;
           if(response.data === ""){
             alert("el usario no existe")
           }else{
             localStorage.setItem("user", JSON?.stringify(result));
             setTimeout(()=>{
               window.location.href ="http://localhost:5173/admin";
-            }, 100)
+            },1000)
           }
           
         })
