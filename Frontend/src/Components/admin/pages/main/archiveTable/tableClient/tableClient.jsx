@@ -29,12 +29,13 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Title, TitleService } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
+import aceite from '../../../../../../assets/img/aceite.png'
 
-const TableClient = ({ editUser, createVehicle, deleteUser }) => {
+const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -42,11 +43,14 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const [handleOpenFormVehicle, setHandleOpenFormVehicle] = useState(false);
   const [handleEdit, setHandleEdit] = useState(false);
   const [handleDelete, setHandleDelete] = useState(false);
-    // Variable de estado para capturar id del usuario y eliminarlo
-    const [selectedItem, setSelectedItem] = useState(null);
+  // Variable de estado para abrir modal de ordenes de servicio.
+  const [handleOrders, setHandleOrders] = useState(false);
+  // Variable de estado para capturar id del usuario y eliminarlo
+  const [selectedItem, setSelectedItem] = useState(null);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
-
+  //Variable para guardar el servicio y mostrarlo
+  const [ordServicio, setOrdService] = useState([])
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -54,7 +58,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
-  };
+  }; 
 
   //Metodo de filtrado tabla cliente
   let resultsCustomer = [];
@@ -73,6 +77,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
   const [id, setId] = useState(null);
   const [id2, setId2] = useState(null);
   const [id3, setId3] = useState(null);
+  const [id4, setId4] = useState(null);
 
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
@@ -85,23 +90,42 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
       setCustomer(res.data);
-      console.log("get usuario", res.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+  //Funcion para trae los servicios
+  const getServices = async () =>{
+    try {
+      const res = await axios.get("http://localhost:3005/getService");
+      setOrdService(res.data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
     setId2(item);
     setId3(item);
-    console.log("la cedula aqui: ", item);
     if (item) {
       setHandleCloseVehicle(!handleCloseVehicle);
     } else {
       alert("Error");
     }
   };
+
+  //Funcion para enviar los servicios del cliente
+  const postOrdenServiceCliente = async () =>{
+    try {
+      const res = await axios.post("http://localhost:3005/postOrdenServiceCliente",{
+        identificacion: id4,
+        id_orden: ordServicio.id_orden
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -118,7 +142,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
 
   useEffect(() => {
     getCustomer();
-  }, [setCustomer]);
+    getServices();
+  }, [setCustomer, setOrdService]);
 
   return (
     <>
@@ -203,6 +228,16 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
                     >
                       <i className={deleteUser}></i>
                     </Buttons>
+
+                    <Buttons
+                      onClick={() => {
+                        setHandleOrders(!handleOrders)
+                        setId4(item.identificacion)
+                      }}
+                      title="Crear orden de servicio"
+                    >
+                      <i className={orderService}></i>
+                    </Buttons>
                   </ButtonOptions>
                 </Td>
               </Tr>
@@ -260,7 +295,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
               className="color-red"
               onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}
             >
-              Cancelar
+              Cerrar
             </BtnRegister>
 
             <BtnRegister
@@ -317,6 +352,44 @@ const TableClient = ({ editUser, createVehicle, deleteUser }) => {
             <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); deleteClient()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
+      </Modals>
+
+      {/* Modal de orden de servicio */}
+      <Modals
+      status={handleOrders}
+      changeStatus={setHandleOrders}
+      titleModal={'Selecciona el servicio requerido por el cliente'}
+      showCloseButton={true}
+      showHeader={true}
+      changePosition={'start'}
+      changeWidth={'800px'}
+      >
+        <ContainInfoModal>
+            <TitleService>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
+            </TitleService>
+          <ContainServices>
+
+            <CardService>
+              <Cuadro>
+                <Img src={aceite} alt="hh" />
+              </Cuadro>
+              <Title>
+                <P className="size">{ordServicio.nombre_serv}</P>
+              </Title>
+              <ContainPrice>
+                <Price>
+                  <P className="desde">Desde</P>
+                  <P className="precio">$ {ordServicio.precio}</P>
+                </Price>
+                <AddPlus>
+                <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus" ></i></Button>
+                </AddPlus>
+              </ContainPrice>
+            </CardService>
+
+          </ContainServices>
+        </ContainInfoModal>        
       </Modals>
     </>
   );

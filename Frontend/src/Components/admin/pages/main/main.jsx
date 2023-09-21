@@ -18,6 +18,7 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
           editUser={"fa-solid fa-pen-to-square"}
           createVehicle={"fa-solid fa-car"} 
           deleteUser={"fa-solid fa-trash-can"}
+          orderService={"fa-solid fa-clipboard-check"}
         />
         )}
 
@@ -34,6 +35,7 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
         <TableVehicleControl
           editVehicleTable={"fa-solid fa-pen-to-square"}
           deleteVehicleTable={"fa-solid fa-trash-can"}
+          
         />
         )}
 
@@ -50,13 +52,16 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
           <TableServiceOrder 
           editOrder={"fa-solid fa-pen-to-square"}
           deleteOrder={"fa-solid fa-trash-can"}
+          createServiceOrder={"fa-solid fa-file-invoice-dollar"}
           />
         )}
 
         {/* Tabla de Facturación */}
         {showTableInvoice && (
           <TableInvoice 
-          // props de iconos pendientes
+          editInvoice={"fa-solid fa-pen-to-square"}
+          deleteInvoice={"fa-solid fa-trash-can"}
+          printInvoice={"fa-solid fa-eye"}
           />
         )}
       </ContainMain>

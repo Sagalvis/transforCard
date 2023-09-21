@@ -1,14 +1,25 @@
 /* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceOrder";
+import axios from "axios";
 
-
-const TableServiceOrder = ({ editOrder, deleteOrder}) => {
+const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   //Función de busqueda
-  const searching = (e) => {
+  /* const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
-  };
-  
+  }; */
+  //Variables para mostrar la orden de servicio
+  const [ordenService, setOrden] = useState([]);
+
+  const getOrdenService = async ()=>{
+    const res = await axios.get(`http://localhost:3005/getServiceCliente`)
+    setOrden(res.data)
+  }
+  useEffect(() =>{
+    getOrdenService()
+  },[setOrden])
+
   return (
     <>
       {/* Controladores */}
@@ -38,20 +49,19 @@ const TableServiceOrder = ({ editOrder, deleteOrder}) => {
               <Th>ID_Cliente</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
-              <Th>Email</Th>
-              <Th>Dirección</Th>
-              <Th>Celular</Th>
+              <Th>Tipo de servicio</Th>
+              <Th>Total a pagar</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
           <Tbody>
-              <Tr>
-                <Td>...</Td>
-                <Td>...</Td>
-                <Td>...</Td>
-                <Td>...</Td>
-                <Td>...</Td>
-                <Td>...</Td>
+            {ordenService.map((item, i) => (
+              <Tr key={i}>
+                <Td>{item.identificacion}</Td>
+                <Td>{item.nombre}</Td>
+                <Td>{item.apellido}</Td>
+                <Td>{item.nombre_serv}</Td>
+                <Td>{item.precio}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons
@@ -63,9 +73,15 @@ const TableServiceOrder = ({ editOrder, deleteOrder}) => {
                       title="Eliminar orden">
                       <i className={deleteOrder}></i>
                     </Buttons>
+
+                    <Buttons
+                      title="Crear factura">
+                      <i className={createServiceOrder}></i>
+                    </Buttons>
                   </ButtonOptions>
                 </Td>
               </Tr>
+              ))}
           </Tbody>
         </Table>
       </ContainTable>

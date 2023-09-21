@@ -1,171 +1,286 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Alert from '@mui/material/Alert'
+import Alert from "@mui/material/Alert";
+import { Button } from "../../main/archiveTable/tableInventory/styledTableInventory";
+import { ShowCedula } from "./formVehicle";
 
 const FormInventory = () => {
-  //Varibles de estado para crear un producto 
+  //Varibles de estado para crear un producto
   const [nombre, setNombre] = useState("");
   const [costo, setCosto] = useState("");
   const [cantidadComprada, setCantidadComprada] = useState("");
   const [precioUnitario, setPrecioUnitario] = useState("");
   const [cantidadStock, setCantidadStock] = useState("");
-  const [tipoItem, setTipoItem] = useState([]);
   const [tipoMedida, setTipoMedida] = useState([]);
+  const [tipoItem, setTipoItem] = useState([]);
+  const [tipoItem2, setTipoItem2] = useState([]);
   const [tipoProducto, setTipoProducto] = useState([]);
-  const [selectItem, setSelectItem] = useState("");
   const [selectMedida, setSelectMedida] = useState("");
+  const [selectItem, setSelectItem] = useState(0);
   const [selectProducto, setSelectProducto] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [showItem, setShowItem] = useState(true);
 
+  const handleSelectItemChange = (value) => {
+    setSelectItem(value);
+  };
+  //Funcion para cambiar de inputs
+  const handleClickButton = (value) => {
+    if (value === "producto") {
+      setShowItem(true);
+    } else if (value === "servicio") {
+      setShowItem(false);
+    }
+  };
 
   //Funcion para crear un producto
 
   const handletSumit = async (e) => {
     if (
-      nombre === "" || costo === "" || cantidadComprada === "" ||
-      precioUnitario === "" || cantidadStock === "" || tipoItem === "" ||
-      tipoMedida === "" || tipoProducto === "" || selectItem === "" || selectMedida === "" || 
+      nombre === "" ||
+      costo === "" ||
+      cantidadComprada === "" ||
+      precioUnitario === "" ||
+      cantidadStock === "" ||
+      tipoMedida === "" ||
+      tipoProducto === "" ||
+      selectMedida === "" ||
       selectProducto === ""
     ) {
       e.preventDefault();
       alert("llenar todos los campos");
-    }else{
-      await axios.post(
-        "http://localhost:3005/postinventory",{
+    } else {
+      await axios
+        .post("http://localhost:3005/postinventory", {
           nombre: nombre,
           costo: parseInt(costo),
           cantidad_comprada: parseInt(cantidadComprada),
           precio_unitario: parseInt(precioUnitario),
           cantidad_en_stock: parseInt(cantidadStock),
-          id_item : selectItem,
-          id_medida  : selectMedida ,
-          id_producto: selectProducto
+          id_item:selectItem,
+          id_medida: selectMedida,
+          id_producto: selectProducto,
         })
         .then((Response) => {
           console.log(Response.data);
           setShowAlert(true);
         });
-        window.location.reload();
+      window.location.reload();
     }
-  }
-    /* Funcion que limpa los inputs */
+  };
 
+  const getItem1 = async () => {
+    try {
+      const result = await axios.get("http://localhost:3005/tipoitem1");
+      setTipoItem(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getItem2 = async () => {
+    try {
+      const result = await axios.get("http://localhost:3005/tipoitem2");
+      setTipoItem2(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  /* Funcion que limpa los inputs */
 
-    useEffect(()=>{
-      const fetchdata = async () => {
-        const responseItem = await axios.get("http://localhost:3005/tipoitem");
-        setTipoItem(responseItem.data);
-        const responseMedida = await axios.get("http://localhost:3005/tipomedida");
-        setTipoMedida(responseMedida.data);
-        const responseProducto = await axios.get("http://localhost:3005/tipoproducto");
-        setTipoProducto(responseProducto.data);
-      };
-      fetchdata();
-    },[])
+  useEffect(() => {
+    const fetchdata = async () => {
+      const responseMedida = await axios.get(
+        "http://localhost:3005/tipomedida"
+      );
+      setTipoMedida(responseMedida.data);
+      const responseProducto = await axios.get(
+        "http://localhost:3005/tipoproducto"
+      );
+      setTipoProducto(responseProducto.data);
+    };
+    fetchdata();
+    getItem1();
+    getItem2();
+  }, []);
   return (
     <>
       {showAlert && (
         <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Cliente registrado!
+          <Alert severity="success" color="success">
+            ¡Cliente registrado!
           </Alert>
         </ContainAlert>
-
       )}
-
 
       <ContainForm>
         <Form>
-          <ContentInput>
-            <Select value={selectItem}
-            onChange={(e) => setSelectItem(e.target.value)}
-            >
-              <Option value="0">-Seleccione tipo de item-</Option>
-              {tipoItem.map((item, index)=>(
-                <Option key= {index} value={item.id_item}>{item.tipo_item}</Option>
-              ))}
-            </Select>
-          </ContentInput>
-
-          <ContentInput>
-            <Select value={selectProducto}
-            onChange={(e) => setSelectProducto(e.target.value)}
-            >
-              <Option value="0">-Seleccione tipo de producto-</Option>
-              {tipoProducto.map((item,index)=> (
-
-                <Option key={index} value={item.id_producto}>{item.tipo_producto}</Option>
-              ))}
-            </Select>
-          </ContentInput>
-
-          <ContentInput>
-            <Input
-              type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              placeholder="Nombre del producto"
-              autoComplete="off"
-              required={true}
-              maxLength={20}
-            />
-          </ContentInput>
-
-          <ContentInput>
-            <Select value={selectMedida}
-            onChange={(e) => setSelectMedida(e.target.val)}
-            >
-              <Option value="0">-Seleccione tipo de medida-</Option>
-              {tipoMedida.map((item,index) => (
-                <Option key={index} value={item.id_medida}>{item.tipo_medida}</Option>
-              ))}
-            </Select>
-          </ContentInput>
-
           <ContentInput className="display">
-          <Input className="width"
-              type="text"
-              value={costo}
-              onChange={(e) => setCosto(e.target.value)}
-              placeholder="Costo"
-              autoComplete="off"
-              required={true}
-              maxLength={20}
-            />
-            <Input
-              className="input-display"
-              type="text"
-              value={precioUnitario}
-              onChange={(e) => setPrecioUnitario(e.target.value)}
-              placeholder="Precio unitario"
-              maxLength={10}
-              autoComplete="off"
-              required={true}
-            />
+            <Button
+              className="btn"
+              onClick={() => handleClickButton("servicio")}
+            >
+              Servicio
+            </Button>
+            <Button
+              className="btn"
+              onClick={() => handleClickButton("producto")}
+            >
+              Producto
+            </Button>
           </ContentInput>
+          {showItem && (
+            <>
+              {tipoItem.map((item, index) => (
+                <ContentInput key={index}>
+                  <ShowCedula
+                    defaultValue={item.id_item}
+                    onSelectItemChange={handleSelectItemChange}
+                  >
+                  {item.tipo_item}
+                  </ShowCedula>
+                </ContentInput>
+              ))}
+              <ContentInput>
+                <Select
+                  value={selectProducto}
+                  onChange={(e) => setSelectProducto(e.target.value)}
+                >
+                  <Option value="0">-Seleccione tipo de producto-</Option>
+                  {tipoProducto.map((item, index) => (
+                    <Option key={index} value={item.id_producto}>
+                      {item.tipo_producto}
+                    </Option>
+                  ))}
+                </Select>
+              </ContentInput>
 
-          <ContentInput>
-            <Input
-              type="text"
-              value={cantidadComprada}
-              onChange={(e)=>setCantidadComprada(e.target.value)}
-              placeholder="Cantidad en comprada"
-              autoComplete="off"
-              required={true}
-            />
-          </ContentInput>
+              <ContentInput>
+                <Input
+                  type="text"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  placeholder="Nombre del producto"
+                  autoComplete="off"
+                  required={true}
+                  maxLength={20}
+                />
+              </ContentInput>
 
-          <ContentInput>
-            <Input
-              type="text"
-              value={cantidadStock}
-              onChange={(e)=> setCantidadStock(e.target.value)}
-              placeholder="Cantidad en stock"
-              autoComplete="off"
-              required={true}
-            />
-          </ContentInput>
+              <ContentInput>
+                <Select
+                  value={selectMedida}
+                  onChange={(e) => setSelectMedida(e.target.val)}
+                >
+                  <Option value="0">-Seleccione tipo de medida-</Option>
+                  {tipoMedida.map((item, index) => (
+                    <Option key={index} value={item.id_medida}>
+                      {item.tipo_medida}
+                    </Option>
+                  ))}
+                </Select>
+              </ContentInput>
+
+              <ContentInput className="display">
+                <Input
+                  className="width"
+                  type="text"
+                  value={costo}
+                  onChange={(e) => setCosto(e.target.value)}
+                  placeholder="Costo"
+                  autoComplete="off"
+                  required={true}
+                  maxLength={20}
+                />
+                <Input
+                  className="input-display"
+                  type="text"
+                  value={precioUnitario}
+                  onChange={(e) => setPrecioUnitario(e.target.value)}
+                  placeholder="Precio unitario"
+                  maxLength={10}
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+
+              <ContentInput>
+                <Input
+                  type="text"
+                  value={cantidadComprada}
+                  onChange={(e) => setCantidadComprada(e.target.value)}
+                  placeholder="Cantidad en comprada"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+
+              <ContentInput>
+                <Input
+                  type="text"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Cantidad en stock"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+            </>
+          )}
+          {!showItem && (
+            <>
+              {tipoItem2.map((item, index) => (
+                <ContentInput key={index}>
+                  <ShowCedula
+                    value={item.id_item}
+                  
+                  >
+                    {item.tipo_item}
+                  </ShowCedula>
+                </ContentInput>
+              ))}
+              <ContentInput>
+                <Input
+                  type="text"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Nombre del servicio"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+              <ContentInput>
+                <Input
+                  type="text"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Precio del servicio"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+              <ContentInput>
+                <Input
+                  type="text"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Tiempo estidamdo del servicio"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+              <ContentInput>
+                <TextArea
+                  type="text"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Descripcion del servicio"
+                  autoComplete="off"
+                  required={true}
+                />
+              </ContentInput>
+            </>
+          )}
         </Form>
       </ContainForm>
 
@@ -206,6 +321,13 @@ export const ContentInput = styled.div`
     flex-direction: row;
     gap: 3px;
   }
+
+  .btn {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 1.5px;
+  }
 `;
 
 export const Select = styled.select`
@@ -223,7 +345,6 @@ export const Select = styled.select`
     width: 50%;
   }
 `;
-
 
 export const Option = styled.option`
   /* background-color: red; */
@@ -255,7 +376,8 @@ export const Input = styled.input`
 
 export const TextArea = styled.textarea`
   width: 100%;
-  border: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   padding: 0;
   resize: none;
   box-sizing: border-box;
@@ -309,5 +431,4 @@ export const ContainAlert = styled.div`
   position: absolute;
   bottom: 86%;
   left: 25%;
-
-`
+`;

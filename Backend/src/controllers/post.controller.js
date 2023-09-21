@@ -141,4 +141,16 @@ export const postInventario = async (req, res) => {
       message: "Error en el servidor",
     });
   }
+};
+
+export const postOrdenServiceCliente = async (req, res) => {
+  try {
+    const {identificacion, id_orden} = req.body
+    const [row] = await pool.query('INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?,?)',[identificacion, id_orden])
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
 }
