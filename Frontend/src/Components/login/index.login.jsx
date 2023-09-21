@@ -100,7 +100,14 @@ const Login = () => {
                 </InputBox>
               </ContenInputs>
               <ContainButton>
-                <ButtonLogin onClick={Log}>Ingresar</ButtonLogin>
+                  <ButtonLogin
+                        onClick={Log}>INGRESAR
+                        <span className="span"></span>
+                        <span className="span"></span>
+                        <span className="span"></span>
+                        <span className="span"></span>
+                        <span className="span"></span>
+                  </ButtonLogin>
               </ContainButton>
             </ContainInputs>
             <ContenParagrafh>
