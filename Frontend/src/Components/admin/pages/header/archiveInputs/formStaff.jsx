@@ -228,6 +228,7 @@ export const TextArea = styled.textarea`
   padding: 10px;
   font-family: "Outfit";
   font-size: 15px;
+  overflow-y: auto;
 `;
 
 export const ButtonRegister = styled.div`

@@ -119,7 +119,7 @@ export const ContainInfoModal = styled.div`
   gap: 10px;
   justify-content: center;
   flex-direction: column;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 
 export const P = styled.p`

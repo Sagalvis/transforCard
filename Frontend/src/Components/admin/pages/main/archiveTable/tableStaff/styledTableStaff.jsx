@@ -70,7 +70,7 @@ export const ContainTable = styled.div`
   width: 100%;
   max-height: 80%;
   margin-bottom: 15px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const Table = styled.table`
@@ -118,6 +118,9 @@ export const Td = styled.td`
 
   &.email {
     text-transform: lowercase;
+  }
+  &.rol {
+    text-transform: uppercase;
   }
 `;
 

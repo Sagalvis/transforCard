@@ -75,8 +75,8 @@ if (!search) {
             {resultsServiceOrder.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.identificacion}</Td>
-                <Td>{item.nombre}</Td>
-                <Td>{item.apellido}</Td>
+                <Td className="name">{item.nombre}</Td>
+                <Td className="last-name">{item.apellido}</Td>
                 <Td>{item.nombre_serv}</Td>
                 <Td>{item.precio}</Td>
                 <Td>
