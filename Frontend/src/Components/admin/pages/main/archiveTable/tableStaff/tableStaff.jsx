@@ -103,7 +103,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
               <Td>{item.rol}</Td>
               <Td>{item.nombre}</Td>
               <Td>{item.apellido}</Td>
-              <Td>{item.correo}</Td>
+              <Td className="email">{item.correo}</Td>
               <Td>
                 <ButtonOptions>
                   <Buttons onClick={() => CapturaEmpleado(item)} title="Editar empleado">

@@ -113,7 +113,7 @@ export const Btn_Create_Order = styled.button`
 `;
 
 export const ContainInfoModal = styled.div`
-  background-color: #008026;
+  /* background-color: #008026; */
   width: 100%;
   display: flex;
   gap: 10px;
@@ -155,7 +155,7 @@ export const P = styled.p`
 
 export const ContainServices = styled.div`
   /* background-color: red; */
-  width: 100%;
+  width: 850px;
   box-sizing: border-box;
   display: flex;
   gap: 10px;
@@ -170,7 +170,7 @@ export const CardService = styled.div`
   background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 5px;
-  width: 20%;
+  width: 165px;
   height: 100%x;
   display: flex;
   flex-direction: column;

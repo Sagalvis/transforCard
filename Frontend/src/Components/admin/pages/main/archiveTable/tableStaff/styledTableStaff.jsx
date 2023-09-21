@@ -113,7 +113,12 @@ export const Tbody = styled.tbody`
 
 export const Td = styled.td`
   padding: 10px;
+  text-transform: capitalize;
   border-bottom: 1px solid #ccc;
+
+  &.email {
+    text-transform: lowercase;
+  }
 `;
 
 
