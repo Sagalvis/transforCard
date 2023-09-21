@@ -17,6 +17,7 @@ getRouter.get('/inventario', controllGet.getInventario);
 getRouter.get('/tipoitem', controllGet.getItem);
 getRouter.get('/tipomedida', controllGet.getMedida);
 getRouter.get('/tipoproducto', controllGet.getProducto);
-getRouter.get('/factura/:id_orden', controllGet.getInvoices);
+getRouter.get('/factura', controllGet.getInvoices);
+getRouter.get('/factura/:id_factura', controllGet.getInvoicesId);
 
 export default getRouter

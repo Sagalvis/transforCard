@@ -157,7 +157,19 @@ export const getProducto = async (req, res) => {
 
 export const getInvoices = async (req, res) => {
    try {
-    const [row] = await pool.query(`SELECT * FROM factura WHERE id_orden = ?`,[req.params.id_orden]);
+    const [row] = await pool.query(`SELECT * FROM factura`);
+    console.log(row);
+    res.send(row);
+   } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+   }
+}
+
+export const getInvoicesId = async (req, res) => {
+  try {
+    const [row] = await pool.query(`SELECT * FROM factura WHERE id_factura = ?`, [ req.params.id_factura]);
     console.log(row);
     res.send(row[0]);
    } catch (error) {
@@ -165,4 +177,4 @@ export const getInvoices = async (req, res) => {
       message: "Error en el servidor"
     });
    }
-}
+  }

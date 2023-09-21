@@ -1,2 +1,0 @@
-/*despliegue de facturas */
-

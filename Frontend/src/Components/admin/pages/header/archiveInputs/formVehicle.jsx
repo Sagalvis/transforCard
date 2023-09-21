@@ -17,7 +17,6 @@ const FormVehicle = ({getCustomer3}) => {
   const [identificacion, setIdentificacion] = useState("");
   const [tipoVehiculo, setTipo_vehiculo] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  
   const [selectVehicle, setSelectVehicle] = useState(0);
   
   /* Funcion para crear vehiculos */
