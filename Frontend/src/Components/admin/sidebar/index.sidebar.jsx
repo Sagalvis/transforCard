@@ -59,7 +59,7 @@ const Sidebar = () => {
               <NavIcon>
                 <i className="fa-solid fa-user"></i>
               </NavIcon>
-              <NavTittle>{useData.nombre} {useData.apellido}</NavTittle>
+              <NavTittle className="user-name">{useData.nombre} {useData.apellido}</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
               <NavLinks onClick={logOut} style={{ width: "25px" }}>

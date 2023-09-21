@@ -127,14 +127,41 @@ export const postLoginEmployees = async (req, res) => {
 
 export const postInventario = async (req, res) => {
   try {
-    const {tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, tipo_item, tipo_medida} = req.body;
+    const {
+      nombre,
+      costo,
+      cantidad_comprada,
+      precio_unitario,
+      cantidad_en_stock,
+      cantidad_vendida,
+      id_medida,
+      id_producto,
+    } = req.body;
     const [row] = await pool.query(
-      "INSERT INTO inventario (tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida) VALUEs(?,?,?,?,?,?,?,?,?)",
-      [ tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida]
+      "INSERT INTO inventario (nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida, id_medida,id_producto) VALUES(?,?,?,?,?,?,?,?)",
+      [
+        nombre,
+        costo,
+        cantidad_comprada,
+        precio_unitario,
+        cantidad_en_stock,
+        cantidad_vendida,
+
+        id_medida,
+        id_producto,
+      ]
     );
-    res.json({
-      id_producto: row.insertId,
-      tipo_producto, nombre, costo, cantidad_comprada, precio_unitario, cantidad_en_stock, cantidad_vendida,tipo_item, tipo_medida
+    res.send({
+      id_inventario: row.insertId,
+      nombre,
+      costo,
+      cantidad_comprada,
+      precio_unitario,
+      cantidad_en_stock,
+      cantidad_vendida,
+
+      id_medida,
+      id_producto,
     });
   } catch (error) {
     return res.status(500).json({
@@ -143,14 +170,36 @@ export const postInventario = async (req, res) => {
   }
 };
 
-export const postOrdenServiceCliente = async (req, res) => {
+/* Consulta para crear servicios */
+
+export const postOrdenService = async (req, res) => {
   try {
-    const {identificacion, id_orden} = req.body
-    const [row] = await pool.query('INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?,?)',[identificacion, id_orden])
-    res.send(row)
+    const {id_orden, nombre_serv, descripcion, precio, tiempo_estimado} = req.body;
+    const [row] = await pool.query("INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado) VALUE (?,?,?,?,?)",
+    [id_orden, nombre_serv, descripcion, precio, tiempo_estimado]);
+    res.json(row)
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       message: "Error en el servidor",
     });
   }
 }
+
+/* Consulta para crear orden se servicio a cada cliente */
+
+export const postOrdenServiceCliente = async (req, res) => {
+  try {
+    const { identificacion, id_orden } = req.body;
+    const [row] = await pool.query(
+      "INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?,?)",
+      [identificacion, id_orden]
+    );
+    res.send(row);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+};
+

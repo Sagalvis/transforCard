@@ -75,8 +75,10 @@ export const NavIcon = styled.p`
 `
 
 export const NavTittle = styled.p`
-
-`
+  &.user-name {
+    text-transform: capitalize;
+  }
+`;
 
 export const ContainPerfil = styled.div`
   /* background-color: rebeccapurple; */

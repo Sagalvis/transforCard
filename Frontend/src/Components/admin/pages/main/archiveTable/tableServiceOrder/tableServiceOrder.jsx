@@ -4,13 +4,28 @@ import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch,
 import axios from "axios";
 
 const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
-  //Función de busqueda
-  /* const searching = (e) => {
-    setSearch(e.target.value);
-    console.log(e.target.value);
-  }; */
+  const [search, setSearch] = useState("");
   //Variables para mostrar la orden de servicio
   const [ordenService, setOrden] = useState([]);
+
+//Función de busqueda
+const searching = (e) => {
+  setSearch(e.target.value);
+  console.log(e.target.value);
+}; 
+
+//Metodo de filtrado tabla cliente
+let resultsServiceOrder = [];
+
+if (!search) {
+  resultsServiceOrder = ordenService || [];
+} else {
+  resultsServiceOrder = ordenService.filter(
+    (dato) =>
+      dato.identificacion &&
+      dato.identificacion.toString().includes(search.toString())
+  );
+}
 
   const getOrdenService = async ()=>{
     const res = await axios.get(`http://localhost:3005/getServiceCliente`)
@@ -34,6 +49,8 @@ const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
         <ContainSearch>
           <Label className="search">Buscar: </Label>
           <Input
+            value={search}
+            onChange={searching}
             type="text"
             title="Buscar cliente"
           ></Input>
@@ -55,7 +72,7 @@ const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
             </Tr>
           </Thead>
           <Tbody>
-            {ordenService.map((item, i) => (
+            {resultsServiceOrder.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.nombre}</Td>

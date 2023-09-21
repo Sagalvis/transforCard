@@ -25,11 +25,20 @@ import { ContainInfoModal } from "../../../header/styledHeader";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
   const [invetario, setInventario] = useState([]);
+  const [ordenService, setOrdenService] = useState([]);
   const [search, setSearch] = useState("");
   const [handleFormInventory, setHandleFormInventory] = useState(false);
   const [showProduct, setShowProduct] = useState(true);
-  const [buttonInventory, setButtonInventory] = useState(0);
+/*   const [buttonInventory, setButtonInventory] = useState(0); */
 
+  const getOrdenService = async () => {
+    try {
+      const res = await axios.get("http://localhost:3005/getService");
+      setOrdenService(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const getInventario = async () => {
     try {
       const res = await axios.get("http://localhost:3005/inventario");
@@ -59,6 +68,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
   useEffect(() => {
     getInventario();
+    getOrdenService();
   }, []);
 
   const handleButtonClick = (value) => {
@@ -174,7 +184,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           <Table>
             <Thead>
               <Tr>
-                <Th>Id_orden</Th>
+                <Th>ID orden</Th>
                 <Th>Nombre del servicio</Th>
                 <Th>Precio</Th>
                 <Th>Tiempo estimado</Th>
@@ -182,12 +192,13 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {invetario.map((item, i) => (
+              {ordenService.map((item, i) => (
                 <Tr key={i}>
-                  <Td>{item.id_inventario}</Td>
-                  <Td>{item.tipo_producto}</Td>
-                  <Td>{item.nombre}</Td>
-                  <Td>{item.costo}</Td>
+                  <Td>{item.id_orden}</Td>
+                  <Td>{item.nombre_serv}</Td>
+                  <Td>{item.descripcion}</Td>
+                  <Td>{item.precio}</Td>
+                  <Td>{item.tiempo_estimado}</Td>
 
                   <Td>
                     <ButtonOptions>

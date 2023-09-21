@@ -113,22 +113,33 @@ export const Btn_Create_Order = styled.button`
 `;
 
 export const ContainInfoModal = styled.div`
-  /* background-color: green; */
+  /* background-color: #008026; */
+  width: 100%;
   display: flex;
   gap: 10px;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  overflow-x: scroll;
 `;
 
 export const P = styled.p`
   margin: 5px;
   font-size: 17px;
   &.size {
-    font-size: 15px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  }
+  &.time {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
   }
   &.desde {
-    font-size: 14px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
   }
   &.precio {
     font-size: 15px;
@@ -141,12 +152,13 @@ export const P = styled.p`
   }
 `;
 
+
 export const ContainServices = styled.div`
   /* background-color: red; */
+  width: 850px;
   box-sizing: border-box;
   display: flex;
   gap: 10px;
-  width: 100%;
   height: 230px;
 `;
 
@@ -157,43 +169,44 @@ export const TitleService = styled.div`
 export const CardService = styled.div`
   background-color: #f8f8f8;
   box-sizing: border-box;
-  padding: 10px;
-  width: 20%;
-  height: 100%;
+  padding: 5px;
+  width: 165px;
+  height: 100%x;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Cuadro = styled.div`
-  background-color: #fff;
-  width: 100%;
-  height: 50%;
   display: flex;
   justify-content: center;
-  border-radius: 10px;
+  align-items: center;
+  height: 120px;
 `;
 
 export const Title = styled.div`
   /* background-color: pink; */
+  /* text-align: center; */
 `;
 
+export const Time = styled.div`
+  display: flex;
+  gap: 5px;
+`;
 export const ContainPrice = styled.div`
   /* background-color: orange; */
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  gap: 2px;
-  margin-top: 1rem;
-  height: 30%;
-  box-sizing: border-box;
-  /* padding: 0 8px; */
+  align-items: center;
 `;
 
 export const Price = styled.div`
   /* background-color: #fff; */
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 80%;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
 `;
 
 export const AddPlus = styled.div`
@@ -203,9 +216,13 @@ export const AddPlus = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: end;
+  cursor: pointer;
+  .fa-square-plus {
+    font-size: 25px
+  }
 `;
 
 export const Img = styled.img`
-  object-fit: cover;
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
 `;
