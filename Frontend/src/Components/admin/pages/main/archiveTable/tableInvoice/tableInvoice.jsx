@@ -45,7 +45,7 @@ const ModalContent = ({ data1 }) => {
         <>
         <h4>Modal</h4>
         {data1.map((item, i) => (      
-        <div>
+        <div key={i}>
           <p>Id factura: {item.id_factura}</p>
           <p>Identificacion: {item.identificacion}</p>
           <p>Id orden: {item.id_orden}</p>
@@ -190,7 +190,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
        showCloseButton={true}
       >
         <ContainInfoModal>
-         <ModalContent data1={save} invoiceId={invoiceId}/>
+         <ModalContent data1={save} />
           <ButtonPdf>
           </ButtonPdf>
         </ContainInfoModal>
