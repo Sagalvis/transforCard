@@ -6,14 +6,13 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
-import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, ContainSearch, Input, Label } from "../tableClient/styledTableClient";
+import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData,Label } from "../tableClient/styledTableClient";
 
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
   const [vehicle, setVehicle] = useState([]);
   // Variable de estado para filtrar busqueda
-
   //Variable de estado modal
   const [handleEditVehicle, setHandleEditVehicle] = useState(false)
   const [handleDeleteVehicle, setHandleDeleteVehicle] = useState(false)
@@ -23,7 +22,8 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   const [observacion, setObservacion] = useState(null)
   // Variable de estado para abrir modal de observacion vehiculo.
   const [handleRemarks, setHandleRemarks] = useState(false);
-/*   const [search, setSearch] = useState(""); */
+
+  
   //Metodo para captura la placa en el modal
   const CapturaVehicle = (item) => {
     setIdVehicle(item)
@@ -61,11 +61,6 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
           <Label type="select">Cantidad de registros</Label>
         </ContainMaxData>
 
-        {/* BUSCADOR */}
-        <ContainSearch>
-          <Label className="search">Buscar: </Label>
-          <Input type="text" title="Buscar cliente"></Input>
-        </ContainSearch>
       </ContainControls>
       {/* Contenedor de tabla */}
 
