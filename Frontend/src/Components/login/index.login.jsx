@@ -22,45 +22,17 @@ import {
 } from "./styled.login";
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
-import axios from "axios";
+import { Log } from "../../contexts/authcontexts";
+
 // import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   
-  const Log = async (evt) => {
+  const handleLogin = (evt) => {
     evt.preventDefault();
-    if (correo && contraseña) {
-      try {
-        await axios.post(
-          "http://localhost:3005/postLoginEmployees",
-          {
-            correo: correo,
-            contraseña: contraseña,
-          }
-        ).then((response) => {
-          console.log(response.data, "😎😎😎"); 
-          const result = response.data;
-          if(response.data === ""){
-            alert("el usario no existe")
-          }else{
-            localStorage.setItem("user", JSON?.stringify(result));
-            setTimeout(()=>{
-              window.location.href ="http://localhost:5173/admin";
-            },1000)
-          }
-          
-        })
-      } catch (error) {
-        console.error(error);
-        alert("Usuario y/o contraseña no validos");
-      }
-    } else {
-      alert(
-        "Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos"
-      );
-    }
+    Log(correo, contraseña);
   };
   return (
     <ContainLogin>
@@ -100,7 +72,7 @@ const Login = () => {
                 </InputBox>
               </ContenInputs>
               <ContainButton>
-                <ButtonLogin onClick={Log}>Ingresar</ButtonLogin>
+                <ButtonLogin onClick={handleLogin}>Ingresar</ButtonLogin>
               </ContainButton>
             </ContainInputs>
             <ContenParagrafh>
@@ -121,3 +93,4 @@ const Login = () => {
 };
 
 export default Login;
+

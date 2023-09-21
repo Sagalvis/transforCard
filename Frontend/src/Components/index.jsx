@@ -6,15 +6,20 @@ import NotFount from "./admin/pages/notFount";
 import { LOGIN, NOTFOUND, PRIVATE } from "../config/routes/patch.routes";
 
 const IndexRoutes = () => {
-  return ( 
+  return (
     <ContainerMain>
       <Routes>
-        <Route path={LOGIN} element={<Login/>}/>
-        <Route path={PRIVATE} element={<Dashboard/>}/>
-        <Route path={NOTFOUND} element={<NotFount/>}/>
+        <Route path="/">
+          <Route path={LOGIN} element={<Login />} />
+          <Route path={NOTFOUND} element={<NotFount />} />
+        </Route>
+        <Route path={PRIVATE}>
+          <Route path={PRIVATE} element={<Dashboard />} />
+
+        </Route>
       </Routes>
     </ContainerMain>
   );
-}
+};
 
 export default IndexRoutes;
