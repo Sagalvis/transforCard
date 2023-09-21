@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+
 import { useEffect, useState } from "react";
 import {
-  ButtonInventory,
   Button,
+  ButtonInventory,
   ButtonOptions,
   Buttons,
   ContainControls,
@@ -23,11 +24,10 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
-  // Variable de estado para traer toda la tabla inventario
   const [invetario, setInventario] = useState([]);
-  // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
   const [handleFormInventory, setHandleFormInventory] = useState(false);
+  const [showProduct, setShowProduct] = useState(true);
   const [buttonInventory, setButtonInventory] = useState(0);
 
   const getInventario = async () => {
@@ -38,7 +38,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       console.log(error);
     }
   };
-  //Función de busqueda
+
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
@@ -59,24 +59,30 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
   useEffect(() => {
     getInventario();
-  }, [setInventario]);
+  }, []);
+
+  const handleButtonClick = (value) => {
+    if (value === "producto") {
+      setShowProduct(true);
+    } else if (value === "servicio") {
+      setShowProduct(false);
+    }
+  };
+
   return (
     <>
-      <ButtonInventory value={buttonInventory} onChange={(e) => setButtonInventory(parseInt((e.target.value)))}>
-        <Button value={1}>Servicio</Button>
-        <Button value={2}>Productos</Button>
-      </ButtonInventory>
-      {buttonInventory === 1 && (
-        <>
-          {/* Controladores */}
-          <ContainControls>
-            {/* Control "CANTIDAD DE REGISTROS" */}
+    <ButtonInventory>
 
+      <Button onClick={() => handleButtonClick("servicio")}>Servicio</Button>
+      <Button onClick={() => handleButtonClick("producto")}>Producto</Button>
+    </ButtonInventory>
+
+      {showProduct && (
+        <>
+          <ContainControls>
             <ContainMaxData>
               <Label type="select">Cantidad de registros</Label>
             </ContainMaxData>
-
-            {/* BUSCADOR */}
             <ContainSearch>
               <Label className="search">Buscar: </Label>
               <Input
@@ -84,12 +90,9 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 onChange={searching}
                 type="text"
                 title="Buscar cliente"
-              ></Input>
+              />
             </ContainSearch>
           </ContainControls>
-
-          {/* Contenedor de tabla */}
-
           <ContainTable>
             <Table>
               <Thead>
@@ -136,7 +139,6 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               </Tbody>
             </Table>
           </ContainTable>
-
           <Modals
             status={handleFormInventory}
             changeStatus={setHandleFormInventory}
@@ -151,10 +153,75 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           </Modals>
         </>
       )}
-      {buttonInventory === 2 && (
+
+      {!showProduct && (
         <>
-          <h1>esta monda no sirvio</h1>
-        </>
+        <ContainControls>
+          <ContainMaxData>
+            <Label type="select">Cantidad de registros</Label>
+          </ContainMaxData>
+          <ContainSearch>
+            <Label className="search">Buscar: </Label>
+            <Input
+              value={search}
+              onChange={searching}
+              type="text"
+              title="Buscar cliente"
+            />
+          </ContainSearch>
+        </ContainControls>
+        <ContainTable>
+          <Table>
+            <Thead>
+              <Tr>
+                <Th>Id_orden</Th>
+                <Th>Nombre del servicio</Th>
+                <Th>Precio</Th>
+                <Th>Tiempo estimado</Th>
+                <Th>Opciones</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {invetario.map((item, i) => (
+                <Tr key={i}>
+                  <Td>{item.id_inventario}</Td>
+                  <Td>{item.tipo_producto}</Td>
+                  <Td>{item.nombre}</Td>
+                  <Td>{item.costo}</Td>
+
+                  <Td>
+                    <ButtonOptions>
+                      <Buttons
+                        onClick={() =>
+                          setHandleFormInventory(!handleFormInventory)
+                        }
+                        title="Editar producto"
+                      >
+                        <i className={editProduct}></i>
+                      </Buttons>
+                      <Buttons title="Eliminar producto">
+                        <i className={deleteProduct}></i>
+                      </Buttons>
+                    </ButtonOptions>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </ContainTable>
+        <Modals
+          status={handleFormInventory}
+          changeStatus={setHandleFormInventory}
+          titleModal={"Editar item"}
+          changePosition={"start"}
+          showHeader={true}
+          showCloseButton={true}
+        >
+          <ContainInfoModal>
+            <h5>aqui va el formulario de edit.</h5>
+          </ContainInfoModal>
+        </Modals>
+      </>
       )}
     </>
   );

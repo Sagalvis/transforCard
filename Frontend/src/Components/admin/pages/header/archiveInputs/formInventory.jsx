@@ -2,22 +2,37 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
+import { Button } from "../../main/archiveTable/tableInventory/styledTableInventory";
+import { ShowCedula } from "./formVehicle";
 
 const FormInventory = () => {
   //Varibles de estado para crear un producto
-
   const [nombre, setNombre] = useState("");
   const [costo, setCosto] = useState("");
   const [cantidadComprada, setCantidadComprada] = useState("");
   const [precioUnitario, setPrecioUnitario] = useState("");
   const [cantidadStock, setCantidadStock] = useState("");
-  const [tipoItem, setTipoItem] = useState([]);
   const [tipoMedida, setTipoMedida] = useState([]);
+  const [tipoItem, setTipoItem] = useState([]);
+  const [tipoItem2, setTipoItem2] = useState([]);
   const [tipoProducto, setTipoProducto] = useState([]);
+  const [selectMedida, setSelectMedida] = useState("");
   const [selectItem, setSelectItem] = useState(0);
-  const [selectMedida, setSelectMedida] = useState(0);
-  const [selectProducto, setSelectProducto] = useState(0);
+  const [selectProducto, setSelectProducto] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [showItem, setShowItem] = useState(true);
+
+  const handleSelectItemChange = (value) => {
+    setSelectItem(value);
+  };
+  //Funcion para cambiar de inputs
+  const handleClickButton = (value) => {
+    if (value === "producto") {
+      setShowItem(true);
+    } else if (value === "servicio") {
+      setShowItem(false);
+    }
+  };
 
   //Funcion para crear un producto
 
@@ -28,9 +43,10 @@ const FormInventory = () => {
       cantidadComprada === "" ||
       precioUnitario === "" ||
       cantidadStock === "" ||
-      selectItem === 0 ||
-      selectMedida === 0 ||
-      selectProducto === 0
+      tipoMedida === "" ||
+      tipoProducto === "" ||
+      selectMedida === "" ||
+      selectProducto === ""
     ) {
       e.preventDefault();
       alert("llenar todos los campos");
@@ -42,39 +58,50 @@ const FormInventory = () => {
           cantidad_comprada: parseInt(cantidadComprada),
           precio_unitario: parseInt(precioUnitario),
           cantidad_en_stock: parseInt(cantidadStock),
-          id_item: selectItem,
+          id_item:selectItem,
           id_medida: selectMedida,
           id_producto: selectProducto,
         })
         .then((Response) => {
           console.log(Response.data);
           setShowAlert(true);
-          window.location.reload();
         });
+      window.location.reload();
+    }
+  };
+
+  const getItem1 = async () => {
+    try {
+      const result = await axios.get("http://localhost:3005/tipoitem1");
+      setTipoItem(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getItem2 = async () => {
+    try {
+      const result = await axios.get("http://localhost:3005/tipoitem2");
+      setTipoItem2(result.data);
+    } catch (error) {
+      console.log(error);
     }
   };
   /* Funcion que limpa los inputs */
 
   useEffect(() => {
     const fetchdata = async () => {
-      try {
-        const responseItem = await axios.get("http://localhost:3005/tipoitem");
-        setTipoItem(responseItem.data);
-
-        const responseMedida = await axios.get(
-          "http://localhost:3005/tipomedida"
-        );
-
-        setTipoMedida(responseMedida.data);
-        const responseProducto = await axios.get(
-          "http://localhost:3005/tipoproducto"
-        );
-        setTipoProducto(responseProducto.data);
-      } catch (error) {
-        console.log(error);
-      }
+      const responseMedida = await axios.get(
+        "http://localhost:3005/tipomedida"
+      );
+      setTipoMedida(responseMedida.data);
+      const responseProducto = await axios.get(
+        "http://localhost:3005/tipoproducto"
+      );
+      setTipoProducto(responseProducto.data);
     };
     fetchdata();
+    getItem1();
+    getItem2();
   }, []);
   return (
     <>
@@ -88,21 +115,32 @@ const FormInventory = () => {
 
       <ContainForm>
         <Form>
-          <ContentInput>
-            <Select
-              value={selectItem}
-              onChange={(e) => setSelectItem(parseInt((e.target.value)))}
+          <ContentInput className="display">
+            <Button
+              className="btn"
+              onClick={() => handleClickButton("servicio")}
             >
-              <Option value={0}>-Seleccione tipo de item-</Option>
-              {tipoItem.map((item, index) => (
-                <Option key={index} value={item.id_item}>
-                  {item.tipo_item}
-                </Option>
-              ))}
-            </Select>
+              Servicio
+            </Button>
+            <Button
+              className="btn"
+              onClick={() => handleClickButton("producto")}
+            >
+              Producto
+            </Button>
           </ContentInput>
-          {selectItem === 1 && (
+          {showItem && (
             <>
+              {tipoItem.map((item, index) => (
+                <ContentInput key={index}>
+                  <ShowCedula
+                    defaultValue={item.id_item}
+                    onSelectItemChange={handleSelectItemChange}
+                  >
+                  {item.tipo_item}
+                  </ShowCedula>
+                </ContentInput>
+              ))}
               <ContentInput>
                 <Select
                   value={selectProducto}
@@ -189,38 +227,34 @@ const FormInventory = () => {
               </ContentInput>
             </>
           )}
-          {selectItem === 2 && (
+          {!showItem && (
             <>
+              {tipoItem2.map((item, index) => (
+                <ContentInput key={index}>
+                  <ShowCedula
+                    value={item.id_item}
+                  
+                  >
+                    {item.tipo_item}
+                  </ShowCedula>
+                </ContentInput>
+              ))}
               <ContentInput>
                 <Input
                   type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
                   placeholder="Nombre del servicio"
                   autoComplete="off"
                   required={true}
-                  maxLength={20}
                 />
               </ContentInput>
-
-              <ContentInput className="display">
+              <ContentInput>
                 <Input
-                  className="width"
                   type="text"
-                  value={costo}
-                  onChange={(e) => setCosto(e.target.value)}
-                  placeholder="Costo"
-                  autoComplete="off"
-                  required={true}
-                  maxLength={20}
-                  />
-                <Input
-                  className="input-display"
-                  type="text"
-                  value={precioUnitario}
-                  onChange={(e) => setPrecioUnitario(e.target.value)}
-                  placeholder="Mano"
-                  maxLength={10}
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Precio del servicio"
                   autoComplete="off"
                   required={true}
                 />
@@ -228,19 +262,23 @@ const FormInventory = () => {
               <ContentInput>
                 <Input
                   type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  placeholder="Tiempo estimado"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Tiempo estidamdo del servicio"
                   autoComplete="off"
                   required={true}
-                  maxLength={20}
                 />
               </ContentInput>
               <ContentInput>
-                <TextArea placeholder="Descripción del servicio"></TextArea>
+                <TextArea
+                  type="text"
+                  value={cantidadStock}
+                  onChange={(e) => setCantidadStock(e.target.value)}
+                  placeholder="Descripcion del servicio"
+                  autoComplete="off"
+                  required={true}
+                />
               </ContentInput>
-              
-
             </>
           )}
         </Form>
@@ -282,6 +320,13 @@ export const ContentInput = styled.div`
     display: flex;
     flex-direction: row;
     gap: 3px;
+  }
+
+  .btn {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 1.5px;
   }
 `;
 
@@ -331,6 +376,7 @@ export const Input = styled.input`
 
 export const TextArea = styled.textarea`
   width: 100%;
+  border-radius: 5px;
   border: 1px solid #ccc;
   padding: 0;
   resize: none;
@@ -338,7 +384,6 @@ export const TextArea = styled.textarea`
   padding: 10px;
   font-family: "Outfit";
   font-size: 15px;
-  border-radius: 5px;
 `;
 
 export const ButtonRegister = styled.div`
