@@ -295,7 +295,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
               className="color-red"
               onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}
             >
-              Cancelar
+              Cerrar
             </BtnRegister>
 
             <BtnRegister
