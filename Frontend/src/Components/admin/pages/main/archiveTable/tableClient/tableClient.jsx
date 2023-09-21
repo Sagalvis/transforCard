@@ -29,11 +29,11 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Title, TitleService } from "../../../header/styledHeader";
+import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Time, Title, TitleService } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import aceite from '../../../../../../assets/img/aceite.png'
+import aceite from '../../../../../../assets/img/ALINEAMIENTO.jpg'
 
 const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
@@ -98,7 +98,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const getServices = async () =>{
     try {
       const res = await axios.get("http://localhost:3005/getService");
-      setOrdService(res.data[0])
+      setOrdService(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -126,6 +126,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       console.log(error)
     }
   }
+
+  // Funcion para mostrar los servicios disponibles
+
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -364,29 +367,34 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       changePosition={'start'}
       changeWidth={'800px'}
       >
-        <ContainInfoModal>
             <TitleService>
               <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
             </TitleService>
+        <ContainInfoModal>
           <ContainServices>
-
-            <CardService>
+          {ordServicio.map((item, index) => (
+            <CardService key={index}>
               <Cuadro>
                 <Img src={aceite} alt="hh" />
               </Cuadro>
               <Title>
-                <P className="size">{ordServicio.nombre_serv}</P>
+                <P className="size">{item.nombre_serv}</P>
               </Title>
+              <Time>
+              <P className="time">T.E:</P>
+              <P className="time">{item.tiempo_estimado}</P>
+              </Time>
               <ContainPrice>
                 <Price>
                   <P className="desde">Desde</P>
-                  <P className="precio">$ {ordServicio.precio}</P>
+                  <P className="precio">$ {item.precio}</P>
                 </Price>
                 <AddPlus>
-                <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus" ></i></Button>
+                <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>
                 </AddPlus>
               </ContainPrice>
             </CardService>
+          ))}
 
           </ContainServices>
         </ContainInfoModal>        
