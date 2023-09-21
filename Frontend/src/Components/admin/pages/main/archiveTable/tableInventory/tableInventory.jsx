@@ -28,7 +28,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   const [search, setSearch] = useState("");
   const [handleFormInventory, setHandleFormInventory] = useState(false);
   const [showProduct, setShowProduct] = useState(true);
-  const [buttonInventory, setButtonInventory] = useState(0);
+/*   const [buttonInventory, setButtonInventory] = useState(0); */
 
   const getInventario = async () => {
     try {
