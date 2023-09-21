@@ -1,44 +1,18 @@
 /* importacion de la base de la base de datos para hace las consultas */
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-const SECRET = "jesusessimpdehelena";
+import bcrypt from "bcrypt"
+const SECRET = "jesusessimpdehelena"
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
-    const {
-      identificacion,
-      nombre,
-      apellido,
-      correo,
-      direccion,
-      tel,
-      idpais,
-      id_tipo_cliente,
-    } = req.body;
+    const { identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente } =
+      req.body;
     const [row] = await pool.query(
       "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente) VALUE(?,?,?,?,?,?,?,?)",
-      [
-        identificacion,
-        nombre,
-        apellido,
-        correo,
-        direccion,
-        tel,
-        idpais,
-        id_tipo_cliente,
-      ]
+      [identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente]
     );
-    res.send({
-      identificacion,
-      nombre,
-      apellido,
-      correo,
-      direccion,
-      tel,
-      idpais,
-      id_tipo_cliente,
-    });
+    res.send({ identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -64,8 +38,8 @@ export const postEmployees = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "Error en el servidor",
-    });
-  }
+    });
+  }
 };
 /* Consulta para crear vehiculos */
 
@@ -123,29 +97,30 @@ export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
     console.log(req.body);
-
-    const [rows] = await pool.query("SELECT * FROM empleado WHERE correo = ?", [
-      correo,
-    ]);
-    console.log(rows[0]);
+    /* const [rows] = await pool.query(
+      "SELECT * FROM empleado WHERE correo = ?",
+      [correo]
+      ); */
+      const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
+    
+    console.log(rows[0])
     if (rows.length > 0) {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
       console.log(compassword);
-      console.log({ id: rows[0].id_empleado });
+      console.log({id: rows[0].id_empleado});
       if (compassword) {
-        const token = jwt.sign({ id: rows[0].id_empleado }, SECRET, {
+        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET, {
           expiresIn: "1h",
         });
         res.status(200).json(token);
-      } else {
-        res.status(400).send("El usuario no existe 🤣🤣");
+        console.log(token)
       }
     } else {
       res.status(400).send("El usuario no existe🤦‍♂🤦‍♂");
     }
   } catch (error) {
-    res.status(500).json({ error: "Error del servidor 💀💀💀" });
-  }
+    res.status(500).json({ error: "Error del servidor 💀💀💀" });
+}
 };
 
 /* consulta para crear productos en el inventario */
