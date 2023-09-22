@@ -140,6 +140,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
               <Th>Fecha de emision</Th>
               <Th>Cantidad pagada</Th>
               <Th>Estado de pago</Th>
+              <Th>Opciones</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -151,7 +152,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>{item.fecha_emision}</Td>
                 <Td>{item.cantidad_pagada}</Td>
                 <Td>{item.estado_pago}</Td>
-               
+            
                 <Td>
                   <ButtonOptions>
                     <Buttons onClick={() => setHandleFormInvoice(!handleFormInvoice)} title="Editar producto">
@@ -162,8 +163,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                     </Buttons>
                     <Buttons title="Ver factura">
                       <i className={printInvoice} onClick={() =>{setHandlePdfInvoice(true)
-                       createPDF(item)
-                       ModalContent(item)
+                      createPDF(item)
+                      ModalContent(item)
                       }}></i>
                     </Buttons>
                   </ButtonOptions>

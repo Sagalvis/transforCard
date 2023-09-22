@@ -11,5 +11,7 @@ const deleteRouter = Router();
 deleteRouter.delete('/deletecustomer/:identificacion', controllDelete.deleteCustomer);
 deleteRouter.delete('/deleteemployees/:id_empleado', controllDelete.deleteEmployees);
 deleteRouter.delete('/deletevehicle/:matricula', controllDelete.deleteVehicle);
-deleteRouter.delete('/deleteinventario/:id_producto', controllDelete.deleteProductoInventario);
+deleteRouter.delete('/deleteproduct/:id_inventario', controllDelete.deleteProductInventory);
+deleteRouter.delete('/deleteserviceorder/:id_servicio_cliente', controllDelete.deleteServiceOrder);
+
 export default deleteRouter

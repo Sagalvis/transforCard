@@ -172,7 +172,7 @@ export const getInvoicesId = async (req, res) => {
 
 export const getServiceCliente = async (req,res) => {
   try {
-    const [row] = await pool.query("SELECT cliente.identificacion, cliente.nombre, cliente.apellido, orden_servicio.nombre_serv, orden_servicio.precio FROM servicio_cliente INNER JOIN orden_servicio INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion AND servicio_cliente.id_orden = orden_servicio.id_orden ");
+    const [row] = await pool.query("SELECT cliente.identificacion, cliente.nombre, cliente.apellido, orden_servicio.nombre_serv, orden_servicio.precio, servicio_cliente.id_servicio_cliente FROM servicio_cliente INNER JOIN orden_servicio INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion AND servicio_cliente.id_orden = orden_servicio.id_orden ORDER BY id_servicio_cliente DESC");
     res.send(row)
   } catch (error) {
     return res.status(500).json({
