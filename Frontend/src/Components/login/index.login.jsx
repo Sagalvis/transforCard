@@ -102,11 +102,6 @@ const Login = () => {
               <ContainButton>
                   <ButtonLogin
                         onClick={Log}>INGRESAR
-                        <span className="span"></span>
-                        <span className="span"></span>
-                        <span className="span"></span>
-                        <span className="span"></span>
-                        <span className="span"></span>
                   </ButtonLogin>
               </ContainButton>
             </ContainInputs>
