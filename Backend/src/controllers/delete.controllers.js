@@ -66,11 +66,11 @@ export const deleteVehicle = async(req, res) => {
     );
     if (row.affectedRows === 0) {
       return res.status(404).json({
-        message: "No se encontró al vehiculo",
+        message: "No se encontró al vehículo",
       });
     };
     res.send({
-      message:'vehiculo eliminado correctamente',
+      message:'vehículo eliminado correctamente',
       matricula
     })
   } catch (error) {
@@ -83,7 +83,7 @@ export const deleteVehicle = async(req, res) => {
 
 /* Consulta para eliminar productos de la tabla inventario */
 
-export const deleteProductoInventario = async (req, res) => {
+export const deleteProductInventory = async (req, res) => {
   try {
     const {id_inventario} = req.params;
     const [row] = await pool.query(
@@ -96,7 +96,32 @@ export const deleteProductoInventario = async (req, res) => {
     };
     res.send({
       message:'producto eliminado correctamente',
-      id_producto
+      id_inventario
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
+
+
+/* Consulta para eliminar ordenes de la tabla orden de servicio */
+
+export const deleteServiceOrder = async (req, res) => {
+  try {
+    const {id_servicio_cliente} = req.params;
+    const [row] = await pool.query(
+      "DELETE FROM servicio_cliente WHERE id_servicio_cliente = ? ",[id_servicio_cliente]
+    )
+    if (row.affectedRows === 0) {
+      return res.status(404).json({
+        message: "No se encontró la orden",
+      });
+    };
+    res.send({
+      message:'Orden eliminada correctamente',
+      id_servicio_cliente
     })
   } catch (error) {
     return res.status(500).json({

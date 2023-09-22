@@ -51,6 +51,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
+  const [idOrden, setIdOrden] = useState([]);
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -98,7 +99,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const getServices = async () =>{
     try {
       const res = await axios.get("http://localhost:3005/getService");
-      setOrdService(res.data)
+      setOrdService(res.data);
     } catch (error) {
       console.log(error)
     }
@@ -114,14 +115,27 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       alert("Error");
     }
   };
+  //funcion para capturar los datos
+  const handleAddOrdenService = (item) => {
+    setIdOrden(item.id_orden);
+    
+  };
+
+  useEffect(() => {
+    if (idOrden) {
+      postOrdenServiceCliente();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idOrden]);
 
   //Funcion para enviar los servicios del cliente
   const postOrdenServiceCliente = async () =>{
     try {
       await axios.post("http://localhost:3005/postOrdenServiceCliente",{
         identificacion: id4,
-        id_orden: ordServicio.id_orden
+        id_orden: idOrden
       });
+      console.log("registrado con exito", res)
     } catch (error) {
       console.log(error)
     }
@@ -134,10 +148,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const deleteClient = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:3005/deletecustomer/${selectedItem.identificacion}`
+        `http://localhost:3005/deletecustomer/${selectedItem}`
       );
       console.log(result);
-      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem.identificacion))
+      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem))
     } catch (error) {
       console.log(error);
     }
@@ -224,7 +238,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
                     <Buttons
                       onClick={() => {
-                        setSelectedItem(item);
+                        setSelectedItem(item.identificacion);
                         setHandleDelete(!handleDelete);
                       }}
                       title="Eliminar cliente"
@@ -390,7 +404,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                   <P className="precio">$ {item.precio.toLocaleString()}</P>
                 </Price>
                 <AddPlus>
-                <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>
+                <Button onClick={()=>{
+                  handleAddOrdenService(item);
+                  }} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>
                 </AddPlus>
               </ContainPrice>
             </CardService>
