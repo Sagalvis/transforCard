@@ -11,16 +11,22 @@ import { PDFDocument, rgb } from 'pdf-lib';
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([400, 400]);
+  const page = pdfDoc.addPage([600, 400]);
   const font = page.drawText("")
   // Utiliza CustomFontText como fuente personalizada
   // Organiza los datos como deseas en el PDF
   const content = `
+    Transforcars
+    Direccion: Calle 47 #21-63
+    Telefono: 3254587894
     Id factura: ${data1.id_factura}
     Identificacion: ${data1.identificacion}
     Id orden: ${data1.id_orden}
+    Descripcion
+    __________________________________________________
+
     Fecha de emision: ${data1.fecha_emision}
-    Cantidad pagada: ${data1.cantidad_pagada}
+    Cantidad pagada: ${data1.cantidad_pagada} $
     Estado de pago: ${data1.estado_pago}
   `;
 
