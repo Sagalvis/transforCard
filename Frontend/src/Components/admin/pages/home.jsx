@@ -1,17 +1,15 @@
-import { ContainHome } from "./styles/styledHome";
+import { ContainCards, ContainHome, HomeConten } from "./styles/styledHome";
 
 
 
 const Home = () => {
-
   return ( 
-    
-
     <ContainHome>
-      <h1>Home </h1>
+      <HomeConten>
+        <ContainCards>2</ContainCards>
+      </HomeConten>
     </ContainHome>
-    )
-    ;
+    );
 }
 
 export default Home;
