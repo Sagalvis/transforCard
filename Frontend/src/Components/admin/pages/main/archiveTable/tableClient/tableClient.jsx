@@ -118,7 +118,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Funcion para enviar los servicios del cliente
   const postOrdenServiceCliente = async () =>{
     try {
-      const res = await axios.post("http://localhost:3005/postOrdenServiceCliente",{
+      await axios.post("http://localhost:3005/postOrdenServiceCliente",{
         identificacion: id4,
         id_orden: ordServicio.id_orden
       });
