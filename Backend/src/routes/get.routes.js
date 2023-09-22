@@ -16,6 +16,8 @@ getRouter.get('/tipocliente', controllGet.getTypeClient);
 getRouter.get('/inventario', controllGet.getInventario);
 getRouter.get('/tipomedida', controllGet.getMedida);
 getRouter.get('/tipoproducto', controllGet.getProducto);
+getRouter.get('/factura', controllGet.getInvoices);
+getRouter.get('/factura/:id_factura', controllGet.getInvoicesId);
 getRouter.get('/getService', controllGet.getService);
 getRouter.get('/getServiceCliente', controllGet.getServiceCliente);
 
