@@ -106,6 +106,32 @@ export const deleteProductInventory = async (req, res) => {
 }
 
 
+/* Consulta para eliminar servicios... */
+
+export const deleteServiceInventory = async (req, res) => {
+  try {
+    const {id_orden} = req.params;
+    const [row] = await pool.query(
+      "DELETE FROM orden_servicio WHERE id_orden = ? ",[id_orden]
+    )
+    if (row.affectedRows === 0) {
+      return res.status(404).json({
+        message: "No se encontró el producto",
+      });
+    };
+    res.send({
+      message:'producto eliminado correctamente',
+      id_orden
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
+
+
 /* Consulta para eliminar ordenes de la tabla orden de servicio */
 
 export const deleteServiceOrder = async (req, res) => {
