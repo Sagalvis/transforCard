@@ -88,6 +88,7 @@ export const ContainTable = styled.div`
   width: 100%;
   max-height: 75%;
   margin-bottom: 15px;
+  overflow-y: auto;
 `;
 
 export const Table = styled.table`
@@ -131,6 +132,8 @@ export const Tbody = styled.tbody`
 export const Td = styled.td`
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  text-transform: uppercase;
 `;
 
 

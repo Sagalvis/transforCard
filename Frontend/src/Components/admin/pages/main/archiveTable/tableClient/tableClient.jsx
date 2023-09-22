@@ -368,7 +368,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       changeWidth={'800px'}
       >
             <TitleService>
-              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P> 
             </TitleService>
         <ContainInfoModal>
           <ContainServices>
@@ -387,7 +387,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
               <ContainPrice>
                 <Price>
                   <P className="desde">Desde</P>
-                  <P className="precio">$ {item.precio}</P>
+                  <P className="precio">$ {item.precio.toLocaleString()}</P>
                 </Price>
                 <AddPlus>
                 <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>

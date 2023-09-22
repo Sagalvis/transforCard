@@ -83,7 +83,7 @@ const FormInventory = () => {
         nombre_serv: nombreServicio,
         descripcion: descripcion,
         precio: parseInt(precioServicio),
-        tiempo_estimado :parseInt(tiempoEstimado)
+        tiempo_estimado :tiempoEstimado
       })
     }
   }
@@ -216,8 +216,8 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister className="btn_red">Cancelar</BtnRegister>
-                <BtnRegister onClick={handletSumitProduct}>Crear</BtnRegister>
+                {/* <BtnRegister className="btn_red">Cancelar</BtnRegister> */}
+                <BtnRegister onClick={handletSumitProduct}>Crear producto</BtnRegister>
               </ButtonRegister>
             </>
           )}
@@ -274,8 +274,8 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister className="btn_red">Cancelar</BtnRegister>
-                <BtnRegister onClick={handleSumitService}>Crear orden</BtnRegister>
+                {/* <BtnRegister className="btn_red">Cancelar</BtnRegister> */}
+                <BtnRegister onClick={handleSumitService}>Crear servicio</BtnRegister>
               </ButtonRegister>
             </>
           )}
@@ -400,11 +400,10 @@ export const BtnRegister = styled.button`
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  font-size: 14px;
 
   &.btn_red {
     background-color: #dc3545;
