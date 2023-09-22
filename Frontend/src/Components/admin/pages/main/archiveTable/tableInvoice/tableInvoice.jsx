@@ -36,6 +36,7 @@ const createPDF = async (data1) => {
   const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
   const pdfUrl = URL.createObjectURL(pdfBlob);
   window.open(pdfUrl, '_blank');
+  window.location.reload()
 };
 
 const ModalContent = ({ data1 }) => {
@@ -43,17 +44,15 @@ const ModalContent = ({ data1 }) => {
   return (
     <div>
         <>
-        <h4>Modal</h4>
-        {data1.map((item, i) => (      
-        <div key={i}>
+        <h4>Modal</h4>       
+        <div>
           <p>Id factura: {item.id_factura}</p>
           <p>Identificacion: {item.identificacion}</p>
           <p>Id orden: {item.id_orden}</p>
           <p>Fecha de emision: {item.fecha_emision}</p>
           <p>Cantidad pagada: {item.cantidad_pagada}</p>
           <p>Estado de pago: {item.estado_pago}</p>
-        </div>
-          ))}
+        </div> 
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
         </>
     </div>
@@ -156,8 +155,9 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                       <i className={deleteInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">
-                      <i className={printInvoice} onClick={() =>{setHandlePdfInvoice(item.id_factura)
-                       setInvoiceId(item.id_factura)
+                      <i className={printInvoice} onClick={() =>{setHandlePdfInvoice(true)
+                       createPDF(item)
+                       ModalContent(item)
                       }}></i>
                     </Buttons>
                   </ButtonOptions>
@@ -172,7 +172,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         status={handleFormInvoice}
         changeStatus={setHandleFormInvoice}
         titleModal={"Editar item"}
-        changePosition={"start"}
+        style={{ position: 'start' , width: '800px'}}
         showHeader={true}
         showCloseButton={true}>
         <ContainInfoModal>
@@ -184,8 +184,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
        status={handlePdfInvoice}
        changeStatus={setHandlePdfInvoice}
        titleModal={"Generar Pdf"}
-       changePosition={"start"}
-       changeWidth={'800px'}
+       style={{ position: 'start' , width: '800px'}}
        showHeader={true}
        showCloseButton={true}
       >
