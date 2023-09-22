@@ -6,15 +6,13 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
-import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, ContainSearch, Input, Label } from "../tableClient/styledTableClient";
+import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, Label } from "../tableClient/styledTableClient";
 
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
-  console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
   // Variable de estado para filtrar busqueda
-
   //Variable de estado modal
   const [handleEditVehicle, setHandleEditVehicle] = useState(false)
   const [handleDeleteVehicle, setHandleDeleteVehicle] = useState(false)
@@ -22,14 +20,15 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   //Variable de estado para capturar vehiculo 
   const [idVehicle, setIdVehicle] = useState(null);
   const [observacion, setObservacion] = useState(null)
+  // Variable de estado para abrir modal de observacion vehiculo.
+  const [handleRemarks, setHandleRemarks] = useState(false);
+
+  
   //Metodo para captura la placa en el modal
   const CapturaVehicle = (item) => {
     setIdVehicle(item)
     setHandleEditVehicle(!handleEditVehicle)
   }
-  // Variable de estado para abrir modal de observacion vehiculo.
-  const [handleRemarks, setHandleRemarks] = useState(false);
-
 
   const getVehicle = async () => {
     try {
@@ -62,11 +61,6 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
           <Label type="select">Cantidad de registros</Label>
         </ContainMaxData>
 
-        {/* BUSCADOR */}
-        <ContainSearch>
-          <Label className="search">Buscar: </Label>
-          <Input type="text" title="Buscar cliente"></Input>
-        </ContainSearch>
       </ContainControls>
       {/* Contenedor de tabla */}
 
@@ -98,7 +92,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
                 <Td>{item.año}</Td>
                 <Td>{item.color}</Td>
                 <Td>{item.tarjetaPropiedad}</Td>
-                <Td>{item.matricula}</Td>
+                <Td className="matricula">{item.matricula}</Td>
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>

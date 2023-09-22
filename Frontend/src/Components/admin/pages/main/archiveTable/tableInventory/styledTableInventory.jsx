@@ -88,6 +88,7 @@ export const ContainTable = styled.div`
   width: 100%;
   max-height: 75%;
   margin-bottom: 15px;
+  overflow-y: auto;
 `;
 
 export const Table = styled.table`
@@ -131,6 +132,8 @@ export const Tbody = styled.tbody`
 export const Td = styled.td`
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  text-transform: uppercase;
 `;
 
 
@@ -177,7 +180,7 @@ export const ContainTextHandle = styled.div`
   /* background-color: yellow; */
 `;
 
-export const Tag_P_Handle = styled.p`
+export const TagPHandle = styled.p`
   margin: 0;
 `;
 
@@ -234,3 +237,30 @@ export const ButtonHandle = styled.button`
     
   }
 `;
+
+export const ButtonInventory = styled.div`
+  display: flex;
+/*   background-color: red; */
+  width: 15%;
+  height: 40px;
+  justify-content: space-around;
+  margin-bottom: 1%;
+`;
+
+export const Button = styled.div`
+  background: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Outfit';
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: .3s ease;
+  text-transform: uppercase;
+  
+  &:hover {
+    background: #cfcfcf;
+  }
+`

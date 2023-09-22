@@ -108,7 +108,7 @@ export const getSelectPais = async(req, res) => {
 
 export const getInventario = async(req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM inventario");
+    const [row] = await pool.query("SELECT inventario.*, medida.tipo_medida, producto.tipo_producto FROM inventario INNER JOIN medida ON inventario.id_medida = medida.id_medida INNER JOIN producto ON inventario.id_producto = producto.id_producto");
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -119,16 +119,7 @@ export const getInventario = async(req, res) => {
 
 /* Inicio de consultas para traer tipo item, medida y producto */
 
-export const getItem = async (req, res) => {
-  try {
-    const [row] = await pool.query("SELECT * FROM item ")
-    res.send(row)
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor"
-    });
-  }
-};
+
 
 export const getMedida = async (req, res) => {
   try {
@@ -178,3 +169,25 @@ export const getInvoicesId = async (req, res) => {
     });
    }
   }
+
+export const getServiceCliente = async (req,res) => {
+  try {
+    const [row] = await pool.query("SELECT cliente.identificacion, cliente.nombre, cliente.apellido, orden_servicio.nombre_serv, orden_servicio.precio FROM servicio_cliente INNER JOIN orden_servicio INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion AND servicio_cliente.id_orden = orden_servicio.id_orden ");
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}
+
+export const getService = async (req,res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM orden_servicio ");
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor"
+    });
+  }
+}

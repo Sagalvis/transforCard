@@ -29,11 +29,11 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { AddPlus, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Title, TitleService } from "../../../header/styledHeader";
+import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Time, Title, TitleService } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import aceite from '../../../../../../assets/img/aceite.png'
+import aceite from '../../../../../../assets/img/ALINEAMIENTO.jpg'
 
 const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
@@ -49,7 +49,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const [selectedItem, setSelectedItem] = useState(null);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
-
+  //Variable para guardar el servicio y mostrarlo
+  const [ordServicio, setOrdService] = useState([])
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -57,7 +58,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
-  };
+  }; 
 
   //Metodo de filtrado tabla cliente
   let resultsCustomer = [];
@@ -76,6 +77,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const [id, setId] = useState(null);
   const [id2, setId2] = useState(null);
   const [id3, setId3] = useState(null);
+  const [id4, setId4] = useState(null);
 
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
@@ -88,23 +90,45 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
     try {
       const res = await axios.get("http://localhost:3005/customer");
       setCustomer(res.data);
-      console.log("get usuario", res.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+  //Funcion para trae los servicios
+  const getServices = async () =>{
+    try {
+      const res = await axios.get("http://localhost:3005/getService");
+      setOrdService(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
     setId2(item);
     setId3(item);
-    console.log("la cedula aqui: ", item);
     if (item) {
       setHandleCloseVehicle(!handleCloseVehicle);
     } else {
       alert("Error");
     }
   };
+
+  //Funcion para enviar los servicios del cliente
+  const postOrdenServiceCliente = async () =>{
+    try {
+      const res = await axios.post("http://localhost:3005/postOrdenServiceCliente",{
+        identificacion: id4,
+        id_orden: ordServicio.id_orden
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // Funcion para mostrar los servicios disponibles
+
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -121,7 +145,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
   useEffect(() => {
     getCustomer();
-  }, [setCustomer]);
+    getServices();
+  }, [setCustomer, setOrdService]);
 
   return (
     <>
@@ -208,7 +233,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                     </Buttons>
 
                     <Buttons
-                      onClick={() => setHandleOrders(!handleOrders)}
+                      onClick={() => {
+                        setHandleOrders(!handleOrders)
+                        setId4(item.identificacion)
+                      }}
                       title="Crear orden de servicio"
                     >
                       <i className={orderService}></i>
@@ -270,7 +298,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
               className="color-red"
               onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}
             >
-              Cancelar
+              Cerrar
             </BtnRegister>
 
             <BtnRegister
@@ -339,29 +367,34 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       changePosition={'start'}
       changeWidth={'800px'}
       >
-        <ContainInfoModal>
             <TitleService>
-              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P> 
             </TitleService>
+        <ContainInfoModal>
           <ContainServices>
-
-            <CardService>
+          {ordServicio.map((item, index) => (
+            <CardService key={index}>
               <Cuadro>
                 <Img src={aceite} alt="hh" />
               </Cuadro>
               <Title>
-                <P className="size">Cambio de aceite</P>
+                <P className="size">{item.nombre_serv}</P>
               </Title>
+              <Time>
+              <P className="time">T.E:</P>
+              <P className="time">{item.tiempo_estimado}</P>
+              </Time>
               <ContainPrice>
                 <Price>
                   <P className="desde">Desde</P>
-                  <P className="precio">$ 30.000</P>
+                  <P className="precio">$ {item.precio.toLocaleString()}</P>
                 </Price>
                 <AddPlus>
-                <P className="no-margin"><i className="fa-solid fa-square-plus"></i></P>
+                <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>
                 </AddPlus>
               </ContainPrice>
             </CardService>
+          ))}
 
           </ContainServices>
         </ContainInfoModal>        

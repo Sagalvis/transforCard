@@ -148,21 +148,124 @@ export const ContainButton = styled.div`
 `;
 
 export const ButtonLogin = styled.button`
-  cursor: pointer;
-  width: 40%;
-  height: 50%;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgb(0, 0, 0);
-  border: none;
-  outline: none;
-  font-size: .9em;
-  font-weight: 600;
-  &:hover {
-    background-color: #64CCC5;
-    color: #12213b;
-    box-shadow: 0 0 10px rgb(88, 88, 88);
+    width:40%;
+    height:50%;
+    border-style: none;
+    color:#000000;
+    font-size: 23px;
+    letter-spacing: 3px;
+    font-family: 'Lato';
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0px;
+    overflow: hidden;
+    transition: all .5s;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+  .span{
+    position: absolute;
+    display: block;
+    //rallita arriba hacia la derecha
+    &.span:nth-child(1){
+    height: 3px;
+    width:200px;
+    top:0px;
+    left:-200px;
+    background: linear-gradient(to right, rgba(0,0,0,0), #000000);
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    animation: span1 2s linear infinite;
+    animation-delay: 1s;
+    
   }
-  transition: all 0.5s ease;
+  //fin
+  @keyframes span1{
+    0%{
+        left:-200px
+    }
+    100%{
+        left:200px;
+    }
+  }
+  //rallita hacia abajo
+  &.span:nth-child(2){
+    height: 70px;
+    width: 3px;
+    top:-70px;
+    right:0px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), #000000);
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    animation: span2 2s linear infinite;
+    animation-delay: 2s;
+}
+  //Fin
+@keyframes span2{
+    0%{
+        top:-70px;
+    }
+    100%{
+        top:70px;
+    }
+}
+  //rallita hacia la izquierda
+  &.span:nth-child(3){
+    height:3px;
+    width:200px;
+    right:-200px;
+    bottom: 0px;
+    background: linear-gradient(to left, rgba(0,0,0,0), #000000);
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    animation: span3 2s linear infinite;
+    animation-delay: 3s;
+}
+//fin
+@keyframes span3{
+    0%{
+        right:-200px;
+    }
+    100%{
+        right: 200px;
+    }
+}
+//rallita hacia arriba
+  &.span:nth-child(4){
+    height:70px;
+    width:3px;
+    bottom:-70px;
+    left:0px;
+    background: linear-gradient(to top, rgba(0,0,0,0), #000000);
+    border-top-right-radius: 1px;
+    border-top-left-radius: 1px;
+    animation: span4 2s linear infinite;
+    animation-delay: 4s;
+}
+//fin
+@keyframes span4{
+    0%{
+        bottom: -70px;
+    }
+    100%{
+        bottom:70px;
+    }
+}
+
+  &:hover{
+    transition: all .5s;
+    transform: rotate(-3deg) scale(1.1);
+    box-shadow: 0px 3px 5px rgba(0,0,0,.4);
+}
+  &:hover .span{
+    animation-play-state: paused;
+}
+
+
+
+
+}
+
 `;
 
 export const ContenParagrafh = styled.div`

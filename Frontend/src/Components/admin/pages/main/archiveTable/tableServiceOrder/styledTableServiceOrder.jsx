@@ -70,7 +70,7 @@ export const ContainTable = styled.div`
   width: 100%;
   max-height: 80%;
   margin-bottom: 15px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const Table = styled.table`
@@ -114,6 +114,12 @@ export const Tbody = styled.tbody`
 export const Td = styled.td`
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  &.name {
+    text-transform: capitalize;
+  }
+  &.last-name {
+    text-transform: capitalize;
+  }
 `;
 
 
@@ -128,6 +134,9 @@ export const ButtonOptions = styled.div`
   }
 
   .fa-trash-can {
+    font-size: 15px;
+  }
+  .fa-file-invoice-dollar {
     font-size: 15px;
   }
 `;
