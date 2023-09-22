@@ -14,7 +14,6 @@ getRouter.get('/tiporol', controllGet.getSelectRol);
 getRouter.get('/tipopais', controllGet.getSelectPais);
 getRouter.get('/tipocliente', controllGet.getTypeClient);
 getRouter.get('/inventario', controllGet.getInventario);
-getRouter.get('/tipoitem', controllGet.getItem);
 getRouter.get('/tipomedida', controllGet.getMedida);
 getRouter.get('/tipoproducto', controllGet.getProducto);
 getRouter.get('/getService', controllGet.getService);

@@ -119,16 +119,7 @@ export const getInventario = async(req, res) => {
 
 /* Inicio de consultas para traer tipo item, medida y producto */
 
-export const getItem = async (req, res) => {
-  try {
-    const [row] = await pool.query("SELECT * FROM item ")
-    res.send(row)
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor"
-    });
-  }
-};
+
 
 export const getMedida = async (req, res) => {
   try {

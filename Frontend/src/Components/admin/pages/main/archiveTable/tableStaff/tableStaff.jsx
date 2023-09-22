@@ -12,7 +12,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
   const [idempleado, setIdEmpleado] = useState("")
   // Variable de estado para modal de eliminar empleado
   const [handleAdvDelete, setHandleAdvDelete] = useState(false)
-
+  const [search, setSearch] = useState("");
   // Variable de estado para modal de editar empleado
   const [handleEditEmployee, setHandleEditEmployee] = useState(false);
 
@@ -31,6 +31,25 @@ const TableStaff = ({editStaff, deletStaff}) => {
       console.log(error);
     }
   };
+
+  //Función de busqueda
+  const searching = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
+  
+  //Metodo de filtrado tabla cliente
+  let resultsStaff = [];
+
+  if (!search) {
+    resultsStaff = employees || [];
+  } else {
+    resultsStaff = employees.filter(
+      (dato) =>
+        dato.id_empleado &&
+        dato.id_empleado.toString().includes(search.toString())
+    );
+  }
 
   const deleteStaff = async () => {
     try {
@@ -59,7 +78,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
         {/* BUSCADOR */}
         <ContainSearch>
           <Label className="search">Buscar: </Label>
-          <Input type="text" title="Buscar cliente"></Input>
+          <Input value={search} onChange={searching} type="text" title="Buscar cliente"></Input>
         </ContainSearch>
       </ContainControls>
 
@@ -78,13 +97,13 @@ const TableStaff = ({editStaff, deletStaff}) => {
             </Tr>
           </Thead>
           <Tbody>
-            {employees.map((item, i) => (
+            {resultsStaff.map((item, i) => (
               <Tr key={i}>
               <Td>{item.id_empleado}</Td>
-              <Td>{item.rol}</Td>
+              <Td className="rol">{item.rol}</Td>
               <Td>{item.nombre}</Td>
               <Td>{item.apellido}</Td>
-              <Td>{item.correo}</Td>
+              <Td className="email">{item.correo}</Td>
               <Td>
                 <ButtonOptions>
                   <Buttons onClick={() => CapturaEmpleado(item)} title="Editar empleado">
