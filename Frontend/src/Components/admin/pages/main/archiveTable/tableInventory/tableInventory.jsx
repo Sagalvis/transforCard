@@ -21,7 +21,8 @@ import {
 } from "./styledTableInventory";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal } from "../../../header/styledHeader";
+import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
   const [invetario, setInventario] = useState([]);
@@ -29,7 +30,11 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   const [search, setSearch] = useState("");
   const [handleFormInventory, setHandleFormInventory] = useState(false);
   const [showProduct, setShowProduct] = useState(true);
-/*   const [buttonInventory, setButtonInventory] = useState(0); */
+  // Variable de estado de eliminar producto
+  const [handleDeleteProduct, setHandleDeleteProduct] = useState(false);
+  const [delProduct, setDelProduct] = useState(null);
+  // Variable de estado de eliminar servicio
+  const [handleDeleteService, setHandleDeleteService] = useState(false);
 
   const getOrdenService = async () => {
     try {
@@ -52,6 +57,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
+
 
   //Metodo de filtrado tabla cliente
   let resultsInventory = [];
@@ -79,6 +85,16 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     }
   };
 
+  // Funcion para eliminar producto de inventario
+  const deleteProductInventory = async () => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
+      console.log(result);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
     <ButtonInventory>
@@ -109,7 +125,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 <Tr>
                   <Th>Id_inventario</Th>
                   <Th>Tipo producto</Th>
-                  <Th>nombre</Th>
+                  <Th>Nombre del producto</Th>
                   <Th>Costo</Th>
                   <Th>Cantidad comprada</Th>
                   <Th>Precio unitario</Th>
@@ -139,7 +155,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                         >
                           <i className={editProduct}></i>
                         </Buttons>
-                        <Buttons title="Eliminar producto">
+                        <Buttons onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); setDelProduct(item)}} title="Eliminar producto">
                           <i className={deleteProduct}></i>
                         </Buttons>
                       </ButtonOptions>
@@ -149,6 +165,25 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               </Tbody>
             </Table>
           </ContainTable>
+
+          {/* Modal de eliminar producto */}
+          <Modals
+          status={handleDeleteProduct}
+          changeStatus={setHandleDeleteProduct}
+          titleModal={"Eliminar producto"}
+          changePosition={"start"}
+          showHeader={true}
+          showCloseButton={true}
+          >
+            <ContainInfoModal>
+              <P>¿Estas seguro de querer eliminar esta orden?</P>
+              <ButtonDelete>
+                <Btn_Delete onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); deleteProductInventory()}} >Eliminar</Btn_Delete>
+              </ButtonDelete>
+            </ContainInfoModal>                                                                              
+          </Modals>
+
+          {/* Modal de ditar producto */}
           <Modals
             status={handleFormInventory}
             changeStatus={setHandleFormInventory}

@@ -2,11 +2,17 @@
 import { useState, useEffect } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceOrder";
 import axios from "axios";
+import Modals from "../../../archive/modals";
+import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   const [search, setSearch] = useState("");
   //Variables para mostrar la orden de servicio
   const [ordenService, setOrden] = useState([]);
+  // Variable para eliminar orden de servicio
+  const [handleDeleteServiceOrder, setHandleDeleteServiceOrder] = useState(false);
+  const [delServiceOrder, setDelServiceOrder] = useState(null);
 
 //Función de busqueda
 const searching = (e) => {
@@ -35,6 +41,16 @@ if (!search) {
     getOrdenService()
   },[setOrden])
 
+  // Función para eliminar orden de servicio.
+  const deleteServiceOrder = async () => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
+      console.log(result);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       {/* Controladores */}
@@ -63,7 +79,8 @@ if (!search) {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID_Cliente</Th>
+              <Th>ID Servicio cliente</Th>
+              <Th>ID Cliente</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
               <Th>Tipo de servicio</Th>
@@ -74,6 +91,7 @@ if (!search) {
           <Tbody>
             {resultsServiceOrder.map((item, i) => (
               <Tr key={i}>
+                <Td>{i + 1}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
@@ -87,6 +105,7 @@ if (!search) {
                     </Buttons>
 
                     <Buttons
+                      onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); setDelServiceOrder(item)}}
                       title="Eliminar orden">
                       <i className={deleteOrder}></i>
                     </Buttons>
@@ -102,6 +121,23 @@ if (!search) {
           </Tbody>
         </Table>
       </ContainTable>
+
+      {/* Eliminar orden de servicio */}
+      <Modals
+      status={handleDeleteServiceOrder}
+      changeStatus={setHandleDeleteServiceOrder}
+      titleModal={'Eliminar orden'}
+      changePosition={'start'}
+      showHeader={true}
+      showCloseButton={true}
+      >
+        <ContainInfoModal>
+          <P>¿Estas seguro de querer eliminar esta orden?</P>
+          <ButtonDelete>
+            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceOrder()}} >Eliminar</Btn_Delete>
+          </ButtonDelete>
+        </ContainInfoModal>
+      </Modals>
     </>
   );
 };

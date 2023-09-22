@@ -134,10 +134,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const deleteClient = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:3005/deletecustomer/${selectedItem.identificacion}`
+        `http://localhost:3005/deletecustomer/${selectedItem}`
       );
       console.log(result);
-      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem.identificacion))
+      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem))
     } catch (error) {
       console.log(error);
     }
@@ -224,7 +224,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
                     <Buttons
                       onClick={() => {
-                        setSelectedItem(item);
+                        setSelectedItem(item.identificacion);
                         setHandleDelete(!handleDelete);
                       }}
                       title="Eliminar cliente"

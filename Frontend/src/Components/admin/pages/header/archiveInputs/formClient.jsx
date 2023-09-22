@@ -25,6 +25,7 @@ const FormClient = () => {
       correo === "" ||
       direccion === "" ||
       telefono === "" ||
+      
       seletTipoCliente === "" ||
       selectTipoPais === ""
     ) {
