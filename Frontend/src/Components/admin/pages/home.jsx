@@ -1,4 +1,4 @@
-import { ContainCards, ContainHome, HomeConten } from "./styles/styledHome";
+import { CardsParagraft, ContainCards, ContainHome, ContenCards, HomeConten, TittleCards, TittleCardsContain } from "./styles/styledHome";
 
 
 
@@ -6,7 +6,14 @@ const Home = () => {
   return ( 
     <ContainHome>
       <HomeConten>
-        <ContainCards>2</ContainCards>
+        <ContainCards>
+          <TittleCardsContain>
+            <TittleCards> </TittleCards>
+          </TittleCardsContain>
+          <ContenCards>
+            <CardsParagraft></CardsParagraft>
+          </ContenCards>
+        </ContainCards>
       </HomeConten>
     </ContainHome>
     );
