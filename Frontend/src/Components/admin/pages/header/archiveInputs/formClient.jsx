@@ -25,6 +25,7 @@ const FormClient = () => {
       correo === "" ||
       direccion === "" ||
       telefono === "" ||
+      
       seletTipoCliente === "" ||
       selectTipoPais === ""
     ) {
@@ -72,11 +73,6 @@ const FormClient = () => {
     fetchdata();
   }, []);
 
-  //funcion que permite solo escribir numeros en el input.
-  function acceptNum(evt) {
-    const input = evt.target.value;
-    evt.target.value = input.replace(/[^\d]/g, "");
-  }
   return (
     <>
       {showAlert && (
@@ -280,6 +276,7 @@ export const TextArea = styled.textarea`
   padding: 10px;
   font-family: "Outfit";
   font-size: 15px;
+  overflow-y: auto;
 `;
 
 export const ButtonRegister = styled.div`

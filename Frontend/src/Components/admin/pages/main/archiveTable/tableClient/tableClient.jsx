@@ -29,11 +29,11 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Title, TitleService } from "../../../header/styledHeader";
+import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Time, Title, TitleService } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import aceite from '../../../../../../assets/img/aceite.png'
+import aceite from '../../../../../../assets/img/ALINEAMIENTO.jpg'
 
 const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
@@ -51,6 +51,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
+  const [idOrden, setIdOrden] = useState([]);
 
   //funcion para traer los datos de la tabla a buscar
 
@@ -98,7 +99,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const getServices = async () =>{
     try {
       const res = await axios.get("http://localhost:3005/getService");
-      setOrdService(res.data[0])
+      setOrdService(res.data);
     } catch (error) {
       console.log(error)
     }
@@ -114,27 +115,43 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       alert("Error");
     }
   };
+  //funcion para capturar los datos
+  const handleAddOrdenService = (item) => {
+    setIdOrden(item.id_orden);
+    
+  };
+
+  useEffect(() => {
+    if (idOrden) {
+      postOrdenServiceCliente();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idOrden]);
 
   //Funcion para enviar los servicios del cliente
   const postOrdenServiceCliente = async () =>{
     try {
-      const res = await axios.post("http://localhost:3005/postOrdenServiceCliente",{
+      await axios.post("http://localhost:3005/postOrdenServiceCliente",{
         identificacion: id4,
-        id_orden: ordServicio.id_orden
+        id_orden: idOrden
       });
+      console.log("registrado con exito", res)
     } catch (error) {
       console.log(error)
     }
   }
 
+  // Funcion para mostrar los servicios disponibles
+
+
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:3005/deletecustomer/${selectedItem.identificacion}`
+        `http://localhost:3005/deletecustomer/${selectedItem}`
       );
       console.log(result);
-      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem.identificacion))
+      setCustomer(customer.filter((c)=>c.identificacion !== selectedItem))
     } catch (error) {
       console.log(error);
     }
@@ -221,7 +238,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
                     <Buttons
                       onClick={() => {
-                        setSelectedItem(item);
+                        setSelectedItem(item.identificacion);
                         setHandleDelete(!handleDelete);
                       }}
                       title="Eliminar cliente"
@@ -295,7 +312,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
               className="color-red"
               onClick={() => setHandleCloseVehicle(!handleCloseVehicle)}
             >
-              Cancelar
+              Cerrar
             </BtnRegister>
 
             <BtnRegister
@@ -364,29 +381,36 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       changePosition={'start'}
       changeWidth={'800px'}
       >
-        <ContainInfoModal>
             <TitleService>
-              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P>
+              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P> 
             </TitleService>
+        <ContainInfoModal>
           <ContainServices>
-
-            <CardService>
+          {ordServicio.map((item, index) => (
+            <CardService key={index}>
               <Cuadro>
                 <Img src={aceite} alt="hh" />
               </Cuadro>
               <Title>
-                <P className="size">{ordServicio.nombre_serv}</P>
+                <P className="size">{item.nombre_serv}</P>
               </Title>
+              <Time>
+              <P className="time">T.E:</P>
+              <P className="time">{item.tiempo_estimado}</P>
+              </Time>
               <ContainPrice>
                 <Price>
                   <P className="desde">Desde</P>
-                  <P className="precio">$ {ordServicio.precio}</P>
+                  <P className="precio">$ {item.precio.toLocaleString()}</P>
                 </Price>
                 <AddPlus>
-                <Button onClick={postOrdenServiceCliente} className="no-margin" ><i className="fa-solid fa-square-plus" ></i></Button>
+                <Button onClick={()=>{
+                  handleAddOrdenService(item);
+                  }} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>
                 </AddPlus>
               </ContainPrice>
             </CardService>
+          ))}
 
           </ContainServices>
         </ContainInfoModal>        

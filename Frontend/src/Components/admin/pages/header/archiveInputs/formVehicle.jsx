@@ -17,7 +17,6 @@ const FormVehicle = ({getCustomer3}) => {
   const [identificacion, setIdentificacion] = useState("");
   const [tipoVehiculo, setTipo_vehiculo] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  
   const [selectVehicle, setSelectVehicle] = useState(0);
   
   /* Funcion para crear vehiculos */
@@ -295,7 +294,7 @@ export const TextArea = styled.textarea`
   padding: 10px;
   font-family: "Outfit";
   font-size: 15px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const ButtonRegister = styled.div`

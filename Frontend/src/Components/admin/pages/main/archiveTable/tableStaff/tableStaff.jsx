@@ -100,10 +100,10 @@ const TableStaff = ({editStaff, deletStaff}) => {
             {resultsStaff.map((item, i) => (
               <Tr key={i}>
               <Td>{item.id_empleado}</Td>
-              <Td>{item.rol}</Td>
+              <Td className="rol">{item.rol}</Td>
               <Td>{item.nombre}</Td>
               <Td>{item.apellido}</Td>
-              <Td>{item.correo}</Td>
+              <Td className="email">{item.correo}</Td>
               <Td>
                 <ButtonOptions>
                   <Buttons onClick={() => CapturaEmpleado(item)} title="Editar empleado">

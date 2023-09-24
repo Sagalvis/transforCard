@@ -105,7 +105,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
                 <Td>{item.año}</Td>
                 <Td>{item.color}</Td>
                 <Td>{item.tarjetaPropiedad}</Td>
-                <Td>{item.matricula}</Td>
+                <Td className="matricula">{item.matricula}</Td>
                 <Td>{item.vin}</Td>
                 <Td>
                   <ButtonOptions>

@@ -14,22 +14,25 @@ import {
   NavbarContain,
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
-import { useLocation } from "react-router-dom";
+import jwt_decode from "jwt-decode"
+import { useLocation  } from "react-router-dom";
 import { useEffect } from "react"
 
 
 const Sidebar = () => {
   const { pathname } = useLocation();
-  const useData = localStorage.getItem(("user"));
- 
+  const useData = jwt_decode (localStorage.getItem("user"));
+  console.log(useData)
+
+
   const logOut = () => {
-    localStorage.removeItem("user");
-    
+    localStorage.removeItem("user"); 
+    window.location.href ="http://localhost:5173/"
   }
   
   useEffect(() => {
     if (!useData){
-      window.location.href = 'http://localhost:5173';
+      window.location.href ="http://localhost:5173/admin"
     }
   },[useData]);
 
@@ -56,7 +59,7 @@ const Sidebar = () => {
               <NavIcon>
                 <i className="fa-solid fa-user"></i>
               </NavIcon>
-              <NavTittle>Sergio Andrés Galvis Smith</NavTittle>
+              <NavTittle className="user-name">{useData.nombre} {useData.apellido}</NavTittle>
             </ContenPerfil>
             <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
               <NavLinks onClick={logOut} style={{ width: "25px" }}>
@@ -64,7 +67,7 @@ const Sidebar = () => {
                   <i className="fa-solid fa-power-off"></i>
                 </NavIcon>
               </NavLinks>
-              <NavTittle >Administrador</NavTittle>
+              <NavTittle >{useData.rol}</NavTittle>
             </ContenPerfil>
           </ContainPerfil>
         </Navbar>

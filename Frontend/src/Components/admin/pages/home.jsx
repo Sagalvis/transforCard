@@ -1,17 +1,22 @@
-import { ContainHome } from "./styles/styledHome";
+import { CardsParagraft, ContainCards, ContainHome, ContenCards, HomeConten, TittleCards, TittleCardsContain } from "./styles/styledHome";
 
 
 
 const Home = () => {
-
   return ( 
-    
-
     <ContainHome>
-      <h1>Home </h1>
+      <HomeConten>
+        <ContainCards>
+          <TittleCardsContain>
+            <TittleCards> </TittleCards>
+          </TittleCardsContain>
+          <ContenCards>
+            <CardsParagraft></CardsParagraft>
+          </ContenCards>
+        </ContainCards>
+      </HomeConten>
     </ContainHome>
-    )
-    ;
+    );
 }
 
 export default Home;

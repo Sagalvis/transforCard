@@ -148,21 +148,88 @@ export const ContainButton = styled.div`
 `;
 
 export const ButtonLogin = styled.button`
-  cursor: pointer;
-  width: 40%;
-  height: 50%;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgb(0, 0, 0);
-  border: none;
-  outline: none;
-  font-size: .9em;
-  font-weight: 600;
-  &:hover {
-    background-color: #64CCC5;
-    color: #12213b;
-    box-shadow: 0 0 10px rgb(88, 88, 88);
+    padding: 15px 100px;
+    margin:10px 4px;
+    color: #fff;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    display:inline-block;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase!important;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    text-transform: capitalize;
+    border: 1px solid #fff;
+    border-radius:50px;
+    position: relative;
+    overflow: hidden!important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background: transparent!important;
+    z-index:10;
+    
+    &:hover{
+    border: 1px solid #ffffff;
+    color: #000000!important;
+}
+    &:before {
+      content: '';
+      width: 0%;
+      height: 100%;
+      display: block;
+      background: #ffffff;
+      position: absolute;
+      -ms-transform: skewX(-20deg);
+      -webkit-transform: skewX(-20deg); 
+      transform: skewX(-20deg);   
+      left: -10%;
+      opacity: 1;
+      top: 0;
+      z-index: -12;
+      -moz-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+    -webkit-transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all .7s cubic-bezier(0.77, 0, 0.175, 1);
+      box-shadow:2px 0px 14px rgba(0,0,0,.6);
+    }
+    &:after {
+    content: '';
+    width: 0%;
+    height: 100%;
+    display: block;
+    background: #64ccc5;
+    position: absolute;
+    -ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg); 
+    transform: skewX(-20deg);   
+    left: -10%;
+    opacity: 0;
+    top: 0;
+    z-index: -15;
+    -webkit-transition: all .94s cubic-bezier(.2,.95,.57,.99);
+    -moz-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    -o-transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    transition: all .4s cubic-bezier(.2,.95,.57,.99);
+    box-shadow: 2px 0px 14px rgba(0,0,0,.6);
+}
+
+  &:hover::before, .btn1O:hover::before{
+    opacity:1;
+    width: 116%;
+}
+  &:hover::after, .btn1O:hover::after{
+    opacity:1;
+    width: 120%;
   }
-  transition: all 0.5s ease;
 `;
 
 export const ContenParagrafh = styled.div`
