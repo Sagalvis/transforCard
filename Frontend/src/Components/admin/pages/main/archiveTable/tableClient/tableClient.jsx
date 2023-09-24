@@ -135,7 +135,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         identificacion: id4,
         id_orden: idOrden
       });
-      console.log("registrado con exito", res)
+      console.log("registrado con exito")
     } catch (error) {
       console.log(error)
     }

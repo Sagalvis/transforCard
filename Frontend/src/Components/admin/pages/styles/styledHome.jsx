@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ContainHome = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #609cd1;
+  /* background-color: #609cd1; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,36 +29,58 @@ export const ContainHome = styled.div`
 export const HomeConten = styled.div`
   width: 99%;
   height: auto;
-  background-color: red;
+  display: grid;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* background-color: red; */
 `;
 
+export const Cards = styled.div`
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
+
 export const  ContainCards = styled.div`
-  background-color: antiquewhite;
+  background-color: #041737;
   width: 250px;
   height: 150px;
   border-radius: 10px;
+  color: white;
+
 `;
 
 export const TittleCardsContain = styled.div`
-  background-color: #5eff00;
+  /* background-color: #5eff00; */
   height: 30px;
   width: 100%;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 ` ;
 
-
-export const TittleCards = styled.h1`
+export const TittleCards = styled.h2`
   margin: 0;
+  font-weight: 400;
+  font-family: 'Outfit';
+  margin-top: 5px;
 `;
 
 export const ContenCards = styled.div`
-  background-color: blue;
+  /* background-color: blue; */
   height: 80%;
   width: 100%;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const CardsParagraft = styled.p`
   margin: 0;
+  font-size: 3.3rem;
 `
 
