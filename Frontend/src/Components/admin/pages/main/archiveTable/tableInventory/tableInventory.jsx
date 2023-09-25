@@ -61,7 +61,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   };
 
 
-  //Metodo de filtrado tabla cliente
+  //Metodo de filtrado tabla producto
   let resultsInventory = [];
 
   if (!search) {
@@ -69,11 +69,23 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   } else {
     resultsInventory = invetario.filter(
       (dato) =>
-        dato.identificacion &&
-        dato.identificacion.toString().includes(search.toString())
+        dato.nombre &&
+        dato.nombre.toLowerCase().includes(search.toLowerCase())
     );
   }
 
+  //Metodo de filtrado tabla servicio
+  let resultsService = [];
+
+    if (!search) {
+      resultsService = ordenService || [];
+    } else {
+      resultsService = ordenService.filter(
+        (dato) =>
+          dato.nombre_serv &&
+          dato.nombre_serv.toLowerCase().includes(search.toLowerCase())
+      );
+    }
   useEffect(() => {
     getInventario();
     getOrdenService();
@@ -126,7 +138,8 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 value={search}
                 onChange={searching}
                 type="text"
-                title="Buscar cliente"
+                title="Buscar producto"
+                placeholder="Nombre producto"
               />
             </ContainSearch>
           </ContainControls>
@@ -134,7 +147,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
             <Table>
               <Thead>
                 <Tr>
-                  <Th>Id_inventario</Th>
+                  <Th>ID Producto</Th>
                   <Th>Tipo producto</Th>
                   <Th>Nombre del producto</Th>
                   <Th>Costo</Th>
@@ -222,7 +235,8 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               value={search}
               onChange={searching}
               type="text"
-              title="Buscar cliente"
+              title="Buscar servicio"
+              placeholder="ID_orden"
             />
           </ContainSearch>
         </ContainControls>
@@ -238,7 +252,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {ordenService.map((item, i) => (
+              {resultsService.map((item, i) => (
                 <Tr key={i}>
                   <Td>{item.id_orden}</Td>
                   <Td>{item.nombre_serv}</Td>
