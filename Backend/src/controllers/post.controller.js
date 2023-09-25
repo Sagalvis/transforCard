@@ -234,7 +234,22 @@ export const postOrdenServiceCliente = async (req, res) => {
   }
 };
 
+export const postCreateFactura = async (req, res) => {
+  try {
+    const {id_servicio_cliente, identificacion} = req.body;
+    const [precio] = await pool.query("SELECT SUM(orden_servicio.precio) AS suma_precio FROM servicio_cliente INNER JOIN orden_servicio ON servicio_cliente.id_orden = orden_servicio.id_orden INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion where cliente.identificacion = ? GROUP BY cliente.identificacion, cliente.nombre, cliente.apellido",[identificacion]);
 
+    const [row] = await pool.query("INSERT INTO factura (cantidad_pagada, id_servicio_cliente, estado_pago) VALUES (?,?,'PENDIENTE')", [precio[0].suma_precio, id_servicio_cliente]);
+    res.json({
+      message:"Se ha creado la Factura",
+      row
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
 
 
 
