@@ -1,7 +1,20 @@
 /* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
+import axios from "axios";
 
-const TableServiceClient = () => {
+const TableServiceClient = ({getcustomer}) => {
+  //Variables de estados para almacenar las ordenes de servicio del cliente
+  const [mapeo, setMapeo] = useState([])
+  //Funcion para traer todos los servicios del cliente
+  const getOrdenService = async ()=> {
+    const res = await axios.get(`http://localhost:3005/getServiceCliente/${getcustomer}`);
+    setMapeo(res.data)
+  }
+  useEffect(() => {
+    getOrdenService()
+  },[setMapeo])
+
   return (
     <>
       {/* Controladores */}

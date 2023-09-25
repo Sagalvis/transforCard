@@ -5,13 +5,14 @@ import {
   ContainCardsGraphics,
   ContainHome,
   ContenCards,
+  GraphicsCards,
   HomeConten,
   TittleCards,
   TittleCardsContain,
 } from "./styles/styledHome";
 import Header from "./header/header";
 import { useEffect, useState } from "react";
-import{
+import {
   getCountCustomer,
   getEmployees,
   getInvoice,
@@ -20,6 +21,7 @@ import{
   getServiceOrder,
   getVehicle,
 } from "./archive/funtionHome";
+import BarsChart  from "./graphics/graphicsHome";
 
 const Home = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -45,7 +47,7 @@ const Home = () => {
     setCountProduct,
     setCountService,
     setCountServiceOrder,
-    setCountInvoice
+    setCountInvoice,
   ]);
   return (
     <>
@@ -98,8 +100,7 @@ const Home = () => {
                 </ContenCards>
               </ContainCards>
             ))}
-          
-          
+
             {CountService.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
@@ -113,7 +114,9 @@ const Home = () => {
             {CountServiceOrder.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards className="service-order"> Ordenes de servicio </TittleCards>
+                  <TittleCards className="service-order">
+                    Orden de servicio
+                  </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>
@@ -128,15 +131,20 @@ const Home = () => {
                   <TittleCards> Facturas </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
-                  <CardsParagraft>
-                    {item.Numero_factura}
-                  </CardsParagraft>
+                  <CardsParagraft>{item.Numero_factura}</CardsParagraft>
                 </ContenCards>
               </ContainCards>
             ))}
           </Cards>
           <ContainCardsGraphics>
-            fff
+            <GraphicsCards>
+              <BarsChart />
+            </GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
+          </ContainCardsGraphics>
+          <ContainCardsGraphics>
+            <GraphicsCards><BarsChart /></GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
           </ContainCardsGraphics>
         </HomeConten>
       </ContainHome>
