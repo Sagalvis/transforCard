@@ -73,7 +73,7 @@ if (!search) {
         identificacion : cedula,
         id_servicio_cliente: idServCliente
       })
-      console.log("factura creada con exito")
+      alert("factura creada con exito")
     } catch (error) {
       console.log(error);
     }

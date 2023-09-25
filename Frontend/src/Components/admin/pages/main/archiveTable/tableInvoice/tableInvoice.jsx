@@ -67,13 +67,11 @@ const ModalContent = ({ data1 }) => {
 
 
 const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
-  // Variable de estado para traer toda la tabla inventario
   const [invoice, setInvoice] = useState([]);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
- /*  const [invoiceId, setInvoiceId] = useState([]) */
   const [save, setSave] = useState([])
 
   const getInvoice = async () => {
@@ -85,17 +83,16 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     }
   };
 
-/*   const getInvoiceId = async () => {
+  const lookServices = async () => {
     try {
-      const res = await axios.get(`http://localhost:3005/factura/${invoiceId}`);
-      console.log(res.data)
-      setSave(res.data);
+      const res = await axios.post(`http://localhost:3005/postCallService/${data1.id_factura}`);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
-  }; */
+  }
 
-  //Función de busqueda
+
   const searching = (e) => {
     setSearch(e.target.value);
     console.log(e.target.value);
@@ -103,20 +100,16 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-    /* getInvoiceId() */;
-  }, [setInvoice/* , setSave */]);
+  },[setInvoice]);
 
   return (
     <>
-      {/* Controladores */}
-
       <ContainControls>
-        {/* Control "CANTIDAD DE REGISTROS" */}
+        
         <ContainMaxData>
           <Label type="select">Cantidad de registros</Label>
         </ContainMaxData>
 
-        {/* BUSCADOR */}
         <ContainSearch>
           <Label className="search">Buscar: </Label>
           <Input
