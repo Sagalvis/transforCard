@@ -5,7 +5,7 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from 'pdf-lib';
-
+import moment from "moment";
 
 // Resto del código ...
 
@@ -143,7 +143,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.id_orden}</Td>
-                <Td>{item.fecha_emision}</Td>
+                <Td>{moment(item.fecha_emision).format("YYYY-MM-DD")}</Td>
                 <Td>{item.cantidad_pagada}</Td>
                 <Td>{item.estado_pago}</Td>
             
