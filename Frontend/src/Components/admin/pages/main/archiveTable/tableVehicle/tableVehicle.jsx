@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainTable, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableVehicle";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, Label } from "../tableClient/styledTableClient";
 
@@ -152,7 +152,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <P>¿Estas seguro de querer eliminar este vehículo?</P>
+          <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); deleteVehicle()}}>Eliminar</Btn_Delete>
           </ButtonDelete>

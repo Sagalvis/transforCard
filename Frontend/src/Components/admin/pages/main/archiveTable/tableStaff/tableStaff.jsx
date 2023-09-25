@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableStaff";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
@@ -154,7 +154,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
       changePadding={"0px"}
       >
         <ContainInfoModal>
-          <P>¿Estas seguro que quieres eliminar este cliente?</P>
+          <Paragraph>¿Estas seguro que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={deleteStaff}>Eliminar</Btn_Delete>
           </ButtonDelete>

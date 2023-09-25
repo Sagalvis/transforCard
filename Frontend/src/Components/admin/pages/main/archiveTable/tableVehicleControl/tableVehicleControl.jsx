@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableVehicleControl";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { ContainAlert } from "../../../header/archiveInputs/formClient";
 import Alert from '@mui/material/Alert'
@@ -143,7 +143,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
         </ContainAlert>
       )}
         <ContainInfoModal>
-          <P>¿Estas seguro de querer eliminar este vehículo?</P>
+          <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
           <ButtonDelete>
             <Btn_Delete onClick={() => {setHandleDeleteControlVehicle(!handleDeleteControlVehicle); deleteVehicle()}} >Eliminar</Btn_Delete>
           </ButtonDelete>

@@ -21,7 +21,7 @@ import {
 } from "./styledTableInventory";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
@@ -200,7 +200,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           showCloseButton={true}
           >
             <ContainInfoModal>
-              <P>¿Estas seguro de querer eliminar este producto?</P>
+              <Paragraph>¿Estas seguro de querer eliminar este producto?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); deleteProductInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
@@ -291,7 +291,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           showCloseButton={true}
           >
             <ContainInfoModal>
-              <P>¿Estas seguro de querer eliminar este servicio?</P>
+              <Paragraph>¿Estas seguro de querer eliminar este servicio?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteService(!handleDeleteService); deleteServiceInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>

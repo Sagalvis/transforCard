@@ -50,7 +50,7 @@ const ModalContent = ({ data1 }) => {
           <p>Fecha de emision: {data1.fecha_emision}</p>
           <p>Cantidad pagada: {data1.cantidad_pagada}</p>
           <p>Estado de pago: {data1.estado_pago}</p>
-        </div> 
+        </div>
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
       </>
     </div>
@@ -76,15 +76,6 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
       console.log(error);
     }
   };
-
-  //Funcion para elimiar la factura
-  /* const DeleteFactura = () =>{
-    try {
-      await axios.delete()
-    } catch (error) {
-      
-    }
-  } */
 
 
   //Función de busqueda

@@ -73,3 +73,14 @@ export const CounterServiceOrder = async (req, res) => {
     });
   }
 }; 
+export const CounterInvoice = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT COUNT (*)AS 'Numero_factura' FROM factura");
+    res.send(row)
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}; 

@@ -29,7 +29,7 @@ import {
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, P, Price, Time, Title, TitleService } from "../../../header/styledHeader";
+import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainServices, Cuadro, Img, Paragraph, Price, Time, Title, TitleService } from "../../../header/styledHeader";
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
@@ -363,7 +363,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         changePadding={"0px"}
       >
         <ContainInfoModal>
-          <P>¿Estas seguro de querer eliminar este cliente?</P>
+          <Paragraph>¿Estas seguro de querer eliminar este cliente?</Paragraph>
           <ButtonDelete>
             <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); deleteClient()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
@@ -381,7 +381,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       changeWidth={'800px'}
       >
             <TitleService>
-              <P>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</P> 
+              <Paragraph>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</Paragraph> 
             </TitleService>
         <ContainInfoModal>
           <ContainServices>
@@ -391,16 +391,16 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                 <Img src={aceite} alt="hh" />
               </Cuadro>
               <Title>
-                <P className="size">{item.nombre_serv}</P>
+                <Paragraph className="size">{item.nombre_serv}</Paragraph>
               </Title>
               <Time>
-              <P className="time">T.E:</P>
-              <P className="time">{item.tiempo_estimado}</P>
+              <Paragraph className="time">T.E:</Paragraph>
+              <Paragraph className="time">{item.tiempo_estimado}</Paragraph>
               </Time>
               <ContainPrice>
                 <Price>
-                  <P className="desde">Desde</P>
-                  <P className="precio">$ {item.precio.toLocaleString()}</P>
+                  <Paragraph className="desde">Desde</Paragraph>
+                  <Paragraph className="precio">$ {item.precio.toLocaleString()}</Paragraph>
                 </Price>
                 <AddPlus>
                 <Button onClick={()=>{

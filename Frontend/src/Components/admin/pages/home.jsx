@@ -2,15 +2,26 @@ import {
   Cards,
   CardsParagraft,
   ContainCards,
+  ContainCardsGraphics,
   ContainHome,
   ContenCards,
+  GraphicsCards,
   HomeConten,
   TittleCards,
   TittleCardsContain,
 } from "./styles/styledHome";
 import Header from "./header/header";
 import { useEffect, useState } from "react";
-import { getCountCustomer, getEmployees, getProduct, getService, getServiceOrder, getVehicle } from "./archive/funtionHome";
+import {
+  getCountCustomer,
+  getEmployees,
+  getInvoice,
+  getProduct,
+  getService,
+  getServiceOrder,
+  getVehicle,
+} from "./archive/funtionHome";
+import BarsChart  from "./graphics/graphicsHome";
 
 const Home = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -19,6 +30,7 @@ const Home = () => {
   const [CountProduct, setCountProduct] = useState([]);
   const [CountService, setCountService] = useState([]);
   const [CountServiceOrder, setCountServiceOrder] = useState([]);
+  const [CountInvoice, setCountInvoice] = useState([]);
 
   useEffect(() => {
     getCountCustomer(setCountCustomer);
@@ -27,13 +39,23 @@ const Home = () => {
     getProduct(setCountProduct);
     getService(setCountService);
     getServiceOrder(setCountServiceOrder);
-  }, [setCountCustomer, setCountVehicle, setCountEmployees, setCountProduct, setCountService, setCountServiceOrder]);
+    getInvoice(setCountInvoice);
+  }, [
+    setCountCustomer,
+    setCountVehicle,
+    setCountEmployees,
+    setCountProduct,
+    setCountService,
+    setCountServiceOrder,
+    setCountInvoice,
+  ]);
   return (
     <>
       <Header
         index={"Dashboard"}
         indexIcon={"fa-solid fa-chart-line"}
         titleButton={"Crear cliente"}
+        titleHome={true}
       />
       <ContainHome>
         <HomeConten>
@@ -78,12 +100,11 @@ const Home = () => {
                 </ContenCards>
               </ContainCards>
             ))}
-          </Cards>
-          <Cards>
-          {CountService.map((item, index) => (
+
+            {CountService.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards> Servicios  </TittleCards>
+                  <TittleCards> Servicios </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>{item.Numero_servicios}</CardsParagraft>
@@ -93,34 +114,38 @@ const Home = () => {
             {CountServiceOrder.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards> Ordenes de servicio </TittleCards>
+                  <TittleCards className="service-order">
+                    Orden de servicio
+                  </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
-                  <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
+                  <CardsParagraft>
+                    {item.Numero_ordenes_servicio}
+                  </CardsParagraft>
                 </ContenCards>
               </ContainCards>
             ))}
-            {CountServiceOrder.map((item, index) => (
+            {CountInvoice.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards> Ordenes de servicio </TittleCards>
+                  <TittleCards> Facturas </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
-                  <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
-                </ContenCards>
-              </ContainCards>
-            ))}
-            {CountServiceOrder.map((item, index) => (
-              <ContainCards key={index}>
-                <TittleCardsContain>
-                  <TittleCards> Ordenes de servicio </TittleCards>
-                </TittleCardsContain>
-                <ContenCards>
-                  <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
+                  <CardsParagraft>{item.Numero_factura}</CardsParagraft>
                 </ContenCards>
               </ContainCards>
             ))}
           </Cards>
+          <ContainCardsGraphics>
+            <GraphicsCards>
+              <BarsChart />
+            </GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
+          </ContainCardsGraphics>
+          <ContainCardsGraphics>
+            <GraphicsCards><BarsChart /></GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
+          </ContainCardsGraphics>
         </HomeConten>
       </ContainHome>
     </>

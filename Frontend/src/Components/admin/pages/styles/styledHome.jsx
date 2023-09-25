@@ -2,41 +2,24 @@ import styled from "styled-components";
 
 export const ContainHome = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   /* background-color: #609cd1; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: 8px; /* Ancho del scroll */
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color de fondo del track */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color del scroll */
-    border-radius: 4px; /* Radio de los bordes del scroll */
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Color del scroll al pasar el cursor por encima */
-  }
 `;
 
 export const HomeConten = styled.div`
   width: 99%;
   height: auto;
-  display: grid;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
   /* background-color: red; */
 `;
 
 export const Cards = styled.div`
   /* background-color: red; */
+  height: 160px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -44,11 +27,14 @@ export const Cards = styled.div`
 
 export const  ContainCards = styled.div`
   background-color: #041737;
-  width: 250px;
-  height: 150px;
+  width: 180px;
+  height: 110px;
   border-radius: 10px;
   color: white;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TittleCardsContain = styled.div`
@@ -59,14 +45,19 @@ export const TittleCardsContain = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 ` ;
 
 export const TittleCards = styled.h2`
   margin: 0;
+  font-size: 17px;
   font-weight: 400;
   font-family: 'Outfit';
   margin-top: 5px;
+  &.service-order{
+    text-align: center;
+    font-size: 17px;
+  }
 `;
 
 export const ContenCards = styled.div`
@@ -81,6 +72,28 @@ export const ContenCards = styled.div`
 
 export const CardsParagraft = styled.p`
   margin: 0;
+  font-size: 3rem;
+`;
+
+export const ContainCardsGraphics = styled.div`
+  width: 100%;
+  height: 340px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: red; */
+`;
+
+export const GraphicsCards = styled.div`
+  width: 48%;
+  height: 310px;
+  border-radius: 10px;
+  background-color: #041737;
+  color: white;
   font-size: 3.3rem;
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
 `
 
