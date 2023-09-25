@@ -168,7 +168,9 @@ if (!search) {
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
-    </>
+
+      
+    </>  
   );
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
-import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf, ContainServices } from "./styledTableInvoice";
+import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf/* , ContainServices */ } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
@@ -59,7 +59,6 @@ const ModalContent = ({ data1 }) => {
   );
 };
 
-
 const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   // Variable de estado para traer toda la tabla inventario
   const [invoice, setInvoice] = useState([]);
@@ -67,27 +66,28 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [search, setSearch] = useState("");
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
-  const [invoiceId, setInvoiceId] = useState([])
   const [save, setSave] = useState([])
 
+  //Funcion para traer los datos de la factura
   const getInvoice = async () => {
     try {
       const res = await axios.get("http://localhost:3005/factura");
       setInvoice(res.data);
+      console.log("factura",res.data)
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getInvoiceId = async () => {
+  //Funcion para elimiar la factura
+  /* const DeleteFactura = () =>{
     try {
-      const res = await axios.get(`http://localhost:3005/factura/${invoiceId}`);
-      console.log(res.data)
-      setSave(res.data);
+      await axios.delete()
     } catch (error) {
-      console.log(error);
+      
     }
-  };
+  } */
+
 
   //Función de busqueda
   const searching = (e) => {
@@ -97,8 +97,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-    getInvoiceId();
-  }, [setInvoice, setSave]);
+  }, [setSave]);
 
   return (
     <>
@@ -152,7 +151,9 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                     <Buttons onClick={() => setHandleFormInvoice(!handleFormInvoice)} title="Editar producto">
                       <i className={editInvoice}></i>
                     </Buttons>
-                    <Buttons title="Eliminar producto">
+                    <Buttons title="Eliminar producto"
+                    /* onClick={DeleteFactura} */
+                    >
                       <i className={deleteInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">
