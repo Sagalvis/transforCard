@@ -88,6 +88,7 @@ export const TittleInputs = styled.div`
   align-items: center;
   font-size: 25px;
   font-weight: 400;
+
 `;
 
 export const ContenInputs = styled.div`
