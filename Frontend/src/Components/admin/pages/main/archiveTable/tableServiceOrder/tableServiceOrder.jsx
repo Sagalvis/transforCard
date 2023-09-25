@@ -44,13 +44,21 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceOrder = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
-      console.log(result);
+      await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
       window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
+
+  const CreateFactura = () =>{
+    try {
+      axios.post("http://localhost:3005/createfactura");
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       {/* Controladores */}
@@ -111,7 +119,9 @@ if (!search) {
                     </Buttons>
 
                     <Buttons
-                      title="Crear factura">
+                      title="Crear factura"
+                      onClick={CreateFactura}
+                      >
                       <i className={createServiceOrder}></i>
                     </Buttons>
                   </ButtonOptions>
