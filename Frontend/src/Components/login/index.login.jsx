@@ -29,39 +29,11 @@ const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   
-  const Log = async (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (correo && contraseña) {
-      try {
-        await axios.post(
-          "http://localhost:3005/postLoginEmployees",
-          {
-            correo: correo,
-            contraseña: contraseña,
-          }
-        ).then((response) => {
-          console.log(response.data, "😎😎😎"); 
-          const result = response.data;
-          if(response.data === ""){
-            alert("el usario no existe")
-          }else{
-            localStorage.setItem("user", JSON?.stringify(result));
-            setTimeout(()=>{
-              window.location.href ="http://localhost:5173/admin";
-            },1000)
-          }
-          
-        })
-      } catch (error) {
-        console.error(error);
-        alert("Usuario y/o contraseña no validos");
-      }
-    } else {
-      alert(
-        "Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos"
-      );
-    }
-  };
+    Log(correo, contraseña, evt);
+  }
+  
   return (
     <ContainLogin>
       <ContenLogin>
@@ -83,8 +55,10 @@ const Login = () => {
                   <Input
                     type="email"
                     value={correo}
-                    onChange={(e) => setCorreo(e.target.value)}
+                    onChange={(e) => setCorreo(e.target.value.toLowerCase())}
+                    autoComplete="off"
                     required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                   />
                   <Label>Email</Label>
                 </InputBox>
@@ -93,7 +67,7 @@ const Login = () => {
                   <Input
                     type="password"
                     value={contraseña}
-                    onChange={(e) => setContraseña(e.target.value)}
+                    onChange={(e) => setContraseña(e.target.value.replace(/[^0-9]/g, ''))}
                     required
                   />
                   <Label>Contraseña</Label>
@@ -101,7 +75,7 @@ const Login = () => {
               </ContenInputs>
               <ContainButton>
                   <ButtonLogin
-                        onClick={Log}>INGRESAR
+                        onClick={handleSubmit}>INGRESAR
                   </ButtonLogin>
               </ContainButton>
             </ContainInputs>
@@ -123,3 +97,42 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+export const Log = async (correo, contraseña) => {
+  let result = null;
+
+  if (correo && contraseña) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3005/postLoginEmployees",
+        {
+          correo: correo,
+          contraseña: contraseña,
+        }
+      );
+
+      console.log(response.data, "😎😎😎");
+      result = response.data;
+
+      if (response.data === "") {
+        alert("El usuario no existe");
+      } else {
+        localStorage.setItem("user", JSON?.stringify(result));
+        setTimeout(() => {
+          window.location.href = "http://localhost:5173/admin";
+        }, 300);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Usuario y/o contraseña no válidos");
+    }
+  } else {
+    alert(
+      "Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos"
+    );
+  }
+
+  return result;
+};

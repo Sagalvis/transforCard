@@ -61,12 +61,6 @@ const EditFormClient = ({getCustomer}) => {
     
   };
 
-
-  //funcion que permite solo escribir numeros en el input.
-  function acceptNum(evt) {
-    const input = evt.target.value;
-    evt.target.value = input.replace(/[^\d]/g, "");
-  }
   return (
     <>
           <>

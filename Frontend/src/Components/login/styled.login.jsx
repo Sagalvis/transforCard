@@ -158,13 +158,13 @@ export const ButtonLogin = styled.button`
     position: relative;
     text-decoration: none;
     display:inline-block;
-    font-family: "proxima-nova", sans-serif;
-    font-weight: 500;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
     font-size: 13px;
     text-transform: uppercase!important;
     letter-spacing: 2px;
     color: #fff;
-    cursor: hand;
+    cursor: pointer;
     text-align: center;
     text-transform: capitalize;
     border: 1px solid #fff;

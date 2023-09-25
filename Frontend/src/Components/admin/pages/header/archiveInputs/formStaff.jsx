@@ -109,7 +109,6 @@ const FormStaff = () => {
               onChange ={(e) => setCorreo(e.target.value.toLowerCase())}
               autoComplete="off"
               required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>
 
