@@ -27,8 +27,8 @@ export const Cards = styled.div`
 
 export const  ContainCards = styled.div`
   background-color: #041737;
-  width: 200px;
-  height: 120px;
+  width: 180px;
+  height: 110px;
   border-radius: 10px;
   color: white;
   display: flex;
@@ -50,12 +50,13 @@ export const TittleCardsContain = styled.div`
 
 export const TittleCards = styled.h2`
   margin: 0;
+  font-size: 17px;
   font-weight: 400;
   font-family: 'Outfit';
   margin-top: 5px;
   &.service-order{
     text-align: center;
-    font-size: 20px;
+    font-size: 17px;
   }
 `;
 
@@ -71,7 +72,7 @@ export const ContenCards = styled.div`
 
 export const CardsParagraft = styled.p`
   margin: 0;
-  font-size: 3.3rem;
+  font-size: 3rem;
 `;
 
 export const ContainCardsGraphics = styled.div`
@@ -85,7 +86,7 @@ export const ContainCardsGraphics = styled.div`
 
 export const GraphicsCards = styled.div`
   width: 48%;
-  height: 320px;
+  height: 310px;
   border-radius: 10px;
   background-color: #041737;
   color: white;

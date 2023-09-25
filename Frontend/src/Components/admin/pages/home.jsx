@@ -21,6 +21,7 @@ import {
   getServiceOrder,
   getVehicle,
 } from "./archive/funtionHome";
+import BarsChart  from "./graphics/graphicsHome";
 
 const Home = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -114,8 +115,7 @@ const Home = () => {
               <ContainCards key={index}>
                 <TittleCardsContain>
                   <TittleCards className="service-order">
-                    {" "}
-                    Ordenes de servicio{" "}
+                    Orden de servicio
                   </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
@@ -137,14 +137,15 @@ const Home = () => {
             ))}
           </Cards>
           <ContainCardsGraphics>
-            <GraphicsCards>grafica para clientes</GraphicsCards>
-            <GraphicsCards>grafica para vehiculos</GraphicsCards>
+            <GraphicsCards>
+              <BarsChart />
+            </GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
           </ContainCardsGraphics>
           <ContainCardsGraphics>
-            <GraphicsCards>grafica para clientes satisfechos</GraphicsCards>
-            <GraphicsCards>grafica para las ganancias</GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
+            <GraphicsCards><BarsChart /></GraphicsCards>
           </ContainCardsGraphics>
-
         </HomeConten>
       </ContainHome>
     </>
