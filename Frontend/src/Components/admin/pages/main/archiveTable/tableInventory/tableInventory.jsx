@@ -102,8 +102,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar producto de inventario
   const deleteProductInventory = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
-      console.log(result);
+      await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
       window.location.reload();
     } catch (error) {
       console.log(error);
