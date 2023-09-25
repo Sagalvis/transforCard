@@ -146,10 +146,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
-      const result = await axios.delete(
+      await axios.delete(
         `http://localhost:3005/deletecustomer/${selectedItem}`
       );
-      console.log(result);
       setCustomer(customer.filter((c)=>c.identificacion !== selectedItem))
     } catch (error) {
       console.log(error);

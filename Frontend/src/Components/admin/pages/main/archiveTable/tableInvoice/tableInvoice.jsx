@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react"; // Importa React
+import { useEffect, useState } from "react"; // Importa React
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf, ContainServices } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from 'pdf-lib';
-
+import moment from "moment";
 
 // Resto del código ...
 
@@ -46,12 +46,12 @@ const ModalContent = ({ data1 }) => {
         <>
         <h4>Modal</h4>       
         <div>
-          <p>Id factura: {item.id_factura}</p>
-          <p>Identificacion: {item.identificacion}</p>
-          <p>Id orden: {item.id_orden}</p>
-          <p>Fecha de emision: {item.fecha_emision}</p>
-          <p>Cantidad pagada: {item.cantidad_pagada}</p>
-          <p>Estado de pago: {item.estado_pago}</p>
+          <p>Id factura: {data1.id_factura}</p>
+          <p>Identificacion: {data1.identificacion}</p>
+          <p>Id orden: {data1.id_orden}</p>
+          <p>Fecha de emision: {data1.fecha_emision}</p>
+          <p>Cantidad pagada: {data1.cantidad_pagada}</p>
+          <p>Estado de pago: {data1.estado_pago}</p>
         </div> 
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
         </>
@@ -143,7 +143,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.id_orden}</Td>
-                <Td>{item.fecha_emision}</Td>
+                <Td>{moment(item.fecha_emision).format("YYYY-MM-DD")}</Td>
                 <Td>{item.cantidad_pagada}</Td>
                 <Td>{item.estado_pago}</Td>
             
