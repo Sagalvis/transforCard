@@ -14,9 +14,6 @@ const Vehicle = () => {
     indexIcon={'fa-solid fa-car'}
     titleModalPages={'Crear vehiculo nuevo'}
     showContentVehicle={true}
-    showPlusButton={false}
-    btnExport={true}
-    btnCreateProduct={false}
     />
 
     {/* Componente MAIN */}

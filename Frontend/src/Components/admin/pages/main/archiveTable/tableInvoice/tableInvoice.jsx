@@ -1,30 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
-import {
-  ButtonOptions,
-  Buttons,
-  ContainControls,
-  ContainMaxData,
-  ContainSearch,
-  ContainTable,
-  Input,
-  Label,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  ButtonPdf,
-  BtnPdf,
-} from "./styledTableInvoice";
+import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
-import { PDFDocument, rgb } from "pdf-lib";
-import moment from "moment";
-
-// Resto del código ...
+import { PDFDocument, rgb } from 'pdf-lib';
+import moment from 'moment';
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
@@ -101,6 +82,20 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     console.log(e.target.value);
   };
 
+  //Metodo de filtrado tabla facturación
+  let resultsInvoice = [];
+
+  if (!search) {
+    resultsInvoice = invoice || [];
+  } else {
+    resultsInvoice = invoice.filter(
+      (dato) =>
+        dato.identificacion &&
+        dato.identificacion.toString().includes(search.toString())
+    );
+  }
+
+
   useEffect(() => {
     getInvoice();
   }, [setInvoice, setSave]);
@@ -123,6 +118,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
             onChange={searching}
             type="text"
             title="Buscar cliente"
+            placeholder="ID Cliente"
+
           ></Input>
         </ContainSearch>
       </ContainControls>
@@ -133,9 +130,9 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>Id factura</Th>
-              <Th>Identificacion</Th>
-              <Th>Id orden</Th>
+              <Th>ID Factura</Th>
+              <Th>ID Cliente</Th>
+              <Th>ID Orden</Th>
               <Th>Fecha de emision</Th>
               <Th>Cantidad pagada</Th>
               <Th>Estado de pago</Th>
@@ -143,7 +140,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {invoice.map((item, i) => (
+            {resultsInvoice.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
@@ -185,7 +182,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         status={handleFormInvoice}
         changeStatus={setHandleFormInvoice}
         titleModal={"Editar item"}
-        style={{ position: "start", width: "800px" }}
+        changePosition={'start'}
         showHeader={true}
         showCloseButton={true}
       >
@@ -198,7 +195,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         status={handlePdfInvoice}
         changeStatus={setHandlePdfInvoice}
         titleModal={"Generar Pdf"}
-        style={{ position: "start", width: "800px" }}
+        changePosition={'start'}
         showHeader={true}
         showCloseButton={true}
       >

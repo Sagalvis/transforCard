@@ -53,6 +53,7 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
           editOrder={"fa-solid fa-pen-to-square"}
           deleteOrder={"fa-solid fa-trash-can"}
           createServiceOrder={"fa-solid fa-file-invoice-dollar"}
+          showServiceOrder={"fa-solid fa-folder-open"}
           />
         )}
 

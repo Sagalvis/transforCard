@@ -116,7 +116,7 @@ const FormStaff = () => {
             <Input
               type="password"
               placeholder="Contraseña"
-              maxLength={8}
+              maxLength={15}
               value={contraseña}
               onChange = {(e)=> setContraseña(e.target.value)} 
               autoComplete="off"

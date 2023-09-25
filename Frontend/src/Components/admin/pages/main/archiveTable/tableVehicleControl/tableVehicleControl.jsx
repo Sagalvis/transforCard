@@ -6,6 +6,8 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import { ContainAlert } from "../../../header/archiveInputs/formClient";
+import Alert from '@mui/material/Alert'
 
 const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -15,6 +17,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   // Variables de estado, modal eliminar
   const [delVehicle, setDelVehicle] = useState(null);
   const [handleDeleteControlVehicle, setHandleDeleteControlVehicle] = useState(false);
+  const [showAlertDeleteVehicle, setShowAlertDeleteVehicle] = useState(false);
   
   //Función de busqueda
   const searching = (e) => {
@@ -22,7 +25,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
     console.log(e.target.value);
   };
   
-  //Metodo de filtrado tabla cliente
+  //Metodo de filtrado tabla control de vehiculos
   let resultsVehicleControl = [];
 
   if (!search) {
@@ -30,8 +33,8 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   } else {
     resultsVehicleControl = vehicle.filter(
       (dato) =>
-        dato.matricula &&
-        dato.matricula.toLowerCase().includes(search.toLowerCase())
+        dato.tarjetaPropiedad &&
+        dato.tarjetaPropiedad.toString().includes(search.toString())
     );
   }
   
@@ -39,7 +42,6 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
     try {
       const res = await axios.get(`http://localhost:3005/vehicle`);
       setVehicle(res.data);
-      console.log("res vehiculo",res)
     } catch (error) {
       console.log(error);
     }
@@ -47,8 +49,8 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
 
   const deleteVehicle = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${delVehicle.matricula}`);
-      console.log(result);
+      await axios.delete(`http://localhost:3005/deletevehicle/${delVehicle.matricula}`);
+      setShowAlertDeleteVehicle(true);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -71,7 +73,12 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
         {/* BUSCADOR */}
         <ContainSearch>
           <Label className="search">Buscar: </Label>
-          <Input value={search} onChange={searching} type="text" title="Buscar vehículo" placeholder="¿Que placa buscas?"></Input>
+          <Input
+          value={search}
+          onChange={searching}
+          type="text"
+          title="Buscar vehículo"
+          placeholder="Tarjeta de propiedad" />
         </ContainSearch>
       </ContainControls>
 
@@ -81,14 +88,14 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID_Vehículo</Th>
+              <Th>ID Vehículo</Th>
               <Th>Cedula</Th>
               <Th>Tipo</Th>
               <Th>Marca</Th>
               <Th>Modelo</Th>
               <Th>Año</Th>
               <Th>Color</Th>
-              <Th>T_Propiedad</Th>
+              <Th>T.Propiedad</Th>
               <Th>Placa</Th>
               <Th>VIN</Th>
               <Th>Opciones</Th>
@@ -128,6 +135,13 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
       showHeader={true}
       showCloseButton={true}
       >
+      {showAlertDeleteVehicle && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Vehículo eliminado con exito!
+          </Alert>
+        </ContainAlert>
+      )}
         <ContainInfoModal>
           <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
           <ButtonDelete>
