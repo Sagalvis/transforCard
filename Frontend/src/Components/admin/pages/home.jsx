@@ -5,13 +5,14 @@ import {
   ContainCardsGraphics,
   ContainHome,
   ContenCards,
+  GraphicsCards,
   HomeConten,
   TittleCards,
   TittleCardsContain,
 } from "./styles/styledHome";
 import Header from "./header/header";
 import { useEffect, useState } from "react";
-import{
+import {
   getCountCustomer,
   getEmployees,
   getInvoice,
@@ -45,7 +46,7 @@ const Home = () => {
     setCountProduct,
     setCountService,
     setCountServiceOrder,
-    setCountInvoice
+    setCountInvoice,
   ]);
   return (
     <>
@@ -98,8 +99,7 @@ const Home = () => {
                 </ContenCards>
               </ContainCards>
             ))}
-          
-          
+
             {CountService.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
@@ -113,7 +113,10 @@ const Home = () => {
             {CountServiceOrder.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards className="service-order"> Ordenes de servicio </TittleCards>
+                  <TittleCards className="service-order">
+                    {" "}
+                    Ordenes de servicio{" "}
+                  </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>
@@ -128,16 +131,20 @@ const Home = () => {
                   <TittleCards> Facturas </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
-                  <CardsParagraft>
-                    {item.Numero_factura}
-                  </CardsParagraft>
+                  <CardsParagraft>{item.Numero_factura}</CardsParagraft>
                 </ContenCards>
               </ContainCards>
             ))}
           </Cards>
           <ContainCardsGraphics>
-            fff
+            <GraphicsCards>grafica para clientes</GraphicsCards>
+            <GraphicsCards>grafica para vehiculos</GraphicsCards>
           </ContainCardsGraphics>
+          <ContainCardsGraphics>
+            <GraphicsCards>grafica para clientes satisfechos</GraphicsCards>
+            <GraphicsCards>grafica para las ganancias</GraphicsCards>
+          </ContainCardsGraphics>
+
         </HomeConten>
       </ContainHome>
     </>
