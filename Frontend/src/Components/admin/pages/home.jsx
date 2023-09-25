@@ -10,7 +10,15 @@ import {
 } from "./styles/styledHome";
 import Header from "./header/header";
 import { useEffect, useState } from "react";
-import { getCountCustomer, getEmployees, getProduct, getService, getServiceOrder, getVehicle } from "./archive/funtionHome";
+import {
+  getCountCustomer,
+  getEmployees,
+  getInvoice,
+  getProduct,
+  getService,
+  getServiceOrder,
+  getVehicle,
+} from "./archive/funtionHome";
 
 const Home = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -19,6 +27,7 @@ const Home = () => {
   const [CountProduct, setCountProduct] = useState([]);
   const [CountService, setCountService] = useState([]);
   const [CountServiceOrder, setCountServiceOrder] = useState([]);
+  const [CountInvoice, setCountInvoice] = useState([]);
 
   useEffect(() => {
     getCountCustomer(setCountCustomer);
@@ -27,7 +36,16 @@ const Home = () => {
     getProduct(setCountProduct);
     getService(setCountService);
     getServiceOrder(setCountServiceOrder);
-  }, [setCountCustomer, setCountVehicle, setCountEmployees, setCountProduct, setCountService, setCountServiceOrder]);
+    getInvoice(setCountInvoice);
+  }, [
+    setCountCustomer,
+    setCountVehicle,
+    setCountEmployees,
+    setCountProduct,
+    setCountService,
+    setCountServiceOrder,
+    setCountInvoice
+  ]);
   return (
     <>
       <Header
@@ -80,10 +98,10 @@ const Home = () => {
             ))}
           </Cards>
           <Cards>
-          {CountService.map((item, index) => (
+            {CountService.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards> Servicios  </TittleCards>
+                  <TittleCards> Servicios </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>{item.Numero_servicios}</CardsParagraft>
@@ -96,7 +114,21 @@ const Home = () => {
                   <TittleCards> Ordenes de servicio </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
-                  <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
+                  <CardsParagraft>
+                    {item.Numero_ordenes_servicio}
+                  </CardsParagraft>
+                </ContenCards>
+              </ContainCards>
+            ))}
+            {CountInvoice.map((item, index) => (
+              <ContainCards key={index}>
+                <TittleCardsContain>
+                  <TittleCards> Facturas </TittleCards>
+                </TittleCardsContain>
+                <ContenCards>
+                  <CardsParagraft>
+                    {item.Numero_factura}
+                  </CardsParagraft>
                 </ContenCards>
               </ContainCards>
             ))}
@@ -106,17 +138,9 @@ const Home = () => {
                   <TittleCards> Ordenes de servicio </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
-                  <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
-                </ContenCards>
-              </ContainCards>
-            ))}
-            {CountServiceOrder.map((item, index) => (
-              <ContainCards key={index}>
-                <TittleCardsContain>
-                  <TittleCards> Ordenes de servicio </TittleCards>
-                </TittleCardsContain>
-                <ContenCards>
-                  <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
+                  <CardsParagraft>
+                    {item.Numero_ordenes_servicio}
+                  </CardsParagraft>
                 </ContenCards>
               </ContainCards>
             ))}
