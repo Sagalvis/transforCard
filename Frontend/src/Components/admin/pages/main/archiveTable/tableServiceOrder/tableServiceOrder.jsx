@@ -21,13 +21,23 @@ const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder, showSer
   const [showAlertDeleteOrder, setShowAlertDeleteOrder] = useState(false);
   // Variable de estado para abrir el modal de servicios del cliente
   const [handleShowServices, setHandleShowServices] = useState(false);
-
+  const [id, setId] = useState("");
+  
 
 //Función de busqueda
 const searching = (e) => {
   setSearch(e.target.value);
   console.log(e.target.value);
 }; 
+//Funcion para mostrar los clientes a los cuales tienen asignado un servicio
+const getAllService = async ()=>{
+  const services = await axios.get("http://localhost:3005/getAllServicesClient")
+  setOrden(services.data)
+  console.log(services.data)
+}
+useEffect(()=>{
+  getAllService()
+},[setOrden])
 
 //Metodo de filtrado tabla orden de servicio
 let resultsServiceOrder = [];
@@ -41,14 +51,6 @@ if (!search) {
       dato.identificacion.toString().includes(search.toString())
   );
 }
-
-  const getOrdenService = async ()=> {
-    const res = await axios.get(`http://localhost:3005/getServiceCliente`)
-    setOrden(res.data)
-  }
-  useEffect(() => {
-    getOrdenService()
-  },[setOrden])
 
   // Función para eliminar orden de servicio.
   const deleteServiceOrder = async () => {
@@ -113,12 +115,10 @@ if (!search) {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID Servicio</Th>
-              <Th>ID Cliente</Th>
+              <Th>ID Orden</Th>
+              <Th>Identificacion</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
-              <Th>Tipo de servicio</Th>
-              <Th>Total a pagar</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -127,10 +127,8 @@ if (!search) {
               <Tr key={i}>
                 <Td>{i + 1}</Td>
                 <Td>{item.identificacion}</Td>
-                <Td className="name">{item.nombre}</Td>
-                <Td className="last-name">{item.apellido}</Td>
-                <Td>{item.nombre_serv}</Td>
-                <Td>{item.precio}</Td>
+                <Td>{item.nombre}</Td>
+                <Td>{item.apellido}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons
@@ -154,8 +152,11 @@ if (!search) {
                     </Buttons>
 
                     <Buttons
-                    onClick={() => setHandleShowServices(!handleShowServices)}
-                    title="Eliminar orden">
+                    onClick={() => {
+                      setHandleShowServices(!handleShowServices)
+                      setId(item.identificacion)
+                    }}
+                    title="Listar servicios">
                     <i className={showServiceOrder}></i>
                     </Buttons>
                   </ButtonOptions>
@@ -201,7 +202,9 @@ if (!search) {
       changeWidth={"1000px"}
       >
         <ContainInfoModal>
-          <TableServiceClient />
+          <TableServiceClient
+          getcustomer = {id}
+          />
         </ContainInfoModal>
       </Modals>
     </>
