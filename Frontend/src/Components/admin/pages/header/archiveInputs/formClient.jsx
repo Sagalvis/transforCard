@@ -43,11 +43,8 @@ const FormClient = () => {
           idpais: selectTipoPais,
           id_tipo_cliente: seletTipoCliente,
         })
-        .then((Response) => {
-          console.log(Response.data);
           setShowAlert(true);
-        });
-      window.location.reload();
+          window.location.reload();
     }
 
     /* Funcion que limpa los inputs */
@@ -81,7 +78,6 @@ const FormClient = () => {
           ¡Cliente registrado!
           </Alert>
         </ContainAlert>
-
       )}
 
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableStaff";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
@@ -38,7 +38,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
     console.log(e.target.value);
   };
   
-  //Metodo de filtrado tabla cliente
+  //Metodo de filtrado tabla empleado
   let resultsStaff = [];
 
   if (!search) {
@@ -78,7 +78,12 @@ const TableStaff = ({editStaff, deletStaff}) => {
         {/* BUSCADOR */}
         <ContainSearch>
           <Label className="search">Buscar: </Label>
-          <Input value={search} onChange={searching} type="text" title="Buscar cliente"></Input>
+          <Input
+          value={search}
+          onChange={searching}
+          type="text"
+          title="Buscar empleado" 
+          placeholder="ID Empleado"/>
         </ContainSearch>
       </ContainControls>
 
@@ -88,7 +93,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID_Empleado</Th>
+              <Th>ID Empleado</Th>
               <Th>Rol</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
@@ -149,7 +154,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
       changePadding={"0px"}
       >
         <ContainInfoModal>
-          <P>¿Estas seguro que quieres eliminar este cliente?</P>
+          <Paragraph>¿Estas seguro que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={deleteStaff}>Eliminar</Btn_Delete>
           </ButtonDelete>

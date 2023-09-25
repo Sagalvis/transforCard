@@ -2,7 +2,7 @@ import axios from "axios"
 
   export const getCountCustomer = async(setCountCustomer) => {
     try {
-      const res = await axios.get("http://localhost:3005/countclientes")
+      const res = await axios.get("http://localhost:3005/count/clientes")
       setCountCustomer(res.data)
       console.log(res.data)
     } catch (error) {
@@ -12,7 +12,7 @@ import axios from "axios"
 
   export const getVehicle = async (setCountVehicle) => {
     try {
-      const res = await axios.get("http://localhost:3005/countvehiculos")
+      const res = await axios.get("http://localhost:3005/count/vehiculos")
       setCountVehicle(res.data)
       console.log(res.data)
     } catch (error) {
@@ -22,7 +22,7 @@ import axios from "axios"
 
   export const getEmployees = async (setCountEmployees) => {
     try {
-      const res = await axios.get("http://localhost:3005/countempleados")
+      const res = await axios.get("http://localhost:3005/count/empleados")
       setCountEmployees(res.data)
       console.log(res.data)
     } catch (error) {
@@ -32,7 +32,7 @@ import axios from "axios"
 
   export const getProduct = async (setCountProduct) => {
     try {
-      const res = await axios.get("http://localhost:3005/countproductos")
+      const res = await axios.get("http://localhost:3005/count/productos")
       setCountProduct(res.data)
       console.log(res.data)
     } catch (error) {
@@ -42,7 +42,7 @@ import axios from "axios"
 
   export const getService = async (setCountService) => {
     try {
-      const res = await axios.get("http://localhost:3005/countservicios")
+      const res = await axios.get("http://localhost:3005/count/servicios")
       setCountService(res.data)
       console.log(res.data)
     } catch (error) {
@@ -52,8 +52,18 @@ import axios from "axios"
 
   export const getServiceOrder = async (setCountServiceOrder) => {
     try {
-      const res = await axios.get("http://localhost:3005/countordenesdeservicio")
+      const res = await axios.get("http://localhost:3005/count/ordenesdeservicio")
       setCountServiceOrder(res.data)
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  export const getInvoice = async (setCountInvoice) => {
+    try {
+      const res = await axios.get("http://localhost:3005/count/factura")
+      setCountInvoice(res.data)
       console.log(res.data)
     } catch (error) {
       console.log(error)

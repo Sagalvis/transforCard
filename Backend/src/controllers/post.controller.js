@@ -28,7 +28,6 @@ export const postEmployees = async (req, res) => {
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } =
       req.body;
     const passwordHash = await bcrypt.hash(contraseña, 8);
-    /* await postLoginEmployees (req, res, passwordHash) */
     const [row] = await pool.query(
       "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
       [id_empleado, nombre, apellido, correo, passwordHash, id_rol]
@@ -97,10 +96,6 @@ export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
     console.log(req.body);
-    /* const [rows] = await pool.query(
-      "SELECT * FROM empleado WHERE correo = ?",
-      [correo]
-      ); */
       const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
     
     console.log(rows[0])

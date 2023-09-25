@@ -109,7 +109,6 @@ const FormStaff = () => {
               onChange ={(e) => setCorreo(e.target.value.toLowerCase())}
               autoComplete="off"
               required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>
 
@@ -117,7 +116,7 @@ const FormStaff = () => {
             <Input
               type="password"
               placeholder="Contraseña"
-              maxLength={8}
+              maxLength={15}
               value={contraseña}
               onChange = {(e)=> setContraseña(e.target.value)} 
               autoComplete="off"

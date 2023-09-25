@@ -15,7 +15,6 @@ export const ContainInfo = styled.div`
   /* background-color: yellow; */
   display: flex;
   align-items: center;
-
   .fa-user-group {
     font-size: 25px;
     margin-right: 5px;
@@ -45,8 +44,14 @@ export const ContainInfo = styled.div`
     margin-right: 5px;
   }
 `;
-
-export const H2 = styled.h2`
+export const ContainTitleHeader = styled.div`
+/*   background-color: red; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+`
+export const TitleH2 = styled.h2`
   font-size: 32px;
   font-weight: 500;
 `;
@@ -99,7 +104,7 @@ export const ExptButton = styled.button`
   }
 `;
 
-export const Btn_Create_Order = styled.button`
+/* export const BtnCreateOrder = styled.button`
   background: none;
   padding: 10px 20px;
   font-weight: 500;
@@ -114,7 +119,7 @@ export const Btn_Create_Order = styled.button`
   &:hover {
     background: #e8e8e8;
   }
-`;
+`; */
 
 export const ContainInfoModal = styled.div`
   /* background-color: #008026; */
@@ -126,7 +131,7 @@ export const ContainInfoModal = styled.div`
   overflow-x: auto;
 `;
 
-export const P = styled.p`
+export const Paragraph = styled.p`
   margin: 5px;
   font-size: 17px;
   &.size {

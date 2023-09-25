@@ -13,7 +13,7 @@ export const ButtonNarbar1 = [
   },
   {
     id:3,
-    title:"Vehículos",
+    title:"Control de vehículos",
     icon:<i className="fa-solid fa-car"></i>,
     to:"/admin/vehicle"
   },

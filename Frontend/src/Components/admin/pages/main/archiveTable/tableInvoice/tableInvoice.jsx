@@ -1,18 +1,16 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react"; // Importa React
-import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf, ContainServices } from "./styledTableInvoice";
+import { useEffect, useState } from "react"; // Importa React
+import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from 'pdf-lib';
-
-
-// Resto del código ...
+import moment from 'moment';
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([600, 400]);
-  const font = page.drawText("")
+  const page = pdfDoc.addPage([400, 400]);
+  const font = page.drawText("");
   // Utiliza CustomFontText como fuente personalizada
   // Organiza los datos como deseas en el PDF
   const content = `
@@ -39,18 +37,19 @@ const createPDF = async (data1) => {
   });
 
   const pdfBytes = await pdfDoc.save();
-  const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
   const pdfUrl = URL.createObjectURL(pdfBlob);
-  window.open(pdfUrl, '_blank');
-  window.location.reload()
+  window.open(pdfUrl, "_blank");
+  window.location.reload();
 };
 
 const ModalContent = ({ data1 }) => {
   console.log("clg modals", data1)
+  console.log("clg modals", data1);
   return (
     <div>
-        <>
-        <h4>Modal</h4>       
+      <>
+        <h4>Modal</h4>
         <div>
           <p>Id factura: {data1.id_factura}</p>
           <p>Identificacion: {data1.identificacion}</p>
@@ -59,12 +58,12 @@ const ModalContent = ({ data1 }) => {
           <p>Cantidad pagada: {data1.cantidad_pagada}</p>
           <p>Estado de pago: {data1.estado_pago}</p>
         </div> 
+          
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-        </>
+      </>
     </div>
   );
 };
-
 
 const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
@@ -100,7 +99,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-  },[setInvoice]);
+    
+  }, [setInvoice]);
 
   return (
     <>

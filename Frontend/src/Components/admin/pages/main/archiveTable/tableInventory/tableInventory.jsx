@@ -21,7 +21,7 @@ import {
 } from "./styledTableInventory";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
@@ -61,7 +61,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   };
 
 
-  //Metodo de filtrado tabla cliente
+  //Metodo de filtrado tabla producto
   let resultsInventory = [];
 
   if (!search) {
@@ -69,11 +69,23 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   } else {
     resultsInventory = invetario.filter(
       (dato) =>
-        dato.identificacion &&
-        dato.identificacion.toString().includes(search.toString())
+        dato.nombre &&
+        dato.nombre.toLowerCase().includes(search.toLowerCase())
     );
   }
 
+  //Metodo de filtrado tabla servicio
+  let resultsService = [];
+
+    if (!search) {
+      resultsService = ordenService || [];
+    } else {
+      resultsService = ordenService.filter(
+        (dato) =>
+          dato.nombre_serv &&
+          dato.nombre_serv.toLowerCase().includes(search.toLowerCase())
+      );
+    }
   useEffect(() => {
     getInventario();
     getOrdenService();
@@ -90,8 +102,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar producto de inventario
   const deleteProductInventory = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
-      console.log(result);
+      await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -127,7 +138,8 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 value={search}
                 onChange={searching}
                 type="text"
-                title="Buscar cliente"
+                title="Buscar producto"
+                placeholder="Nombre producto"
               />
             </ContainSearch>
           </ContainControls>
@@ -135,7 +147,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
             <Table>
               <Thead>
                 <Tr>
-                  <Th>Id_inventario</Th>
+                  <Th>ID Producto</Th>
                   <Th>Tipo producto</Th>
                   <Th>Nombre del producto</Th>
                   <Th>Costo</Th>
@@ -188,7 +200,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           showCloseButton={true}
           >
             <ContainInfoModal>
-              <P>¿Estas seguro de querer eliminar este producto?</P>
+              <Paragraph>¿Estas seguro de querer eliminar este producto?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); deleteProductInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
@@ -223,7 +235,8 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               value={search}
               onChange={searching}
               type="text"
-              title="Buscar cliente"
+              title="Buscar servicio"
+              placeholder="ID_orden"
             />
           </ContainSearch>
         </ContainControls>
@@ -239,7 +252,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {ordenService.map((item, i) => (
+              {resultsService.map((item, i) => (
                 <Tr key={i}>
                   <Td>{item.id_orden}</Td>
                   <Td>{item.nombre_serv}</Td>
@@ -278,7 +291,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           showCloseButton={true}
           >
             <ContainInfoModal>
-              <P>¿Estas seguro de querer eliminar este servicio?</P>
+              <Paragraph>¿Estas seguro de querer eliminar este servicio?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteService(!handleDeleteService); deleteServiceInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
