@@ -1,18 +1,34 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react"; // Importa React
-import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf, ContainServices } from "./styledTableInvoice";
+import {
+  ButtonOptions,
+  Buttons,
+  ContainControls,
+  ContainMaxData,
+  ContainSearch,
+  ContainTable,
+  Input,
+  Label,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  ButtonPdf,
+  BtnPdf,
+} from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
-import { PDFDocument, rgb } from 'pdf-lib';
-
+import { PDFDocument, rgb } from "pdf-lib";
 
 // Resto del código ...
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([400, 400]);
-  const font = page.drawText("")
+  const font = page.drawText("");
   // Utiliza CustomFontText como fuente personalizada
   // Organiza los datos como deseas en el PDF
   const content = `
@@ -33,18 +49,18 @@ const createPDF = async (data1) => {
   });
 
   const pdfBytes = await pdfDoc.save();
-  const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
   const pdfUrl = URL.createObjectURL(pdfBlob);
-  window.open(pdfUrl, '_blank');
-  window.location.reload()
+  window.open(pdfUrl, "_blank");
+  window.location.reload();
 };
 
 const ModalContent = ({ data1 }) => {
-  console.log("clg modals",data1)
+  console.log("clg modals", data1);
   return (
     <div>
-        <>
-        <h4>Modal</h4>       
+      <>
+        <h4>Modal</h4>
         <div>
           <p>Id factura: {item.id_factura}</p>
           <p>Identificacion: {item.identificacion}</p>
@@ -52,13 +68,12 @@ const ModalContent = ({ data1 }) => {
           <p>Fecha de emision: {item.fecha_emision}</p>
           <p>Cantidad pagada: {item.cantidad_pagada}</p>
           <p>Estado de pago: {item.estado_pago}</p>
-        </div> 
+        </div>
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-        </>
+      </>
     </div>
   );
 };
-
 
 const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   // Variable de estado para traer toda la tabla inventario
@@ -67,8 +82,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [search, setSearch] = useState("");
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
-  const [invoiceId, setInvoiceId] = useState([])
-  const [save, setSave] = useState([])
+  const [invoiceId, setInvoiceId] = useState([]);
+  const [save, setSave] = useState([]);
 
   const getInvoice = async () => {
     try {
@@ -82,7 +97,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const getInvoiceId = async () => {
     try {
       const res = await axios.get(`http://localhost:3005/factura/${invoiceId}`);
-      console.log(res.data)
+      console.log(res.data);
       setSave(res.data);
     } catch (error) {
       console.log(error);
@@ -94,6 +109,20 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
+
+  //Metodo de filtrado tabla facturación
+  let resultsInvoice = [];
+
+  if (!search) {
+    resultsInvoice = invoice || [];
+  } else {
+    resultsInvoice = invoice.filter(
+      (dato) =>
+        dato.identificacion &&
+        dato.identificacion.toString().includes(search.toString())
+    );
+  }
+
 
   useEffect(() => {
     getInvoice();
@@ -118,6 +147,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
             onChange={searching}
             type="text"
             title="Buscar cliente"
+            placeholder="ID Cliente"
+
           ></Input>
         </ContainSearch>
       </ContainControls>
@@ -128,9 +159,9 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>Id factura</Th>
-              <Th>Identificacion</Th>
-              <Th>Id orden</Th>
+              <Th>ID Factura</Th>
+              <Th>ID Cliente</Th>
+              <Th>ID Orden</Th>
               <Th>Fecha de emision</Th>
               <Th>Cantidad pagada</Th>
               <Th>Estado de pago</Th>
@@ -138,7 +169,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {invoice.map((item, i) => (
+            {resultsInvoice.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
@@ -146,20 +177,27 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>{item.fecha_emision}</Td>
                 <Td>{item.cantidad_pagada}</Td>
                 <Td>{item.estado_pago}</Td>
-            
+
                 <Td>
                   <ButtonOptions>
-                    <Buttons onClick={() => setHandleFormInvoice(!handleFormInvoice)} title="Editar producto">
+                    <Buttons
+                      onClick={() => setHandleFormInvoice(!handleFormInvoice)}
+                      title="Editar producto"
+                    >
                       <i className={editInvoice}></i>
                     </Buttons>
                     <Buttons title="Eliminar producto">
                       <i className={deleteInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">
-                      <i className={printInvoice} onClick={() =>{setHandlePdfInvoice(true)
-                      createPDF(item)
-                      ModalContent(item)
-                      }}></i>
+                      <i
+                        className={printInvoice}
+                        onClick={() => {
+                          setHandlePdfInvoice(true);
+                          createPDF(item);
+                          ModalContent(item);
+                        }}
+                      ></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>
@@ -173,26 +211,26 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         status={handleFormInvoice}
         changeStatus={setHandleFormInvoice}
         titleModal={"Editar item"}
-        style={{ position: 'start' , width: '800px'}}
+        changePosition={'start'}
         showHeader={true}
-        showCloseButton={true}>
+        showCloseButton={true}
+      >
         <ContainInfoModal>
           <h5>aqui va el formulario de edit.</h5>
         </ContainInfoModal>
       </Modals>
 
       <Modals
-       status={handlePdfInvoice}
-       changeStatus={setHandlePdfInvoice}
-       titleModal={"Generar Pdf"}
-       style={{ position: 'start' , width: '800px'}}
-       showHeader={true}
-       showCloseButton={true}
+        status={handlePdfInvoice}
+        changeStatus={setHandlePdfInvoice}
+        titleModal={"Generar Pdf"}
+        changePosition={'start'}
+        showHeader={true}
+        showCloseButton={true}
       >
         <ContainInfoModal>
-         <ModalContent data1={save} />
-          <ButtonPdf>
-          </ButtonPdf>
+          <ModalContent data1={save} />
+          <ButtonPdf></ButtonPdf>
         </ContainInfoModal>
       </Modals>
     </>

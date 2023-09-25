@@ -191,6 +191,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
             onChange={searching}
             type="text"
             title="Buscar cliente"
+            placeholder="ID Cliente"
           ></Input>
         </ContainSearch>
       </ContainControls>
@@ -201,7 +202,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID_Cliente</Th>
+              <Th>ID Cliente</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
               <Th>Email</Th>

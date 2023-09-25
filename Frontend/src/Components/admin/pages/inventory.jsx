@@ -15,8 +15,6 @@ const Inventory = () => {
     titleButton={'Crear inventario'}
     titleModalPages={'Crear item nuevo'}
     showContentStaff={true}
-    showPlusButton={false}
-    btnExport={true}
     btnCreateProduct={true}
     />
 

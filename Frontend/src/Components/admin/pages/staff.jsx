@@ -18,8 +18,6 @@ const Staff = () => {
     titleModalPages={'Crear empleado nuevo'}
     showContentStaff={true}
     showPlusButton={true}
-    btnExport={true}
-    btnCreateProduct={false}
     />
     
     {/* Componente MAIN */}

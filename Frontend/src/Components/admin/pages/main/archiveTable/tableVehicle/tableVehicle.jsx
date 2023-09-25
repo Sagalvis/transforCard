@@ -68,7 +68,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
         <Table>
           <Thead>
             <Tr>
-              <Th>ID_Vehículo</Th>
+              <Th>ID Vehículo</Th>
               <Th>Cedula</Th>
               <Th>Tipo</Th>
               <Th>Marca</Th>

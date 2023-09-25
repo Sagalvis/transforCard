@@ -5,6 +5,8 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, P } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import { ContainAlert } from "../../../header/archiveInputs/formClient";
+import Alert from '@mui/material/Alert'
 
 const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   const [search, setSearch] = useState("");
@@ -15,6 +17,7 @@ const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   const [delServiceOrder, setDelServiceOrder] = useState(null);
   const [idServCliente , setIdServCliente ] = useState("");
   const [cedula , setCedula ] = useState("");
+  const [showAlertDeleteOrder, setShowAlertDeleteOrder] = useState(false);
 
 
 //Función de busqueda
@@ -23,7 +26,7 @@ const searching = (e) => {
   console.log(e.target.value);
 }; 
 
-//Metodo de filtrado tabla cliente
+//Metodo de filtrado tabla orden de servicio
 let resultsServiceOrder = [];
 
 if (!search) {
@@ -47,9 +50,9 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceOrder = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
-      console.log(result);
+      await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
       window.location.reload();
+      setShowAlertDeleteOrder(true); 
     } catch (error) {
       console.log(error);
     }
@@ -96,6 +99,7 @@ if (!search) {
             onChange={searching}
             type="text"
             title="Buscar cliente"
+            placeholder="ID Cliente"
           ></Input>
         </ContainSearch>
       </ContainControls>
@@ -106,7 +110,7 @@ if (!search) {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID Servicio cliente</Th>
+              <Th>ID Servicio</Th>
               <Th>ID Cliente</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
@@ -162,6 +166,13 @@ if (!search) {
       showHeader={true}
       showCloseButton={true}
       >
+        {showAlertDeleteOrder && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Orden eliminada con exito!
+          </Alert>
+        </ContainAlert>
+      )}
         <ContainInfoModal>
           <P>¿Estas seguro de querer eliminar esta orden?</P>
           <ButtonDelete>
