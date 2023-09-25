@@ -11,7 +11,7 @@ const SidebarRoutes = () => {
   return (  
     <>
     <Routes>
-      <Route path="/user" element={<Home/>}/>
+      <Route path="/" element={<Home/>}/>
       <Route path="/cliente" element={<Client/>}/>
       <Route path="/vehicle" element={<Vehicle/>}/>
       <Route path="/serviceorder" element={<ServiceOder/>}/>

@@ -13,6 +13,9 @@ const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   // Variable para eliminar orden de servicio
   const [handleDeleteServiceOrder, setHandleDeleteServiceOrder] = useState(false);
   const [delServiceOrder, setDelServiceOrder] = useState(null);
+  const [idServCliente , setIdServCliente ] = useState("");
+  const [cedula , setCedula ] = useState("");
+
 
 //Función de busqueda
 const searching = (e) => {
@@ -33,11 +36,11 @@ if (!search) {
   );
 }
 
-  const getOrdenService = async ()=>{
+  const getOrdenService = async ()=> {
     const res = await axios.get(`http://localhost:3005/getServiceCliente`)
     setOrden(res.data)
   }
-  useEffect(() =>{
+  useEffect(() => {
     getOrdenService()
   },[setOrden])
 
@@ -51,6 +54,30 @@ if (!search) {
       console.log(error);
     }
   };
+
+  const handleAddOIdService = (item) => {
+    setIdServCliente(item.id_servicio_cliente);
+    setCedula(item.identificacion)
+  };
+
+  useEffect(() => {
+    if (idServCliente) {
+      postCreateFactura();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idServCliente]);
+
+  const postCreateFactura = () => {
+    try {
+      axios.post("http://localhost:3005/postCreateFactura",{
+        identificacion : cedula,
+        id_servicio_cliente: idServCliente
+      })
+      console.log("factura creada con exito")
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       {/* Controladores */}
@@ -111,7 +138,11 @@ if (!search) {
                     </Buttons>
 
                     <Buttons
-                      title="Crear factura">
+                      title="Crear factura"
+                      onClick={()=>{
+                        handleAddOIdService(item)
+                      }}
+                      >
                       <i className={createServiceOrder}></i>
                     </Buttons>
                   </ButtonOptions>

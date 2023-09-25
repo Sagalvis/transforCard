@@ -118,7 +118,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //funcion para capturar los datos
   const handleAddOrdenService = (item) => {
     setIdOrden(item.id_orden);
-    
   };
 
   useEffect(() => {
@@ -129,13 +128,13 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   }, [idOrden]);
 
   //Funcion para enviar los servicios del cliente
-  const postOrdenServiceCliente = async () =>{
+  const postOrdenServiceCliente = async () =>{ 
     try {
       await axios.post("http://localhost:3005/postOrdenServiceCliente",{
         identificacion: id4,
         id_orden: idOrden
       });
-      console.log("registrado con exito", res)
+      console.log("registrado con exito")
     } catch (error) {
       console.log(error)
     }
