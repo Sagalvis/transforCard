@@ -7,8 +7,9 @@ import { ContainInfoModal, P } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { ContainAlert } from "../../../header/archiveInputs/formClient";
 import Alert from '@mui/material/Alert'
+import TableServiceClient from "../tableServiceClient/tableServiceClient";
 
-const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
+const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder, showServiceOrder}) => {
   const [search, setSearch] = useState("");
   //Variables para mostrar la orden de servicio
   const [ordenService, setOrden] = useState([]);
@@ -18,6 +19,8 @@ const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
   const [idServCliente , setIdServCliente ] = useState("");
   const [cedula , setCedula ] = useState("");
   const [showAlertDeleteOrder, setShowAlertDeleteOrder] = useState(false);
+  // Variable de estado para abrir el modal de servicios del cliente
+  const [handleShowServices, setHandleShowServices] = useState(false);
 
 
 //Función de busqueda
@@ -149,6 +152,12 @@ if (!search) {
                       >
                       <i className={createServiceOrder}></i>
                     </Buttons>
+
+                    <Buttons
+                    onClick={() => setHandleShowServices(!handleShowServices)}
+                    title="Eliminar orden">
+                    <i className={showServiceOrder}></i>
+                    </Buttons>
                   </ButtonOptions>
                 </Td>
               </Tr>
@@ -178,6 +187,21 @@ if (!search) {
           <ButtonDelete>
             <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceOrder()}} >Eliminar</Btn_Delete>
           </ButtonDelete>
+        </ContainInfoModal>
+      </Modals>
+
+      {/* Modal para abrir la orden de servicio del cliente  */}
+      <Modals
+      status={handleShowServices}
+      changeStatus={setHandleShowServices}
+      showHeader={true}
+      titleModal={"Tus servicios"}
+      showCloseButton={true}
+      changePosition={"start"}
+      changeWidth={"1000px"}
+      >
+        <ContainInfoModal>
+          <TableServiceClient />
         </ContainInfoModal>
       </Modals>
     </>

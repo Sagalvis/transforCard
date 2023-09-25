@@ -5,9 +5,7 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from 'pdf-lib';
-import moment from "moment";
-
-// Resto del código ...
+import moment from 'moment';
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
