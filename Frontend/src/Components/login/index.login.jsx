@@ -55,8 +55,10 @@ const Login = () => {
                   <Input
                     type="email"
                     value={correo}
-                    onChange={(e) => setCorreo(e.target.value)}
+                    onChange={(e) => setCorreo(e.target.value.toLowerCase())}
+                    autoComplete="off"
                     required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                   />
                   <Label>Email</Label>
                 </InputBox>
@@ -65,7 +67,7 @@ const Login = () => {
                   <Input
                     type="password"
                     value={contraseña}
-                    onChange={(e) => setContraseña(e.target.value)}
+                    onChange={(e) => setContraseña(e.target.value.replace(/[^0-9]/g, ''))}
                     required
                   />
                   <Label>Contraseña</Label>
@@ -74,11 +76,6 @@ const Login = () => {
               <ContainButton>
                   <ButtonLogin
                         onClick={handleSubmit}>INGRESAR
-                        <span className="span"></span>
-                        <span className="span"></span>
-                        <span className="span"></span>
-                        <span className="span"></span>
-                        <span className="span"></span>
                   </ButtonLogin>
               </ContainButton>
             </ContainInputs>
