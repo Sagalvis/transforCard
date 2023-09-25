@@ -2,6 +2,7 @@ import {
   Cards,
   CardsParagraft,
   ContainCards,
+  ContainCardsGraphics,
   ContainHome,
   ContenCards,
   HomeConten,
@@ -10,7 +11,7 @@ import {
 } from "./styles/styledHome";
 import Header from "./header/header";
 import { useEffect, useState } from "react";
-import {
+import{
   getCountCustomer,
   getEmployees,
   getInvoice,
@@ -52,6 +53,7 @@ const Home = () => {
         index={"Dashboard"}
         indexIcon={"fa-solid fa-chart-line"}
         titleButton={"Crear cliente"}
+        titleHome={true}
       />
       <ContainHome>
         <HomeConten>
@@ -96,8 +98,8 @@ const Home = () => {
                 </ContenCards>
               </ContainCards>
             ))}
-          </Cards>
-          <Cards>
+          
+          
             {CountService.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
@@ -111,7 +113,7 @@ const Home = () => {
             {CountServiceOrder.map((item, index) => (
               <ContainCards key={index}>
                 <TittleCardsContain>
-                  <TittleCards> Ordenes de servicio </TittleCards>
+                  <TittleCards className="service-order"> Ordenes de servicio </TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>
@@ -132,19 +134,10 @@ const Home = () => {
                 </ContenCards>
               </ContainCards>
             ))}
-            {CountServiceOrder.map((item, index) => (
-              <ContainCards key={index}>
-                <TittleCardsContain>
-                  <TittleCards> Ordenes de servicio </TittleCards>
-                </TittleCardsContain>
-                <ContenCards>
-                  <CardsParagraft>
-                    {item.Numero_ordenes_servicio}
-                  </CardsParagraft>
-                </ContenCards>
-              </ContainCards>
-            ))}
           </Cards>
+          <ContainCardsGraphics>
+            fff
+          </ContainCardsGraphics>
         </HomeConten>
       </ContainHome>
     </>

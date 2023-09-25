@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceOrder";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, P } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder}) => {
@@ -162,7 +162,7 @@ if (!search) {
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <P>¿Estas seguro de querer eliminar esta orden?</P>
+          <Paragraph>¿Estas seguro de querer eliminar esta orden?</Paragraph>
           <ButtonDelete>
             <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceOrder()}} >Eliminar</Btn_Delete>
           </ButtonDelete>

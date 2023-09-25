@@ -1,10 +1,27 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
-import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf, ContainServices } from "./styledTableInvoice";
+import {
+  ButtonOptions,
+  Buttons,
+  ContainControls,
+  ContainMaxData,
+  ContainSearch,
+  ContainTable,
+  Input,
+  Label,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  ButtonPdf,
+  BtnPdf,
+} from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
-import { PDFDocument, rgb } from 'pdf-lib';
+import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 
 // Resto del código ...
@@ -12,7 +29,7 @@ import moment from "moment";
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([400, 400]);
-  const font = page.drawText("")
+  const font = page.drawText("");
   // Utiliza CustomFontText como fuente personalizada
   // Organiza los datos como deseas en el PDF
   const content = `
@@ -33,18 +50,18 @@ const createPDF = async (data1) => {
   });
 
   const pdfBytes = await pdfDoc.save();
-  const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
   const pdfUrl = URL.createObjectURL(pdfBlob);
-  window.open(pdfUrl, '_blank');
-  window.location.reload()
+  window.open(pdfUrl, "_blank");
+  window.location.reload();
 };
 
 const ModalContent = ({ data1 }) => {
-  console.log("clg modals",data1)
+  console.log("clg modals", data1);
   return (
     <div>
-        <>
-        <h4>Modal</h4>       
+      <>
+        <h4>Modal</h4>
         <div>
           <p>Id factura: {data1.id_factura}</p>
           <p>Identificacion: {data1.identificacion}</p>
@@ -52,13 +69,12 @@ const ModalContent = ({ data1 }) => {
           <p>Fecha de emision: {data1.fecha_emision}</p>
           <p>Cantidad pagada: {data1.cantidad_pagada}</p>
           <p>Estado de pago: {data1.estado_pago}</p>
-        </div> 
+        </div>
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-        </>
+      </>
     </div>
   );
 };
-
 
 const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   // Variable de estado para traer toda la tabla inventario
@@ -67,8 +83,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [search, setSearch] = useState("");
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
-  const [invoiceId, setInvoiceId] = useState([])
-  const [save, setSave] = useState([])
+  const [save, setSave] = useState([]);
 
   const getInvoice = async () => {
     try {
@@ -79,15 +94,6 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     }
   };
 
-  const getInvoiceId = async () => {
-    try {
-      const res = await axios.get(`http://localhost:3005/factura/${invoiceId}`);
-      console.log(res.data)
-      setSave(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   //Función de busqueda
   const searching = (e) => {
@@ -97,7 +103,6 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-    getInvoiceId();
   }, [setInvoice, setSave]);
 
   return (
@@ -146,20 +151,27 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>{moment(item.fecha_emision).format("YYYY-MM-DD")}</Td>
                 <Td>{item.cantidad_pagada}</Td>
                 <Td>{item.estado_pago}</Td>
-            
+
                 <Td>
                   <ButtonOptions>
-                    <Buttons onClick={() => setHandleFormInvoice(!handleFormInvoice)} title="Editar producto">
+                    <Buttons
+                      onClick={() => setHandleFormInvoice(!handleFormInvoice)}
+                      title="Editar producto"
+                    >
                       <i className={editInvoice}></i>
                     </Buttons>
                     <Buttons title="Eliminar producto">
                       <i className={deleteInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">
-                      <i className={printInvoice} onClick={() =>{setHandlePdfInvoice(true)
-                      createPDF(item)
-                      ModalContent(item)
-                      }}></i>
+                      <i
+                        className={printInvoice}
+                        onClick={() => {
+                          setHandlePdfInvoice(true);
+                          createPDF(item);
+                          ModalContent(item);
+                        }}
+                      ></i>
                     </Buttons>
                   </ButtonOptions>
                 </Td>
@@ -173,26 +185,26 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         status={handleFormInvoice}
         changeStatus={setHandleFormInvoice}
         titleModal={"Editar item"}
-        style={{ position: 'start' , width: '800px'}}
+        style={{ position: "start", width: "800px" }}
         showHeader={true}
-        showCloseButton={true}>
+        showCloseButton={true}
+      >
         <ContainInfoModal>
           <h5>aqui va el formulario de edit.</h5>
         </ContainInfoModal>
       </Modals>
 
       <Modals
-       status={handlePdfInvoice}
-       changeStatus={setHandlePdfInvoice}
-       titleModal={"Generar Pdf"}
-       style={{ position: 'start' , width: '800px'}}
-       showHeader={true}
-       showCloseButton={true}
+        status={handlePdfInvoice}
+        changeStatus={setHandlePdfInvoice}
+        titleModal={"Generar Pdf"}
+        style={{ position: "start", width: "800px" }}
+        showHeader={true}
+        showCloseButton={true}
       >
         <ContainInfoModal>
-         <ModalContent data1={save} />
-          <ButtonPdf>
-          </ButtonPdf>
+          <ModalContent data1={save} />
+          <ButtonPdf></ButtonPdf>
         </ContainInfoModal>
       </Modals>
     </>

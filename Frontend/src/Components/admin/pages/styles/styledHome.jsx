@@ -30,8 +30,8 @@ export const HomeConten = styled.div`
   width: 99%;
   height: auto;
   display: grid;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
   /* background-color: red; */
 `;
 
@@ -44,11 +44,14 @@ export const Cards = styled.div`
 
 export const  ContainCards = styled.div`
   background-color: #041737;
-  width: 250px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   border-radius: 10px;
   color: white;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TittleCardsContain = styled.div`
@@ -59,7 +62,7 @@ export const TittleCardsContain = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 ` ;
 
 export const TittleCards = styled.h2`
@@ -67,6 +70,10 @@ export const TittleCards = styled.h2`
   font-weight: 400;
   font-family: 'Outfit';
   margin-top: 5px;
+  &.service-order{
+    text-align: center;
+    font-size: 20px;
+  }
 `;
 
 export const ContenCards = styled.div`
@@ -82,5 +89,16 @@ export const ContenCards = styled.div`
 export const CardsParagraft = styled.p`
   margin: 0;
   font-size: 3.3rem;
+`;
+
+export const ContainCardsGraphics = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: red;
+`;
+
+export const GraphicsCards = styled.div`
+  width: 300px;
+  background-color: red;
 `
 
