@@ -46,18 +46,18 @@ const createPDF = async (data1) => {
 };
 
 const ModalContent = ({ data1 }) => {
-  console.log("clg modals",data1)
+  console.log("clg modals", data1)
   return (
     <div>
         <>
         <h4>Modal</h4>       
         <div>
-          <p>Id factura: {item.id_factura}</p>
-          <p>Identificacion: {item.identificacion}</p>
-          <p>Id orden: {item.id_orden}</p>
-          <p>Fecha de emision: {item.fecha_emision}</p>
-          <p>Cantidad pagada: {item.cantidad_pagada}</p>
-          <p>Estado de pago: {item.estado_pago}</p>
+          <p>Id factura: {data1.id_factura}</p>
+          <p>Identificacion: {data1.identificacion}</p>
+          <p>Id orden: {data1.id_orden}</p>
+          <p>Fecha de emision: {data1.fecha_emision}</p>
+          <p>Cantidad pagada: {data1.cantidad_pagada}</p>
+          <p>Estado de pago: {data1.estado_pago}</p>
         </div> 
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
         </>
@@ -73,7 +73,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [search, setSearch] = useState("");
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
-  const [invoiceId, setInvoiceId] = useState([])
+ /*  const [invoiceId, setInvoiceId] = useState([]) */
   const [save, setSave] = useState([])
 
   const getInvoice = async () => {
@@ -85,7 +85,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     }
   };
 
-  const getInvoiceId = async () => {
+/*   const getInvoiceId = async () => {
     try {
       const res = await axios.get(`http://localhost:3005/factura/${invoiceId}`);
       console.log(res.data)
@@ -93,7 +93,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
   //Función de busqueda
   const searching = (e) => {
@@ -103,8 +103,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-    getInvoiceId();
-  }, [setInvoice, setSave]);
+    /* getInvoiceId() */;
+  }, [setInvoice/* , setSave */]);
 
   return (
     <>
