@@ -131,7 +131,7 @@ export const ContentLogout = styled.div`
   display: flex;
   justify-content: center;
   /* background: red; */
-  width: 47%;
+  width: auto;
 `;
 
 export const ButtonLog = styled(Link)`
@@ -145,7 +145,7 @@ export const ButtonLog = styled(Link)`
   border: solid 1px #fff;
   border-radius: 3px;
   cursor: pointer;
-  transition: all .4s ease-in-out;
+  transition: all .3s ease-in-out;
   text-decoration: none;
   
   &:hover{
