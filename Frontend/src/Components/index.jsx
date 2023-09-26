@@ -2,7 +2,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { ContainerMain } from "./styles/styledIndex";
 import Dashboard from "./admin/index.admin";
 import Login from "./login/index.login";
-import NotFound from "./admin/pages/notFount";
+import Forbidden from "./admin/pages/Forbidden";
 
 const IndexRoutes = () => {
   const user = localStorage.getItem("user");
@@ -16,10 +16,10 @@ const IndexRoutes = () => {
         {isUserLoggedIn ? (
           <Route path="/admin/*" element={<Dashboard />} />
         ) : (
-          <Route path="/admin/*" element={<Navigate to="/" />} />
-        )}
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="*" element={<NotFound />} />
+          <Route path="/admin/*" element={<Navigate to="/forbidden" />} />
+        )}Forbidden
+        <Route path="/forbidden" element={<Forbidden />} />
+        <Route path="*" element={<Forbidden />} />
       </Routes>
     </ContainerMain>
   );

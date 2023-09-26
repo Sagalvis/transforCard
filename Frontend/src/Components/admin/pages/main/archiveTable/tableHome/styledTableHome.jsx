@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom"
 
 export const ContainerTableHome = styled.div`
   /* background-color: red; */
@@ -33,10 +34,11 @@ export const CardsContain = styled.div`
   justify-content: space-around;
 `
 
-export const Cards = styled.div`
+export const Cards = styled(Link)`
   width: 98%;
   height: 20%;
   background-color: #041737;
+  text-decoration: none;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.732);
   transform-style: preserve-3d;
