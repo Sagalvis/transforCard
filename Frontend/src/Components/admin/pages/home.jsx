@@ -16,17 +16,6 @@ const Home = () => {
       <Main
       showTableHome= {true}
       />
-{/*       <ContainCardsGraphics>
-            <GraphicsCards>
-              <BarsChart />
-            </GraphicsCards>
-            <GraphicsCards><BarsChart /></GraphicsCards>
-          </ContainCardsGraphics>
-          <ContainCardsGraphics>
-            <GraphicsCards><BarsChart /></GraphicsCards>
-            <GraphicsCards><BarsChart /></GraphicsCards>
-          </ContainCardsGraphics>
-      */}
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {Link} from "react-router-dom"
 import {
   Cards,
   CardsContain,
@@ -138,7 +139,10 @@ const TableHome = () => {
         </ContainCards>
         <ContainCards>
           {CountServiceOrder.map((item, index) => (
-            <Cards key={index}>
+            <Link to="/admin/serviceorder"key={index}>
+
+            
+            <Cards >
               <TittleCardsContain>
                 <TittleCards>Ordenes de servicio</TittleCards>
               </TittleCardsContain>
@@ -146,6 +150,7 @@ const TableHome = () => {
                 <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
               </ContenCards>
             </Cards>
+            </Link>
           ))}
           <Cards>
             <TittleCardsContain>

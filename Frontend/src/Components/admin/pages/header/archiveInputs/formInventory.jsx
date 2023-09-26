@@ -40,46 +40,52 @@ const FormInventory = () => {
   //Funcion para crear un producto
 
   const handletSumitProduct = async (e) => {
-    if (
-      nombre === "" ||
-      costo === "" ||
-      cantidadComprada === "" ||
-      precioUnitario === "" ||
-      cantidadStock === "" ||
-      tipoMedida === "" ||
-      tipoProducto === "" ||
-      selectMedida === "" ||
-      selectProducto === ""
-    ) {
+    try {
       e.preventDefault();
-      alert("llenar todos los campos");
-    } else {
-      await axios
-        .post("http://localhost:3005/postinventory", {
-          nombre: nombre,
-          costo: parseInt(costo),
-          cantidad_comprada: parseInt(cantidadComprada),
-          precio_unitario: parseInt(precioUnitario),
-          cantidad_en_stock: parseInt(cantidadStock),
-          id_medida: selectMedida,
-          id_producto: selectProducto,
-        })
-        .then((Response) => {
-          console.log(Response.data);
-          setShowAlert(true);
-        });
-      window.location.reload();
+      if (
+        nombre === "" ||
+        costo === "" ||
+        cantidadComprada === "" ||
+        precioUnitario === "" ||
+        cantidadStock === "" ||
+        tipoMedida === "" ||
+        tipoProducto === "" ||
+        selectMedida === "" ||
+        selectProducto === ""
+      ) {
+        
+        alert("llenar todos los campos");
+      } else {
+        await axios
+          .post("http://localhost:3005/postinventory", {
+            nombre: nombre,
+            costo: parseInt(costo),
+            cantidad_comprada: parseInt(cantidadComprada),
+            precio_unitario: parseInt(precioUnitario),
+            cantidad_en_stock: parseInt(cantidadStock),
+            id_medida: selectMedida,
+            id_producto: selectProducto,
+          })
+          
+          .then((Response) => {
+            
+            console.log(Response.data);
+            setShowAlert(true);
+          });
+        }
+    } catch (error) {
+      console.log(error)
     }
   };
 
   const handleSumitService = async (e) => {
-    if ( ordenServicio === "" || nombreServicio === "" || descripcion === "" || precioServicio === "" || 
+    e.preventDefault();
+    if (  nombreServicio === "" || descripcion === "" || precioServicio === "" || 
     tiempoEstimado === "" ) {
       e.preventDefault();
       alert("Llenar todos los campos")
     }else {
       await axios.post("http://localhost:3005/postservice",{
-        id_orden: ordenServicio,
         nombre_serv: nombreServicio,
         descripcion: descripcion,
         precio: parseInt(precioServicio),
