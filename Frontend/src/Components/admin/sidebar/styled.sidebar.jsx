@@ -105,8 +105,8 @@ export const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   overflow: hidden;
 
