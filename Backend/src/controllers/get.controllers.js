@@ -151,7 +151,7 @@ export const getProducto = async (req, res) => {
 
 /* consultas para traer facturas */
 
-export const getInvoices = async (req, res) => {
+ export const getInvoices = async (req, res) => {
   try {
     const [row] = await pool.query(
       `SELECT servicio_cliente.identificacion, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente`
@@ -163,9 +163,9 @@ export const getInvoices = async (req, res) => {
       message: "Error en el servidor",
     });
   }
-};
+}; 
 
-export const getInvoicesId = async (req, res) => {
+/* export const getInvoicesId = async (req, res) => {
   try {
     const [row] = await pool.query(
       `SELECT servicio_cliente.identificacion, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente WHERE id_factura = ?`,
@@ -178,7 +178,7 @@ export const getInvoicesId = async (req, res) => {
       message: "Error en el servidor",
     });
   }
-};
+};*/
 
 export const getServiceCliente = async (req, res) => {
   try {

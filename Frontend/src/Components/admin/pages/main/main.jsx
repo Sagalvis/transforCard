@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import TableClient from "./archiveTable/tableClient/tableClient";
+import TableHome from "./archiveTable/tableHome/tableHome";
 import TableInventory from "./archiveTable/tableInventory/tableInventory";
 import TableInvoice from "./archiveTable/tableInvoice/tableInvoice";
 import TableServiceOrder from "./archiveTable/tableServiceOrder/tableServiceOrder";
@@ -8,7 +9,7 @@ import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicle
 import Cards from "./cards";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice, showCards}) => {
+const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
@@ -65,10 +66,8 @@ const Main = ({showTableClient, showTableStaff,showTableVehicleControl, showTabl
           printInvoice={"fa-solid fa-eye"}
           />
         )}
-
-        {/* Cards */}
-        {showCards && (
-          <Cards />
+        {showTableHome && (
+          <TableHome/>
         )}
       </ContainMain>
     </>

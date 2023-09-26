@@ -1,11 +1,12 @@
 import Header from "./header/header";
 import Main from "./main/main";
-import Footer from "./footer/footer";
-import { ContentCards } from "./styles/styledHome";
+/* import BarsChart  from "./graphics/graphicsHome"; */
+
 const Home = () => {
 
   return (
     <>
+      {/* Componente HEADER */}
       <Header
         index={"Dashboard"}
         indexIcon={"fa-solid fa-chart-line"}
@@ -13,13 +14,9 @@ const Home = () => {
         titleHome={true}
       />
 
-      <Main 
-      showCards={true}
-      />
-
-      <Footer 
-      copyright='Copyright &copy; 2023 transforCAR. All Rights'
-      welcome='Te damos la bienvenida en transforCar 💚'
+      {/* Componente MAIN */}
+      <Main
+      showTableHome= {true}
       />
     </>
   );
