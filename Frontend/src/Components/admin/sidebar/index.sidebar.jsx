@@ -1,10 +1,14 @@
 import { ButtonNarbar1 } from "./archive/arrayNavbar";
 import {
+  ButtonLog,
+  Circle,
   ContaiSidebar,
   ContainAll,
   ContainLogo,
-  ContainPerfil,
-  ContenPerfil,
+  ContentCircle,
+  ContentLogout,
+  ContentName,
+  ContentProfile,
   LogoSidebar,
   NavConten,
   NavIcon,
@@ -12,6 +16,7 @@ import {
   NavTittle,
   Navbar,
   NavbarContain,
+  P,
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
 import jwt_decode from "jwt-decode"
@@ -54,22 +59,24 @@ const Sidebar = () => {
               </NavConten>
             ))}
           </NavbarContain>
-          <ContainPerfil>
-            <ContenPerfil>
-              <NavIcon>
-                <i className="fa-solid fa-user"></i>
-              </NavIcon>
-              <NavTittle className="user-name">{useData.nombre} {useData.apellido}</NavTittle>
-            </ContenPerfil>
-            <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
-              <NavLinks onClick={logOut} style={{ width: "25px" }}>
-                <NavIcon>
-                  <i className="fa-solid fa-power-off"></i>
-                </NavIcon>
-              </NavLinks>
-              <NavTittle >{useData.rol}</NavTittle>
-            </ContenPerfil>
-          </ContainPerfil>
+
+          <ContentProfile>
+
+            <ContentCircle>
+            <Circle>
+              <i class="fa-regular fa-id-badge"></i>
+            </Circle>
+            </ContentCircle>
+
+            <ContentName>
+              <P>{useData.nombre} {useData.apellido}</P>
+              <P className="rol">{useData.rol}</P>
+            </ContentName>
+
+            <ContentLogout onClick={logOut}>
+              <ButtonLog>Cerrar sesión</ButtonLog>
+            </ContentLogout>
+          </ContentProfile>
         </Navbar>
       </ContainAll>
     </ContaiSidebar>

@@ -6,27 +6,18 @@ const Home = () => {
 
   return (
     <>
-
+      {/* Componente HEADER */}
       <Header
         index={"Dashboard"}
         indexIcon={"fa-solid fa-chart-line"}
         titleButton={"Crear cliente"}
         titleHome={true}
       />
+
+      {/* Componente MAIN */}
       <Main
       showTableHome= {true}
       />
-{/*       <ContainCardsGraphics>
-            <GraphicsCards>
-              <BarsChart />
-            </GraphicsCards>
-            <GraphicsCards><BarsChart /></GraphicsCards>
-          </ContainCardsGraphics>
-          <ContainCardsGraphics>
-            <GraphicsCards><BarsChart /></GraphicsCards>
-            <GraphicsCards><BarsChart /></GraphicsCards>
-          </ContainCardsGraphics>
-      */}
     </>
   );
 };

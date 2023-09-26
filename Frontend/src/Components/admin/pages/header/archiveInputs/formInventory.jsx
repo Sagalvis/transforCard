@@ -63,7 +63,7 @@ const FormInventory = () => {
           cantidad_en_stock: parseInt(cantidadStock),
           id_medida: selectMedida,
           id_producto: selectProducto,
-        })
+        }) 
         .then((Response) => {
           console.log(Response.data);
           setShowAlert(true);
