@@ -115,9 +115,9 @@ export const Circle = styled.div`
     font-weight: 200;
   }
 
-  @media (min-height: 768px) {
-    width: 30px;
-    height: 30px;
+  @media (max-height: 768px) {
+    width: 50px;
+    height: 50px;
   }
 `;
 
