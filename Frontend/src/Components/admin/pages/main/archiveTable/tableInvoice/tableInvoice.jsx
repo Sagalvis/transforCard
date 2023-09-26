@@ -26,6 +26,12 @@ const createPDF = async (data1) => {
     Fecha de emision: ${data1.fecha_emision}
     Cantidad pagada: ${data1.cantidad_pagada} $
     Estado de pago: ${data1.estado_pago}
+
+
+
+
+
+
   `;
 
   page.drawText(content, {
@@ -43,20 +49,40 @@ const createPDF = async (data1) => {
   window.location.reload();
 };
 
+
+
 const ModalContent = ({ data1 }) => {
-  console.log("clg modals", data1)
-  console.log("clg modals", data1);
+
+  const [value, setValue] = useState('')
+
+  const lookServices = async () => {
+  try {
+    const res = await axios.post(`http://localhost:3005/postCallService/${data1.id_factura}`);
+    setValue(res.data);
+    
+   } catch (error) {
+     console.log(error);
+   }
+ }
+ console.log(lookServices);
   return (
     <div>
       <>
         <h4>Modal</h4>
         <div>
+          
           <p>Id factura: {data1.id_factura}</p>
           <p>Identificacion: {data1.identificacion}</p>
           <p>Id orden: {data1.id_orden}</p>
           <p>Fecha de emision: {data1.fecha_emision}</p>
-          <p>Cantidad pagada: {data1.cantidad_pagada}</p>
           <p>Estado de pago: {data1.estado_pago}</p>
+          {value.map((value, i) =>{
+           <div key={i}>
+            <p>Servicios:{value.servicios} </p>
+            <p>Precio:{value.precio} </p>
+           </div>
+         })}
+          <p>Total pagado: {data1.cantidad_pagada}</p>
         </div> 
           
         <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
@@ -72,6 +98,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [save, setSave] = useState([])
+ 
 
   const getInvoice = async () => {
     try {
@@ -82,14 +109,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     }
   };
 
-  const lookServices = async () => {
-    try {
-      const res = await axios.post(`http://localhost:3005/postCallService/${data1.id_factura}`);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+ 
 
 
   const searching = (e) => {
@@ -142,7 +162,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.id_orden}</Td>
-                <Td>{item.fecha_emision}</Td>
+                <Td>{moment(item.fecha_emision).format("YYYY-MM-DD")}</Td>
                 <Td>{item.cantidad_pagada}</Td>
                 <Td>{item.estado_pago}</Td>
             
@@ -158,6 +178,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                       <i className={printInvoice} onClick={() =>{setHandlePdfInvoice(true)
                       createPDF(item)
                       ModalContent(item)
+
                       }}></i>
                     </Buttons>
                   </ButtonOptions>
