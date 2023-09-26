@@ -1,18 +1,6 @@
-const NotFound = () => {
-  return ( 
-    <>
-    <ContainNotfound title='404'>
-      <Pf className='http'> 404</Pf>
-      <Pf className='text'>No se encontro la pagina esperada</Pf>
-    </ContainNotfound>
-    </>
-  );
-}
-
-export default NotFound;
-
-import styled from "styled-components";
-import { Pf } from "./Forbidden";
+import  { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Pf } from './Forbidden';
 
 export const ContainNotfound = styled.div`
   display: flex;
@@ -22,5 +10,34 @@ export const ContainNotfound = styled.div`
   align-items: center;
   justify-content: center;
   background: #131313;
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
 `;
+
+const NotFound = () => {
+  const [currentCount, setCurrentCount] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentCount((prevCount) => {
+        const newCount = prevCount + 1;
+        if (newCount > 404) {
+          return 404;
+        }
+        return newCount;
+      });
+    }, 1);
+
+    return () => clearTimeout(timer);
+  }, [currentCount]);
+
+  return (
+    <>
+      <ContainNotfound title="404">
+        <Pf className="http">{currentCount}</Pf>
+        <Pf className="text">No se encontró la página esperada</Pf>
+      </ContainNotfound>
+    </>
+  );
+};
+
+export default NotFound;

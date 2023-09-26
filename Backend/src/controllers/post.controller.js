@@ -95,20 +95,16 @@ export const postVehicle = async (req, res) => {
 export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
-    console.log(req.body);
       const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
     
     console.log(rows[0])
     if (rows.length > 0) {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
-      console.log(compassword);
-      console.log({id: rows[0].id_empleado});
       if (compassword) {
         const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET, {
           expiresIn: "1h",
         });
         res.status(200).json(token);
-        console.log(token)
       }
     } else {
       res.status(400).send("El usuario no existe🤦‍♂🤦‍♂");
