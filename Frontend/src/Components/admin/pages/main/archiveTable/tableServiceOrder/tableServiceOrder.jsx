@@ -9,7 +9,7 @@ import { ContainAlert } from "../../../header/archiveInputs/formClient";
 import Alert from '@mui/material/Alert'
 import TableServiceClient from "../tableServiceClient/tableServiceClient";
 
-const TableServiceOrder = ({ editOrder, deleteOrder, createServiceOrder, showServiceOrder}) => {
+const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder}) => {
   const [search, setSearch] = useState("");
   //Variables para mostrar la orden de servicio
   const [ordenService, setOrden] = useState([]);
@@ -116,7 +116,7 @@ if (!search) {
           <Thead>
             <Tr>
               <Th>ID Orden</Th>
-              <Th>Identificacion</Th>
+              <Th>ID Cliente</Th>
               <Th>Nombre</Th>
               <Th>Apellido</Th>
               <Th>Opciones</Th>
@@ -127,15 +127,10 @@ if (!search) {
               <Tr key={i}>
                 <Td>{i + 1}</Td>
                 <Td>{item.identificacion}</Td>
-                <Td>{item.nombre}</Td>
-                <Td>{item.apellido}</Td>
+                <Td className="name">{item.nombre}</Td>
+                <Td className="last-name">{item.apellido}</Td>
                 <Td>
                   <ButtonOptions>
-                    <Buttons
-                      title="Editar orden">
-                      <i className={editOrder}></i>
-                    </Buttons>
-
                     <Buttons
                       onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); setDelServiceOrder(item)}}
                       title="Eliminar orden">
