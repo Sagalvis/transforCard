@@ -54,12 +54,17 @@ export const NavbarContain = styled.div`
 export const NavConten = styled.div`
   width: 100%;
   height: 40px;
-  padding: 8px 0;
+  padding: 10px 0;
   :hover {
     color: #64CCC5;
   }
   transition: all .5s ease;
+
+  @media (max-height: 768px) {
+    padding: 7px 0;
+  }
 `;
+
 export const NavLinks = styled(Link)`
   width: 100%;
   height: 100%;
@@ -90,7 +95,6 @@ export const ContentProfile = styled.div`
   width: 100%;
   height: 20%;
   padding: 10px;
-  box-sizing: border-box;
 `;
 
 export const ContentCircle = styled.div`
