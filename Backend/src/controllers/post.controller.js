@@ -141,7 +141,6 @@ export const postInventario = async (req, res) => {
         precio_unitario,
         cantidad_en_stock,
         cantidad_vendida,
-
         id_medida,
         id_producto,
       ]
@@ -154,7 +153,6 @@ export const postInventario = async (req, res) => {
       precio_unitario,
       cantidad_en_stock,
       cantidad_vendida,
-
       id_medida,
       id_producto,
     });

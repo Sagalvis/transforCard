@@ -53,7 +53,7 @@ const TableHome = () => {
       <HomeConten>
         <ContainCards>
           {CountCustomer.map((item, index) => (
-            <Cards key={index}>
+            <Cards key={index} to={"/admin/cliente"}>
               <TittleCardsContain>
                 <TittleCards>Clientes</TittleCards>
               </TittleCardsContain>
@@ -64,7 +64,7 @@ const TableHome = () => {
           ))}
 
           {CountService.map((item, index) => (
-            <Cards key={index}>
+            <Cards key={index} to={"/admin/inventory"}>
               <TittleCardsContain>
                 <TittleCards>Servicios</TittleCards>
               </TittleCardsContain>
@@ -87,7 +87,9 @@ const TableHome = () => {
         <ContainCards style={{ width: "49%" }}>
           <CardsContain>
             {CountVehicle.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/vehicle"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Control de vehículos</TittleCards>
                 </TittleCardsContain>
@@ -98,7 +100,9 @@ const TableHome = () => {
             ))}
 
             {CountEmployees.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/employees"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Empleados</TittleCards>
                 </TittleCardsContain>
@@ -111,7 +115,9 @@ const TableHome = () => {
 
           <CardsContain>
             {CountInvoice.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/invoice"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Ventas</TittleCards>
                 </TittleCardsContain>
@@ -121,7 +127,9 @@ const TableHome = () => {
               </Cards>
             ))}
             {CountProduct.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/inventory"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Productos</TittleCards>
                 </TittleCardsContain>
@@ -144,7 +152,8 @@ const TableHome = () => {
 
         <ContainCards>
           {CountServiceOrder.map((item, index) => (
-            <Cards key={index}>
+
+            <Cards key={index} to={"/admin/serviceorder"}>
               <TittleCardsContain>
                 <TittleCards>Ordenes de servicio</TittleCards>
               </TittleCardsContain>
