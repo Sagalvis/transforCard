@@ -75,7 +75,7 @@ const Header = ({
         </ContainInfo>
         {titleHome && (
           <ContainTitleHeader>
-            <TitleH2>Bienvenido de nuevo {useData.nombre} y {useData.apellido}</TitleH2>
+            <TitleH2>Bienvenido de nuevo {useData.nombre} {useData.apellido}</TitleH2>
           </ContainTitleHeader>
         )}
 
