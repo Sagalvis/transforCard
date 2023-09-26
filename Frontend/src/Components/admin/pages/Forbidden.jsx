@@ -2,18 +2,20 @@
 const Forbidden = () => {
   return ( 
     <>
-    <NotFound title='403'>
+    <Forbid title='403'>
       <Pf className='_404'>403</Pf>
       <Pf className='text'>
-        No tienes los permisos suficientes para acceder a esta ruta
-        inicia sesion para continuar 
+        No tienes los permisos suficientes para acceder a esta ruta,
+        intentalo de nuevo.
       
       </Pf>
       <NavLink to="/">
-        <BottoForbidden>Iniciar sesion</BottoForbidden>
+        <BottoForbidden>
+          <i class="fa-solid fa-arrow-right"></i>
+        </BottoForbidden>
       </NavLink>
       {/* <Pf className='text'>No se encontro la pagina esperada</Pf> */}
-    </NotFound>
+    </Forbid>
     </>
   );
 }
@@ -23,7 +25,7 @@ export default Forbidden;
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const NotFound = styled.div`
+export const Forbid = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -50,16 +52,24 @@ export const Pf = styled.p`
 `;
 
 export const NavLink = styled(Link)`
-background-color: red;
-width: 100px;
-height: 50px;
+/* background-color: red; */
+width: auto;
+height: auto;
 text-decoration: none;
 display: flex;
 align-items: center;
 justify-content: center;
-cursor: pointer;
+
 `
 export const BottoForbidden = styled.button`
-  background-color: white;
-  color: black;
-` 
+  /* background-color: white; */
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  .fa-arrow-right {
+    font-size: 75px;
+
+  }
+` ;
