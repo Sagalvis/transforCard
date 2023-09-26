@@ -19,6 +19,7 @@ getRouter.get('/tipoproducto', controllGet.getProducto);
 getRouter.get('/factura', controllGet.getInvoices);
 /* getRouter.get('/factura/:id_factura', controllGet.getInvoicesId);*/
 getRouter.get('/getService', controllGet.getService);
-getRouter.get('/getServiceCliente', controllGet.getServiceCliente);
+getRouter.get('/getServiceCliente/:identificacion', controllGet.getServiceCliente);
+getRouter.get('/getAllServicesClient', controllGet.getAllServicesClient);
 
 export default getRouter

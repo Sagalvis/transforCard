@@ -182,9 +182,9 @@ export const getProducto = async (req, res) => {
 
 export const getServiceCliente = async (req, res) => {
   try {
+    const {identificacion} = req.params
     const [row] = await pool.query(
-      "SELECT cliente.identificacion, cliente.nombre, cliente.apellido, orden_servicio.nombre_serv, orden_servicio.precio, servicio_cliente.id_servicio_cliente FROM servicio_cliente INNER JOIN orden_servicio INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion AND servicio_cliente.id_orden = orden_servicio.id_orden ORDER BY id_servicio_cliente DESC"
-    );
+      "SELECT cliente.identificacion, cliente.nombre, cliente.apellido, orden_servicio.nombre_serv, orden_servicio.precio, servicio_cliente.id_servicio_cliente FROM servicio_cliente INNER JOIN orden_servicio INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion AND servicio_cliente.id_orden = orden_servicio.id_orden WHERE cliente.identificacion = (?) ORDER BY id_servicio_cliente DESC",[identificacion]);
     res.send(row);
   } catch (error) {
     return res.status(500).json({
@@ -192,6 +192,16 @@ export const getServiceCliente = async (req, res) => {
     });
   }
 };
+export const getAllServicesClient = async (req, res) => {
+  try {
+    const [row] = await pool.query("select servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido from servicio_cliente inner join cliente on servicio_cliente.identificacion = cliente.identificacion group by identificacion")
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
 
 export const getService = async (req, res) => {
   try {

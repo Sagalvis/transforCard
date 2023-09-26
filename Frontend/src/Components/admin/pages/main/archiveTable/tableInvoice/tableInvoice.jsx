@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
-import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf } from "./styledTableInvoice";
+import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr, ButtonPdf, BtnPdf/* , ContainServices */ } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal } from "../../../header/styledHeader";
@@ -100,10 +100,12 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [save, setSave] = useState([])
  
 
+  //Funcion para traer los datos de la factura
   const getInvoice = async () => {
     try {
       const res = await axios.get("http://localhost:3005/factura");
       setInvoice(res.data);
+      console.log("factura",res.data)
     } catch (error) {
       console.log(error);
     }
@@ -119,8 +121,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-    
-  }, [setInvoice]);
+  }, [setInvoice, setSave]);
 
   return (
     <>
@@ -171,7 +172,9 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                     <Buttons onClick={() => setHandleFormInvoice(!handleFormInvoice)} title="Editar producto">
                       <i className={editInvoice}></i>
                     </Buttons>
-                    <Buttons title="Eliminar producto">
+                    <Buttons title="Eliminar producto"
+                    /* onClick={DeleteFactura} */
+                    >
                       <i className={deleteInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">

@@ -7,6 +7,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, Label } from "../tableClient/styledTableClient";
+import { TextArea } from "../../../header/archiveInputs/formVehicle";
 
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
@@ -136,7 +137,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       showCloseButton={true}
       >
         <ContainInfoModal>
-          <div>{observacion}</div>
+          <TextArea>{observacion}</TextArea>
           <ButtonDelete>
           <Btn_Delete onClick={() => setHandleRemarks(!handleRemarks)}>Cerrar</Btn_Delete>
           </ButtonDelete>
