@@ -124,6 +124,7 @@ export const P = styled.p`
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 500;
+    letter-spacing: 1px;
   }
 `;
 
@@ -139,6 +140,7 @@ export const ButtonLog = styled(Link)`
   /* background: blue; */
   padding: 8px;
   text-transform: uppercase;
+  letter-spacing: 1px;
   color: #fff;
   font-family: 'Outfit';
   font-size: 11px;
