@@ -3,6 +3,7 @@ import { ContainerMain } from "./styles/styledIndex";
 import Dashboard from "./admin/index.admin";
 import Login from "./login/index.login";
 import Forbidden from "./admin/pages/Forbidden";
+import NotFound from "./admin/pages/NotFound";
 
 const IndexRoutes = () => {
   const user = localStorage.getItem("user");
@@ -19,7 +20,7 @@ const IndexRoutes = () => {
           <Route path="/admin/*" element={<Navigate to="/forbidden" />} />
         )}
         <Route path="/forbidden" element={<Forbidden />} />
-        <Route path="*" element={<Forbidden />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </ContainerMain>
   );
