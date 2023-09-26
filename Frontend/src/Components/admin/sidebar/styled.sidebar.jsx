@@ -47,7 +47,7 @@ export const NavbarContain = styled.div`
   border-bottom: 1px solid  #12213b;
 
   @media (max-height: 768px) {
-    height: 70%;
+    height: 75%;
   }
 `
 
