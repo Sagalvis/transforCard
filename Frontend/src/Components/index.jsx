@@ -17,7 +17,7 @@ const IndexRoutes = () => {
           <Route path="/admin/*" element={<Dashboard />} />
         ) : (
           <Route path="/admin/*" element={<Navigate to="/forbidden" />} />
-        )}Forbidden
+        )}
         <Route path="/forbidden" element={<Forbidden />} />
         <Route path="*" element={<Forbidden />} />
       </Routes>
