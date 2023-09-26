@@ -86,7 +86,7 @@ export const Circle2 = () => {
   return <Doughnut data={Data} />;
 };
 
-let beneficios = [0, 56, 20, 36, 80, 40, 30, -20, 25, 30, 12, 60];
+let beneficios = [0, 56, 20, 36, 80, 40, 30, 0, 25, 30, 12, 60];
 let meses = [
   "Enero",
   "Febrero",
