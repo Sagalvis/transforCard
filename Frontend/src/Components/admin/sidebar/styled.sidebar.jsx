@@ -116,8 +116,8 @@ export const Circle = styled.div`
   }
 
   @media (max-height: 768px) {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 `;
 
