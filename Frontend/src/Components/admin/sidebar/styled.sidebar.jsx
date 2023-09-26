@@ -39,10 +39,11 @@ export const Navbar = styled.div`
 export const NavbarContain = styled.div`
   /* background-color: black; */
   width: 100%;
-  height: 80%;
+  height: 78%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
   border-bottom: 1px solid  #12213b;
 `
 
@@ -103,6 +104,7 @@ export const Circle = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  overflow: hidden;
 
   .fa-user {
     font-size: 15px;
@@ -110,6 +112,11 @@ export const Circle = styled.div`
   }
 `;
 
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 export const ContentName = styled.div`
   margin-bottom:10px;
 `;
