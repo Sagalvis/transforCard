@@ -3,18 +3,17 @@ const Forbidden = () => {
   return ( 
     <>
     <Forbid title='403'>
-      <Pf className='_404'>403</Pf>
+      <Pf className='http'>403</Pf>
       <Pf className='text'>
         No tienes los permisos suficientes para acceder a esta ruta,
-        intentalo de nuevo.
+        inicia sesion para continuar.
       
       </Pf>
       <NavLink to="/">
         <BottoForbidden>
-          <i class="fa-solid fa-arrow-right"></i>
+          <i className="fa-solid fa-arrow-right"></i>
         </BottoForbidden>
       </NavLink>
-      {/* <Pf className='text'>No se encontro la pagina esperada</Pf> */}
     </Forbid>
     </>
   );
@@ -37,7 +36,7 @@ export const Forbid = styled.div`
 `;
 
 export const Pf = styled.p`
-  &._404 {
+  &.http {
     letter-spacing: 20px;
     margin: 0;
     font-size: 200px;
