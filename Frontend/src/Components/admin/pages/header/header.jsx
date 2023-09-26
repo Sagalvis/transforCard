@@ -17,8 +17,11 @@ import FormStaff from "./archiveInputs/formStaff";
 import FormVehicle from "./archiveInputs/formVehicle";
 import FormInventory from "./archiveInputs/formInventory";
 import axios from "axios";
+import jwt_decode from "jwt-decode"
 import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
 
+
+// const useData = jwt_decode (localStorage.getItem("user"));
 const Header = ({
   indexIcon,
   index,
@@ -41,6 +44,7 @@ const Header = ({
   // Variable de estado para abrir modal crear nueva factura
   const [handleFormInvoice, setHandleFormInvoice] = useState(false);
 
+  const useData = jwt_decode (localStorage.getItem("user"));
   const handleDownloadCustomer = async () => {
     try {
       const response = await axios.get(
@@ -71,7 +75,7 @@ const Header = ({
         </ContainInfo>
         {titleHome && (
           <ContainTitleHeader>
-            <TitleH2>Bienvenido de nuevo [NOMBRES Y APELLIDOS] </TitleH2>
+            <TitleH2>Bienvenido de nuevo {useData.nombre} y {useData.apellido}</TitleH2>
           </ContainTitleHeader>
         )}
 

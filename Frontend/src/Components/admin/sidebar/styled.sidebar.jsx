@@ -39,11 +39,16 @@ export const Navbar = styled.div`
 export const NavbarContain = styled.div`
   /* background-color: black; */
   width: 100%;
-  height: 80%;
+  height: 78%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
   border-bottom: 1px solid  #12213b;
+
+  @media (max-height: 768px) {
+    height: 73%;
+  }
 `
 
 export const NavConten = styled.div`
@@ -54,7 +59,12 @@ export const NavConten = styled.div`
     color: #64CCC5;
   }
   transition: all .5s ease;
+
+  @media (max-height: 768px) {
+    padding: 7px 0;
+  }
 `;
+
 export const NavLinks = styled(Link)`
   width: 100%;
   height: 100%;
@@ -83,9 +93,8 @@ export const ContentProfile = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 19%;
+  height: 20%;
   padding: 10px;
-  box-sizing: border-box;
 `;
 
 export const ContentCircle = styled.div`
@@ -100,16 +109,27 @@ export const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
+  overflow: hidden;
 
   .fa-user {
     font-size: 15px;
     font-weight: 200;
   }
+
+  @media (max-height: 768px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 export const ContentName = styled.div`
   margin-bottom:10px;
 `;
