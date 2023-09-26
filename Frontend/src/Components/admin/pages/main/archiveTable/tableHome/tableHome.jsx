@@ -62,6 +62,7 @@ const TableHome = () => {
               </ContenCards>
             </Cards>
           ))}
+
           {CountService.map((item, index) => (
             <Cards key={index} to={"/admin/inventory"}>
               <TittleCardsContain>
@@ -72,6 +73,7 @@ const TableHome = () => {
               </ContenCards>
             </Cards>
           ))}
+
           <SmallGraphicsCards>
             <TittleCardsContain>
               <TittleCards>Productos más vendidos</TittleCards>
@@ -81,6 +83,7 @@ const TableHome = () => {
             </ContenCards>
           </SmallGraphicsCards>
         </ContainCards>
+
         <ContainCards style={{ width: "49%" }}>
           <CardsContain>
             {CountVehicle.map((item, index) => (
@@ -88,13 +91,14 @@ const TableHome = () => {
               to={"/admin/vehicle"}
               style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
-                  <TittleCards>Vehiculos</TittleCards>
+                  <TittleCards>Control de vehículos</TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>{item.Numero_vehiculos}</CardsParagraft>
                 </ContenCards>
               </Cards>
             ))}
+
             {CountEmployees.map((item, index) => (
               <Cards key={index} 
               to={"/admin/employees"}
@@ -108,6 +112,7 @@ const TableHome = () => {
               </Cards>
             ))}
           </CardsContain>
+
           <CardsContain>
             {CountInvoice.map((item, index) => (
               <Cards key={index} 
@@ -144,6 +149,7 @@ const TableHome = () => {
             </ContenCards>
           </LargeGraphicsCards>
         </ContainCards>
+
         <ContainCards>
           {CountServiceOrder.map((item, index) => (
 
@@ -156,16 +162,18 @@ const TableHome = () => {
               </ContenCards>
             </Cards>
           ))}
+
           <Cards>
             <TittleCardsContain>
               <TittleCards>Cargando...</TittleCards>
             </TittleCardsContain>
             <ContenCards>
-              <CardsParagraft style={{ fontSize: "2rem" }}>
+              <CardsParagraft className="size">
                 Cargando...
               </CardsParagraft>
             </ContenCards>
           </Cards>
+
           <SmallGraphicsCards>
             <TittleCardsContain>
               <TittleCards>Clientes registrados</TittleCards>
@@ -174,7 +182,9 @@ const TableHome = () => {
               <Circle />
             </ContenCards>
           </SmallGraphicsCards>
+
         </ContainCards>
+
       </HomeConten>
     </ContainerTableHome>
   );

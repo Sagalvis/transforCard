@@ -9,9 +9,10 @@ export const ContainerTableHome = styled.div`
 
 /* Este componente esta creado para más adelante hacerle un scroll */
 export const HomeConten = styled.div`
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   /* background-color: #15ff00; */
 `;
@@ -46,7 +47,7 @@ export const Cards = styled(Link)`
   perspective: 1000px;
   color: white;
   &:hover {
-    transform: rotateY(10deg);
+    transform: rotateY(12deg);
   }
 `;
 
@@ -65,6 +66,10 @@ export const TittleCards = styled.h2`
   font-weight: 300;
   font-family: "Outfit";
   margin-left: 5px;
+
+  @media ( max-width: 1039px ) {
+    font-size: 1rem;
+  }
 `;
 
 export const ContenCards = styled.div`
@@ -80,6 +85,13 @@ export const ContenCards = styled.div`
 export const CardsParagraft = styled.p`
   margin: 0;
   font-size: 4.6rem;
+
+  &.size {
+    font-size: 1.5rem;
+  }
+  @media ( max-width: 1039px ) {
+    font-size: 3rem;
+  }
 `;
 
 export const SmallGraphicsCards = styled.div`
