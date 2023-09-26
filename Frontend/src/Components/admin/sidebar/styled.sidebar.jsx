@@ -84,7 +84,7 @@ export const ContentProfile = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 19%;
+  height: 20%;
   padding: 10px;
   box-sizing: border-box;
 `;
