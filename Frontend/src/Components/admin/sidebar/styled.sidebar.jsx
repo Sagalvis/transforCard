@@ -45,6 +45,10 @@ export const NavbarContain = styled.div`
   align-items: center;
   margin-bottom: 10px;
   border-bottom: 1px solid  #12213b;
+
+  @media (min-height: 768px) {
+    height: 70%;
+  }
 `
 
 export const NavConten = styled.div`
@@ -109,6 +113,11 @@ export const Circle = styled.div`
   .fa-user {
     font-size: 15px;
     font-weight: 200;
+  }
+
+  @media (min-height: 768px) {
+    width: 40px;
+  height: 40px;
   }
 `;
 
