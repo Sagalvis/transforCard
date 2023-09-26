@@ -46,7 +46,7 @@ export const NavbarContain = styled.div`
   margin-bottom: 10px;
   border-bottom: 1px solid  #12213b;
 
-  @media (min-height: 768px) {
+  @media (max-height: 768px) {
     height: 70%;
   }
 `
@@ -54,7 +54,7 @@ export const NavbarContain = styled.div`
 export const NavConten = styled.div`
   width: 100%;
   height: 40px;
-  padding: 10px 0;
+  padding: 8px 0;
   :hover {
     color: #64CCC5;
   }
