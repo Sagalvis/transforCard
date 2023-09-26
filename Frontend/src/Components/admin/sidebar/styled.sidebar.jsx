@@ -119,6 +119,7 @@ export const P = styled.p`
   color: #fff;
   text-align: center;
   font-family: 'Outfit';
+  text-transform: capitalize;
 
   &.rol {
     text-transform: uppercase;
