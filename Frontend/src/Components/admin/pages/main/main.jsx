@@ -6,6 +6,7 @@ import TableInvoice from "./archiveTable/tableInvoice/tableInvoice";
 import TableServiceOrder from "./archiveTable/tableServiceOrder/tableServiceOrder";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
+import Cards from "./cards";
 import {ContainMain} from "./styledMain";
 
 const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice}) => {
@@ -51,7 +52,6 @@ const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleCon
         {/* Tabla de Orden de servicio */}
         {showTableServiceOrder && (
           <TableServiceOrder 
-          editOrder={"fa-solid fa-pen-to-square"}
           deleteOrder={"fa-solid fa-trash-can"}
           createServiceOrder={"fa-solid fa-file-invoice-dollar"}
           showServiceOrder={"fa-solid fa-folder-open"}
