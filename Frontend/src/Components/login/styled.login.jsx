@@ -242,6 +242,15 @@ export const ContenParagrafh = styled.div`
   align-items: center;
 `;
 
+export const ButtonPassword = styled.button`
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Outfit';
+  font-size: 16px;
+`;
+
 export const ContainFooterLogin = styled.div`
   /* background-color: #0059ff; */
   width: 100%;
