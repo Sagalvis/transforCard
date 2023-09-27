@@ -101,7 +101,7 @@ const Login = () => {
                     type="email"
                     value={correo}
                     onChange={handleEmailChange}
-                    autoComplete="off"
+                    autoComplete="on"
                     required
                   />
                   <Label>Email</Label>
