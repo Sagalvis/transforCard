@@ -23,12 +23,19 @@ import {
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-  
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value.toLowerCase().replace(/[^a-z.@]/g, "");
+    setCorreo(newEmail);
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      Log();
+    }
+  };
   const Log = async () => {
     let result = null;
   
@@ -65,6 +72,7 @@ const Login = () => {
   
     return result;
   };
+
   
   return (
     <ContainLogin>
@@ -87,10 +95,9 @@ const Login = () => {
                   <Input
                     type="email"
                     value={correo}
-                    onChange={(e) => setCorreo(e.target.value.toLowerCase())}
+                    onChange={handleEmailChange}
                     autoComplete="off"
                     required
-                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                   />
                   <Label>Email</Label>
                 </InputBox>
@@ -100,6 +107,7 @@ const Login = () => {
                     type="password"
                     value={contraseña}
                     onChange={(e) => setContraseña(e.target.value.replace(/[^0-9]/g, ''))}
+                    onKeyDown={handleKeyDown}
                     required
                   />
                   <Label>Contraseña</Label>

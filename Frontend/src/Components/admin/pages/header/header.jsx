@@ -8,7 +8,6 @@ import {
   ContainHeader,
   ContainInfo,
   ContainInfoModal,
-  ContainName,
   ContainTitleHeader,
   ExptButton,
   TitleH2,
@@ -77,10 +76,7 @@ const Header = ({
         {titleHome && (
           <ContainTitleHeader>
             <TitleH2 className="margin">Bienvenido/a de nuevo,</TitleH2>
-            <ContainName>
             <TitleH2 className="name">{useData.nombre}.. 👋</TitleH2>
-            {/* <TitleH2 className="last-name">{useData.apellido} </TitleH2> */}
-            </ContainName>
           </ContainTitleHeader>
         )}
 

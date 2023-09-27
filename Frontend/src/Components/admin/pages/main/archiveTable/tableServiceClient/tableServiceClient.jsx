@@ -48,7 +48,7 @@ const TableServiceClient = ({getcustomer}) => {
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
                 <Td>{item.nombre_serv}</Td>
-                <Td>{item.precio}</Td>
+                <Td>{item.precio.toLocaleString()}</Td>
                 <Td>
                 </Td>
               </Tr>
