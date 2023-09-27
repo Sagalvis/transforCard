@@ -56,7 +56,7 @@ const Login = () => {
         console.log(response.data, "😎😎😎");
         result = response.data;
   
-        if (response.data === "") {
+        if (response.data === "" ) {
           alert("El usuario no existe");
         } else {
           localStorage.setItem("user", JSON?.stringify(result));
