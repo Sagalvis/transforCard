@@ -6,7 +6,6 @@ import TableInvoice from "./archiveTable/tableInvoice/tableInvoice";
 import TableServiceOrder from "./archiveTable/tableServiceOrder/tableServiceOrder";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
-// import Cards from "./cards";
 import {ContainMain} from "./styledMain";
 
 const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice}) => {
