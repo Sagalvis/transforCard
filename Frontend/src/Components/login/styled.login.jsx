@@ -49,10 +49,10 @@ export const ContenForm = styled.div`
 export const Form = styled.div`
   position: relative;
   background-color: #12213b;
-  width: 450px;
-  height: 100%;
+  width: 470px;
+  height: 95%;
   margin-left: 5rem;
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgb(0, 0, 0);
 `;
 
@@ -240,6 +240,15 @@ export const ContenParagrafh = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ButtonPassword = styled.button`
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Outfit';
+  font-size: 16px;
 `;
 
 export const ContainFooterLogin = styled.div`

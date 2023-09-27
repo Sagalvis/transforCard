@@ -19,14 +19,18 @@ import {
   InputBox,
   Label,
   Input,
+  ButtonPassword,
 } from "./styled.login";
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
 import axios from "axios";
+import Modals from '../admin/pages/archive/modals'
+import { ContainInfoModal, Paragraph } from "../admin/pages/header/styledHeader";
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const [handleOpenForgetPassword, setHandleOpenForgetPassword] = useState(false);
   const handleEmailChange = (e) => {
     const newEmail = e.target.value.toLowerCase().replace(/[^a-z.@]/g, "");
     setCorreo(newEmail);
@@ -49,7 +53,7 @@ const Login = () => {
           }
         );
         result = response.data;
-        if (response.data === "") {
+        if (response.data === "" ) {
           alert("El usuario no existe");
         } else {
           localStorage.setItem("user", JSON?.stringify(result));
@@ -70,6 +74,7 @@ const Login = () => {
 
   
   return (
+    <>
     <ContainLogin>
       <ContenLogin>
         <ContenTittle>
@@ -115,9 +120,9 @@ const Login = () => {
               </ContainButton>
             </ContainInputs>
             <ContenParagrafh>
-              <Paragrafh style={{ color: "white" }}>
-                ¿Olvidaste tu contraseña ?
-              </Paragrafh>
+              <ButtonPassword onClick={() => setHandleOpenForgetPassword(!handleOpenForgetPassword)}>
+                ¿Problemas para acceder?
+              </ButtonPassword>
             </ContenParagrafh>
           </Form>
         </ContenForm>
@@ -128,6 +133,21 @@ const Login = () => {
         </ContainFooterLogin>
       </ContenLogin>
     </ContainLogin>
+
+    {/* Modal para el boton de olvido su contraseña */}
+
+    <Modals
+    status={handleOpenForgetPassword}
+    changeStatus={setHandleOpenForgetPassword}
+    showCloseButton={true}
+    showHeader={true}
+    titleModal={'Ayuda de soporte'}
+    >
+      <ContainInfoModal>
+        <Paragraph>[Aqui texto]</Paragraph>
+      </ContainInfoModal>
+    </Modals>
+  </>
   );
 };
 

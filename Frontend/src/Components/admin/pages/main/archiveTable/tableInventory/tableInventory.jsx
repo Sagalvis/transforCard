@@ -139,7 +139,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 onChange={searching}
                 type="text"
                 title="Buscar producto"
-                placeholder="Nombre producto"
+                placeholder="Nombre del producto"
               />
             </ContainSearch>
           </ContainControls>
