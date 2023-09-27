@@ -4,7 +4,7 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/clientes")
       setCountCustomer(res.data)
-      console.log(res.data)
+      
     } catch (error) {
       console.log(error)
     }
@@ -14,7 +14,6 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/vehiculos")
       setCountVehicle(res.data)
-      console.log(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -24,7 +23,7 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/empleados")
       setCountEmployees(res.data)
-      console.log(res.data)
+      
     } catch (error) {
       console.log(error)
     }
@@ -34,7 +33,7 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/productos")
       setCountProduct(res.data)
-      console.log(res.data)
+      
     } catch (error) {
       console.log(error)
     }
@@ -44,7 +43,7 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/servicios")
       setCountService(res.data)
-      console.log(res.data)
+      
     } catch (error) {
       console.log(error)
     }
@@ -54,7 +53,7 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/ordenesdeservicio")
       setCountServiceOrder(res.data)
-      console.log(res.data)
+      
     } catch (error) {
       console.log(error)
     }
@@ -64,7 +63,7 @@ import axios from "axios"
     try {
       const res = await axios.get("http://localhost:3005/count/factura")
       setCountInvoice(res.data)
-      console.log(res.data)
+      
     } catch (error) {
       console.log(error)
     }

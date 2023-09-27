@@ -21,7 +21,7 @@ import {
   getServiceOrder,
   getVehicle,
 } from "../../../archive/funtionHome";
-import { Circle, LinesChart } from "./graphics/graphicsHome";
+import { GraphicsCustomer, GraphicsProduct, Earnings } from "./graphics/graphicsHome";
 
 const TableHome = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -58,7 +58,7 @@ const TableHome = () => {
                 <TittleCards>Clientes</TittleCards>
               </TittleCardsContain>
               <ContenCards>
-                <CardsParagraft>{item.Numero_clientes}</CardsParagraft>
+                <CardsParagraft className="counter">{item.Numero_clientes}</CardsParagraft>
               </ContenCards>
             </Cards>
           ))}
@@ -79,7 +79,7 @@ const TableHome = () => {
               <TittleCards>Productos más vendidos</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <Circle />
+              <GraphicsProduct />
             </ContenCards>
           </SmallGraphicsCards>
         </ContainCards>
@@ -145,7 +145,7 @@ const TableHome = () => {
               <TittleCards>Ganancias mes a mes</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <LinesChart />
+              <Earnings />
             </ContenCards>
           </LargeGraphicsCards>
         </ContainCards>
@@ -179,7 +179,7 @@ const TableHome = () => {
               <TittleCards>Clientes registrados</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <Circle />
+              <GraphicsCustomer />
             </ContenCards>
           </SmallGraphicsCards>
 

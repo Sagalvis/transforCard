@@ -29,20 +29,15 @@ import profile from '../../../assets/img/Imagen de WhatsApp 2023-09-26 a las 15.
 const Sidebar = () => {
   const { pathname } = useLocation();
   const useData = jwt_decode (localStorage.getItem("user"));
-  console.log(useData)
-
-
   const logOut = () => {
     localStorage.removeItem("user"); 
     window.location.href ="http://localhost:5173/"
   }
-  
   useEffect(() => {
     if (!useData){
       window.location.href ="http://localhost:5173/admin"
     }
   },[useData]);
-
   return (
     <ContaiSidebar>
       <ContainAll>

@@ -48,10 +48,7 @@ const Login = () => {
             contraseña: contraseña,
           }
         );
-  
-        console.log(response.data, "😎😎😎");
         result = response.data;
-  
         if (response.data === "") {
           alert("El usuario no existe");
         } else {
@@ -61,15 +58,13 @@ const Login = () => {
           }, 300);
         }
       } catch (error) {
-        console.error(error);
         alert("parto y/o contraseña no válidos");
       }
     } else {
       alert(
         "meto y/o contraseña no ingresados, por favor ingrese los campos requeridos"
       );
-    }
-  
+    } 
     return result;
   };
 
