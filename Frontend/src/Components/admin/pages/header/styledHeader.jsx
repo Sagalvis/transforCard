@@ -50,7 +50,26 @@ export const ContainTitleHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-`
+
+  .margin {
+    margin-right: 5px;
+    font-size: 25px;
+  }
+  .name {
+    text-transform: capitalize;
+    font-size: 25px;
+  }
+  .last-name {
+    text-transform: capitalize;
+    font-size: 25px;
+  }
+`;
+
+export const ContainName = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
 export const TitleH2 = styled.h2`
   font-size: 32px;
   font-weight: 500;
