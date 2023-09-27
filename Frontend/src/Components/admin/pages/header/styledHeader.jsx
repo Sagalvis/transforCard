@@ -59,15 +59,6 @@ export const ContainTitleHeader = styled.div`
     text-transform: capitalize;
     font-size: 25px;
   }
-  .last-name {
-    text-transform: capitalize;
-    font-size: 25px;
-  }
-`;
-
-export const ContainName = styled.div`
-  display: flex;
-  gap: 5px;
 `;
 
 export const TitleH2 = styled.h2`
