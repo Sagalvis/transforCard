@@ -1,6 +1,6 @@
 import  { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Pf } from './Forbidden';
+import { Pf } from '../admin/pages/notFoundPages';
 
 export const ContainNotfound = styled.div`
   display: flex;

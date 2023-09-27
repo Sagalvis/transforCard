@@ -84,3 +84,19 @@ export const CounterInvoice = async (req, res) => {
     });
   }
 }; 
+/* Final de las consulta para contar el contenido de las diferentes tabalas  */
+
+
+// Inicio consulta que permite obtener la cantidad de clientes por mes 
+
+export const JanuaryCustomer = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-01-01' AND '2023-01-31'")
+    res.send(row)
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}; 
