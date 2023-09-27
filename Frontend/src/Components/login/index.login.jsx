@@ -126,7 +126,7 @@ const Login = () => {
             </ContainInputs>
             <ContenParagrafh>
               <ButtonPassword onClick={() => setHandleOpenForgetPassword(!handleOpenForgetPassword)}>
-                ¿Olvidaste tu contraseña ?
+                ¿Problemas para acceder?
               </ButtonPassword>
             </ContenParagrafh>
           </Form>
@@ -146,7 +146,7 @@ const Login = () => {
     changeStatus={setHandleOpenForgetPassword}
     showCloseButton={true}
     showHeader={true}
-    titleModal={'Recupera tu contraseña'}
+    titleModal={'Ayuda de soporte'}
     >
       <ContainInfoModal>
         <Paragraph>[Aqui texto]</Paragraph>

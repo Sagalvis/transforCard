@@ -49,10 +49,10 @@ export const ContenForm = styled.div`
 export const Form = styled.div`
   position: relative;
   background-color: #12213b;
-  width: 450px;
-  height: 100%;
+  width: 470px;
+  height: 95%;
   margin-left: 5rem;
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgb(0, 0, 0);
 `;
 
