@@ -52,7 +52,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-
+  const [todo, setTodo] = useState([]);
   //funcion para traer los datos de la tabla a buscar
 
   //Función de busqueda
@@ -104,7 +104,20 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       console.log(error)
     }
   }
-  
+
+  //funcion para trarer servicio_cliente para poder validar si ya existe 
+  const getServiCliente = async () => {
+    try {
+      const getAll = await axios.get("hettp://localhost:3005/getAllServicesClient");
+      setTodo(getAll.data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    getServiCliente()
+  },[setTodo])
+
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
     setId2(item);
@@ -130,11 +143,13 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Funcion para enviar los servicios del cliente
   const postOrdenServiceCliente = async () =>{ 
     try {
-      await axios.post("http://localhost:3005/postOrdenServiceCliente",{
-        identificacion: id4,
-        id_orden: idOrden
-      });
-      console.log("registrado con exito")
+     
+        await axios.post("http://localhost:3005/postOrdenServiceCliente",{
+          identificacion: id4,
+          id_orden: idOrden
+        });
+        alert("registrado con exito")
+      
     } catch (error) {
       console.log(error)
     }
@@ -247,8 +262,13 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
                     <Buttons
                       onClick={() => {
-                        setHandleOrders(!handleOrders)
+                        if(todo.identificacion == id4 && todo.id_orden == idOrden){
+                          alert('ya se encuentra registrado');
+                        }else{
+                          setHandleOrders(!handleOrders)
                         setId4(item.identificacion)
+                        }
+                        
                       }}
                       title="Crear orden de servicio"
                     >

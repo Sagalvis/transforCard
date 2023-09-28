@@ -3,6 +3,24 @@ import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 const SECRET = "jesusessimpdehelena"
+
+//Middleware para verificar el token y asegurar rutas...
+export const verifyToken = async (req, res) => {
+  try{
+    let token = req.headers["x-access-token"];
+    if (!token){
+      return res.status(401).send({message: 'No hay un Token en la petición'});
+    }
+    //verificamos si es valido o no
+    let decoded = await jwt.verify(token ,SECRET);
+  }catch(error){
+      return  res.status(500).send("Error al autenticarse");
+  }
+}
+
+
+
+
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
@@ -246,7 +264,7 @@ export const postCreateFactura = async (req, res) => {
 }
 
 
- export const postCallService = async (req, res) => {
+export const postCallService = async (req, res) => {
   try{
     const { identificacion } = req.params;
     console.log(req.body);

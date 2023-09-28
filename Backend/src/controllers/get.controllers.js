@@ -192,9 +192,20 @@ export const getServiceCliente = async (req, res) => {
     });
   }
 };
-export const getAllServicesClient = async (req, res) => {
+export const getServicesClient = async (req, res) => {
   try {
     const [row] = await pool.query("select servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido from servicio_cliente inner join cliente on servicio_cliente.identificacion = cliente.identificacion group by identificacion")
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
+
+export const getAllServicesClient = async (req, res) => {
+  try {
+    const [row] = await pool.query("select * from servicio_cliente ")
     res.send(row)
   } catch (error) {
     return res.status(500).json({

@@ -31,7 +31,7 @@ const searching = (e) => {
 }; 
 //Funcion para mostrar los clientes a los cuales tienen asignado un servicio
 const getAllService = async ()=>{
-  const services = await axios.get("http://localhost:3005/getAllServicesClient")
+  const services = await axios.get("http://localhost:3005/getServicesClient")
   setOrden(services.data)
   console.log(services.data)
 }
