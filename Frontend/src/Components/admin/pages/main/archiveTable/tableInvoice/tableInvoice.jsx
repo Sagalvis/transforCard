@@ -106,12 +106,13 @@ const ModalContent = ({ data1 }) => {
   );
 };
 
-const TableInvoice = ({ deleteInvoice, printInvoice }) => {
+const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false);
+  const [delInvoice, setDelInvoice] = useState(null);
   const [save, setSave] = useState([]);
 
   //Funcion para traer los datos de la factura
@@ -143,6 +144,17 @@ const TableInvoice = ({ deleteInvoice, printInvoice }) => {
     );
   }
 
+  const deleteInvoice = async() => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      console.log(result);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   useEffect(() => {
     getInvoice();
   }, [setInvoice, setSave]);
@@ -173,6 +185,8 @@ const TableInvoice = ({ deleteInvoice, printInvoice }) => {
             <Tr>
               <Th>ID Factura</Th>
               <Th>ID Cliente</Th>
+              <Th>Nombres</Th>
+              <Th>Apellidos</Th>
               <Th>ID Orden</Th>
               <Th>Fecha de emisión</Th>
               <Th>Cantidad pagada</Th>
@@ -185,6 +199,8 @@ const TableInvoice = ({ deleteInvoice, printInvoice }) => {
               <Tr key={i}>
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
+                <Td>{item.nombre}</Td>
+                <Td>{item.apellido}</Td>
                 <Td>{item.id_orden}</Td>
                 <Td>{moment(item.fecha_emision).format("YYYY-MM-DD")}</Td>
                 <Td>{item.cantidad_pagada.toLocaleString()}</Td>
@@ -194,9 +210,9 @@ const TableInvoice = ({ deleteInvoice, printInvoice }) => {
                   <ButtonOptions>
                     <Buttons
                       title="Eliminar producto"
-                      onClick={() => setHandleDeleteInvoice(!handleDeleteInvoice)}
+                      onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); setDelInvoice(item)}}
                     >
-                      <i className={deleteInvoice}></i>
+                      <i className={deletInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">
                       <i
@@ -242,7 +258,7 @@ const TableInvoice = ({ deleteInvoice, printInvoice }) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); deleteInvoice()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

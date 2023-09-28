@@ -154,7 +154,7 @@ export const getProducto = async (req, res) => {
  export const getInvoices = async (req, res) => {
   try {
     const [row] = await pool.query(
-      `SELECT servicio_cliente.identificacion, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente`
+      `SELECT servicio_cliente.identificacion, cliente.nombre, cliente.apellido, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion`
     );
     console.log(row);
     res.send(row);
