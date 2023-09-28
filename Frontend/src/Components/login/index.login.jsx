@@ -52,25 +52,34 @@ const Login = () => {
             contraseña: contraseña,
           }
         );
-        result = response.data;
-        if (response.data === "" ) {
-          alert("El usuario no existe");
-        } else {
-          localStorage.setItem("user", JSON?.stringify(result));
+        if (response.status === 200) {
+          // El inicio de sesión fue exitoso, obtén el token
+          const token = response.data.token;
+          localStorage.setItem("user", JSON?.stringify(token));
           setTimeout(() => {
             window.location.href = "http://localhost:5173/admin";
           }, 300);
         }
       } catch (error) {
-        alert("parto y/o contraseña no válidos");
+        if (error.response && error.response.status === 401) {
+          // Contraseña incorrecta, muestra un mensaje en el frontend
+          alert("Contraseña incorrecta. Por favor, inténtelo de nuevo.");
+        } else {
+          alert(
+            "Correo no registrado, por favor ingresar correo valido"
+          );
+        }
       }
     } else {
       alert(
-        "meto y/o contraseña no ingresados, por favor ingrese los campos requeridos"
+        "Correo y/o contraseña no ingresados. Por favor, complete los campos requeridos."
       );
-    } 
+    }
     return result;
   };
+  
+  
+  
 
   
   return (
