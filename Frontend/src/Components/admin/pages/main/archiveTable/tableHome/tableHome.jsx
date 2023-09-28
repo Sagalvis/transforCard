@@ -76,7 +76,7 @@ const TableHome = () => {
 
           <SmallGraphicsCards>
             <TittleCardsContain>
-              <TittleCards>Productos más vendidos</TittleCards>
+              <TittleCards>Vehiculos registrados</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
               <GraphicsVehicle />
