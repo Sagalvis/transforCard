@@ -12,7 +12,7 @@ const Staff = () => {
     <>
     {/* Componente HEADER */}
     <Header
-    index='Empleados'
+    index='Mitarbeiter'
     indexIcon={'fa-solid fa-people-group'}
     titleButton={'Crear empleado'}
     titleModalPages={'Crear empleado nuevo'}

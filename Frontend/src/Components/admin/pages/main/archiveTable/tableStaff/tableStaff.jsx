@@ -82,7 +82,6 @@ const TableStaff = ({editStaff, deletStaff}) => {
           value={search}
           onChange={searching}
           type="text"
-          title="Buscar empleado" 
           placeholder="ID Empleado"/>
         </ContainSearch>
       </ContainControls>
@@ -94,10 +93,10 @@ const TableStaff = ({editStaff, deletStaff}) => {
           <Thead>
             <Tr>
               <Th>ID Empleado</Th>
-              <Th>Rol</Th>
-              <Th>Nombre</Th>
-              <Th>Apellido</Th>
-              <Th>Email</Th>
+              <Th>Rol actual</Th>
+              <Th>Nombres</Th>
+              <Th>Apellidos</Th>
+              <Th>E-mail</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -154,7 +153,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
       changePadding={"0px"}
       >
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro que quieres eliminar este cliente?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={deleteStaff}>Eliminar</Btn_Delete>
           </ButtonDelete>
