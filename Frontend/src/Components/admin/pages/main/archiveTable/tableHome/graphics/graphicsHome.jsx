@@ -11,6 +11,8 @@ import {
   Filler,
 } from "chart.js";
 import { Doughnut, Line } from "react-chartjs-2";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 ChartJS.register(
   ArcElement,
@@ -25,12 +27,21 @@ ChartJS.register(
 );
 
 export const GraphicsVehicle = () => {
+  const [dataVehicle, setDataVehicle] = useState([]);
+  const getVehicle = async () => {
+    const res = await axios.get("http://localhost:3005/DateVehicle");
+    setDataVehicle(res.data);
+}
+useEffect(()=>{
+  getVehicle();
+}, [setDataVehicle]);
+
   const Data = {
     labels: ["RED", "hola", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
         label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 30],
+        data: dataVehicle.map((item) => item.total),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -55,19 +66,34 @@ export const GraphicsVehicle = () => {
 };
 
 export const GraphicsCustomer = () => {
+  //Variable de estado para almacenar la consulta  que obtiene los clientes por mes
+  const [dataClient, setDataClient] = useState([]);
+  //Funcion para traer a los clientes por mes
+  const getCustomer = async () => {
+    const res = await axios.get("http://localhost:3005/Datecustomer");
+    setDataClient(res.data);
+};
+useEffect(()=>{
+  getCustomer();
+},[setDataClient]);
+
   const Data2 = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     datasets: [
       {
         label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        data: dataClient.map((item) => item.total),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
           "rgba(255, 206, 86, 0.2)",
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "rgba(23, 235, 164, 0.2)",
+          "rgba(255, 255, 64, 0.2)",
+          "rgba(144, 64, 255, 0.2)",
+          "rgba(64, 249, 255, 0.2)",
+          "rgba(83, 255, 64, 0.2)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
