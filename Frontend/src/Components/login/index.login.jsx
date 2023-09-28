@@ -65,7 +65,6 @@ const Login = () => {
           // Contraseña incorrecta, muestra un mensaje en el frontend
           alert("Contraseña incorrecta. Por favor, inténtelo de nuevo.");
         } else {
-          // Otro tipo de error
           alert(
             "Correo no registrado, por favor ingresar correo valido"
           );
