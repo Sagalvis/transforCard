@@ -21,5 +21,6 @@ getRouter.get('/factura', controllGet.getInvoices);
 getRouter.get('/getService', controllGet.getService);
 getRouter.get('/getServiceCliente/:identificacion', controllGet.getServiceCliente);
 getRouter.get('/getAllServicesClient', controllGet.getAllServicesClient);
+getRouter.get('/getCallService/:identificacion', controllGet.getCallService);
 
 export default getRouter

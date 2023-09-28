@@ -14,5 +14,5 @@ postRouter.post('/postinvoices', controllpost.postInvoices);
 postRouter.post('/postservice', controllpost.postOrdenService);
 postRouter.post('/postOrdenServiceCliente', controllpost.postOrdenServiceCliente);
 postRouter.post('/postCreateFactura', controllpost.postCreateFactura);
-postRouter.post('/postCallService/:identificacion', controllpost.postCallService);
+/* postRouter.post('/postCallService/:identificacion', controllpost.postCallService); */
 export default postRouter

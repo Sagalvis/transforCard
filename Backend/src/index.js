@@ -1,13 +1,14 @@
 /* Importacion de modulos */
 import express from "express";
 import cors from "cors";
-import jws from "jws";
+/* import jws from "jws"; */
 import getRouter from "./routes/get.routes.js";
 import postRouter from "./routes/post.routes.js";
 import patchRouter from "./routes/patch.routes.js";
 import deleteRouter from "./routes/delete.routes.js";
 import downloadRoutes from "./routes/download.routes.js";
 import queryHome from "./routes/home.routes.js";
+import {PORT} from './config.js'
 
 /* Se crea una instancia de aplicacion express y se almacena en la app */
 const app = express();
@@ -25,6 +26,6 @@ app.use(cors());
 app.use(getRouter, postRouter, patchRouter, deleteRouter, downloadRoutes, queryHome);
 
 /* Inicio del servidor y en donde va a escuchar el server */
-app.listen(3005, () => {
-  console.log("Server is running on port 3005");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 }); 
