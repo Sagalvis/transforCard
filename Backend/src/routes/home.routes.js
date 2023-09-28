@@ -13,6 +13,7 @@ queryHome.get("/count/factura", ControllerHome.CounterInvoice);
 /* Final de las consulta para contar el contenido de las diferentes tabalas  */
 
 // Inicio consulta que permite obtener la cantidad de clientes por mes 
-queryHome.get("/january/customer", ControllerHome.JanuaryCustomer);
+queryHome.get("/Datecustomer", ControllerHome.DateCustomer);
+queryHome.get("/Datevehicle", ControllerHome.DateVehicle);
 export default queryHome
 

@@ -80,7 +80,6 @@ const FormClient = () => {
         </ContainAlert>
       )}
 
-
       <ContainForm>
         <Form>
           <ContentInput>
@@ -172,7 +171,7 @@ const FormClient = () => {
           <ContentInput>
             <Input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder="E-mail"
               autoComplete="off"
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}

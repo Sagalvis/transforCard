@@ -95,7 +95,8 @@ const FormStaff = () => {
             onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
             
-            <Input type="text" placeholder="Apellidos" 
+            <Input type="text"
+            placeholder="Apellidos" 
             value={apellidos}
             onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
@@ -104,7 +105,7 @@ const FormStaff = () => {
           <ContentInput>
             <Input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder="E-mail"
               value={correo}
               onChange ={(e) => setCorreo(e.target.value.toLowerCase())}
               autoComplete="off"
@@ -129,6 +130,7 @@ const FormStaff = () => {
             placeholder="Teléfono" 
             value={telefono}
             onChange={(e)=> setTelefono(e.target.value.replace(/[^0-9]/g, ''))} 
+            maxLength={10}
             autoComplete="off"
             />
           </ContentInput>

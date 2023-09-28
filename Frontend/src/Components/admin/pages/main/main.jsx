@@ -60,8 +60,7 @@ const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleCon
         {/* Tabla de Facturación */}
         {showTableInvoice && (
           <TableInvoice 
-          editInvoice={"fa-solid fa-pen-to-square"}
-          deleteInvoice={"fa-solid fa-trash-can"}
+          deletInvoice={"fa-solid fa-trash-can"}
           printInvoice={"fa-solid fa-eye"}
           />
         )}

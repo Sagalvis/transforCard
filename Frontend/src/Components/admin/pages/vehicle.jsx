@@ -10,7 +10,7 @@ const Vehicle = () => {
     <>
     {/* Componente HEADER */}
     <Header 
-    index='Vehículos'
+    index='Fahrzeug Kontrolle'
     indexIcon={'fa-solid fa-car'}
     titleModalPages={'Crear vehiculo nuevo'}
     showContentVehicle={true}

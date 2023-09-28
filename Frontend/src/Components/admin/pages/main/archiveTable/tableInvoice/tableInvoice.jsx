@@ -16,13 +16,14 @@ import {
   Thead,
   Tr,
   ButtonPdf,
-  BtnPdf /* , ContainServices */,
+  BtnPdf
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
+import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
@@ -105,13 +106,13 @@ const ModalContent = ({ data1 }) => {
   );
 };
 
-const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
+const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
-  const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false);
+  const [delInvoice, setDelInvoice] = useState(null);
   const [save, setSave] = useState([]);
 
   //Funcion para traer los datos de la factura
@@ -130,6 +131,30 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     console.log(e.target.value);
   };
 
+  //Metodo de filtrado tabla cliente
+  let resultsInvoice = [];
+
+  if (!search) {
+    resultsInvoice = invoice || [];
+  } else {
+    resultsInvoice = invoice.filter(
+      (dato) =>
+        dato.identificacion &&
+        dato.identificacion.toString().includes(search.toString())
+    );
+  }
+
+  const deleteInvoice = async() => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      console.log(result);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   useEffect(() => {
     getInvoice();
   }, [setInvoice, setSave]);
@@ -147,7 +172,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
             value={search}
             onChange={searching}
             type="text"
-            title="Buscar cliente"
+            placeholder="ID Cliente"
           ></Input>
         </ContainSearch>
       </ContainControls>
@@ -158,20 +183,24 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>Id factura</Th>
-              <Th>Identificacion</Th>
-              <Th>Id orden</Th>
-              <Th>Fecha de emision</Th>
+              <Th>ID Factura</Th>
+              <Th>ID Cliente</Th>
+              <Th>Nombres</Th>
+              <Th>Apellidos</Th>
+              <Th>ID Orden</Th>
+              <Th>Fecha de emisión</Th>
               <Th>Cantidad pagada</Th>
               <Th>Estado de pago</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {invoice.map((item, i) => (
+            {resultsInvoice.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
+                <Td>{item.nombre}</Td>
+                <Td>{item.apellido}</Td>
                 <Td>{item.id_orden}</Td>
                 <Td>{moment(item.fecha_emision).format("YYYY-MM-DD")}</Td>
                 <Td>{item.cantidad_pagada.toLocaleString()}</Td>
@@ -180,16 +209,10 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
                 <Td>
                   <ButtonOptions>
                     <Buttons
-                      onClick={() => setHandleFormInvoice(!handleFormInvoice)}
-                      title="Editar producto"
-                    >
-                      <i className={editInvoice}></i>
-                    </Buttons>
-                    <Buttons
                       title="Eliminar producto"
-                      onClick={() => setHandleDeleteInvoice(!handleDeleteInvoice)}
+                      onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); setDelInvoice(item)}}
                     >
-                      <i className={deleteInvoice}></i>
+                      <i className={deletInvoice}></i>
                     </Buttons>
                     <Buttons title="Ver factura">
                       <i
@@ -208,19 +231,6 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
           </Tbody>
         </Table>
       </ContainTable>
-
-      <Modals
-        status={handleFormInvoice}
-        changeStatus={setHandleFormInvoice}
-        titleModal={"Editar item"}
-        changePosition={'start'}
-        showHeader={true}
-        showCloseButton={true}
-      >
-        <ContainInfoModal>
-          <h5>aqui va el formulario de edit.</h5>
-        </ContainInfoModal>
-      </Modals>
 
       <Modals
         status={handlePdfInvoice}
@@ -246,7 +256,10 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
       showHeader={true}
       >
         <ContainInfoModal>
-          <h4>esto es una prueba</h4>
+          <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
+          <ButtonDelete>
+            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); deleteInvoice()}}>Eliminar</Btn_Delete>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
     </>

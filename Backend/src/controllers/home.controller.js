@@ -89,9 +89,20 @@ export const CounterInvoice = async (req, res) => {
 
 // Inicio consulta que permite obtener la cantidad de clientes por mes 
 
-export const JanuaryCustomer = async (req, res) => {
+export const DateCustomer = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-01-01' AND '2023-01-31'")
+    const [row] = await pool.query("SELECT month(fecha_creacion) AS 'Mes', count(*) as 'total' FROM cliente GROUP BY month(fecha_creacion)")
+    res.send(row)
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}; 
+export const DateVehicle = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT month(fecha_creacion) AS 'Mes', count(*) as 'total' FROM vehiculo GROUP BY month(fecha_creacion)")
     res.send(row)
   } catch (error) {
     console.log(`Error: ${error}`)

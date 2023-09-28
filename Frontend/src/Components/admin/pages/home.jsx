@@ -8,7 +8,7 @@ const Home = () => {
     <>
       {/* Componente HEADER */}
       <Header
-        index={"Dashboard"}
+        index={"Armaturenbrett"}
         indexIcon={"fa-solid fa-chart-line"}
         titleButton={"Crear cliente"}
         titleHome={true}

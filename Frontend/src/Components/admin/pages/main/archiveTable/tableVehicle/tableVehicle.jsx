@@ -70,15 +70,15 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
           <Thead>
             <Tr>
               <Th>ID Vehículo</Th>
-              <Th>Cedula</Th>
+              <Th>ID Cliente</Th>
               <Th>Tipo</Th>
               <Th>Marca</Th>
               <Th>Modelo</Th>
               <Th>Año</Th>
               <Th>Color</Th>
-              <Th>T_Propiedad</Th>
-              <Th>Placa</Th>
-              <Th>VIN</Th>
+              <Th>Lic. Tránsito</Th>
+              <Th>Matrícula</Th>
+              <Th className="center">VIN</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -151,9 +151,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       changePosition={'start'}
       showHeader={true}
       showCloseButton={true}
+      changePadding={'0px'}
       >
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar este vehículo?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); deleteVehicle()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
