@@ -228,6 +228,18 @@ export const TextArea = styled.textarea`
   font-family: "Outfit";
   font-size: 15px;
   overflow-y: auto;
+    &.soporte{
+    width: 100%;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-family: "Outfit";
+  }
 `;
 
 export const ButtonRegister = styled.div`

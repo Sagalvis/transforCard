@@ -137,6 +137,19 @@ export const Input = styled.input`
   font-size: 1em;
   padding: 0 35px 0 5px;
   color: white;
+  &.soporte{
+    margin-top: 10px;
+    width: 100%;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-family: "Outfit";
+  }
 `;
 
 export const ContainButton = styled.div`
