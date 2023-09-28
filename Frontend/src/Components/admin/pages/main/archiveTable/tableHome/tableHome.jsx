@@ -21,7 +21,7 @@ import {
   getServiceOrder,
   getVehicle,
 } from "../../../archive/funtionHome";
-import { GraphicsCustomer, GraphicsProduct, Earnings } from "./graphics/graphicsHome";
+import { GraphicsCustomer, GraphicsVehicle, Earnings } from "./graphics/graphicsHome";
 
 const TableHome = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -79,7 +79,7 @@ const TableHome = () => {
               <TittleCards>Productos más vendidos</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <GraphicsProduct />
+              <GraphicsVehicle />
             </ContenCards>
           </SmallGraphicsCards>
         </ContainCards>

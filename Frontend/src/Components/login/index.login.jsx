@@ -41,6 +41,7 @@ const Login = () => {
     }
   };
   const Log = async () => {
+    
     let result = null;
   
     if (correo && contraseña) {
@@ -53,7 +54,6 @@ const Login = () => {
           }
         );
         if (response.status === 200) {
-          // El inicio de sesión fue exitoso, obtén el token
           const token = response.data.token;
           localStorage.setItem("user", JSON?.stringify(token));
           setTimeout(() => {
@@ -62,11 +62,10 @@ const Login = () => {
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          // Contraseña incorrecta, muestra un mensaje en el frontend
-          alert("Contraseña incorrecta. Por favor, inténtelo de nuevo.");
+          alert("Correo y/o contraseña incorrecta. Por favor, inténtelo de nuevo.");
         } else {
           alert(
-            "Correo no registrado, por favor ingresar correo valido"
+            "Correo y/o contraseña incorrecta. Por favor, inténtelo de nuevo."
           );
         }
       }
@@ -77,11 +76,6 @@ const Login = () => {
     }
     return result;
   };
-  
-  
-  
-
-  
   return (
     <>
     <ContainLogin>
@@ -106,6 +100,7 @@ const Login = () => {
                     value={correo}
                     onChange={handleEmailChange}
                     autoComplete="on"
+                    onKeyDown={handleKeyDown}
                     required
                   />
                   <Label>Email</Label>

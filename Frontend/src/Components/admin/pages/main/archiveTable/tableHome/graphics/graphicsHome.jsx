@@ -24,9 +24,9 @@ ChartJS.register(
   Filler
 );
 
-export const GraphicsProduct = () => {
+export const GraphicsVehicle = () => {
   const Data = {
-    labels: ["RED", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: ["RED", "hola", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
         label: "# of Votes",
@@ -129,6 +129,7 @@ export const Earnings = () => {
       y: {
         min: 0,
         ticks: { color: "rgb(255, 255, 255)" },
+        max:200
       },
       x: {
         ticks: { color: "rgb(255, 255, 255)" },
