@@ -181,7 +181,7 @@ if (!search) {
         </ContainAlert>
       )}
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro de querer eliminar esta orden?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar esta orden?</Paragraph>
           <ButtonDelete>
             <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceOrder()}} >Eliminar</Btn_Delete>
           </ButtonDelete>
@@ -193,13 +193,14 @@ if (!search) {
       status={handleShowServices}
       changeStatus={setHandleShowServices}
       showHeader={true}
-      titleModal={"Tus servicios"}
+      titleModal={"Servicios de cliente actual"}
       showCloseButton={true}
       changePosition={"start"}
-      changeWidth={"1000px"}
+      changeWidth={"1100px"}
       >
         <ContainInfoModal>
           <TableServiceClient
+          deleteService={"fa-solid fa-trash-can"}
           getcustomer = {id}
           />
         </ContainInfoModal>

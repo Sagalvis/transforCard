@@ -250,7 +250,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         changePosition={"start"}
         showHeader={true}
         showCloseButton={true}
-        changeWidth={"1200px"}
+        changeWidth={"1340px"}
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
@@ -316,7 +316,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         changePadding={"0px"}
       >
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro de querer eliminar este cliente?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
             <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); deleteClient()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
@@ -331,17 +331,18 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       showCloseButton={true}
       showHeader={true}
       changePosition={'start'}
-      changeWidth={'800px'}
+      changeWidth={'850px'}
       >
             <TitleService>
-              <Paragraph>Mantenimientos rapidos servicios rápidos para mantener el buen estado de mi carro.</Paragraph> 
+              <Paragraph>Mantenimientos rápidos.</Paragraph>
+              <Paragraph>Servicios rápidos para mantener el buen estado del vehículo.</Paragraph>
             </TitleService>
         <ContainInfoModal>
           <ContainServices>
           {ordServicio.map((item, index) => (
             <CardService key={index}>
               <Cuadro>
-                <Img src={aceite} alt="hh" />
+                <Img src={aceite}/>
               </Cuadro>
               <Title>
                 <Paragraph className="size">{item.nombre_serv}</Paragraph>
@@ -363,7 +364,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
               </ContainPrice>
             </CardService>
           ))}
-
+          
           </ContainServices>
         </ContainInfoModal>        
       </Modals>
