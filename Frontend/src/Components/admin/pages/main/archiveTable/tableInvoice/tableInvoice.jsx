@@ -16,7 +16,7 @@ import {
   Thead,
   Tr,
   ButtonPdf,
-  BtnPdf /* , ContainServices */,
+  BtnPdf
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
@@ -105,11 +105,10 @@ const ModalContent = ({ data1 }) => {
   );
 };
 
-const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
+const TableInvoice = ({ deleteInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
-  const [handleFormInvoice, setHandleFormInvoice] = useState(false);
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false);
   const [save, setSave] = useState([]);
@@ -130,6 +129,19 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
     console.log(e.target.value);
   };
 
+  //Metodo de filtrado tabla cliente
+  let resultsInvoice = [];
+
+  if (!search) {
+    resultsInvoice = invoice || [];
+  } else {
+    resultsInvoice = invoice.filter(
+      (dato) =>
+        dato.identificacion &&
+        dato.identificacion.toString().includes(search.toString())
+    );
+  }
+
   useEffect(() => {
     getInvoice();
   }, [setInvoice, setSave]);
@@ -147,7 +159,7 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
             value={search}
             onChange={searching}
             type="text"
-            title="Buscar cliente"
+            placeholder="ID Cliente"
           ></Input>
         </ContainSearch>
       </ContainControls>
@@ -158,17 +170,17 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>Id factura</Th>
-              <Th>Identificacion</Th>
-              <Th>Id orden</Th>
-              <Th>Fecha de emision</Th>
+              <Th>ID Factura</Th>
+              <Th>ID Cliente</Th>
+              <Th>ID Orden</Th>
+              <Th>Fecha de emisión</Th>
               <Th>Cantidad pagada</Th>
               <Th>Estado de pago</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {invoice.map((item, i) => (
+            {resultsInvoice.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.id_factura}</Td>
                 <Td>{item.identificacion}</Td>
@@ -179,12 +191,6 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
                 <Td>
                   <ButtonOptions>
-                    <Buttons
-                      onClick={() => setHandleFormInvoice(!handleFormInvoice)}
-                      title="Editar producto"
-                    >
-                      <i className={editInvoice}></i>
-                    </Buttons>
                     <Buttons
                       title="Eliminar producto"
                       onClick={() => setHandleDeleteInvoice(!handleDeleteInvoice)}
@@ -208,19 +214,6 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
           </Tbody>
         </Table>
       </ContainTable>
-
-      <Modals
-        status={handleFormInvoice}
-        changeStatus={setHandleFormInvoice}
-        titleModal={"Editar item"}
-        changePosition={'start'}
-        showHeader={true}
-        showCloseButton={true}
-      >
-        <ContainInfoModal>
-          <h5>aqui va el formulario de edit.</h5>
-        </ContainInfoModal>
-      </Modals>
 
       <Modals
         status={handlePdfInvoice}

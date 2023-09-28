@@ -9,7 +9,7 @@ const ServiceOrder = () => {
     <>
       {/* Componente HEADER */}
       <Header 
-      index={"Órden de servicio"} 
+      index={"Orden de servicio"} 
       indexIcon={"fa-solid fa-clipboard-check"} 
       titleButton={'Crear orden'}
       exportButton={'Exportar tabla cliente'}

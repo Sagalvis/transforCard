@@ -3,29 +3,20 @@ import { useEffect, useState } from "react";
 import {
   Btn_Delete,
   ButtonDelete,
-  /* ButtonHandle, */ ButtonOptions,
+  ButtonOptions,
   Buttons,
-  /* ContainCheck,
- */  ContainControls,
-  /* ContainHandlePage,
- */  ContainMaxData,
+  ContainControls,
+  ContainMaxData,
   ContainSearch,
   ContainTable,
-  /* ContainTextHandle,
-  ControlHandle, */
   Input,
   Label,
-  /* Li,
-  Option,
-  Select, */
   Table,
-  /* Tag_P_Handle, */
   Tbody,
   Td,
   Th,
   Thead,
   Tr,
-  /* Ul, */
 } from "./styledTableClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
@@ -162,24 +153,12 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
   return (
     <>
-      {/* <ContainCheck>
-        <Label type="checkbox">Empresas</Label>
-        <Input type="checkbox" />
-        <Label type="checkbox">Personas</Label>
-      </ContainCheck> */}
-
       {/* Controladores */}
 
       <ContainControls>
         {/* Control "CANTIDAD DE REGISTROS" */}
         <ContainMaxData>
           <Label type="select">Cantidad de registros</Label>
-          {/* <Select>
-            <Option value="option1">10</Option>
-            <Option value="option2">25</Option>
-            <Option value="option3">50</Option>
-            <Option value="option4">100</Option>
-          </Select> */}
         </ContainMaxData>
 
         {/* BUSCADOR */}
@@ -202,11 +181,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
           <Thead>
             <Tr>
               <Th>ID Cliente</Th>
-              <Th>Nombre</Th>
-              <Th>Apellido</Th>
-              <Th>Email</Th>
+              <Th>Nombres</Th>
+              <Th>Apellidos</Th>
+              <Th>E-mail</Th>
               <Th>Dirección</Th>
-              <Th>Celular</Th>
+              <Th>Teléfono</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -262,31 +241,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         </Table>
       </ContainTable>
 
-      {/* Contenedor manejo de paginas */}
-
-      {/* <ContainHandlePage>
-        <ContainTextHandle>
-          <Tag_P_Handle>
-            Mostrando registros del 1 al 2 de un total de 2 registros
-          </Tag_P_Handle>
-        </ContainTextHandle> */}
-
-      {/* Manejo de paginas */}
-      {/* <ControlHandle>
-          <Ul>
-            <Li>
-              <ButtonHandle>Anterior</ButtonHandle>
-            </Li>
-            <Li title="Pagina actual" className="button-li">
-              <a href="/">1</a>
-            </Li>
-            <Li>
-              <ButtonHandle>Siguiente</ButtonHandle>
-            </Li>
-          </Ul>
-        </ControlHandle>
-      </ContainHandlePage> */}
-
       {/* MODALES  */}
 
       <Modals
@@ -315,8 +269,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
             </BtnRegister>
 
             <BtnRegister
-              onClick={() => setHandleOpenFormVehicle(!handleOpenFormVehicle)}
-            >
+              onClick={() => setHandleOpenFormVehicle(!handleOpenFormVehicle)}>
               Crear vehículo
             </BtnRegister>
           </ButtonRegister>

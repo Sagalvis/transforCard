@@ -138,7 +138,6 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 value={search}
                 onChange={searching}
                 type="text"
-                title="Buscar producto"
                 placeholder="Nombre del producto"
               />
             </ContainSearch>
@@ -198,9 +197,11 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           changePosition={"start"}
           showHeader={true}
           showCloseButton={true}
+          changePadding={'0px'}
+
           >
             <ContainInfoModal>
-              <Paragraph>¿Estas seguro de querer eliminar este producto?</Paragraph>
+              <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); deleteProductInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
@@ -235,8 +236,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               value={search}
               onChange={searching}
               type="text"
-              title="Buscar servicio"
-              placeholder="ID_orden"
+              placeholder="ID Orden"
             />
           </ContainSearch>
         </ContainControls>
@@ -244,7 +244,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           <Table>
             <Thead>
               <Tr>
-                <Th>ID orden</Th>
+                <Th>ID Orden</Th>
                 <Th>Nombre del servicio</Th>
                 <Th>Descripción</Th>
                 <Th>Precio</Th>
@@ -290,9 +290,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           changePosition={"start"}
           showHeader={true}
           showCloseButton={true}
+          changePadding={'0px'}
           >
             <ContainInfoModal>
-              <Paragraph>¿Estas seguro de querer eliminar este servicio?</Paragraph>
+              <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteService(!handleDeleteService); deleteServiceInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
