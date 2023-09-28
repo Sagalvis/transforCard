@@ -192,9 +192,11 @@ export const getServiceCliente = async (req, res) => {
     });
   }
 };
+
+
 export const getAllServicesClient = async (req, res) => {
   try {
-    const [row] = await pool.query("select servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido from servicio_cliente inner join cliente on servicio_cliente.identificacion = cliente.identificacion group by identificacion")
+    const [row] = await pool.query("SELECT servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido FROM servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion GROUP BY identificacion")
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -202,6 +204,7 @@ export const getAllServicesClient = async (req, res) => {
     });
   }
 }
+
 
 export const getService = async (req, res) => {
   try {

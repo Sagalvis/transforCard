@@ -9,6 +9,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   //Variables de estados para almacenar las ordenes de servicio del cliente
   const [mapeo, setMapeo] = useState([])
   const [handleDeleteCustomerService, setHandleDeleteCustomerService] = useState(false);
+  const [delServiderOrder, setDelServiceOrder] = useState(null);
 
   //Funcion para traer todos los servicios del cliente
   const getOrdenService = async ()=> {
@@ -18,6 +19,16 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   useEffect(() => {
     getOrdenService()
   },[setMapeo])
+
+  const deleteServiceOrder = async() => {
+    try {
+      const result = await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiderOrder.id_servicio_cliente}`)
+      console.log(result);
+      setMapeo(mapeo.filter((v) => v.id_servicio_cliente !== delServiderOrder.id_servicio_cliente));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -58,7 +69,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
                   <ButtonOptions>
                     <Buttons
                     title="Eliminar servicio"
-                    onClick={() => setHandleDeleteCustomerService(!handleDeleteCustomerService)}
+                    onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); setDelServiceOrder(item)}}
                     >
                       <i className={deleteService}></i>
                     </Buttons>
@@ -82,7 +93,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este servicio?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

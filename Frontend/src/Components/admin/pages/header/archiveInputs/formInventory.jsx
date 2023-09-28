@@ -155,7 +155,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                   placeholder="Nombre del producto"
                   autoComplete="off"
                   required={true}
@@ -182,7 +182,7 @@ const FormInventory = () => {
                   className="width"
                   type="text"
                   value={costo}
-                  onChange={(e) => setCosto(e.target.value)}
+                  onChange={(e) => setCosto(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Costo"
                   autoComplete="off"
                   required={true}
@@ -192,7 +192,7 @@ const FormInventory = () => {
                   className="input-display"
                   type="text"
                   value={precioUnitario}
-                  onChange={(e) => setPrecioUnitario(e.target.value)}
+                  onChange={(e) => setPrecioUnitario(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Precio unitario"
                   maxLength={10}
                   autoComplete="off"
@@ -204,7 +204,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadComprada}
-                  onChange={(e) => setCantidadComprada(e.target.value)}
+                  onChange={(e) => setCantidadComprada(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad en comprada"
                   autoComplete="off"
                   required={true}
@@ -215,7 +215,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  onChange={(e) => setCantidadStock(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad en stock"
                   autoComplete="off"
                   required={true}
@@ -233,8 +233,8 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={ordenServicio}
-                  onChange={(e) => setOrdenServicio(e.target.value)}
-                  placeholder="id del servicio"
+                  onChange={(e) => setOrdenServicio(e.target.value.replace(/[^0-9]/g, ''))}
+                  placeholder="ID servicio"
                   autoComplete="off"
                   required={true}
                 />
@@ -243,7 +243,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombreServicio}
-                  onChange={(e) => setNombreServicio(e.target.value)}
+                  onChange={(e) => setNombreServicio(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                   placeholder="Nombre del servicio"
                   autoComplete="off"
                   required={true}
@@ -253,7 +253,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={precioServicio}
-                  onChange={(e) => setPrecioServicio(e.target.value)}
+                  onChange={(e) => setPrecioServicio(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Precio del servicio"
                   autoComplete="off"
                   required={true}
@@ -263,7 +263,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={tiempoEstimado}
-                  onChange={(e) => setTiempoEstimado(e.target.value)}
+                  onChange={(e) => setTiempoEstimado(e.target.value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase())}
                   placeholder="Tiempo estidamdo del servicio"
                   autoComplete="off"
                   required={true}
@@ -274,7 +274,7 @@ const FormInventory = () => {
                   type="text"
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
-                  placeholder="Descripcion del servicio"
+                  placeholder="Descripción del servicio"
                   autoComplete="off"
                   required={true}
                 />

@@ -6,6 +6,8 @@ export const ContainFooter = styled.div`
   width: 100%;
   padding: 0 24px;
   box-sizing: border-box;
+  border-top: solid 1px #e5e4e4;
+
   height: 8.3%;
 `;
 

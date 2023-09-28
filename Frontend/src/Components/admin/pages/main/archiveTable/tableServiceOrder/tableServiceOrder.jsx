@@ -15,7 +15,7 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   const [ordenService, setOrden] = useState([]);
   // Variable para eliminar orden de servicio
   const [handleDeleteServiceOrder, setHandleDeleteServiceOrder] = useState(false);
-  const [delServiceOrder, setDelServiceOrder] = useState(null);
+  const [delServiceCustomer, setDelServiceCustomer] = useState(null);
   const [idServCliente , setIdServCliente ] = useState("");
   const [cedula , setCedula ] = useState("");
   const [showAlertDeleteOrder, setShowAlertDeleteOrder] = useState(false);
@@ -53,9 +53,9 @@ if (!search) {
 }
 
   // Función para eliminar orden de servicio.
-  const deleteServiceOrder = async () => {
+  const deleteServiceCustomer = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
+      await axios.delete(`http://localhost:3005/deleteservicecustomer/${delServiceCustomer.identificacion}`);
       window.location.reload();
       setShowAlertDeleteOrder(true); 
     } catch (error) {
@@ -134,7 +134,7 @@ if (!search) {
                 <Td>
                   <ButtonOptions>
                     <Buttons
-                      onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); setDelServiceOrder(item)}}
+                      onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); setDelServiceCustomer(item)}}
                       title="Eliminar orden">
                       <i className={deleteOrder}></i>
                     </Buttons>
@@ -183,7 +183,7 @@ if (!search) {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar esta orden?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceOrder()}} >Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceCustomer()}} >Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

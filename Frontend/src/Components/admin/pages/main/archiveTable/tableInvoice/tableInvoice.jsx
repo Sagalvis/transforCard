@@ -20,9 +20,10 @@ import {
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
+import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
 const createPDF = async (data1) => {
   const pdfDoc = await PDFDocument.create();
@@ -239,7 +240,10 @@ const TableInvoice = ({ deleteInvoice, printInvoice }) => {
       showHeader={true}
       >
         <ContainInfoModal>
-          <h4>esto es una prueba</h4>
+          <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
+          <ButtonDelete>
+            <Btn_Delete>Eliminar</Btn_Delete>
+          </ButtonDelete>
         </ContainInfoModal>
       </Modals>
     </>
