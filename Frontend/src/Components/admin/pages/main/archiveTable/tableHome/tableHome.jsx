@@ -21,7 +21,7 @@ import {
   getServiceOrder,
   getVehicle,
 } from "../../../archive/funtionHome";
-import { Circle, LinesChart } from "./graphics/graphicsHome";
+import { GraphicsCustomer, GraphicsVehicle, Earnings } from "./graphics/graphicsHome";
 
 const TableHome = () => {
   const [CountCustomer, setCountCustomer] = useState([]);
@@ -53,17 +53,18 @@ const TableHome = () => {
       <HomeConten>
         <ContainCards>
           {CountCustomer.map((item, index) => (
-            <Cards key={index}>
+            <Cards key={index} to={"/admin/cliente"}>
               <TittleCardsContain>
                 <TittleCards>Clientes</TittleCards>
               </TittleCardsContain>
               <ContenCards>
-                <CardsParagraft>{item.Numero_clientes}</CardsParagraft>
+                <CardsParagraft className="counter">{item.Numero_clientes}</CardsParagraft>
               </ContenCards>
             </Cards>
           ))}
+
           {CountService.map((item, index) => (
-            <Cards key={index}>
+            <Cards key={index} to={"/admin/inventory"}>
               <TittleCardsContain>
                 <TittleCards>Servicios</TittleCards>
               </TittleCardsContain>
@@ -72,29 +73,36 @@ const TableHome = () => {
               </ContenCards>
             </Cards>
           ))}
+
           <SmallGraphicsCards>
             <TittleCardsContain>
-              <TittleCards>Productos más vendidos</TittleCards>
+              <TittleCards>Vehiculos registrados</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <Circle />
+              <GraphicsVehicle />
             </ContenCards>
           </SmallGraphicsCards>
         </ContainCards>
+
         <ContainCards style={{ width: "49%" }}>
           <CardsContain>
             {CountVehicle.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/vehicle"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
-                  <TittleCards>Vehiculos</TittleCards>
+                  <TittleCards>Control de vehículos</TittleCards>
                 </TittleCardsContain>
                 <ContenCards>
                   <CardsParagraft>{item.Numero_vehiculos}</CardsParagraft>
                 </ContenCards>
               </Cards>
             ))}
+
             {CountEmployees.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/employees"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Empleados</TittleCards>
                 </TittleCardsContain>
@@ -104,9 +112,12 @@ const TableHome = () => {
               </Cards>
             ))}
           </CardsContain>
+
           <CardsContain>
             {CountInvoice.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/invoice"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Ventas</TittleCards>
                 </TittleCardsContain>
@@ -116,7 +127,9 @@ const TableHome = () => {
               </Cards>
             ))}
             {CountProduct.map((item, index) => (
-              <Cards key={index} style={{ width: "48%", height: "100%" }}>
+              <Cards key={index} 
+              to={"/admin/inventory"}
+              style={{ width: "48%", height: "100%" }}>
                 <TittleCardsContain>
                   <TittleCards>Productos</TittleCards>
                 </TittleCardsContain>
@@ -132,13 +145,15 @@ const TableHome = () => {
               <TittleCards>Ganancias mes a mes</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <LinesChart />
+              <Earnings />
             </ContenCards>
           </LargeGraphicsCards>
         </ContainCards>
+
         <ContainCards>
           {CountServiceOrder.map((item, index) => (
-            <Cards key={index}>
+
+            <Cards key={index} to={"/admin/serviceorder"}>
               <TittleCardsContain>
                 <TittleCards>Ordenes de servicio</TittleCards>
               </TittleCardsContain>
@@ -147,25 +162,29 @@ const TableHome = () => {
               </ContenCards>
             </Cards>
           ))}
+
           <Cards>
             <TittleCardsContain>
               <TittleCards>Cargando...</TittleCards>
             </TittleCardsContain>
             <ContenCards>
-              <CardsParagraft style={{ fontSize: "2rem" }}>
+              <CardsParagraft className="size">
                 Cargando...
               </CardsParagraft>
             </ContenCards>
           </Cards>
+
           <SmallGraphicsCards>
             <TittleCardsContain>
               <TittleCards>Clientes registrados</TittleCards>
             </TittleCardsContain>
             <ContenCards style={{ height: "90%" }}>
-              <Circle />
+              <GraphicsCustomer />
             </ContenCards>
           </SmallGraphicsCards>
+
         </ContainCards>
+
       </HomeConten>
     </ContainerTableHome>
   );

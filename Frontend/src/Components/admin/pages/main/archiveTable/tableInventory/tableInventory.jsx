@@ -139,7 +139,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 onChange={searching}
                 type="text"
                 title="Buscar producto"
-                placeholder="Nombre producto"
+                placeholder="Nombre del producto"
               />
             </ContainSearch>
           </ContainControls>
@@ -246,6 +246,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               <Tr>
                 <Th>ID orden</Th>
                 <Th>Nombre del servicio</Th>
+                <Th>Descripción</Th>
                 <Th>Precio</Th>
                 <Th>Tiempo estimado</Th>
                 <Th>Opciones</Th>
@@ -257,7 +258,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                   <Td>{item.id_orden}</Td>
                   <Td>{item.nombre_serv}</Td>
                   <Td>{item.descripcion}</Td>
-                  <Td>{item.precio}</Td>
+                  <Td>{item.precio.toLocaleString()}</Td>
                   <Td>{item.tiempo_estimado}</Td>
 
                   <Td>

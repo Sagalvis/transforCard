@@ -51,7 +51,6 @@ const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleCon
         {/* Tabla de Orden de servicio */}
         {showTableServiceOrder && (
           <TableServiceOrder 
-          editOrder={"fa-solid fa-pen-to-square"}
           deleteOrder={"fa-solid fa-trash-can"}
           createServiceOrder={"fa-solid fa-file-invoice-dollar"}
           showServiceOrder={"fa-solid fa-folder-open"}
