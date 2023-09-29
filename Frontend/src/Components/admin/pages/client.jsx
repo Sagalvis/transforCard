@@ -8,7 +8,7 @@ const Client = () => {
     <>
       {/* Componente HEADER */}
       <Header
-      index={'Kunden'}
+      index={'Clientes'}
       indexIcon={'fa-solid fa-user-group'}
       titleButton={'Crear cliente'}
       exportButton={'Exportar tabla cliente'}

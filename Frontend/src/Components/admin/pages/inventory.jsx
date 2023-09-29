@@ -10,7 +10,7 @@ const Inventory = () => {
     <>
     {/* Componente HEADER  */}
     <Header
-    index='Inventar'
+    index='Inventario'
     indexIcon={'fa-solid fa-boxes-stacked'}
     titleButton={'Crear inventario'}
     titleModalPages={'Crear item nuevo'}

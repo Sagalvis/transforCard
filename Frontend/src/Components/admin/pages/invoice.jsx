@@ -8,7 +8,7 @@ const Invoice = () => {
     <>
     {/* Componente HEADER */}
     <Header
-    index='Rechnungen'
+    index='Facturación'
     indexIcon={'fa-solid fa-file-invoice'}
     titleButton={'Crear factura'}
     titleModalPages={'Crear factura nueva'}
