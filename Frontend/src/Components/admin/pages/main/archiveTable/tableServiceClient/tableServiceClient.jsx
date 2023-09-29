@@ -18,6 +18,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   }
   useEffect(() => {
     getOrdenService()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[setMapeo])
 
   const deleteServiceOrder = async() => {
