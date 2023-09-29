@@ -1,4 +1,4 @@
-  /* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
 import {
   ButtonOptions,
@@ -25,34 +25,6 @@ import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 
-
-const ModalContent = ({ data1 }) => {
-
-  return (
-    <div>
-      <>
-        <h4>Modal</h4>
-        <div>
-          <p>Id factura: {data1.id_factura}</p>
-          <p>Identificacion: {data1.identificacion}</p>
-          <p>Id orden: {data1.id_orden}</p>
-          <p>Fecha de emision: {moment.data1.fecha_emision}</p>
-          <p>Estado de pago: {data1.estado_pago}</p>
-          {value.map((value, i) =>{
-           <div key={i}>
-            <p>Servicios: {value.servicios}</p>
-            <p>Precio: {value.precio}</p>
-           </div>
-         })}
-          <p>Total pagado: {data1.cantidad_pagada}</p>
-        </div>
-
-        <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-      </>
-    </div>
-  );
-};
-
 const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
   // Variable de estado para filtrar busqueda
@@ -60,37 +32,32 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
-  const [id, setId] = useState()
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false)
-
+  const [delInvoice, setDelInvoice] = useState(null)
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
   //Funcion para traer los datos de la factura
-
-  const createPDF = async (data1) => {
+  const createPDF = async (data) => {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([400, 400]);
     const font = page.drawText("");
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
-    
-    
     const content = `
       Transforcars
       Direccion: Calle 47 #21-63
       Telefono: 3254587894
-      Id factura: ${data1.id_factura}
-      Identificacion: ${data1.identificacion}
-      Fecha de emision: ${data1.fecha_emision} 
-      Id orden: ${data1.id_orden}
+      Id factura: ${data.id_factura}
+      Identificacion: ${data.identificacion}
+      Fecha de emision: ${data.fecha_emision} 
+      Id orden: ${data.id_orden}
       Productos y Servicios:
-      ${value.map((item, i) =>`  
-           ${key(i)}
-           servicios: ${item.servicios}   precios: ${item.precio} $
+      ${value.map((item) =>`
+          servicios: ${item.servicios}   precios: $ ${item.precio} 
       `)}
       _________________________________________________________
-      Cantidad pagada: ${data1.cantidad_pagada} $
-      Estado de pago: ${data1.estado_pago}
+      Cantidad pagada: $ ${data.cantidad_pagada} 
+      Estado de pago: ${data.estado_pago}
     `;
   
     page.drawText(content, {
@@ -106,6 +73,33 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
     window.location.reload();
+  };
+
+  const ModalContent = ({ data }) => {
+
+    return (
+      <div>
+        <>
+          <h4>Modal</h4>
+          <div>
+            <p>Id factura: {data.id_factura}</p>
+            <p>Identificacion: {data.identificacion}</p>
+            <p>Id orden: {data.id_orden}</p>
+            <p>Fecha de emision: {moment.data.fecha_emision}</p>
+            <p>Estado de pago: {data.estado_pago}</p>
+            {value.map((value, i) =>{
+            <div key={i}>
+              <p>Servicios: {value.servicios}</p>
+              <p>Precio: {value.precio}</p>
+            </div>
+          })}
+            <p>Total pagado: {data.cantidad_pagada}</p>
+          </div>
+  
+          <BtnPdf onClick={() => createPDF(data)}>Crear PDF</BtnPdf>
+        </>
+      </div>
+    );
   };
 
   const getInvoice = async () => {
@@ -151,20 +145,21 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-  /*   lookVal(); */
+    lookServices(); 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setInvoice, setSave]);
 
- /*  console.log(lookVal);
+
 
   const lookServices = async (item) => {
     try {
-      const res = await axios.get(`http://localhost:3005/getCallService/${id}`);
-      console.log(res.data, "esto es el res");
+      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`);
+      console.log("esto es el res",res.data);
       setValue(res.data);
-     } catch (error) {
-       console.log(error);
-     }
-  }  */
+    } catch (error) {
+      console.log(error);
+    }
+  }  
 
   return (
     <>
@@ -225,8 +220,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                         className={printInvoice}
                         onClick={() => {
                           setHandlePdfInvoice(true);
-                          createPDF(item);
+                          createPDF(item, value);
                           ModalContent(item);
+                          lookServices(item);
                         }}
                       ></i>
                     </Buttons>
@@ -247,7 +243,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
         showCloseButton={true}
       >
         <ContainInfoModal>
-          <ModalContent data1={save} />
+          <ModalContent data={save} />
           <ButtonPdf></ButtonPdf>
         </ContainInfoModal>
       </Modals>

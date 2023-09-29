@@ -97,18 +97,6 @@ export const getTypeClient = async (req, res) => {
   }
 };
 
-/* Consulta para traer toda la tabla tipo de pais */
-
-export const getSelectPais = async (req, res) => {
-  try {
-    const [row] = await pool.query("SELECT * FROM pais");
-    res.send(row);
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
-  }
-};
 
 /* Consulta para traer toda la tabla inventario */
 
@@ -125,7 +113,7 @@ export const getInventario = async (req, res) => {
   }
 };
 
-/* Inicio de consultas para traer tipo item, medida y producto */
+/* Inicio de consultas para traer tipo medida y producto */
 
 export const getMedida = async (req, res) => {
   try {
@@ -151,7 +139,7 @@ export const getProducto = async (req, res) => {
 
 /* consultas para traer facturas */
 
- export const getInvoices = async (req, res) => {
+export const getInvoices = async (req, res) => {
   try {
     const [row] = await pool.query(
       `SELECT servicio_cliente.identificacion, cliente.nombre, cliente.apellido, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion`
@@ -165,20 +153,22 @@ export const getProducto = async (req, res) => {
   }
 }; 
 
-/* export const getInvoicesId = async (req, res) => {
+
+//Funcion para mostrar en la factura todos los servicios del cliente
+export const getInvoicesServices = async (req, res) => {
   try {
     const [row] = await pool.query(
-      `SELECT servicio_cliente.identificacion, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente WHERE id_factura = ?`,
-      [req.params.id_factura]
+      `SELECT identificacion, id_orden from servicio_cliente group by id_orden having identificacion = ?`,
+      [req.params.identificacion]
     );
     console.log(row);
-    res.send(row[0]);
+    res.send(row);
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor",
     });
   }
-};*/
+};
 
 export const getServiceCliente = async (req, res) => {
   try {
