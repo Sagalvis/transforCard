@@ -23,8 +23,6 @@ const FormStaff = () => {
       apellidos === "" ||
       correo === "" ||
       contraseña === "" ||
-      direccion === "" ||
-      telefono === ""||
       selectRol === ""
     ) {
       e.preventDefault();
@@ -125,25 +123,6 @@ const FormStaff = () => {
             />
           </ContentInput>
 
-          <ContentInput>
-            <Input type="tel" 
-            placeholder="Teléfono" 
-            value={telefono}
-            onChange={(e)=> setTelefono(e.target.value.replace(/[^0-9]/g, ''))} 
-            maxLength={10}
-            autoComplete="off"
-            />
-          </ContentInput>
-
-          <ContentInput>
-            <Input type="text" 
-            placeholder="Dirección" 
-            value={direccion}
-            onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
-            autoComplete="off" 
-            required
-            />
-          </ContentInput>
         </Form>
       </ContainForm>
 

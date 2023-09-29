@@ -43,7 +43,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-
+  
+ const [todo, setTodo] = useState([]);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //funcion para traer los datos de la tabla a buscar
@@ -101,7 +102,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //funcion para trarer servicio_cliente para poder validar si ya existe 
   const getServiCliente = async () => {
     try {
-      const getAll = await axios.get("hettp://localhost:3005/getAllServicesClient");
+      const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`);
       setTodo(getAll.data);
     } catch (error) {
       console.log(error)

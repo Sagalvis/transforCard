@@ -61,6 +61,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
   const [id, setId] = useState()
+  const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false)
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
