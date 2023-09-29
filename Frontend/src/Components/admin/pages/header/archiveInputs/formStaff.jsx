@@ -8,7 +8,6 @@ const FormStaff = () => {
   const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-
   const [tipoRol, setTipoRol] = useState([]);
 
   const [selectRol, setSeletRol] = useState(0);
@@ -57,6 +56,7 @@ const FormStaff = () => {
       setTipoRol(responseRol.data)
     }
     fetchdata()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (
     <>
