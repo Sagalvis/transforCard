@@ -103,10 +103,14 @@ export default Login;
 export const Log = async (correo, contraseña) => {
   let result = null;
 
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+  console.log(apiBaseBack, '😎😎😎😎😎😎🧰🧰🧰'); 
+  const apiBaseFront = import.meta.env.VITE_URL_FRONTEND; 
+
   if (correo && contraseña) {
     try {
       const response = await axios.post(
-        "http://localhost:3005/postLoginEmployees",
+        `${apiBaseBack}/postLoginEmployees`,
         {
           correo: correo,
           contraseña: contraseña,
@@ -115,16 +119,15 @@ export const Log = async (correo, contraseña) => {
 
       console.log(response.data, "😎😎😎");
       result = response.data;
-
       if (response.data === "") {
         alert("El usuario no existe");
       } else {
-        localStorage.setItem("user", JSON?.stringify(result));
-        setTimeout(() => {
-          window.location.href = "http://localhost:5173/admin";
+         localStorage.setItem("user", JSON?.stringify(result)); 
+         setTimeout(() => {
+          window.location.href = `${apiBaseFront}/admin`; 
         }, 300);
       }
-    } catch (error) {
+    } catch (error) { 
       console.error(error);
       alert("Usuario y/o contraseña no válidos");
     }

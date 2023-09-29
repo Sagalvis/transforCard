@@ -45,6 +45,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
   const [id, setId] = useState()
+
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
   //Funcion para traer los datos de la factura
 
@@ -91,7 +93,8 @@ const TableInvoice = ({ editInvoice, deleteInvoice, printInvoice }) => {
 
   const getInvoice = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/factura");
+      
+      const res = await axios.get(`${apiBaseBack}/factura`);
       setInvoice(res.data);
       console.log("factura",res.data)
       

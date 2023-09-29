@@ -24,6 +24,8 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
     setSearch(e.target.value);
     console.log(e.target.value);
   };
+
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
   //Metodo de filtrado tabla control de vehiculos
   let resultsVehicleControl = [];
@@ -40,7 +42,8 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   
   const getVehicle = async () => {
     try {
-      const res = await axios.get(`http://localhost:3005/vehicle`);
+      
+      const res = await axios.get(`${apiBaseBack}/vehicle`);
       setVehicle(res.data);
     } catch (error) {
       console.log(error);
@@ -49,7 +52,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
 
   const deleteVehicle = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deletevehicle/${delVehicle.matricula}`);
+      await axios.delete(`${apiBaseBack}/deletevehicle/${delVehicle.matricula}`);
       setShowAlertDeleteVehicle(true);
       window.location.reload();
     } catch (error) {

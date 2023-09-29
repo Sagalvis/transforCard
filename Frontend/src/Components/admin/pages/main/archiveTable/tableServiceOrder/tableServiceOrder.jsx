@@ -55,7 +55,8 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceOrder = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
+      const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+      await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
       window.location.reload();
       setShowAlertDeleteOrder(true); 
     } catch (error) {
@@ -77,7 +78,8 @@ if (!search) {
 
   const postCreateFactura = () => {
     try {
-      axios.post("http://localhost:3005/postCreateFactura",{
+      const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+      axios.post(`${apiBaseBack}/postCreateFactura`,{
         identificacion : cedula,
         id_servicio_cliente: idServCliente
       })

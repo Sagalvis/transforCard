@@ -20,19 +20,25 @@ import { useEffect } from "react"
 
 
 const Sidebar = () => {
+
+ 
+
   const { pathname } = useLocation();
   const useData = jwt_decode (localStorage.getItem("user"));
   console.log(useData)
+  var apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
 
-
-  const logOut = () => {
+  const logOut = () => { 
+    console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
     localStorage.removeItem("user"); 
-    window.location.href ="http://localhost:5173/"
+    window.location.href =`${apiBaseFront}`
+    console.log();
   }
   
   useEffect(() => {
     if (!useData){
-      window.location.href ="http://localhost:5173/admin"
+      console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
+      window.location.href =`${apiBaseFront}/admin`
     }
   },[useData]);
 

@@ -14,7 +14,7 @@ const FormStaff = () => {
 
   const [selectRol, setSeletRol] = useState(0);
 
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear empleados */
   const handleSumit = async (e) => {
     if (
@@ -31,7 +31,7 @@ const FormStaff = () => {
       alert("Por favor llenar todos los campos");
     } else {
       await axios
-        .post("http://localhost:3005/postemployees", {
+        .post(`${apiBaseBack}/postemployees`, {
           id_empleado: identification,
           nombre: nombres,
           apellido: apellidos,
@@ -58,7 +58,7 @@ const FormStaff = () => {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const responseRol = await axios.get("http://localhost:3005/tiporol");
+      const responseRol = await axios.get(`${apiBaseBack}/tiporol`);
       setTipoRol(responseRol.data)
     }
     fetchdata()

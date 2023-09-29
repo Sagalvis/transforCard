@@ -15,7 +15,7 @@ const FormClient = () => {
   const [selectTipoPais, setSelectTipoPais] = useState(0);
   const [seletTipoCliente, setSelectTipoCliente] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
     if (
@@ -33,7 +33,7 @@ const FormClient = () => {
       alert("Por favor llenar todos los campos");
     } else {
       await axios
-        .post("http://localhost:3005/postcustomer", {
+        .post(`${apiBaseBack}/postcustomer`, {
           identificacion: identification,
           nombre: nombres,
           apellido: apellidos,
@@ -60,10 +60,10 @@ const FormClient = () => {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const responsePais = await axios.get("http://localhost:3005/tipopais");
+      const responsePais = await axios.get(`${apiBaseBack}/tipopais`);
       setTipoPais(responsePais.data);
       const responseCliente = await axios.get(
-        "http://localhost:3005/tipocliente"
+        `${apiBaseBack}/tipocliente`
       );
       setTipoCliente(responseCliente.data);
     };

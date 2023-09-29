@@ -8,7 +8,8 @@ const TableServiceClient = ({getcustomer}) => {
   const [mapeo, setMapeo] = useState([])
   //Funcion para traer todos los servicios del cliente
   const getOrdenService = async ()=> {
-    const res = await axios.get(`http://localhost:3005/getServiceCliente/${getcustomer}`);
+    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+    const res = await axios.get(`${apiBaseBack}/getServiceCliente/${getcustomer}`);
     setMapeo(res.data)
   }
   useEffect(() => {

@@ -2,7 +2,7 @@
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
-const SECRET = "jesusessimpdehelena"
+import { SECRET_KEY } from "../config.js";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
@@ -104,7 +104,7 @@ export const postLoginEmployees = async (req, res) => {
       console.log(compassword);
       console.log({id: rows[0].id_empleado});
       if (compassword) {
-        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET, {
+        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET_KEY, {
           expiresIn: "1h",
         });
         res.status(200).json(token);
