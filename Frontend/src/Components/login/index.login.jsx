@@ -24,6 +24,7 @@ import {
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
 import axios from "axios";
+import Alert from '@mui/material/Alert'
 /* import Modals from "../admin/pages/archive/modals";
 import { ContainInfoModal } from "../admin/pages/header/styledHeader"; */
 /* import {
@@ -34,6 +35,8 @@ import { ContainInfoModal } from "../admin/pages/header/styledHeader"; */
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+
 /*   const [handleOpenSupport, setHandleOpenSupport] = useState(false); */
 /*   const [validationCorreo, setValidationCorreo] = useState(""); */
   const handleEmailChange = (e) => {
@@ -126,6 +129,14 @@ const Login = () => {
 
   return (
     <>
+    {showAlert && (
+        <ContainAlert>
+        <Alert severity="success" color="success">
+          ¡Cliente registrado!
+          </Alert>
+        </ContainAlert>
+      )}
+      
       <ContainLogin>
         <ContenLogin>
           <ContenTittle>
@@ -248,8 +259,8 @@ export const Log = async (correo, contraseña) => {
       if (response.data === "") {
         alert("El usuario no existe");
       } else {
-         localStorage.setItem("user", JSON?.stringify(result)); 
-         setTimeout(() => {
+        localStorage.setItem("user", JSON?.stringify(result)); 
+        setTimeout(() => {
           window.location.href = `${apiBaseFront}/admin`; 
         }, 300);
       }

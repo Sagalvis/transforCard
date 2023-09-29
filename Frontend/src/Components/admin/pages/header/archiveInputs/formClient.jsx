@@ -14,7 +14,6 @@ const FormClient = () => {
   const [tipoPais, setTipoPais] = useState([]);
   const [selectTipoPais, setSelectTipoPais] = useState(0);
   const [seletTipoCliente, setSelectTipoCliente] = useState(0);
-  const [showAlert, setShowAlert] = useState(false);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -72,14 +71,6 @@ const FormClient = () => {
 
   return (
     <>
-      {showAlert && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Cliente registrado!
-          </Alert>
-        </ContainAlert>
-      )}
-
       <ContainForm>
         <Form>
           <ContentInput>
