@@ -49,10 +49,10 @@ export const ContenForm = styled.div`
 export const Form = styled.div`
   position: relative;
   background-color: #12213b;
-  width: 30%;
-  height: 100%;
+  width: 470px;
+  height: 95%;
   margin-left: 5rem;
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgb(0, 0, 0);
 `;
 
@@ -137,6 +137,19 @@ export const Input = styled.input`
   font-size: 1em;
   padding: 0 35px 0 5px;
   color: white;
+  &.soporte{
+    margin-top: 10px;
+    width: 100%;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-family: "Outfit";
+  }
 `;
 
 export const ContainButton = styled.div`
@@ -240,6 +253,15 @@ export const ContenParagrafh = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ButtonPassword = styled.button`
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Outfit';
+  font-size: 16px;
 `;
 
 export const ContainFooterLogin = styled.div`

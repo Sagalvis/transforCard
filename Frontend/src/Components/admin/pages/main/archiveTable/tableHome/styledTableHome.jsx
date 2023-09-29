@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import {Link} from "react-router-dom"
 
 export const ContainerTableHome = styled.div`
   /* background-color: red; */
@@ -8,9 +9,10 @@ export const ContainerTableHome = styled.div`
 
 /* Este componente esta creado para más adelante hacerle un scroll */
 export const HomeConten = styled.div`
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   /* background-color: #15ff00; */
 `;
@@ -24,6 +26,14 @@ export const ContainCards = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+const right = keyframes`
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(0)
+  }
+`;
 
 export const CardsContain = styled.div`
   /* background-color: aliceblue; */
@@ -33,10 +43,11 @@ export const CardsContain = styled.div`
   justify-content: space-around;
 `
 
-export const Cards = styled.div`
+export const Cards = styled(Link)`
   width: 98%;
   height: 20%;
   background-color: #041737;
+  text-decoration: none;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.732);
   transform-style: preserve-3d;
@@ -44,7 +55,7 @@ export const Cards = styled.div`
   perspective: 1000px;
   color: white;
   &:hover {
-    transform: rotateY(10deg);
+    transform: rotateY(12deg);
   }
 `;
 
@@ -63,6 +74,10 @@ export const TittleCards = styled.h2`
   font-weight: 300;
   font-family: "Outfit";
   margin-left: 5px;
+
+  @media ( max-width: 1039px ) {
+    font-size: 1rem;
+  }
 `;
 
 export const ContenCards = styled.div`
@@ -78,6 +93,14 @@ export const ContenCards = styled.div`
 export const CardsParagraft = styled.p`
   margin: 0;
   font-size: 4.6rem;
+
+  &.size {
+    font-size: 1.5rem;
+  }
+  @media ( max-width: 1039px ) {
+    font-size: 3rem;
+  }
+  animation: ${right} .5s ease;
 `;
 
 export const SmallGraphicsCards = styled.div`

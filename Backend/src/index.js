@@ -1,7 +1,6 @@
 /* Importacion de modulos */
 import express from "express";
 import cors from "cors";
-/* import jws from "jws"; */
 import getRouter from "./routes/get.routes.js";
 import postRouter from "./routes/post.routes.js";
 import patchRouter from "./routes/patch.routes.js";

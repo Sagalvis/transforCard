@@ -81,7 +81,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
           onChange={searching}
           type="text"
           title="Buscar vehículo"
-          placeholder="Tarjeta de propiedad" />
+          placeholder="Lic. Tránsito" />
         </ContainSearch>
       </ContainControls>
 
@@ -92,14 +92,14 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
           <Thead>
             <Tr>
               <Th>ID Vehículo</Th>
-              <Th>Cedula</Th>
+              <Th>ID Cliente</Th>
               <Th>Tipo</Th>
               <Th>Marca</Th>
               <Th>Modelo</Th>
               <Th>Año</Th>
               <Th>Color</Th>
-              <Th>T.Propiedad</Th>
-              <Th>Placa</Th>
+              <Th>Lic. Tránsito</Th>
+              <Th>Matrícula</Th>
               <Th>VIN</Th>
               <Th>Opciones</Th>
             </Tr>

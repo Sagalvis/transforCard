@@ -95,28 +95,33 @@ export const postVehicle = async (req, res) => {
 export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
-    console.log(req.body);
-      const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
+    const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
     
-    console.log(rows[0])
     if (rows.length > 0) {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
-      console.log(compassword);
-      console.log({id: rows[0].id_empleado});
+
       if (compassword) {
         const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET_KEY, {
           expiresIn: "1h",
         });
-        res.status(200).json(token);
-        console.log(token)
+        
+        // Envía el token si la contraseña es correcta
+        res.status(200).json({ token });
+        
+      } else {
+        // Envía un mensaje de error si la contraseña es incorrecta
+        res.status(401).json({ error: "Contraseña incorrecta" });
+
       }
     } else {
-      res.status(400).send("El usuario no existe🤦‍♂🤦‍♂");
+      // Envía un mensaje de error si el usuario no existe
+      res.status(404).json({ error: "El usuario no existe" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Error del servidor 💀💀💀" });
-}
+    res.status(500).json({ error: "Error del servidor 💀💀💀" });
+  }
 };
+
 
 /* consulta para crear productos en el inventario */
 
@@ -141,7 +146,6 @@ export const postInventario = async (req, res) => {
         precio_unitario,
         cantidad_en_stock,
         cantidad_vendida,
-
         id_medida,
         id_producto,
       ]
@@ -154,7 +158,6 @@ export const postInventario = async (req, res) => {
       precio_unitario,
       cantidad_en_stock,
       cantidad_vendida,
-
       id_medida,
       id_producto,
     });
@@ -246,6 +249,36 @@ export const postCreateFactura = async (req, res) => {
 }
 
 
+export const postCallService = async (req, res) => {
+  try{
+    const { identificacion } = req.params;
+    console.log(req.body);
+    const [ row ] = await pool.query("SELECT cliente.identificacion, orden_servicio.nombre_serv AS servicios, orden_servicio.precio AS precio FROM servicio_cliente INNER JOIN orden_servicio ON servicio_cliente.id_orden = orden_servicio.id_orden INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion WHERE cliente.identificacion = ?",[identificacion]);
+    res.json({
+      message: "Se ha generado la factura",
+      row 
+    });
+  }catch(error){
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+} 
 
+export const validationCorreoSoporte = async (req, res) => {
+  try {
+    const {correo} = req.body;
+    const [rows] = await pool.query("SELECT correo FROM empleado WHERE correo = ?", [correo]);
+    if(rows.length > 0){
+      res.status(200).json({exists: true});
+    } else {
+      res.status(404).json({exists: false})
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
 
 

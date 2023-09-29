@@ -116,7 +116,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                   placeholder="Nombre del producto"
                   autoComplete="off"
                   required={true}
@@ -143,7 +143,7 @@ const FormInventory = () => {
                   className="width"
                   type="text"
                   value={costo}
-                  onChange={(e) => setCosto(e.target.value)}
+                  onChange={(e) => setCosto(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Costo"
                   autoComplete="off"
                   required={true}
@@ -153,7 +153,7 @@ const FormInventory = () => {
                   className="input-display"
                   type="text"
                   value={precioUnitario}
-                  onChange={(e) => setPrecioUnitario(e.target.value)}
+                  onChange={(e) => setPrecioUnitario(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Precio unitario"
                   maxLength={10}
                   autoComplete="off"
@@ -165,7 +165,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadComprada}
-                  onChange={(e) => setCantidadComprada(e.target.value)}
+                  onChange={(e) => setCantidadComprada(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad comprada"
                   autoComplete="off"
                   required={true}
@@ -176,7 +176,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  onChange={(e) => setCantidadStock(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad en stock"
                   autoComplete="off"
                   required={true}

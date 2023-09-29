@@ -129,6 +129,32 @@ export const deleteServiceInventory = async (req, res) => {
   }
 };
 
+// Consulta para eliminar el cliente completo con sus ordenes de servicio
+
+export const deleteServiceCustomer = async (req, res) => {
+  try {
+    const { identificacion } = req.params;
+    const [row] = await pool.query(
+      "DELETE FROM servicio_cliente WHERE identificacion = ? ",
+      [identificacion]
+    );
+    if (row.affectedRows === 0) {
+      return res.status(404).json({
+        message: "No se encontró el servicio.",
+      });
+    }
+    res.send({
+      message: "Servicio eliminado correctamente",
+      identificacion,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+};
+
+
 /* Consulta para eliminar ordenes de la tabla orden de servicio */
 
 export const deleteServiceOrder = async (req, res) => {
@@ -140,12 +166,38 @@ export const deleteServiceOrder = async (req, res) => {
     );
     if (row.affectedRows === 0) {
       return res.status(404).json({
-        message: "No se encontró la orden",
+        message: "No se encontró el servicio.",
       });
     }
     res.send({
-      message: "Orden eliminada correctamente",
+      message: "Servicio eliminado correctamente",
       id_servicio_cliente,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+};
+
+
+// Consulta para eliminar una facturación. 
+
+export const deleteInvoice = async (req, res) => {
+  try {
+    const { id_factura } = req.params;
+    const [row] = await pool.query(
+      "DELETE FROM factura WHERE id_factura = ? ",
+      [id_factura]
+    );
+    if (row.affectedRows === 0) {
+      return res.status(404).json({
+        message: "No se encontró la factura.",
+      });
+    }
+    res.send({
+      message: "Factura eliminada correctamente",
+      id_factura,
     });
   } catch (error) {
     return res.status(500).json({

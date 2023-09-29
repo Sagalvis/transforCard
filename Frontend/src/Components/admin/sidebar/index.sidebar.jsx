@@ -1,10 +1,15 @@
 import { ButtonNarbar1 } from "./archive/arrayNavbar";
 import {
+  ButtonLog,
+  Circle,
   ContaiSidebar,
   ContainAll,
   ContainLogo,
-  ContainPerfil,
-  ContenPerfil,
+  ContentCircle,
+  ContentLogout,
+  ContentName,
+  ContentProfile,
+  Image,
   LogoSidebar,
   NavConten,
   NavIcon,
@@ -12,11 +17,13 @@ import {
   NavTittle,
   Navbar,
   NavbarContain,
+  P,
 } from "./styled.sidebar";
 import Logo from "../../../assets/svg/transforCars-01.svg";
 import jwt_decode from "jwt-decode"
 import { useLocation  } from "react-router-dom";
 import { useEffect } from "react"
+import profile from '../../../assets/img/Imagen de WhatsApp 2023-09-26 a las 15.23.58.jpg'
 
 
 const Sidebar = () => {
@@ -34,14 +41,12 @@ const Sidebar = () => {
     window.location.href =`${apiBaseFront}`
     console.log();
   }
-  
   useEffect(() => {
     if (!useData){
       console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
       window.location.href =`${apiBaseFront}/admin`
     }
   },[useData]);
-
   return (
     <ContaiSidebar>
       <ContainAll>
@@ -60,22 +65,24 @@ const Sidebar = () => {
               </NavConten>
             ))}
           </NavbarContain>
-          <ContainPerfil>
-            <ContenPerfil>
-              <NavIcon>
-                <i className="fa-solid fa-user"></i>
-              </NavIcon>
-              <NavTittle className="user-name">{useData.nombre} {useData.apellido}</NavTittle>
-            </ContenPerfil>
-            <ContenPerfil style={{ display: "flex", justifyContent: "center" }}>
-              <NavLinks onClick={logOut} style={{ width: "25px" }}>
-                <NavIcon>
-                  <i className="fa-solid fa-power-off"></i>
-                </NavIcon>
-              </NavLinks>
-              <NavTittle >{useData.rol}</NavTittle>
-            </ContenPerfil>
-          </ContainPerfil>
+
+          <ContentProfile>
+
+            <ContentCircle>
+            <Circle>
+              <Image src={profile} alt="" />
+            </Circle>
+            </ContentCircle>
+
+            <ContentName>
+              <P>{useData.nombre} {useData.apellido}</P>
+              <P className="rol">{useData.rol}</P>
+            </ContentName>
+
+            <ContentLogout onClick={logOut}>
+              <ButtonLog>Cerrar sesión</ButtonLog>
+            </ContentLogout>
+          </ContentProfile>
         </Navbar>
       </ContainAll>
     </ContaiSidebar>
