@@ -67,6 +67,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
   }
   useEffect(() => {
     getEmployees();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setEmployees]);
   return (
     <>
