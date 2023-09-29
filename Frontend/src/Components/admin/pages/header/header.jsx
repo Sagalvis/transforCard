@@ -46,9 +46,11 @@ const Header = ({
 
   const useData = jwt_decode (localStorage.getItem("user"));
   const handleDownloadCustomer = async () => {
+
+    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
     try {
       const response = await axios.get(
-        "http://localhost:3005/downdloadcustomer",
+        `${apiBaseBack}/downdloadcustomer`,
         { responseType: "arraybuffer" }
       );
       const blob = new Blob([response.data], {

@@ -36,11 +36,11 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Variable de estado de eliminar servicio
   const [handleDeleteService, setHandleDeleteService] = useState(false);
   const [delService, setDelService] = useState(null);
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   const getOrdenService = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/getService");
+      const res = await axios.get(`${apiBaseBack}/getService`);
       setOrdenService(res.data)
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   }
   const getInventario = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/inventario");
+      const res = await axios.get(`${apiBaseBack}/inventario`);
       setInventario(res.data);
     } catch (error) {
       console.log(error);
@@ -102,7 +102,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar producto de inventario
   const deleteProductInventory = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
+      await axios.delete(`${apiBaseBack}/deleteproduct/${delProduct.id_inventario}`);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -112,7 +112,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteservice/${delService.id_orden}`);
+      const result = await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
       console.log(result);
     } catch (error) {
       console.log(error);

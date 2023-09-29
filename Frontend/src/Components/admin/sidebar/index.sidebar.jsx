@@ -27,15 +27,24 @@ import profile from '../../../assets/img/Imagen de WhatsApp 2023-09-26 a las 15.
 
 
 const Sidebar = () => {
+
+ 
+
   const { pathname } = useLocation();
   const useData = jwt_decode (localStorage.getItem("user"));
-  const logOut = () => {
+  console.log(useData)
+  var apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
+
+  const logOut = () => { 
+    console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
     localStorage.removeItem("user"); 
-    window.location.href ="http://localhost:5173/"
+    window.location.href =`${apiBaseFront}`
+    console.log();
   }
   useEffect(() => {
     if (!useData){
-      window.location.href ="http://localhost:5173/admin"
+      console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
+      window.location.href =`${apiBaseFront}/admin`
     }
   },[useData]);
   return (

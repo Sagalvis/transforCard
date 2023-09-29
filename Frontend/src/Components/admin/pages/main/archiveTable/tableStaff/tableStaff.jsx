@@ -23,9 +23,11 @@ const TableStaff = ({editStaff, deletStaff}) => {
     setHandleEditEmployee(!handleEditEmployee)
     setEmpleadoId(item)
   }
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   const getEmployees = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/employees");
+      
+      const res = await axios.get(`${apiBaseBack}/employees`);
       setEmployees(res.data);
     } catch (error) {
       console.log(error);
@@ -53,8 +55,9 @@ const TableStaff = ({editStaff, deletStaff}) => {
 
   const deleteStaff = async () => {
     try {
+      
       const result = await axios.delete(
-        `http://localhost:3005/deleteemployees/${idempleado.id_empleado}`
+        `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`
       );
       console.log(result);
       window.location.reload()
@@ -64,6 +67,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
   }
   useEffect(() => {
     getEmployees();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setEmployees]);
   return (
     <>

@@ -19,6 +19,7 @@ const FormVehicle = ({getCustomer3}) => {
   const [showAlert, setShowAlert] = useState(false);
   const [selectVehicle, setSelectVehicle] = useState(0);
   
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear vehiculos */
   const handletSumit = async (e) => {
     if (
@@ -36,7 +37,7 @@ const FormVehicle = ({getCustomer3}) => {
       alert("Por favor llenar todos los campos");
     } else {
       await axios
-        .post("http://localhost:3005/postvehicle", {
+        .post(`${apiBaseBack}/postvehicle`, {
           matricula: matricula,
           tarjetaPropiedad: tarjetaPropiedad,
           marca: marca,
@@ -68,7 +69,7 @@ const FormVehicle = ({getCustomer3}) => {
   useEffect(()=>{
     const fetchdata = async () =>{
       const responseVehicle = await axios.get(
-        "http://localhost:3005/tipovehicle"
+        `${apiBaseBack}/tipovehicle`
       );
       setTipo_vehiculo(responseVehicle.data)
     }

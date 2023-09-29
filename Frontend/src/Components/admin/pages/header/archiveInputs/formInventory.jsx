@@ -38,43 +38,27 @@ const FormInventory = () => {
   };
 
   //Funcion para crear un producto
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   const handletSumitProduct = async (e) => {
     try {
       e.preventDefault();
-      if (
-        nombre === "" ||
-        costo === "" ||
-        cantidadComprada === "" ||
-        precioUnitario === "" ||
-        cantidadStock === "" ||
-        tipoMedida === "" ||
-        tipoProducto === "" ||
-        selectMedida === "" ||
-        selectProducto === ""
-      ) {
-        
-        alert("llenar todos los campos");
-      } else {
-        await axios
-          .post("http://localhost:3005/postinventory", {
-            nombre: nombre,
-            costo: parseInt(costo),
-            cantidad_comprada: parseInt(cantidadComprada),
-            precio_unitario: parseInt(precioUnitario),
-            cantidad_en_stock: parseInt(cantidadStock),
-            id_medida: selectMedida,
-            id_producto: selectProducto,
-          })
-          
-          .then((Response) => {
-            
-            console.log(Response.data);
-            setShowAlert(true);
-          });
-        }
-    } catch (error) {
-      console.log(error)
+      alert("llenar todos los campos");
+    } catch {
+       await axios
+        .post(`${apiBaseBack}/postinventory`, {
+          nombre: nombre,
+          costo: parseInt(costo),
+          cantidad_comprada: parseInt(cantidadComprada),
+          precio_unitario: parseInt(precioUnitario),
+          cantidad_en_stock: parseInt(cantidadStock),
+          id_medida: selectMedida,
+          id_producto: selectProducto,
+        })
+        .then((Response) => {
+          console.log(Response.data);
+          setShowAlert(true);
+        });
+      window.location.reload();
     }
   };
 
@@ -85,7 +69,8 @@ const FormInventory = () => {
       e.preventDefault();
       alert("Llenar todos los campos")
     }else {
-      await axios.post("http://localhost:3005/postservice",{
+      await axios.post(`${apiBaseBack}/postservice`,{
+        id_orden: ordenServicio,
         nombre_serv: nombreServicio,
         descripcion: descripcion,
         precio: parseInt(precioServicio),
@@ -99,11 +84,11 @@ const FormInventory = () => {
   useEffect(() => {
     const fetchdata = async () => {
       const responseMedida = await axios.get(
-        "http://localhost:3005/tipomedida"
+        `${apiBaseBack}/tipomedida`
       );
       setTipoMedida(responseMedida.data);
       const responseProducto = await axios.get(
-        "http://localhost:3005/tipoproducto"
+        `${apiBaseBack}http://localhost:3005/tipoproducto`
       );
       setTipoProducto(responseProducto.data);
     };

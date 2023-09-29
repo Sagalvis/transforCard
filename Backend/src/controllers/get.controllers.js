@@ -224,3 +224,21 @@ export const getService = async (req, res) => {
     });
   }
 };
+
+
+
+export const getCallService = async (req, res) => {
+  try{
+    const { identificacion } = req.params;
+    console.log(req.body);
+    const [ row ] = await pool.query("SELECT orden_servicio.nombre_serv AS servicios, orden_servicio.precio AS precio FROM servicio_cliente INNER JOIN orden_servicio ON servicio_cliente.id_orden = orden_servicio.id_orden INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion WHERE cliente.identificacion = ?",[identificacion]);
+    res.json({
+      message: "Se ha generado la factura",
+      row
+    });
+  }catch(error){
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+} 

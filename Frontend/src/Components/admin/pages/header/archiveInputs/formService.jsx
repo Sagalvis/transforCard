@@ -16,7 +16,9 @@ const FormInventory = () => {
   const [selectMedida, setSelectMedida] = useState(0);
   const [selectProducto, setSelectProducto] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
+  
 
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -34,7 +36,7 @@ const FormInventory = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3005/postinventory", {
+      const response = await axios.post(`${apiBaseBack}/postinventory`, {
         nombre,
         costo: parseInt(costo),
         cantidad_comprada: parseInt(cantidadComprada),
@@ -55,13 +57,13 @@ const FormInventory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseItem = await axios.get("http://localhost:3005/tipoitem");
+        const responseItem = await axios.get(`${apiBaseBack}/tipoitem`);
         setTipoItem(responseItem.data);
 
-        const responseMedida = await axios.get("http://localhost:3005/tipomedida");
+        const responseMedida = await axios.get(`${apiBaseBack}/tipomedida`);
         setTipoMedida(responseMedida.data);
 
-        const responseProducto = await axios.get("http://localhost:3005/tipoproducto");
+        const responseProducto = await axios.get(`${apiBaseBack}/tipoproducto`);
         setTipoProducto(responseProducto.data);
       } catch (error) {
         console.error(error);

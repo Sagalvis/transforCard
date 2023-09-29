@@ -43,7 +43,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-  const [todo, setTodo] = useState([]);
+  
+ const [todo, setTodo] = useState([]);
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
   //funcion para traer los datos de la tabla a buscar
 
   //Función de busqueda
@@ -80,7 +83,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   // Funcion para traer toda la tabla clientes
   const getCustomer = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/customer");
+      const res = await axios.get(`${apiBaseBack}/customer`);
       setCustomer(res.data);
     } catch (error) {
       console.log(error);
@@ -89,7 +92,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Funcion para trae los servicios
   const getServices = async () =>{
     try {
-      const res = await axios.get("http://localhost:3005/getService");
+      const res = await axios.get(`${apiBaseBack}/getService`);
       setOrdService(res.data);
     } catch (error) {
       console.log(error)
@@ -99,7 +102,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //funcion para trarer servicio_cliente para poder validar si ya existe 
   const getServiCliente = async () => {
     try {
-      const getAll = await axios.get("hettp://localhost:3005/getAllServicesClient");
+      const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`);
       setTodo(getAll.data);
     } catch (error) {
       console.log(error)
@@ -134,13 +137,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Funcion para enviar los servicios del cliente
   const postOrdenServiceCliente = async () =>{ 
     try {
-     
-        await axios.post("http://localhost:3005/postOrdenServiceCliente",{
-          identificacion: id4,
-          id_orden: idOrden
-        });
-        alert("registrado con exito")
-      
+      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`,{
+        identificacion: id4,
+        id_orden: idOrden
+      });
+      console.log("registrado con exito")
     } catch (error) {
       console.log(error)
     }
@@ -153,7 +154,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const deleteClient = async () => {
     try {
       await axios.delete(
-        `http://localhost:3005/deletecustomer/${selectedItem}`
+        `${apiBaseBack}/deletecustomer/${selectedItem}`
       );
       setCustomer(customer.filter((c)=>c.identificacion !== selectedItem))
     } catch (error) {

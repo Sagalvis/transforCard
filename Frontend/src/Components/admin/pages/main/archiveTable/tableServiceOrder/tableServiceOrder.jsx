@@ -22,7 +22,7 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   // Variable de estado para abrir el modal de servicios del cliente
   const [handleShowServices, setHandleShowServices] = useState(false);
   const [id, setId] = useState("");
-  
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
 //Función de busqueda
 const searching = (e) => {
@@ -31,7 +31,7 @@ const searching = (e) => {
 }; 
 //Funcion para mostrar los clientes a los cuales tienen asignado un servicio
 const getAllService = async ()=>{
-  const services = await axios.get("http://localhost:3005/getServicesClient")
+  const services = await axios.get(`${apiBaseBack}/getServicesClient`)
   setOrden(services.data)
   console.log(services.data)
 }
@@ -55,7 +55,8 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceCustomer = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteservicecustomer/${delServiceCustomer.identificacion}`);
+      const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+      await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiceCustomer.id_servicio_cliente}`);
       window.location.reload();
       setShowAlertDeleteOrder(true); 
     } catch (error) {
@@ -77,7 +78,8 @@ if (!search) {
 
   const postCreateFactura = () => {
     try {
-      axios.post("http://localhost:3005/postCreateFactura",{
+      
+      axios.post(`${apiBaseBack}/postCreateFactura`,{
         identificacion : cedula,
         id_servicio_cliente: idServCliente
       })

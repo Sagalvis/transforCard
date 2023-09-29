@@ -2,25 +2,7 @@
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
-const SECRET = "jesusessimpdehelena"
-
-//Middleware para verificar el token y asegurar rutas...
-export const verifyToken = async (req, res) => {
-  try{
-    let token = req.headers["x-access-token"];
-    if (!token){
-      return res.status(401).send({message: 'No hay un Token en la petición'});
-    }
-    //verificamos si es valido o no
-    let decoded = await jwt.verify(token ,SECRET);
-  }catch(error){
-      return  res.status(500).send("Error al autenticarse");
-  }
-}
-
-
-
-
+import { SECRET_KEY } from "../config.js";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
@@ -119,7 +101,7 @@ export const postLoginEmployees = async (req, res) => {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
 
       if (compassword) {
-        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET, {
+        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET_KEY, {
           expiresIn: "1h",
         });
         
