@@ -52,11 +52,23 @@ export const Pf = styled.p`
     font-size: 200px;
     color: #000000;
   }
+  &.http2 {
+    letter-spacing: 20px;
+    margin: 0;
+    font-size: 200px;
+    color: #ffffff;
+  }
   &.text {
     margin: 0;
     font-size: 16px;
     letter-spacing: 0.5px;
     color: #000000;
+  }
+  &.text2 {
+    margin: 0;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #ffffff;
   }
 `;
 
