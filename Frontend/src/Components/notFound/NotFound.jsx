@@ -2,16 +2,6 @@ import  { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Pf } from '../admin/pages/notFoundPages';
 
-export const ContainNotfound = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background: #131313;
-  font-family: 'Outfit', sans-serif;
-`;
 
 const NotFound = () => {
   const [currentCount, setCurrentCount] = useState(0);
@@ -33,11 +23,22 @@ const NotFound = () => {
   return (
     <>
       <ContainNotfound title="404">
-        <Pf className="http">{currentCount}</Pf>
-        <Pf className="text">No se encontró la página esperada</Pf>
+        <Pf className="http2">{currentCount}</Pf>
+        <Pf className="text2">No se encontró la página esperada</Pf>
       </ContainNotfound>
     </>
   );
 };
 
 export default NotFound;
+
+  export const ContainNotfound = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: #131313;
+    font-family: 'Outfit', sans-serif;
+  `;

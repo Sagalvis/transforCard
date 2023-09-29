@@ -11,8 +11,6 @@ const FormClient = () => {
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
   const [tipoCliente, setTipoCliente] = useState([]);
-  const [tipoPais, setTipoPais] = useState([]);
-  const [selectTipoPais, setSelectTipoPais] = useState(0);
   const [seletTipoCliente, setSelectTipoCliente] = useState(0);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
@@ -25,8 +23,8 @@ const FormClient = () => {
       direccion === "" ||
       telefono === "" ||
       
-      seletTipoCliente === "" ||
-      selectTipoPais === ""
+      seletTipoCliente === "" 
+
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
@@ -39,7 +37,6 @@ const FormClient = () => {
           correo: correo,
           direccion: direccion,
           tel: telefono,
-          idpais: selectTipoPais,
           id_tipo_cliente: seletTipoCliente,
         })
           setShowAlert(true);
@@ -54,19 +51,17 @@ const FormClient = () => {
     setDireccion("");
     setTelefono("");
     setSelectTipoCliente(0);
-    setSelectTipoPais(0);
   };
 
   useEffect(() => {
     const fetchdata = async () => {
-      const responsePais = await axios.get(`${apiBaseBack}/tipopais`);
-      setTipoPais(responsePais.data);
       const responseCliente = await axios.get(
         `${apiBaseBack}/tipocliente`
       );
       setTipoCliente(responseCliente.data);
     };
     fetchdata();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -124,18 +119,6 @@ const FormClient = () => {
           </ContentInput>
 
           <ContentInput className="display">
-            <Select
-              className="select-display"
-              value={selectTipoPais}
-              onChange={(e) => setSelectTipoPais(e.target.value)}
-            >
-              <Option value="0">-Seleccione tipo de país-</Option>
-              {tipoPais.map((item, i) => (
-                <Option key={i} value={item.id_pais}>
-                  {item.id_pais}-{item.nombrePais}
-                </Option>
-              ))}
-            </Select>
             <Input
               className="input-display"
               type="tel"

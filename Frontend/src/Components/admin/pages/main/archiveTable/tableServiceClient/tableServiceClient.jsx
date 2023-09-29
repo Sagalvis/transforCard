@@ -19,6 +19,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   }
   useEffect(() => {
     getOrdenService()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[setMapeo])
 
   const deleteServiceOrder = async() => {
@@ -65,7 +66,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
                 <Td>{item.nombre_serv}</Td>
-                <Td>{item.precio.toLocaleString()}</Td>
+                <Td>$ {item.precio.toLocaleString()}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons

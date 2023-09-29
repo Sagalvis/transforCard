@@ -10,7 +10,6 @@ import {
   Paragrafh,
   ContainLogo,
   ContainInputs,
-  ContenParagrafh,
   LogoLogin,
   TittleInputs,
   ContenInputs,
@@ -19,29 +18,20 @@ import {
   InputBox,
   Label,
   Input,
-/*   ButtonPassword, */
 } from "./styled.login";
 import Logologin from "../../assets/svg/transforCars-01.svg";
 import { useState } from "react";
 import axios from "axios";
-import Alert from '@mui/material/Alert'
-/* import Modals from "../admin/pages/archive/modals";
-import { ContainInfoModal } from "../admin/pages/header/styledHeader"; */
-/* import {
-  BtnRegister,
-  ContentInput,
-} from "../admin/pages/header/archiveInputs/formStaff"; */
-/* import emailjs from "@emailjs/browser"; */
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-
-/*   const [handleOpenSupport, setHandleOpenSupport] = useState(false); */
-/*   const [validationCorreo, setValidationCorreo] = useState(""); */
   const handleEmailChange = (e) => {
     const newEmail = e.target.value.toLowerCase().replace(/[^a-z.@]/g, "");
     setCorreo(newEmail);
+  };
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+{}[\]?~\\/-]/g, "");
+    setContraseña(newPassword);
   };
   const handleKeyDownLogin = (e) => {
     if (e.key === "Enter") {
@@ -87,45 +77,6 @@ const Login = () => {
     }
     return result;
   };
-/*   const handleKeyDownSuport = (e) => {
-    if (e.key === "Enter") {
-      ValidationCorreoSoporte();
-    }
-  }; */
-/*   const ValidationCorreoSoporte = async () => {
-    if (!validationCorreo) {
-      alert("Por favor llenar los campos requeridos");
-    } else {
-      try {
-        const results = await axios.post(
-          "http://localhost:3005/validacioncorreo",
-          {
-            correo: validationCorreo,
-          }
-        );
-        if (results.status === 200) {
-          alert("El correo sí existe");
-          sendEmail(validationCorreo);
-        }
-      } catch (error) {
-        alert("No se encuentra registrado");
-      }
-    }
-  }; */
-
-/*   const sendEmail = (user_name) => {
-    const templateParams = {
-      to_email: user_name,
-    };
-
-    emailjs.send("service_i2vcjs8","template_awfdivp",templateParams,"1xoGXbVmimfJFEmQ-")
-      .then((response) => {
-        console.log("Correo electrónico enviado con éxito:", response);
-      })
-      .catch((error) => {
-        console.error("Error al enviar el correo electrónico:", error);
-      });
-  }; */
 
   return (
     <>
@@ -171,9 +122,8 @@ const Login = () => {
                     <Input
                       type="password"
                       value={contraseña}
-                      onChange={(e) =>
-                        setContraseña(e.target.value)}
-                        maxLength={20}
+                      onChange={handlePasswordChange}
+                      maxLength={20}
                       onKeyDown={handleKeyDownLogin}
                       required
                     />
@@ -184,13 +134,6 @@ const Login = () => {
                   <ButtonLogin onClick={Log}>INGRESAR</ButtonLogin>
                 </ContainButton>
               </ContainInputs>
-              <ContenParagrafh>
-{/*                 <ButtonPassword
-                  onClick={() => setHandleOpenSupport(!handleOpenSupport)}
-                >
-                  ¿Problemas para acceder?
-                </ButtonPassword> */}
-              </ContenParagrafh>
             </Form>
           </ContenForm>
           <ContainFooterLogin>
@@ -203,68 +146,37 @@ const Login = () => {
         </ContenLogin>
       </ContainLogin>
 
-      {/* Modal para el boton de pedir soporte */}
-
-{/*       <Modals
-        status={handleOpenSupport}
-        changeStatus={setHandleOpenSupport}
-        showCloseButton={true}
-        showHeader={true}
-        titleModal={"Ayuda de soporte"}
-      >
-        <ContainInfoModal>
-          <ContentInput>
-            <Paragrafh>
-              Ingresar correo electronico para solicitar ayuda de soporte
-            </Paragrafh>
-            <Input
-              className="soporte"
-              name="user_email"
-              value={validationCorreo}
-              onChange={(e) => setValidationCorreo(e.target.value)}
-              onKeyDown={handleKeyDownSuport}
-              placeholder="Correo electronico"
-            />
-          </ContentInput>
-          <BtnRegister onClick={ValidationCorreoSoporte}>Enviar</BtnRegister>
-        </ContainInfoModal>
-      </Modals> */}
     </>
   );
 };
 
 export default Login;
 
-
-
 export const Log = async (correo, contraseña) => {
   let result = null;
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-  console.log(apiBaseBack, '😎😎😎😎😎😎🧰🧰🧰'); 
-  const apiBaseFront = import.meta.env.VITE_URL_FRONTEND; 
+  console.log(apiBaseBack, "😎😎😎😎😎😎🧰🧰🧰");
+  const apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
 
   if (correo && contraseña) {
     try {
-      const response = await axios.post(
-        `${apiBaseBack}/postLoginEmployees`,
-        {
-          correo: correo,
-          contraseña: contraseña,
-        }
-      );
+      const response = await axios.post(`${apiBaseBack}/postLoginEmployees`, {
+        correo: correo,
+        contraseña: contraseña,
+      });
 
       console.log(response.data, "😎😎😎");
       result = response.data;
       if (response.data === "") {
         alert("El usuario no existe");
       } else {
-        localStorage.setItem("user", JSON?.stringify(result)); 
+        localStorage.setItem("user", JSON?.stringify(result));
         setTimeout(() => {
-          window.location.href = `${apiBaseFront}/admin`; 
+          window.location.href = `${apiBaseFront}/admin`;
         }, 300);
       }
-    } catch (error) { 
+    } catch (error) {
       console.error(error);
       alert("Usuario y/o contraseña no válidos");
     }
