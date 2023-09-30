@@ -1,6 +1,6 @@
 import {Router} from "express";
-
 import * as controllpost from "../controllers/post.controller.js";
+import { isAuth } from "../middleware/auth.js"
 
 const postRouter = Router();
 

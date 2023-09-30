@@ -1,14 +1,22 @@
-/* import {Router} from "express";
-import multer from "multer";
-import {fileUpload} from "../controllers/imagen.controllers.js"
-import * as controllpost from "../controllers/imagen.controllers.js";
+import { Router } from "express";
+import { pool } from "../dbconfig.js";
+import * as controllimg from "../controllers/imagen.controllers.js";
 
 const imgRouter = Router();
-const uploader = multer({fileUpload})
-Rutas para subir imagenes
+//Rutas para subir imagenes
 
-imgRouter.post('/imagen', uploader,(req, res)=>{
-    console.log(req.file)
-} ,controllpost.postImg);
+imgRouter.post('/imagen', controllimg.upload.single('file'), async(req, res)=>{
+    const file = req.file
+    console.log(file)
+    const imagen = {
+        name: file.originalname
+    }
+    await pool.query("INSERT INTO imagen (ruta) values (?)",[imagen.name])
+    res.status(200).json({
+        message: 'Imagen subida correctamente'
+      });
+});
 
-export default imgRouter; */
+imgRouter.get('/getImagen', controllimg.getImg)
+
+export default imgRouter;

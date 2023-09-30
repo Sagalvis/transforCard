@@ -80,13 +80,13 @@ const Login = () => {
 
   return (
     <>
-    {showAlert && (
+    {/* {showAlert && (
         <ContainAlert>
         <Alert severity="success" color="success">
           ¡Cliente registrado!
           </Alert>
         </ContainAlert>
-      )}
+      )} */}
       
       <ContainLogin>
         <ContenLogin>
