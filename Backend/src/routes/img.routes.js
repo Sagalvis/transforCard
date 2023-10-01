@@ -17,6 +17,6 @@ imgRouter.post('/imagen', controllimg.upload.single('file'), async(req, res)=>{
       });
 });
 
-imgRouter.get('/getImagen', controllimg.getImg)
+
 
 export default imgRouter;

@@ -7,7 +7,6 @@ import patchRouter from "./routes/patch.routes.js";
 import deleteRouter from "./routes/delete.routes.js";
 import downloadRoutes from "./routes/download.routes.js";
 import queryHome from "./routes/home.routes.js";
-import imgRouter from "./routes/img.routes.js"
 import {PORT} from './config.js'
 
 /* Se crea una instancia de aplicacion express y se almacena en la app */
@@ -20,8 +19,8 @@ app.use(express.json());
 /* Se usa el middleware de cors para que  los recursos de la aplicación sean 
 accesibles desde diferentes dominios o puertos */
 app.use(cors());
-
-app.use(getRouter, postRouter, patchRouter, deleteRouter, downloadRoutes, queryHome, imgRouter);
+app.use(getRouter, postRouter, patchRouter, deleteRouter, downloadRoutes, queryHome);
+app.use('/uploads', express.static('uploads'));
 
 /* Inicio del servidor y en donde va a escuchar el server */
 app.listen(PORT, () => {
