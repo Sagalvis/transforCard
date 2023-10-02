@@ -20,7 +20,7 @@ import {
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
+import { Button, ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
@@ -36,7 +36,7 @@ const ModalContent = ({ data1 }) => {
           <p>Id factura: {data1.id_factura}</p>
           <p>Identificacion: {data1.identificacion}</p>
           <p>Id orden: {data1.id_orden}</p>
-          <p>Fecha de emision: {moment.data1.fecha_emision}</p>
+          <p>Fecha de emision: {moment(data1.fecha_emision).format("YYYY-MM-DD")}</p>
           <p>Estado de pago: {data1.estado_pago}</p>
           {value.map((value, i) =>{
            <div key={i}>
@@ -74,7 +74,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
     
-    
     const content = `
       Transforcars
       Direccion: Calle 47 #21-63
@@ -84,9 +83,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Fecha de emision: ${data1.fecha_emision} 
       Id orden: ${data1.id_orden}
       Productos y Servicios:
-      ${value.map((item, i) =>`  
-           ${key(i)}
-           servicios: ${item.servicios}   precios: ${item.precio} $
+      ${value.map((item) =>`   
+           servicios: ${item.nombre_serv}   precios: ${item.precio} $
       `)}
       _________________________________________________________
       Cantidad pagada: ${data1.cantidad_pagada} $
@@ -113,8 +111,18 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       
       const res = await axios.get(`${apiBaseBack}/factura`);
       setInvoice(res.data);
-      console.log("factura",res.data)
+      console.log("factura",res.data[0].identificacion)
       
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getServicesClient = async (item) => {
+    try {
+      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
+      setValue(res.data);
+      console.log("aqui vienen los servicios",res.data);
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +148,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
       console.log(result);
       window.location.reload();
     } catch (error) {
@@ -216,7 +224,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                   <ButtonOptions>
                     <Buttons
                       title="Eliminar producto"
-                      onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); setDelInvoice(item)}}
+                      onClick={() => {
+                        setHandleDeleteInvoice(!handleDeleteInvoice); 
+                      }}
                     >
                       <i className={deletInvoice}></i>
                     </Buttons>
@@ -225,11 +235,15 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                         className={printInvoice}
                         onClick={() => {
                           setHandlePdfInvoice(true);
+                          getServicesClient(item);
                           createPDF(item);
                           ModalContent(item);
                         }}
                       ></i>
                     </Buttons>
+
+                    {/* <Buttons onClick={()=>{}}>
+                    </Buttons> */}
                   </ButtonOptions>
                 </Td>
               </Tr>

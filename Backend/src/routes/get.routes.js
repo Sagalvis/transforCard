@@ -22,5 +22,5 @@ getRouter.get('/getService', controllGet.getService);
 getRouter.get('/getServiceCliente/:identificacion', controllGet.getServiceCliente);
 getRouter.get('/getAllServicesClient', controllGet.getAllServicesClient);
 getRouter.get('/getServicesClient', controllGet.getServicesClient);
-
+getRouter.get('/getImagen', controllGet.getImg)
 export default getRouter

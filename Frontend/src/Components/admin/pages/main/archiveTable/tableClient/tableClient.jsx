@@ -43,7 +43,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-  
+  //Variable de estado para las imagenes
+  const [img, setImg] = useState([]);
  const [todo, setTodo] = useState([]);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
@@ -111,6 +112,17 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   useEffect(()=>{
     getServiCliente()
   },[setTodo])
+
+  //funcion para traer las imagenes
+  const getImage = async ()=> {
+    try {
+      const imagenes = await axios.get(`${apiBaseBack}/getImagen`);
+      setImg(imagenes.data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
@@ -363,7 +375,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
           {ordServicio.map((item, index) => (
             <CardService key={index}>
               <Cuadro>
-                <Img src={aceite}/>
+                <Img src={img}/>
               </Cuadro>
               <Title>
                 <Paragraph className="size">{item.nombre_serv}</Paragraph>

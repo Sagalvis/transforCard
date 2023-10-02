@@ -151,12 +151,11 @@ export const getProducto = async (req, res) => {
 
 /* consultas para traer facturas */
 
- export const getInvoices = async (req, res) => {
+export const getInvoices = async (req, res) => {
   try {
     const [row] = await pool.query(
       `SELECT servicio_cliente.identificacion, cliente.nombre, cliente.apellido, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion`
     );
-    console.log(row);
     res.send(row);
   } catch (error) {
     return res.status(500).json({
@@ -242,3 +241,12 @@ export const getCallService = async (req, res) => {
     });
   }
 } 
+//Funcion para traer las imagenes 
+export const getImg = async (req, res) =>{
+  try {
+      const [row] = await pool.query("SELECT * FROM imagen");
+      res.json(row[0]); 
+  } catch (error) {
+      return res.status(500).json({message:"No se encontro la imagen"})
+  }
+};

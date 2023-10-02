@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { Btn_Delete, ButtonDelete, ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
+import { BtnDelete, ButtonDelete, ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
@@ -19,6 +19,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   }
   useEffect(() => {
     getOrdenService()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[setMapeo])
 
   const deleteServiceOrder = async() => {
@@ -65,7 +66,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
                 <Td>{item.nombre_serv}</Td>
-                <Td>{item.precio.toLocaleString()}</Td>
+                <Td>$ {item.precio.toLocaleString()}</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons
@@ -94,7 +95,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este servicio?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</Btn_Delete>
+            <BtnDelete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</BtnDelete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
