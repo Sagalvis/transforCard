@@ -41,9 +41,10 @@ const Sidebar = () => {
     window.location.href =`${apiBaseFront}`
     console.log();
   }
+  console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
   useEffect(() => {
     if (!useData){
-      console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
+  
       window.location.href =`${apiBaseFront}/admin`
     }
   },[useData]);
