@@ -8,7 +8,10 @@ import {
   InfoProfile,
   ProfileConten,
 } from "./styledTableProfile";
+import jwt_decode from "jwt-decode"
 import { Input } from "../../../header/archiveInputs/editForms/editFormClient";
+
+const useData = jwt_decode (localStorage.getItem("user"))
 
 const TableProfile = () => {
 
@@ -16,13 +19,13 @@ const TableProfile = () => {
     <>
       <ContainerProfile>
             <ProfileConten>
-              <ContainImg></ContainImg>
+              <ContainImg>{/* la mala pal roy */}</ContainImg>
               <ContainInfoProfile>
                 <ContenInputs>
-                  <InfoProfile >hola</InfoProfile>
-                  <InfoProfile >hola</InfoProfile>
-                  <InfoProfile >hola</InfoProfile>
-                  <InfoProfile >hola</InfoProfile>
+                  <InfoProfile >{useData.nombre}</InfoProfile> {/* nombre */}
+                  <InfoProfile >{useData.apellido}</InfoProfile> {/* apellido */}
+                  <InfoProfile >{useData.id}</InfoProfile> {/* cedula */}
+                  <InfoProfile >{useData.correo}</InfoProfile> {/* correo */}
                 </ContenInputs>
                 <ContenInputs>
                   <Input 
