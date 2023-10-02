@@ -22,7 +22,7 @@ export const ProfileConten = styled.div`
 export const ContainImg = styled.div`
 background-color: #aca4a4;
   width: 20%;
-  height: 35%;
+  height: 50%;
   border-radius: 100%;
 `;
 
