@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ButtonNarbar1 } from "./archive/arrayNavbar";
 import {
   ButtonLog,
@@ -30,17 +31,14 @@ const Sidebar = () => {
 
   const { pathname } = useLocation();
   const useData = jwt_decode (localStorage.getItem("user"));
-  console.log(useData)
   var apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
 
   const logOut = () => { 
-    console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
     localStorage.removeItem("user"); 
     window.location.href =`${apiBaseFront}`
   }
   useEffect(() => {
     if (!useData){
-      console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
       window.location.href =`${apiBaseFront}/admin`
     }
   },[useData]);

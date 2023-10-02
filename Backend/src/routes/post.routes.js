@@ -7,7 +7,7 @@ const postRouter = Router();
 
 /* Rutas para crear clientes, empleados, vehiculo, logueo de empleado */
 postRouter.post('/postcustomer', controllpost.postCustomer);
-postRouter.post('/postemployees', controllpost.postEmployees);
+postRouter.post('/postemployees', controllimg.upload.single('file'), controllpost.postEmployees);
 postRouter.post('/postvehicle', controllpost.postVehicle);
 postRouter.post('/postLoginEmployees', controllpost.postLoginEmployees);
 postRouter.post('/postinventory', controllpost.postInventario);
