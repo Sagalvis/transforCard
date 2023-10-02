@@ -37,6 +37,7 @@ const Sidebar = () => {
     localStorage.removeItem("user"); 
     window.location.href =`${apiBaseFront}`
   }
+  console.log(apiBaseFront, '😎😎😎😎😎😎🧰🧰🧰');
   useEffect(() => {
     if (!useData){
       window.location.href =`${apiBaseFront}/admin`

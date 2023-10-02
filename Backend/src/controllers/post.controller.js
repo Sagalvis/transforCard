@@ -108,7 +108,7 @@ export const postLoginEmployees = async (req, res) => {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
 
       if (compassword) {
-        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET_KEY, {
+        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido, correo: rows[0].correo }, SECRET_KEY, {
           expiresIn: "1h",
         });
         
