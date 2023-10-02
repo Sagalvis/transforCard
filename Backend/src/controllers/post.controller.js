@@ -25,16 +25,23 @@ export const postCustomer = async (req, res) => {
 
 export const postEmployees = async (req, res) => {
   try {
+    const file = req.file
+    console.log(file)
+    const imagen = {
+        name: file.originalname
+    }
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } =
       req.body;
     const passwordHash = await bcrypt.hash(contraseña, 8);
     const [row] = await pool.query(
-      "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
-      [id_empleado, nombre, apellido, correo, passwordHash, id_rol]
+      "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,ruta, id_rol) VALUE (?,?,?,?,?,?,?)",
+      [id_empleado, nombre, apellido, correo, passwordHash,imagen.name, id_rol]
     );
-    res.send({ id_empleado, nombre, apellido, correo, passwordHash, id_rol });
+    res.json(row);
+    console.log(row)
   } catch (error) {
     console.log(error);
+    console.log(error)
     return res.status(500).json({
       message: "Error en el servidor",
     });
@@ -203,9 +210,14 @@ export const postInvoices = async (req, res) => {
 
 export const postOrdenService = async (req, res) => {
   try {
+    const file = req.file
+    console.log(file)
+    const imagen = {
+        name: file.originalname
+    }
     const {id_orden, nombre_serv, descripcion, precio, tiempo_estimado} = req.body;
-    const [row] = await pool.query("INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado) VALUE (?,?,?,?,?)",
-    [id_orden, nombre_serv, descripcion, precio, tiempo_estimado]);
+    const [row] = await pool.query("INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado, ruta_img) VALUE (?,?,?,?,?,?)",
+    [id_orden, nombre_serv, descripcion, precio, tiempo_estimado, imagen.name]);
     res.json(row)
   } catch (error) {
     console.log(error)

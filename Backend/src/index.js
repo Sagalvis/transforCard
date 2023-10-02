@@ -19,8 +19,8 @@ app.use(express.json());
 /* Se usa el middleware de cors para que  los recursos de la aplicación sean 
 accesibles desde diferentes dominios o puertos */
 app.use(cors());
-
 app.use(getRouter, postRouter, patchRouter, deleteRouter, downloadRoutes, queryHome);
+app.use('/uploads', express.static('uploads'));
 
 /* Inicio del servidor y en donde va a escuchar el server */
 app.listen(PORT, () => {

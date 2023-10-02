@@ -20,10 +20,13 @@ import {
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
+import { Button, ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+
+
+
 
 const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
@@ -43,6 +46,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const font = page.drawText("");
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
+    
     const content = `
       Transforcars
       Direccion: Calle 47 #21-63
@@ -75,28 +79,28 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     window.location.reload();
   };
 
-  const ModalContent = ({ data }) => {
+  const ModalContent = ({ data1 }) => {
 
     return (
       <div>
         <>
           <h4>Modal</h4>
           <div>
-            <p>Id factura: {data.id_factura}</p>
-            <p>Identificacion: {data.identificacion}</p>
-            <p>Id orden: {data.id_orden}</p>
-            <p>Fecha de emision: {moment.data.fecha_emision}</p>
-            <p>Estado de pago: {data.estado_pago}</p>
+            <p>Id factura: {data1.id_factura}</p>
+            <p>Identificacion: {data1.identificacion}</p>
+            <p>Id orden: {data1.id_orden}</p>
+            <p>Fecha de emision: {moment(data1.fecha_emision).format("YYYY-MM-DD")}</p>
+            <p>Estado de pago: {data1.estado_pago}</p>
             {value.map((value, i) =>{
-            <div key={i}>
+             <div key={i}>
               <p>Servicios: {value.servicios}</p>
               <p>Precio: {value.precio}</p>
-            </div>
-          })}
-            <p>Total pagado: {data.cantidad_pagada}</p>
+             </div>
+           })}
+            <p>Total pagado: {data1.cantidad_pagada}</p>
           </div>
   
-          <BtnPdf onClick={() => createPDF(data)}>Crear PDF</BtnPdf>
+          <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
         </>
       </div>
     );
@@ -107,8 +111,18 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       
       const res = await axios.get(`${apiBaseBack}/factura`);
       setInvoice(res.data);
-      console.log("factura",res.data)
+      console.log("factura",res.data[0].identificacion)
       
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getServicesClient = async (item) => {
+    try {
+      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
+      setValue(res.data);
+      console.log("aqui vienen los servicios",res.data);
     } catch (error) {
       console.log(error);
     }
@@ -134,7 +148,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
       console.log(result);
       window.location.reload();
     } catch (error) {
@@ -211,7 +225,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                   <ButtonOptions>
                     <Buttons
                       title="Eliminar producto"
-                      onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); setDelInvoice(item)}}
+                      onClick={() => {
+                        setHandleDeleteInvoice(!handleDeleteInvoice); 
+                      }}
                     >
                       <i className={deletInvoice}></i>
                     </Buttons>
@@ -220,12 +236,16 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                         className={printInvoice}
                         onClick={() => {
                           setHandlePdfInvoice(true);
-                          createPDF(item, value);
+                          getServicesClient(item);
+                          createPDF(item);
                           ModalContent(item);
                           lookServices(item);
                         }}
                       ></i>
                     </Buttons>
+
+                    {/* <Buttons onClick={()=>{}}>
+                    </Buttons> */}
                   </ButtonOptions>
                 </Td>
               </Tr>

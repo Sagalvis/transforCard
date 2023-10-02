@@ -45,10 +45,7 @@ const EditFormClient = ({getCustomer}) => {
           direccion,
           tel
         })
-        .then((Response) => {
-          console.log("actualizador",Response.data);
           setShowAlert(true)
-        });
         window.location.reload();
     }
 
@@ -200,6 +197,10 @@ export const Input = styled.input`
 
   &::placeholder {
     font-size: 15px;
+  }
+  &.perfil{
+    width: 23%;
+    height: 30%;
   }
 `;
 

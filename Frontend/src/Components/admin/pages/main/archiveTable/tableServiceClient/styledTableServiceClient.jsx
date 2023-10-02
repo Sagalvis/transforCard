@@ -2,12 +2,6 @@ import styled from 'styled-components';
 
 // FILA DE PERSONA Y EMPRESA <<-----------------
 
-export const ContainCheck = styled.div`
-  padding-left: 1rem;
-  /* background-color: yellow; */
-  margin-bottom: 1.55rem;
-`;
-
 export const Input = styled.input`
   padding: 4px;
   border: 1px solid #ccc;
@@ -172,10 +166,6 @@ export const ContainTextHandle = styled.div`
   /* background-color: yellow; */
 `;
 
-export const Tag_P_Handle = styled.p`
-  margin: 0;
-`;
-
 export const ControlHandle = styled.div`
   /* background-color: green; */
 `;
@@ -237,7 +227,7 @@ export const ButtonDelete = styled.div`
   margin: 3% 1%;
 `;
 
-export const Btn_Delete = styled.button`
+export const BtnDelete = styled.button`
   background: #212529;
   border: none;
   color: #fff;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
@@ -123,7 +124,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     <ButtonInventory>
 
       <Button onClick={() => handleButtonClick("servicio")}>Servicio</Button>
-      <Button onClick={() => handleButtonClick("producto")}>Producto</Button>
+      <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button>
     </ButtonInventory>
 
       {showProduct && (

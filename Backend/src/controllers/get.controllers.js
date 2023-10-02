@@ -231,3 +231,12 @@ export const getCallService = async (req, res) => {
     });
   }
 } 
+//Funcion para traer las imagenes 
+export const getImg = async (req, res) =>{
+  try {
+      const [row] = await pool.query("SELECT * FROM imagen");
+      res.json(row[0]); 
+  } catch (error) {
+      return res.status(500).json({message:"No se encontro la imagen"})
+  }
+};

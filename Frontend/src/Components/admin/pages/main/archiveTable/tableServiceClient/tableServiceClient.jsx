@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { Btn_Delete, ButtonDelete, ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
+import { BtnDelete, ButtonDelete, ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
@@ -95,7 +95,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este servicio?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</Btn_Delete>
+            <BtnDelete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</BtnDelete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
