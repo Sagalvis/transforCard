@@ -13,6 +13,7 @@ import {
 import { Doughnut, Line } from "react-chartjs-2";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getApril, getAugust, getDicember, getFebruary, getJanuary, getJuly, getJune, getMarch, getMay, getNovember, getOctober, getSeptember } from "../../../../archive/funtionHome";
 
 ChartJS.register(
   ArcElement,
@@ -66,55 +67,60 @@ useEffect(()=>{
 };
 
 export const GraphicsCustomer = () => {
-  //Variable de estado para almacenar la consulta  que obtiene los clientes por mes
   const [januaryClient, setJanuaryClient] = useState([]);
-  const [february, serFebruaryClient ] = useState([]);
-
-  const getJanuary = async () => {
-    const res = await axios.get("http://localhost:3005/january/client")
-    setJanuaryClient(res.data)
-  }
-  const getFebruary = async() => {
-      const res = await axios.get("http://localhost:3005/february/client");
-      serFebruaryClient(res.data)
-
-  }
-
-useEffect(()=>{
-  getJanuary();
-  getFebruary();
-},[setJanuaryClient, serFebruaryClient]);
+  const [februaryClient, setFebruaryClient] = useState([]);
+  const [marchClient, setMarchClient] = useState([]);
+  const [aprilClient, setAprilClient] = useState([]);
+  const [mayClient, setMayClient] = useState([]);
+  const [juneClient, setJuneClient] = useState([]);
+  const [julyClient, setJulyClient] = useState([]);
+  const [augustClient, setAugustClient] = useState([]);
+  const [septemberClient, setSeptemberClient] = useState([]);
+  const [octoberClient, setOctoberClient] = useState([]);
+  const [novemberClient, setNovemberClient] = useState([]);
+  const [dicemberClient, setDicemberClient] = useState([]);
+  useEffect(() => {
+    getJanuary(setJanuaryClient);
+    getFebruary(setFebruaryClient);
+    getMarch(setMarchClient);
+    getApril(setAprilClient);
+    getMay(setMayClient);
+    getJune(setJuneClient);
+    getJuly(setJulyClient);
+    getAugust(setAugustClient);
+    getSeptember(setSeptemberClient);
+    getOctober(setOctoberClient);
+    getNovember(setNovemberClient);
+    getDicember(setDicemberClient);
+  }, []);
 
   const Data2 = {
-    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
     datasets: [
       {
-        label: "# of Votes",
-        data: "",
+        label: "# de Clientes",
+        data: [januaryClient.length, februaryClient.length, marchClient.length, aprilClient.length, mayClient.length, juneClient.length, julyClient.length, augustClient.length, septemberClient.length, octoberClient.length, novemberClient.length, dicemberClient.length],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(23, 235, 164, 0.2)",
-          "rgba(255, 255, 64, 0.2)",
-          "rgba(144, 64, 255, 0.2)",
-          "rgba(64, 249, 255, 0.2)",
-          "rgba(83, 255, 64, 0.2)",
+          "#fdcae1c5",
+          "#84b6f4",
+          "#fdfd96",
+          "#77dd77",
+          "#ff6961",
+          "#7052ff",
+          "#d06aff",
+          "#ff81ff",
+          "#ff7360",
+          "#ffff51",
+          "#725097",
+          "#0b4c90",
+          "#464980",
+          
         ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
+        borderWidth: .5,
       },
     ],
   };
+
   return <Doughnut data={Data2} />;
 };
 
