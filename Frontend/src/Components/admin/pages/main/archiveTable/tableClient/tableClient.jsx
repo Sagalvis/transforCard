@@ -134,17 +134,27 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   }, [idOrden]);
 
   //Funcion para enviar los servicios del cliente
-  const postOrdenServiceCliente = async () =>{ 
+  const postOrdenServiceCliente = async () => {
+    // Obtenemos el token de autenticación
+    const token = localStorage.getItem('user');
+    // Establecemos la cabecera
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+    };
+  
     try {
-      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`,{
+      // Hacemos la solicitud
+      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
         identificacion: id4,
         id_orden: idOrden
+      }, {
+        headers,
       });
-      console.log("registrado con exito")
+      console.log("registrado con exito");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // Funcion para mostrar los servicios disponibles
 
