@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceOrder";
@@ -6,6 +7,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import TableServiceClient from "../tableServiceClient/tableServiceClient";
+import { toast, ToastContainer } from 'react-toastify'
 
 const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder}) => {
   const [search, setSearch] = useState("");
@@ -16,7 +18,6 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   const [delServiceCustomer, setDelServiceCustomer] = useState(null);
   const [idServCliente , setIdServCliente ] = useState("");
   const [cedula , setCedula ] = useState("");
-  const [showAlertDeleteOrder, setShowAlertDeleteOrder] = useState(false);
   // Variable de estado para abrir el modal de servicios del cliente
   const [handleShowServices, setHandleShowServices] = useState(false);
   const [id, setId] = useState("");
@@ -55,8 +56,11 @@ if (!search) {
     try {
       const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
       await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiceCustomer.id_servicio_cliente}`);
-      window.location.reload();
-      setShowAlertDeleteOrder(true); 
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
@@ -81,11 +85,15 @@ if (!search) {
         identificacion : cedula,
         id_servicio_cliente: idServCliente
       })
-      alert("factura creada con exito")
+      toast.success('Factura creada con éxito.')
     } catch (error) {
       console.log(error);
     }
   }
+
+  const handleAlerteDeleteOrder = () => {
+    toast.success('Orden eliminada con éxito.');
+  };
   return (
     <>
       {/* Controladores */}
@@ -164,6 +172,12 @@ if (!search) {
         </Table>
       </ContainTable>
 
+
+      <ToastContainer
+      autoClose={1000}
+      hideProgressBar={true}
+      />
+
       {/* Eliminar orden de servicio */}
       <Modals
       status={handleDeleteServiceOrder}
@@ -176,7 +190,7 @@ if (!search) {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar esta orden?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceCustomer()}} >Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); handleAlerteDeleteOrder(); deleteServiceCustomer()}} >Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
