@@ -8,6 +8,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, Label } from "../tableClient/styledTableClient";
 import { TextArea } from "../../../header/archiveInputs/formVehicle";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
@@ -55,6 +56,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   useEffect(() => {
     getVehicle();
   }, [setVehicle]);
+
+  const handleAlerteDelete = () => {
+    toast.success('Vehículo eliminado con éxito.');
+  };
   return (
     <>
     <ContainControls>
@@ -157,7 +162,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este vehículo?</Paragraph>
           <ButtonDelete>
-          <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); deleteVehicle()}}>Eliminar</Btn_Delete>
+          <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); handleAlerteDelete(); deleteVehicle()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

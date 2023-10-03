@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import {  useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { ContainAlert } from "../formClient";
-import Alert from "@mui/material/Alert";
+import {toast, ToastContainer, Zoom} from 'react-toastify'
 
 const EditFormClient = ({getCustomer}) => {
   const [nombre, setNombres] = useState("");
@@ -11,7 +10,6 @@ const EditFormClient = ({getCustomer}) => {
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [tel, setTelefono] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
 
 
 //TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
@@ -33,8 +31,7 @@ const EditFormClient = ({getCustomer}) => {
       direccion === "" ||
       tel === "" 
     ) {
-      e.preventDefault();
-      alert("Por favor llenar todos los campos");
+      toast.warning('Por favor llenar todos los campos');
     } else {
       await axios
         .patch(`http://localhost:3005/patchcustomer/${getCustomer.identificacion}`, {
@@ -45,31 +42,19 @@ const EditFormClient = ({getCustomer}) => {
           direccion,
           tel
         })
-          setShowAlert(true)
-        window.location.reload();
+        setTimeout(() => { 
+          window.location.reload(); 
+        }, 1000); 
     }
-
-    /* Funcion que limpa los inputs */
-    setNombres("");
-    setApellidos("");
-    setCorreo("");
-    setDireccion("");
-    setTelefono("");
     
   };
 
+  const handleAlert = () => { 
+    toast.success('Cliente actualizado con éxito.'); 
+  }; 
+
   return (
     <>
-          <>
-      {showAlert && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Cliente actualizado!
-          </Alert>
-        </ContainAlert>
-
-      )}
-      </>
       <ContainForm>
         <Form>
           <ContentInput className="display">
@@ -126,8 +111,12 @@ const EditFormClient = ({getCustomer}) => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Actualizar datos</BtnRegister>
+        <BtnRegister onClick={() => {handletSumit(); handleAlert();}}>Actualizar datos</BtnRegister>
       </ButtonRegister>
+
+      <ToastContainer
+      autoClose='1000' 
+      hideProgressBar='true'/>
     </>
   );
 };
