@@ -25,6 +25,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import {toast, ToastContainer} from 'react-toastify'
 
 
 const ModalContent = ({ data1 }) => {
@@ -104,7 +105,10 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();      
+    }, 1000);
   };
 
   const getInvoice = async () => {
@@ -166,7 +170,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     getInvoice();
   }, [setInvoice, setSave]);
 
-
+  const handleAlertDeleteInvoice = () => {
+    toast.success('Factura eliminada con éxito.');
+  };  
   return (
     <>
       <ContainControls>
@@ -245,6 +251,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
         </Table>
       </ContainTable>
 
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
+
       <Modals
         status={handlePdfInvoice}
         changeStatus={setHandlePdfInvoice}
@@ -271,7 +282,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); deleteInvoice()}}>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); handleAlertDeleteInvoice(); deleteInvoice()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
