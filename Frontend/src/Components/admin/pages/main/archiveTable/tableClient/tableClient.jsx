@@ -24,7 +24,6 @@ import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainSe
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import aceite from '../../../../../../assets/img/ALINEAMIENTO.jpg'
 
 const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
@@ -43,9 +42,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-  //Variable de estado para las imagenes
-  const [img, setImg] = useState([]);
- const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState([]);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //funcion para traer los datos de la tabla a buscar
@@ -111,18 +108,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   }
   useEffect(()=>{
     getServiCliente()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[setTodo])
-
-  //funcion para traer las imagenes
-  const getImage = async ()=> {
-    try {
-      const imagenes = await axios.get(`${apiBaseBack}/getImagen`);
-      setImg(imagenes.data);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
 
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
@@ -177,6 +164,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   useEffect(() => {
     getCustomer();
     getServices();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCustomer, setOrdService]);
 
   return (
@@ -375,7 +363,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
           {ordServicio.map((item, index) => (
             <CardService key={index}>
               <Cuadro>
-                <Img src={img}/>
+                <Img src={`http://localhost:3005/uploads/${item.ruta_img}`}/>
               </Cuadro>
               <Title>
                 <Paragraph className="size">{item.nombre_serv}</Paragraph>

@@ -1,8 +1,6 @@
 import {Router} from "express";
 import * as controllpost from "../controllers/post.controller.js";
 import * as controllimg from "../controllers/imagen.controllers.js";
-import { isAuth } from "../middleware/auth.js"
-
 const postRouter = Router();
 
 /* Rutas para crear clientes, empleados, vehiculo, logueo de empleado */
