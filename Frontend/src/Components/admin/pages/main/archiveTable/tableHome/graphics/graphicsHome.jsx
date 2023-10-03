@@ -67,22 +67,30 @@ useEffect(()=>{
 
 export const GraphicsCustomer = () => {
   //Variable de estado para almacenar la consulta  que obtiene los clientes por mes
-  const [dataClient, setDataClient] = useState([]);
-  //Funcion para traer a los clientes por mes
-  const getCustomer = async () => {
-    const res = await axios.get("http://localhost:3005/Datecustomer");
-    setDataClient(res.data);
-};
+  const [januaryClient, setJanuaryClient] = useState([]);
+  const [february, serFebruaryClient ] = useState([]);
+
+  const getJanuary = async () => {
+    const res = await axios.get("http://localhost:3005/january/client")
+    setJanuaryClient(res.data)
+  }
+  const getFebruary = async() => {
+      const res = await axios.get("http://localhost:3005/february/client");
+      serFebruaryClient(res.data)
+
+  }
+
 useEffect(()=>{
-  getCustomer();
-},[setDataClient]);
+  getJanuary();
+  getFebruary();
+},[setJanuaryClient, serFebruaryClient]);
 
   const Data2 = {
     labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     datasets: [
       {
         label: "# of Votes",
-        data: dataClient.map((item) => item.total),
+        data: "",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
