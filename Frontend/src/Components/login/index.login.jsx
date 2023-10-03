@@ -20,8 +20,11 @@ import {
   Input,
 } from "./styled.login";
 import Logologin from "../../assets/svg/transforCars-01.svg";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, Zoom, toast } from 'react-toastify'
+
+
 const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
@@ -42,9 +45,9 @@ const Login = () => {
   const Log = async () => {
     let result = null;
     if (correo && !contraseña) {
-      alert("Por favor llenar el campo de contraseña");
+      toast.warning('Por favor llenar el campo de contraseña.');
     } else if (contraseña && !correo) {
-      alert("Por favor llenar el campo de correo");
+      toast.warning('Por favor llenar el campo de correo');
     } else if (correo && contraseña) {
       try {
         const response = await axios.post(
@@ -63,31 +66,19 @@ const Login = () => {
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          alert(
-            "Correo y/o contraseña incorrecta. Por favor, inténtelo de nuevo."
-          );
+          toast.error('Correo y/o contraseña incorrecta. Por favor, inténtelo de nuevo.');
         } else {
-          alert(
-            "Correo y/o contraseña incorrecta. Por favor, inténtelo de nuevo."
-          );
+          toast.error('Correo y/o contraseña incorrecta. Por favor, inténtelo de nuevo.');
         }
       }
     } else {
-      alert("Por favor, complete los campos requeridos.");
+      toast.warning('Por favor, complete los campos requeridos.');
     }
     return result;
   };
 
   return (
     <>
-    {/* {showAlert && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Cliente registrado!
-          </Alert>
-        </ContainAlert>
-      )} */}
-      
       <ContainLogin>
         <ContenLogin>
           <ContenTittle>
@@ -146,6 +137,11 @@ const Login = () => {
         </ContenLogin>
       </ContainLogin>
 
+      {/* Content alert ¡IMPORTANT! */}
+      <ToastContainer
+      autoClose='2000' 
+      hideProgressBar='true' 
+      transition={Zoom}/>
     </>
   );
 };
@@ -169,7 +165,7 @@ export const Log = async (correo, contraseña) => {
       console.log(response.data, "😎😎😎");
       result = response.data;
       if (response.data === "") {
-        alert("El usuario no existe");
+        toast.error('El usuario no existe');
       } else {
         localStorage.setItem("user", JSON?.stringify(result));
         setTimeout(() => {
@@ -178,12 +174,10 @@ export const Log = async (correo, contraseña) => {
       }
     } catch (error) {
       console.error(error);
-      alert("Usuario y/o contraseña no válidos");
+      toast.error('Usuario y/o contraseña no válidos');
     }
   } else {
-    alert(
-      "Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos"
-    );
+    toast.error('Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos');
   }
 
   return result;
