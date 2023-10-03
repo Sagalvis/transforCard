@@ -1,4 +1,4 @@
-  /* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
 import {
   ButtonOptions,
@@ -20,7 +20,7 @@ import {
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { Button, ContainInfoModal, Paragraph } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
@@ -60,7 +60,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
-  const [id, setId] = useState()
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false)
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
@@ -73,6 +72,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const font = page.drawText("");
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
+    await getServicesClient(data1);
     
     const content = `
       Transforcars
@@ -80,11 +80,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Telefono: 3254587894
       Id factura: ${data1.id_factura}
       Identificacion: ${data1.identificacion}
-      Fecha de emision: ${data1.fecha_emision} 
+      Fecha de emision: ${moment(data1.fecha_emision).format("YYYY-MM-DD")} 
       Id orden: ${data1.id_orden}
       Productos y Servicios:
       ${value.map((item) =>`   
-           servicios: ${item.nombre_serv}   precios: ${item.precio} $
+          servicios: ${item.nombre_serv}   precios: ${item.precio} $
       `)}
       _________________________________________________________
       Cantidad pagada: ${data1.cantidad_pagada} $
@@ -120,7 +120,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const getServicesClient = async (item) => {
     try {
-      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
+      const res = await axios.get(`${apiBaseBack}/getServiceCliente/${item.identificacion}`)
       setValue(res.data);
       console.log("aqui vienen los servicios",res.data);
     } catch (error) {
@@ -148,7 +148,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
+      const result = await axios.delete(`${apiBaseBack}/deleteinvoice/`);
       console.log(result);
       window.location.reload();
     } catch (error) {
@@ -235,7 +235,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                         className={printInvoice}
                         onClick={() => {
                           setHandlePdfInvoice(true);
-                          getServicesClient(item);
                           createPDF(item);
                           ModalContent(item);
                         }}
