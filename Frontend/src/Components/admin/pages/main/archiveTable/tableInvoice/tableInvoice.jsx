@@ -60,11 +60,20 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
-  const [id, setId] = useState()
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false)
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
+  const getServicesClient = async (item) => {
+    try {
+      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
+      setValue(res.data);
+      console.log("aqui vienen los servicios",res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //Funcion para traer los datos de la factura
 
   const createPDF = async (data1) => {
@@ -74,23 +83,27 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
     
+    //construye la lista de productos y servicios
+
+  const servicesList = value.map((item) =>{
+    return `servicios: ${item.nombre_serv}   Precio: ${item.precio} $`;
+  }).join('\n');
+
     const content = `
       Transforcars
       Direccion: Calle 47 #21-63
       Telefono: 3254587894
       Id factura: ${data1.id_factura}
       Identificacion: ${data1.identificacion}
-      Fecha de emision: ${data1.fecha_emision} 
+      Fecha de emision: ${moment(data1.fecha_emision).format("YYYY-MM-DD")} 
       Id orden: ${data1.id_orden}
       Productos y Servicios:
-      ${value.map((item) =>`   
-           servicios: ${item.nombre_serv}   precios: ${item.precio} $
-      `)}
-      _________________________________________________________
+      ${servicesList}
+  _________________________________________________________
       Cantidad pagada: ${data1.cantidad_pagada} $
       Estado de pago: ${data1.estado_pago}
     `;
-  
+
     page.drawText(content, {
       x: 50,
       y: 350,
@@ -98,7 +111,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       font: font,
       color: rgb(0, 0, 0),
     });
-  
+    
     const pdfBytes = await pdfDoc.save();
     const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
     const pdfUrl = URL.createObjectURL(pdfBlob);
@@ -118,15 +131,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     }
   };
 
-  const getServicesClient = async (item) => {
-    try {
-      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
-      setValue(res.data);
-      console.log("aqui vienen los servicios",res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   const searching = (e) => {
     setSearch(e.target.value);
@@ -170,7 +175,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       console.log(res.data, "esto es el res");
       setValue(res.data);
      } catch (error) {
-       console.log(error);
+      console.log(error);
      }
   }  */
 
@@ -235,8 +240,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                         className={printInvoice}
                         onClick={() => {
                           setHandlePdfInvoice(true);
-                          getServicesClient(item);
                           createPDF(item);
+                          getServicesClient(item);
                           ModalContent(item);
                         }}
                       ></i>
