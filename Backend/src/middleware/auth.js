@@ -12,15 +12,23 @@ export const isAuth = (req, res) => {
         return;
     }
 
-    // Verificamos que el token de autenticación sea válido
-    const decodedToken = jwt.verify(token, SECRET_KEY);
-    if (!decodedToken) {
-        // El token de autenticación no es válido
-        res.status(401).send("No autorizado");
+    // Validamos el formato del token
+    if (!token.startsWith("Bearer ")) {
+        // El token no tiene el formato correcto
+        res.status(401).send("El token de autenticación no es válido");
         return;
     }
 
-    // Si el token de autenticación es válido, continuamos con la solicitud
-    req.user = decodedToken.user;
+    // Verificamos que el token de autenticación sea válido
+    const decodedToken = jwt.verify(token.slice(7), SECRET_KEY);
+    if (!decodedToken) {
+        // El token de autenticación no es válido
+        res.status(401).send("El token de autenticación no es válido");
+        return;
+    }
+
+    // Almacenamos el usuario en la sesión
+    req.session.user = decodedToken.user;
+
     next();
 };
