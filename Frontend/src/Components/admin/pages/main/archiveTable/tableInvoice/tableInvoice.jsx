@@ -28,32 +28,7 @@ import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import {toast, ToastContainer} from 'react-toastify'
 
 
-const ModalContent = ({ data1 }) => {
 
-  return (
-  <div>
-    <>
-      <h4>Modal</h4>
-      <div>
-        <p>Id factura: {data1.id_factura}</p>
-        <p>Identificacion: {data1.identificacion}</p>
-        <p>Id orden: {data1.id_orden}</p>
-        <p>Fecha de emision: {moment(data1.fecha_emision).format("YYYY-MM-DD")}</p>
-        <p>Estado de pago: {data1.estado_pago}</p>
-        {value.map((value, i) =>{
-          <div key={i}>
-          <p>Servicios: {value.servicios}</p>
-          <p>Precio: {value.precio}</p>
-          </div>
-        })}
-        <p>Total pagado: {data1.cantidad_pagada}</p>
-      </div>
-
-      <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-    </>
-  </div>
-  );
-};
 
 const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
@@ -74,7 +49,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const font = page.drawText("");
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
-    await getServicesClient(data1);
     
     const content = `
       Transforcars
@@ -105,10 +79,34 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
+    window.location.reload();
+  };
+  
+  const ModalContent = ({ data1 }) => {
 
-    setTimeout(() => {
-      window.location.reload();      
-    }, 1000);
+    return (
+    <div>
+      <>
+        <h4>Modal</h4>
+        <div>
+          <p>Id factura: {data1.id_factura}</p>
+          <p>Identificacion: {data1.identificacion}</p>
+          <p>Id orden: {data1.id_orden}</p>
+          <p>Fecha de emision: {moment(data1.fecha_emision).format("YYY-MM-DD")}</p>
+          <p>Estado de pago: {data1.estado_pago}</p>
+          {value.map((value, i) =>{
+            <div key={i}>
+            <p>Servicios: {value.servicios}</p>
+            <p>Precio: {value.precio}</p>
+            </div>
+          })}
+          <p>Total pagado: {data1.cantidad_pagada}</p>
+        </div>
+  
+        <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
+      </>
+    </div>
+    );
   };
 
   const getInvoice = async () => {
@@ -125,7 +123,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const getServicesClient = async (item) => {
     try {
-      const res = await axios.get(`${apiBaseBack}/getServiceCliente/${item.identificacion}`)
+      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
       setValue(res.data);
       console.log("aqui vienen los servicios",res.data);
     } catch (error) {
@@ -153,13 +151,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`${apiBaseBack}/deleteinvoice/${delInvoice.id_factura}`);
+      const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
       console.log(result);
-
-      setTimeout(() => {
-        window.location.reload();        
-      }, 1000);
-
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -168,11 +162,21 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
+  /*   lookVal(); */
   }, [setInvoice, setSave]);
 
-  const handleAlertDeleteInvoice = () => {
-    toast.success('Factura eliminada con éxito.');
-  };  
+ /*  console.log(lookVal);
+
+  const lookServices = async (item) => {
+    try {
+      const res = await axios.get(`http://localhost:3005/getCallService/${id}`);
+      console.log(res.data, "esto es el res");
+      setValue(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }  */
+
   return (
     <>
       <ContainControls>
@@ -224,8 +228,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                     <Buttons
                       title="Eliminar producto"
                       onClick={() => {
-                        setHandleDeleteInvoice(!handleDeleteInvoice);
-                        setDelInvoice(item);
+                        setHandleDeleteInvoice(!handleDeleteInvoice); 
                       }}
                     >
                       <i className={deletInvoice}></i>
@@ -235,6 +238,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                         className={printInvoice}
                         onClick={() => {
                           setHandlePdfInvoice(true);
+                          getServicesClient(item);
                           createPDF(item);
                           ModalContent(item);
                         }}
@@ -250,11 +254,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
           </Tbody>
         </Table>
       </ContainTable>
-
-      <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
-      />
 
       <Modals
         status={handlePdfInvoice}
@@ -282,7 +281,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); handleAlertDeleteInvoice(); deleteInvoice()}}>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); deleteInvoice()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
