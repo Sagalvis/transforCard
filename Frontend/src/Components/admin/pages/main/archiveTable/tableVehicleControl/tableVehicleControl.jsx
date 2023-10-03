@@ -6,8 +6,6 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
-import { ContainAlert } from "../../../header/archiveInputs/formClient";
-import Alert from '@mui/material/Alert'
 
 const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -138,13 +136,6 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
       showHeader={true}
       showCloseButton={true}
       >
-      {showAlertDeleteVehicle && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Vehículo eliminado con exito!
-          </Alert>
-        </ContainAlert>
-      )}
         <ContainInfoModal>
           <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
           <ButtonDelete>

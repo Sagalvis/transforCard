@@ -5,8 +5,6 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
-import { ContainAlert } from "../../../header/archiveInputs/formClient";
-import Alert from '@mui/material/Alert'
 import TableServiceClient from "../tableServiceClient/tableServiceClient";
 
 const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder}) => {
@@ -175,13 +173,6 @@ if (!search) {
       showHeader={true}
       showCloseButton={true}
       >
-        {showAlertDeleteOrder && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Orden eliminada con exito!
-          </Alert>
-        </ContainAlert>
-      )}
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar esta orden?</Paragraph>
           <ButtonDelete>

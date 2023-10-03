@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { ContainAlert } from "../formClient";
 import Alert from "@mui/material/Alert";
 
 const EditFormVehicle = ({ getVehicle}) => {
@@ -70,16 +69,6 @@ setVin("")
 
 return (
     <>
-
-      {showAlert && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Vehiculo actualizado!
-          </Alert>
-        </ContainAlert>
-
-      )}
-
         <ContainForm>
             <Form>
                 <ContentInput className="display">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Alert from '@mui/material/Alert'
+import {toast, ToastContainer} from 'react-toastify'
 
 const FormClient = () => {
   const [identification, setIdentificacion] = useState("");
@@ -27,7 +27,7 @@ const FormClient = () => {
 
     ) {
       e.preventDefault();
-      alert("Por favor llenar todos los campos");
+      toast.warning('Por favor llenar todos los campos');
     } else {
       await axios
         .post(`${apiBaseBack}/postcustomer`, {
@@ -39,8 +39,9 @@ const FormClient = () => {
           tel: telefono,
           id_tipo_cliente: seletTipoCliente,
         })
-          setShowAlert(true);
+        setTimeout(() => {
           window.location.reload();
+        }, 1000);
     }
 
     /* Funcion que limpa los inputs */
@@ -64,6 +65,9 @@ const FormClient = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleAlert = () => {
+    toast.success('Cliente registrado con éxito.');
+  };
   return (
     <>
       <ContainForm>
@@ -157,8 +161,14 @@ const FormClient = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
+        <BtnRegister onClick={() => {handletSumit(); handleAlert();}}>Registrar</BtnRegister>
       </ButtonRegister>
+
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
     </>
   );
 };
@@ -277,9 +287,3 @@ export const BtnRegister = styled.button`
     background-color: #041737;
   }
 `;
-
-export const ContainAlert = styled.div`
-  position: absolute;
-  bottom: 86%;
-  left: 25%;
-`
