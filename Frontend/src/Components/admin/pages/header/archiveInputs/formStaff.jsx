@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { toast, ToastContainer } from 'react-toastify'
 
 const FormStaff = () => {
   const [identification, setIdentification] = useState("");
@@ -37,17 +38,19 @@ const FormStaff = () => {
         })
         .then((Response) => {
           console.log(Response.data);
-          alert("Empleado registrado");
         });
-      window.location.reload();
+
+        setTimeout(() => {
+        window.location.reload();        
+      }, 1000);
     }
-    /* Funcion que limpa los inputs */
-    setIdentification("");
-    setNombres("");
-    setApellidos("") ;
-    setCorreo("");
-    setContraseña("");
-    setSeletRol(0);
+    // /* Funcion que limpa los inputs */
+    // setIdentification("");
+    // setNombres("");
+    // setApellidos("") ;
+    // setCorreo("");
+    // setContraseña("");
+    // setSeletRol(0);
   };
 
   useEffect(() => {
@@ -58,6 +61,10 @@ const FormStaff = () => {
     fetchdata()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
+  const handleAlertRegisterEmployee = () => {
+    toast.success('Empleado registrado satisfactoriamente.');
+  };
   return (
     <>
       <ContainForm>
@@ -124,8 +131,14 @@ const FormStaff = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handleSumit}>Registrar</BtnRegister>
+        <BtnRegister onClick={() => {handleSumit(); handleAlertRegisterEmployee();}}>Registrar</BtnRegister>
       </ButtonRegister>
+
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
     </>
   );
 };
