@@ -38,43 +38,27 @@ const FormInventory = () => {
   };
 
   //Funcion para crear un producto
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   const handletSumitProduct = async (e) => {
     try {
       e.preventDefault();
-      if (
-        nombre === "" ||
-        costo === "" ||
-        cantidadComprada === "" ||
-        precioUnitario === "" ||
-        cantidadStock === "" ||
-        tipoMedida === "" ||
-        tipoProducto === "" ||
-        selectMedida === "" ||
-        selectProducto === ""
-      ) {
-        
-        alert("llenar todos los campos");
-      } else {
-        await axios
-          .post("http://localhost:3005/postinventory", {
-            nombre: nombre,
-            costo: parseInt(costo),
-            cantidad_comprada: parseInt(cantidadComprada),
-            precio_unitario: parseInt(precioUnitario),
-            cantidad_en_stock: parseInt(cantidadStock),
-            id_medida: selectMedida,
-            id_producto: selectProducto,
-          })
-          
-          .then((Response) => {
-            
-            console.log(Response.data);
-            setShowAlert(true);
-          });
-        }
-    } catch (error) {
-      console.log(error)
+      alert("llenar todos los campos");
+    } catch {
+       await axios
+        .post(`${apiBaseBack}/postinventory`, {
+          nombre: nombre,
+          costo: parseInt(costo),
+          cantidad_comprada: parseInt(cantidadComprada),
+          precio_unitario: parseInt(precioUnitario),
+          cantidad_en_stock: parseInt(cantidadStock),
+          id_medida: selectMedida,
+          id_producto: selectProducto,
+        })
+        .then((Response) => {
+          console.log(Response.data);
+          setShowAlert(true);
+        });
+      window.location.reload();
     }
   };
 
@@ -85,7 +69,8 @@ const FormInventory = () => {
       e.preventDefault();
       alert("Llenar todos los campos")
     }else {
-      await axios.post("http://localhost:3005/postservice",{
+      await axios.post(`${apiBaseBack}/postservice`,{
+        id_orden: ordenServicio,
         nombre_serv: nombreServicio,
         descripcion: descripcion,
         precio: parseInt(precioServicio),
@@ -99,11 +84,11 @@ const FormInventory = () => {
   useEffect(() => {
     const fetchdata = async () => {
       const responseMedida = await axios.get(
-        "http://localhost:3005/tipomedida"
+        `${apiBaseBack}/tipomedida`
       );
       setTipoMedida(responseMedida.data);
       const responseProducto = await axios.get(
-        "http://localhost:3005/tipoproducto"
+        `${apiBaseBack}http://localhost:3005/tipoproducto`
       );
       setTipoProducto(responseProducto.data);
     };
@@ -155,7 +140,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                   placeholder="Nombre del producto"
                   autoComplete="off"
                   required={true}
@@ -182,7 +167,7 @@ const FormInventory = () => {
                   className="width"
                   type="text"
                   value={costo}
-                  onChange={(e) => setCosto(e.target.value)}
+                  onChange={(e) => setCosto(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Costo"
                   autoComplete="off"
                   required={true}
@@ -192,7 +177,7 @@ const FormInventory = () => {
                   className="input-display"
                   type="text"
                   value={precioUnitario}
-                  onChange={(e) => setPrecioUnitario(e.target.value)}
+                  onChange={(e) => setPrecioUnitario(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Precio unitario"
                   maxLength={10}
                   autoComplete="off"
@@ -204,7 +189,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadComprada}
-                  onChange={(e) => setCantidadComprada(e.target.value)}
+                  onChange={(e) => setCantidadComprada(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad en comprada"
                   autoComplete="off"
                   required={true}
@@ -215,7 +200,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value)}
+                  onChange={(e) => setCantidadStock(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad en stock"
                   autoComplete="off"
                   required={true}
@@ -233,8 +218,8 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={ordenServicio}
-                  onChange={(e) => setOrdenServicio(e.target.value)}
-                  placeholder="id del servicio"
+                  onChange={(e) => setOrdenServicio(e.target.value.replace(/[^0-9]/g, ''))}
+                  placeholder="ID servicio"
                   autoComplete="off"
                   required={true}
                 />
@@ -243,7 +228,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombreServicio}
-                  onChange={(e) => setNombreServicio(e.target.value)}
+                  onChange={(e) => setNombreServicio(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                   placeholder="Nombre del servicio"
                   autoComplete="off"
                   required={true}
@@ -253,7 +238,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={precioServicio}
-                  onChange={(e) => setPrecioServicio(e.target.value)}
+                  onChange={(e) => setPrecioServicio(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Precio del servicio"
                   autoComplete="off"
                   required={true}
@@ -263,7 +248,7 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={tiempoEstimado}
-                  onChange={(e) => setTiempoEstimado(e.target.value)}
+                  onChange={(e) => setTiempoEstimado(e.target.value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase())}
                   placeholder="Tiempo estidamdo del servicio"
                   autoComplete="off"
                   required={true}
@@ -274,7 +259,7 @@ const FormInventory = () => {
                   type="text"
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
-                  placeholder="Descripcion del servicio"
+                  placeholder="Descripción del servicio"
                   autoComplete="off"
                   required={true}
                 />

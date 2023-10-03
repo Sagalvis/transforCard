@@ -23,7 +23,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   const [observacion, setObservacion] = useState(null)
   // Variable de estado para abrir modal de observacion vehiculo.
   const [handleRemarks, setHandleRemarks] = useState(false);
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
   //Metodo para captura la placa en el modal
   const CapturaVehicle = (item) => {
@@ -33,7 +33,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
 
   const getVehicle = async () => {
     try {
-      const res = await axios.get(`http://localhost:3005/vehicle/${getCustomer2}`);
+      const res = await axios.get(`${apiBaseBack}/vehicle/${getCustomer2}`)
       setVehicle(res.data);
       console.log("res vehiculo",res)
     } catch (error) {
@@ -43,7 +43,8 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
 
   const deleteVehicle = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deletevehicle/${delIdVehicle.matricula}`);
+      
+      const result = await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`);
       console.log(result);
       setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
@@ -70,15 +71,15 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
           <Thead>
             <Tr>
               <Th>ID Vehículo</Th>
-              <Th>Cedula</Th>
+              <Th>ID Cliente</Th>
               <Th>Tipo</Th>
               <Th>Marca</Th>
               <Th>Modelo</Th>
               <Th>Año</Th>
               <Th>Color</Th>
-              <Th>T_Propiedad</Th>
-              <Th>Placa</Th>
-              <Th>VIN</Th>
+              <Th>Lic. Tránsito</Th>
+              <Th>Matrícula</Th>
+              <Th className="center">VIN</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -151,9 +152,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       changePosition={'start'}
       showHeader={true}
       showCloseButton={true}
+      changePadding={'0px'}
       >
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar este vehículo?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={() => {setHandleDeleteVehicle(!handleDeleteVehicle); deleteVehicle()}}>Eliminar</Btn_Delete>
           </ButtonDelete>

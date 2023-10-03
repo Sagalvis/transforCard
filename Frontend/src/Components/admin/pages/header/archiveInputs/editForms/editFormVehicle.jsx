@@ -5,9 +5,7 @@ import axios from "axios";
 import { ContainAlert } from "../formClient";
 import Alert from "@mui/material/Alert";
 
-const EditFormVehicle = ({ getVehicle/* , changeStatus */ }) => {
-    //const [cedula, setCedula] = useState("");
-    //const [tipo, setTipo] = useState("");
+const EditFormVehicle = ({ getVehicle}) => {
     const [marca, setMarca] = useState("");
     const [modelo, setModelo] = useState("");
     const [año, setAño] = useState("");
@@ -70,15 +68,9 @@ setVin("")
 
     };
 
-
-//funcion que permite solo escribir numeros en el input.
-/* function acceptNum(evt) {
-    const input = evt.target.value;
-    evt.target.value = input.replace(/[^\d]/g, "");
-} */
 return (
     <>
-              <>
+
       {showAlert && (
         <ContainAlert>
         <Alert severity="success" color="success">
@@ -87,7 +79,7 @@ return (
         </ContainAlert>
 
       )}
-      </>
+
         <ContainForm>
             <Form>
                 <ContentInput className="display">

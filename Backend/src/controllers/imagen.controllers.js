@@ -1,22 +1,14 @@
-import { pool } from "../dbconfig.js";
 import multer from "multer";
-import path from "path";
 
-export const imagenes = multer.diskStorage({
-    destination: function(req, res, cb){
-        cb(null, '../assets')
-    },
-    filename: (req, file, cb)=>{
-        cb(null,"imagen"+Date.now()+file.originalname);
+// Configuramos Multer
+const storage = multer.diskStorage({
+    destination: './uploads',
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
     }
-})
+});
 
-export const fileUpload = multer({
-    storage: imagenes
-}).single('imagen')
-
+// Creamos un middleware para manejar las subidas de imágenes
+export const upload = multer({storage});
 
 
-export const postImg = async () =>{
-    const [row] = await pool.query("insert into imagen values (?)" )
-}

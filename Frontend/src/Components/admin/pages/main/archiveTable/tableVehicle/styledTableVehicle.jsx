@@ -37,6 +37,10 @@ export const Th = styled.th`
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
+
+  &.center {
+    text-align: center;
+  }
 `;
 
 export const Tbody = styled.tbody`
@@ -55,7 +59,7 @@ export const Td = styled.td`
   border-bottom: 1px solid #ccc;
   &.matricula {
     font-weight: 600;
-    color: red;
+    color: #041737;
   }
 `;
 

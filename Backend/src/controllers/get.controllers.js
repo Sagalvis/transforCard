@@ -151,12 +151,11 @@ export const getProducto = async (req, res) => {
 
 /* consultas para traer facturas */
 
- export const getInvoices = async (req, res) => {
+export const getInvoices = async (req, res) => {
   try {
     const [row] = await pool.query(
-      `SELECT servicio_cliente.identificacion, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente`
+      `SELECT servicio_cliente.identificacion, cliente.nombre, cliente.apellido, servicio_cliente.id_orden, factura.* FROM factura INNER JOIN servicio_cliente ON factura.id_servicio_cliente = servicio_cliente.id_servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion`
     );
-    console.log(row);
     res.send(row);
   } catch (error) {
     return res.status(500).json({
@@ -192,9 +191,20 @@ export const getServiceCliente = async (req, res) => {
     });
   }
 };
+export const getServicesClient = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido FROM servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion GROUP BY identificacion")
+    res.send(row)
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
+
 export const getAllServicesClient = async (req, res) => {
   try {
-    const [row] = await pool.query("select servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido from servicio_cliente inner join cliente on servicio_cliente.identificacion = cliente.identificacion group by identificacion")
+    const [row] = await pool.query("select * from servicio_cliente ")
     res.send(row)
   } catch (error) {
     return res.status(500).json({
@@ -211,5 +221,32 @@ export const getService = async (req, res) => {
     return res.status(500).json({
       message: "Error en el servidor",
     });
+  }
+};
+
+
+
+export const getCallService = async (req, res) => {
+  try{
+    const { identificacion } = req.params;
+    console.log(req.body);
+    const [ row ] = await pool.query("SELECT orden_servicio.nombre_serv AS servicios, orden_servicio.precio AS precio FROM servicio_cliente INNER JOIN orden_servicio ON servicio_cliente.id_orden = orden_servicio.id_orden INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion WHERE cliente.identificacion = ?",[identificacion]);
+    res.json({
+      message: "Se ha generado la factura",
+      row
+    });
+  }catch(error){
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+} 
+//Funcion para traer las imagenes 
+export const getImg = async (req, res) =>{
+  try {
+      const [row] = await pool.query("SELECT * FROM imagen");
+      res.json(row[0]); 
+  } catch (error) {
+      return res.status(500).json({message:"No se encontro la imagen"})
   }
 };

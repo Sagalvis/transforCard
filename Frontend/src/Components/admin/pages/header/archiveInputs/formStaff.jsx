@@ -8,13 +8,11 @@ const FormStaff = () => {
   const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [telefono, setTelefono] = useState("");
   const [tipoRol, setTipoRol] = useState([]);
 
   const [selectRol, setSeletRol] = useState(0);
 
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear empleados */
   const handleSumit = async (e) => {
     if (
@@ -23,15 +21,13 @@ const FormStaff = () => {
       apellidos === "" ||
       correo === "" ||
       contraseña === "" ||
-      direccion === "" ||
-      telefono === ""||
       selectRol === ""
     ) {
       e.preventDefault();
       alert("Por favor llenar todos los campos");
     } else {
       await axios
-        .post("http://localhost:3005/postemployees", {
+        .post(`${apiBaseBack}/postemployees`, {
           id_empleado: identification,
           nombre: nombres,
           apellido: apellidos,
@@ -51,17 +47,16 @@ const FormStaff = () => {
     setApellidos("") ;
     setCorreo("");
     setContraseña("");
-    setDireccion("");
-    setTelefono("");
     setSeletRol(0);
   };
 
   useEffect(() => {
     const fetchdata = async () => {
-      const responseRol = await axios.get("http://localhost:3005/tiporol");
+      const responseRol = await axios.get(`${apiBaseBack}/tiporol`);
       setTipoRol(responseRol.data)
     }
     fetchdata()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (
     <>
@@ -95,7 +90,8 @@ const FormStaff = () => {
             onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
             
-            <Input type="text" placeholder="Apellidos" 
+            <Input type="text"
+            placeholder="Apellidos" 
             value={apellidos}
             onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
@@ -104,7 +100,7 @@ const FormStaff = () => {
           <ContentInput>
             <Input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder="E-mail"
               value={correo}
               onChange ={(e) => setCorreo(e.target.value.toLowerCase())}
               autoComplete="off"
@@ -124,24 +120,6 @@ const FormStaff = () => {
             />
           </ContentInput>
 
-          <ContentInput>
-            <Input type="tel" 
-            placeholder="Teléfono" 
-            value={telefono}
-            onChange={(e)=> setTelefono(e.target.value.replace(/[^0-9]/g, ''))} 
-            autoComplete="off"
-            />
-          </ContentInput>
-
-          <ContentInput>
-            <Input type="text" 
-            placeholder="Dirección" 
-            value={direccion}
-            onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
-            autoComplete="off" 
-            required
-            />
-          </ContentInput>
         </Form>
       </ContainForm>
 
@@ -228,6 +206,18 @@ export const TextArea = styled.textarea`
   font-family: "Outfit";
   font-size: 15px;
   overflow-y: auto;
+    &.soporte{
+    width: 100%;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-family: "Outfit";
+  }
 `;
 
 export const ButtonRegister = styled.div`

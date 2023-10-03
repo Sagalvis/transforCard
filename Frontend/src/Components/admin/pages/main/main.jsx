@@ -3,12 +3,13 @@ import TableClient from "./archiveTable/tableClient/tableClient";
 import TableHome from "./archiveTable/tableHome/tableHome";
 import TableInventory from "./archiveTable/tableInventory/tableInventory";
 import TableInvoice from "./archiveTable/tableInvoice/tableInvoice";
+import TableProfile from "./archiveTable/tableProfile/tableProfile";
 import TableServiceOrder from "./archiveTable/tableServiceOrder/tableServiceOrder";
 import TableStaff from "./archiveTable/tableStaff/tableStaff";
 import TableVehicleControl from "./archiveTable/tableVehicleControl/tableVehicleControl";
 import {ContainMain} from "./styledMain";
 
-const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice}) => {
+const Main = ({showTableProfile, showTableClient,showTableHome, showTableStaff,showTableVehicleControl, showTableInventory, showTableServiceOrder, showTableInvoice}) => {
   return (
     <>
       {/* Contenedor principal de la pagina */}
@@ -60,13 +61,15 @@ const Main = ({showTableClient,showTableHome, showTableStaff,showTableVehicleCon
         {/* Tabla de Facturación */}
         {showTableInvoice && (
           <TableInvoice 
-          editInvoice={"fa-solid fa-pen-to-square"}
-          deleteInvoice={"fa-solid fa-trash-can"}
+          deletInvoice={"fa-solid fa-trash-can"}
           printInvoice={"fa-solid fa-eye"}
           />
         )}
         {showTableHome && (
           <TableHome/>
+        )}
+        {showTableProfile && (
+          <TableProfile/>
         )}
       </ContainMain>
     </>

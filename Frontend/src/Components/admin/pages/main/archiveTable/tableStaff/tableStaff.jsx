@@ -23,9 +23,11 @@ const TableStaff = ({editStaff, deletStaff}) => {
     setHandleEditEmployee(!handleEditEmployee)
     setEmpleadoId(item)
   }
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   const getEmployees = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/employees");
+      
+      const res = await axios.get(`${apiBaseBack}/employees`);
       setEmployees(res.data);
     } catch (error) {
       console.log(error);
@@ -53,8 +55,9 @@ const TableStaff = ({editStaff, deletStaff}) => {
 
   const deleteStaff = async () => {
     try {
+      
       const result = await axios.delete(
-        `http://localhost:3005/deleteemployees/${idempleado.id_empleado}`
+        `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`
       );
       console.log(result);
       window.location.reload()
@@ -64,6 +67,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
   }
   useEffect(() => {
     getEmployees();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setEmployees]);
   return (
     <>
@@ -82,7 +86,6 @@ const TableStaff = ({editStaff, deletStaff}) => {
           value={search}
           onChange={searching}
           type="text"
-          title="Buscar empleado" 
           placeholder="ID Empleado"/>
         </ContainSearch>
       </ContainControls>
@@ -94,10 +97,10 @@ const TableStaff = ({editStaff, deletStaff}) => {
           <Thead>
             <Tr>
               <Th>ID Empleado</Th>
-              <Th>Rol</Th>
-              <Th>Nombre</Th>
-              <Th>Apellido</Th>
-              <Th>Email</Th>
+              <Th>Rol actual</Th>
+              <Th>Nombres</Th>
+              <Th>Apellidos</Th>
+              <Th>E-mail</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -154,7 +157,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
       changePadding={"0px"}
       >
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro que quieres eliminar este cliente?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
           <Btn_Delete onClick={deleteStaff}>Eliminar</Btn_Delete>
           </ButtonDelete>

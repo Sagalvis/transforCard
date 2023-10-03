@@ -46,9 +46,11 @@ const Header = ({
 
   const useData = jwt_decode (localStorage.getItem("user"));
   const handleDownloadCustomer = async () => {
+
+    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
     try {
       const response = await axios.get(
-        "http://localhost:3005/downdloadcustomer",
+        `${apiBaseBack}/downdloadcustomer`,
         { responseType: "arraybuffer" }
       );
       const blob = new Blob([response.data], {
@@ -75,7 +77,8 @@ const Header = ({
         </ContainInfo>
         {titleHome && (
           <ContainTitleHeader>
-            <TitleH2>Bienvenido de nuevo {useData.nombre} {useData.apellido}</TitleH2>
+            <TitleH2 className="margin">Bienvenido/a de nuevo,</TitleH2>
+            <TitleH2 className="name">{useData.nombre}.. 👋</TitleH2>
           </ContainTitleHeader>
         )}
 

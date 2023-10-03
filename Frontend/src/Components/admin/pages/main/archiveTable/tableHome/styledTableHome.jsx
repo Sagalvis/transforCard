@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {Link} from "react-router-dom"
 
 export const ContainerTableHome = styled.div`
@@ -25,6 +25,14 @@ export const ContainCards = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+`;
+const right = keyframes`
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(0)
+  }
 `;
 
 export const CardsContain = styled.div`
@@ -92,6 +100,7 @@ export const CardsParagraft = styled.p`
   @media ( max-width: 1039px ) {
     font-size: 3rem;
   }
+  animation: ${right} .5s ease;
 `;
 
 export const SmallGraphicsCards = styled.div`

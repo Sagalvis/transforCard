@@ -15,14 +15,14 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   const [ordenService, setOrden] = useState([]);
   // Variable para eliminar orden de servicio
   const [handleDeleteServiceOrder, setHandleDeleteServiceOrder] = useState(false);
-  const [delServiceOrder, setDelServiceOrder] = useState(null);
+  const [delServiceCustomer, setDelServiceCustomer] = useState(null);
   const [idServCliente , setIdServCliente ] = useState("");
   const [cedula , setCedula ] = useState("");
   const [showAlertDeleteOrder, setShowAlertDeleteOrder] = useState(false);
   // Variable de estado para abrir el modal de servicios del cliente
   const [handleShowServices, setHandleShowServices] = useState(false);
   const [id, setId] = useState("");
-  
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
 //Función de busqueda
 const searching = (e) => {
@@ -31,7 +31,7 @@ const searching = (e) => {
 }; 
 //Funcion para mostrar los clientes a los cuales tienen asignado un servicio
 const getAllService = async ()=>{
-  const services = await axios.get("http://localhost:3005/getAllServicesClient")
+  const services = await axios.get(`${apiBaseBack}/getServicesClient`)
   setOrden(services.data)
   console.log(services.data)
 }
@@ -53,9 +53,10 @@ if (!search) {
 }
 
   // Función para eliminar orden de servicio.
-  const deleteServiceOrder = async () => {
+  const deleteServiceCustomer = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiceOrder.id_servicio_cliente}`);
+      const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+      await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiceCustomer.id_servicio_cliente}`);
       window.location.reload();
       setShowAlertDeleteOrder(true); 
     } catch (error) {
@@ -77,7 +78,8 @@ if (!search) {
 
   const postCreateFactura = () => {
     try {
-      axios.post("http://localhost:3005/postCreateFactura",{
+      
+      axios.post(`${apiBaseBack}/postCreateFactura`,{
         identificacion : cedula,
         id_servicio_cliente: idServCliente
       })
@@ -117,8 +119,9 @@ if (!search) {
             <Tr>
               <Th>ID Orden</Th>
               <Th>ID Cliente</Th>
-              <Th>Nombre</Th>
-              <Th>Apellido</Th>
+              <Th>Nombres</Th>
+              <Th>Apellidos</Th>
+              <Th>Matrícula</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -129,10 +132,11 @@ if (!search) {
                 <Td>{item.identificacion}</Td>
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
+                <Td>[get.pendiente]</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons
-                      onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); setDelServiceOrder(item)}}
+                      onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); setDelServiceCustomer(item)}}
                       title="Eliminar orden">
                       <i className={deleteOrder}></i>
                     </Buttons>
@@ -179,9 +183,9 @@ if (!search) {
         </ContainAlert>
       )}
         <ContainInfoModal>
-          <Paragraph>¿Estas seguro de querer eliminar esta orden?</Paragraph>
+          <Paragraph>¿Estás seguro de que quieres eliminar esta orden?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceOrder()}} >Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteServiceOrder(!handleDeleteServiceOrder); deleteServiceCustomer()}} >Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
@@ -191,13 +195,14 @@ if (!search) {
       status={handleShowServices}
       changeStatus={setHandleShowServices}
       showHeader={true}
-      titleModal={"Tus servicios"}
+      titleModal={"Servicios de cliente actual"}
       showCloseButton={true}
       changePosition={"start"}
-      changeWidth={"1000px"}
+      changeWidth={"1100px"}
       >
         <ContainInfoModal>
           <TableServiceClient
+          deleteService={"fa-solid fa-trash-can"}
           getcustomer = {id}
           />
         </ContainInfoModal>

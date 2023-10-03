@@ -13,6 +13,8 @@ deleteRouter.delete('/deleteemployees/:id_empleado', controllDelete.deleteEmploy
 deleteRouter.delete('/deletevehicle/:matricula', controllDelete.deleteVehicle);
 deleteRouter.delete('/deleteproduct/:id_inventario', controllDelete.deleteProductInventory);
 deleteRouter.delete('/deleteservice/:id_orden', controllDelete.deleteServiceInventory);
+deleteRouter.delete('/deleteservicecustomer/:identificacion', controllDelete.deleteServiceCustomer);
 deleteRouter.delete('/deleteserviceorder/:id_servicio_cliente', controllDelete.deleteServiceOrder);
+deleteRouter.delete('/deleteinvoice/:id_factura', controllDelete.deleteInvoice);
 
 export default deleteRouter

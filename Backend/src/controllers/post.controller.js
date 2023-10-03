@@ -2,17 +2,17 @@
 import { pool } from "../dbconfig.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
-const SECRET = "jesusessimpdehelena"
+import { SECRET_KEY } from "../config.js";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
-    const { identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente } =
+    const { identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente } =
       req.body;
     const [row] = await pool.query(
-      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente) VALUE(?,?,?,?,?,?,?,?)",
-      [identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente]
+      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel, id_tipo_cliente) VALUE(?,?,?,?,?,?,?)",
+      [identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente]
     );
-    res.send({ identificacion, nombre, apellido, correo, direccion, tel, idpais, id_tipo_cliente });
+    res.send({ identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -25,16 +25,23 @@ export const postCustomer = async (req, res) => {
 
 export const postEmployees = async (req, res) => {
   try {
+    const file = req.file
+    console.log(file)
+    const imagen = {
+        name: file.originalname
+    }
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } =
       req.body;
     const passwordHash = await bcrypt.hash(contraseña, 8);
     const [row] = await pool.query(
-      "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,id_rol) VALUE (?,?,?,?,?,?)",
-      [id_empleado, nombre, apellido, correo, passwordHash, id_rol]
+      "INSERT INTO empleado (id_empleado, nombre, apellido, correo, contraseña,ruta, id_rol) VALUE (?,?,?,?,?,?,?)",
+      [id_empleado, nombre, apellido, correo, passwordHash,imagen.name, id_rol]
     );
-    res.send({ id_empleado, nombre, apellido, correo, passwordHash, id_rol });
+    res.json(row);
+    console.log(row)
   } catch (error) {
     console.log(error);
+    console.log(error)
     return res.status(500).json({
       message: "Error en el servidor",
     });
@@ -95,24 +102,33 @@ export const postVehicle = async (req, res) => {
 export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
-      const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
+    const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
     
-    console.log(rows[0])
     if (rows.length > 0) {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
+
       if (compassword) {
-        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido}, SECRET, {
+        const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido, correo: rows[0].correo }, SECRET_KEY, {
           expiresIn: "1h",
         });
-        res.status(200).json(token);
+        
+        // Envía el token si la contraseña es correcta
+        res.status(200).json({ token });
+        
+      } else {
+        // Envía un mensaje de error si la contraseña es incorrecta
+        res.status(401).json({ error: "Contraseña incorrecta" });
+
       }
     } else {
-      res.status(400).send("El usuario no existe🤦‍♂🤦‍♂");
+      // Envía un mensaje de error si el usuario no existe
+      res.status(404).json({ error: "El usuario no existe" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Error del servidor 💀💀💀" });
-}
+    res.status(500).json({ error: "Error del servidor 💀💀💀" });
+  }
 };
+
 
 /* consulta para crear productos en el inventario */
 
@@ -194,9 +210,14 @@ export const postInvoices = async (req, res) => {
 
 export const postOrdenService = async (req, res) => {
   try {
+    const file = req.file
+    console.log(file)
+    const imagen = {
+        name: file.originalname
+    }
     const {id_orden, nombre_serv, descripcion, precio, tiempo_estimado} = req.body;
-    const [row] = await pool.query("INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado) VALUE (?,?,?,?,?)",
-    [id_orden, nombre_serv, descripcion, precio, tiempo_estimado]);
+    const [row] = await pool.query("INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado, ruta_img) VALUE (?,?,?,?,?,?)",
+    [id_orden, nombre_serv, descripcion, precio, tiempo_estimado, imagen.name]);
     res.json(row)
   } catch (error) {
     console.log(error)
@@ -240,7 +261,7 @@ export const postCreateFactura = async (req, res) => {
 }
 
 
- export const postCallService = async (req, res) => {
+export const postCallService = async (req, res) => {
   try{
     const { identificacion } = req.params;
     console.log(req.body);
@@ -255,5 +276,21 @@ export const postCreateFactura = async (req, res) => {
     });
   }
 } 
+
+export const validationCorreoSoporte = async (req, res) => {
+  try {
+    const {correo} = req.body;
+    const [rows] = await pool.query("SELECT correo FROM empleado WHERE correo = ?", [correo]);
+    if(rows.length > 0){
+      res.status(200).json({exists: true});
+    } else {
+      res.status(404).json({exists: false})
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}
 
 

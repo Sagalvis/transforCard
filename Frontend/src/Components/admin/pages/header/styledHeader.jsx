@@ -40,7 +40,11 @@ export const ContainInfo = styled.div`
     margin-right: 5px;
   }
   .fa-chart-line{
-    font-size :27px ;
+    font-size :25px ;
+    margin-right: 5px;
+  }
+  .fa-user{
+    font-size: 25px;
     margin-right: 5px;
   }
 `;
@@ -50,7 +54,17 @@ export const ContainTitleHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-`
+
+  .margin {
+    margin-right: 5px;
+    font-size: 25px;
+  }
+  .name {
+    text-transform: capitalize;
+    font-size: 25px;
+  }
+`;
+
 export const TitleH2 = styled.h2`
   font-size: 32px;
   font-weight: 500;

@@ -84,3 +84,30 @@ export const CounterInvoice = async (req, res) => {
     });
   }
 }; 
+/* Final de las consulta para contar el contenido de las diferentes tabalas  */
+
+
+// Inicio consulta que permite obtener la cantidad de clientes por mes 
+
+export const DateCustomer = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT month(fecha_creacion) AS 'Mes', count(*) as 'total' FROM cliente GROUP BY month(fecha_creacion)")
+    res.send(row)
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}; 
+export const DateVehicle = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT month(fecha_creacion) AS 'Mes', count(*) as 'total' FROM vehiculo GROUP BY month(fecha_creacion)")
+    res.send(row)
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+}; 

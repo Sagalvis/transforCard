@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
@@ -36,11 +37,11 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Variable de estado de eliminar servicio
   const [handleDeleteService, setHandleDeleteService] = useState(false);
   const [delService, setDelService] = useState(null);
-
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   const getOrdenService = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/getService");
+      const res = await axios.get(`${apiBaseBack}/getService`);
       setOrdenService(res.data)
     } catch (error) {
       console.log(error);
@@ -48,7 +49,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   }
   const getInventario = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/inventario");
+      const res = await axios.get(`${apiBaseBack}/inventario`);
       setInventario(res.data);
     } catch (error) {
       console.log(error);
@@ -102,7 +103,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar producto de inventario
   const deleteProductInventory = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteproduct/${delProduct.id_inventario}`);
+      await axios.delete(`${apiBaseBack}/deleteproduct/${delProduct.id_inventario}`);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -112,7 +113,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteservice/${delService.id_orden}`);
+      const result = await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -123,7 +124,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     <ButtonInventory>
 
       <Button onClick={() => handleButtonClick("servicio")}>Servicio</Button>
-      <Button onClick={() => handleButtonClick("producto")}>Producto</Button>
+      <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button>
     </ButtonInventory>
 
       {showProduct && (
@@ -138,8 +139,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                 value={search}
                 onChange={searching}
                 type="text"
-                title="Buscar producto"
-                placeholder="Nombre producto"
+                placeholder="Nombre del producto"
               />
             </ContainSearch>
           </ContainControls>
@@ -198,9 +198,11 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           changePosition={"start"}
           showHeader={true}
           showCloseButton={true}
+          changePadding={'0px'}
+
           >
             <ContainInfoModal>
-              <Paragraph>¿Estas seguro de querer eliminar este producto?</Paragraph>
+              <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); deleteProductInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
@@ -235,8 +237,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               value={search}
               onChange={searching}
               type="text"
-              title="Buscar servicio"
-              placeholder="ID_orden"
+              placeholder="ID Orden"
             />
           </ContainSearch>
         </ContainControls>
@@ -244,8 +245,9 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           <Table>
             <Thead>
               <Tr>
-                <Th>ID orden</Th>
+                <Th>ID Orden</Th>
                 <Th>Nombre del servicio</Th>
+                <Th>Descripción</Th>
                 <Th>Precio</Th>
                 <Th>Tiempo estimado</Th>
                 <Th>Opciones</Th>
@@ -257,7 +259,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                   <Td>{item.id_orden}</Td>
                   <Td>{item.nombre_serv}</Td>
                   <Td>{item.descripcion}</Td>
-                  <Td>{item.precio}</Td>
+                  <Td>{item.precio.toLocaleString()}</Td>
                   <Td>{item.tiempo_estimado}</Td>
 
                   <Td>
@@ -289,9 +291,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           changePosition={"start"}
           showHeader={true}
           showCloseButton={true}
+          changePadding={'0px'}
           >
             <ContainInfoModal>
-              <Paragraph>¿Estas seguro de querer eliminar este servicio?</Paragraph>
+              <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteService(!handleDeleteService); deleteServiceInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
