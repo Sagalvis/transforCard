@@ -12,8 +12,22 @@ queryHome.get("/count/ordenesdeservicio", ControllerHome.CounterServiceOrder);
 queryHome.get("/count/factura", ControllerHome.CounterInvoice);
 /* Final de las consulta para contar el contenido de las diferentes tabalas  */
 
-// Inicio consulta que permite obtener la cantidad de clientes por mes 
-queryHome.get("/Datecustomer", ControllerHome.DateCustomer);
+/* Inicio ruta que traer clientes mes a mes en cada una */
+queryHome.get("/january/client", ControllerHome.JanuaryClient);
+queryHome.get("/february/client", ControllerHome.FebruaryCLient);
+queryHome.get("/march/client", ControllerHome.FebruaryCLient);
+queryHome.get("/april/client", ControllerHome.FebruaryCLient);
+queryHome.get("/may/client", ControllerHome.FebruaryCLient);
+queryHome.get("/june/client", ControllerHome.FebruaryCLient);
+queryHome.get("/july/client", ControllerHome.FebruaryCLient);
+queryHome.get("/august/client", ControllerHome.FebruaryCLient);
+queryHome.get("/september/client", ControllerHome.FebruaryCLient);
+queryHome.get("/october/client", ControllerHome.FebruaryCLient);
+queryHome.get("/november/client", ControllerHome.FebruaryCLient);
+queryHome.get("/dicember/client", ControllerHome.FebruaryCLient);
+/* Final  ruta que traer clientes mes a mes en cada una */
+
+
 queryHome.get("/Datevehicle", ControllerHome.DateVehicle);
 export default queryHome
 

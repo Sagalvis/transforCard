@@ -60,7 +60,11 @@ const TableStaff = ({editStaff, deletStaff}) => {
         `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`
       );
       console.log(result);
-      window.location.reload()
+
+      setTimeout(() => {
+        window.location.reload()        
+      }, 1000);
+      
     } catch (error) {
       console.log(error);
     }

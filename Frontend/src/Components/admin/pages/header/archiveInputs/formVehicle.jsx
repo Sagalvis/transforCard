@@ -3,8 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Alert from '@mui/material/Alert'
-import { ContainAlert } from "./formClient";
+import {toast, ToastContainer} from 'react-toastify'
 
 const FormVehicle = ({getCustomer3}) => {
   const [matricula, setMatricula] = useState("");
@@ -17,7 +16,6 @@ const FormVehicle = ({getCustomer3}) => {
   const [observacion, setObservacion] = useState("");
   const [identificacion, setIdentificacion] = useState("");
   const [tipoVehiculo, setTipo_vehiculo] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
   const [selectVehicle, setSelectVehicle] = useState(0);
   
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
@@ -35,7 +33,7 @@ const FormVehicle = ({getCustomer3}) => {
       selectVehicle === ""
     ) {
       e.preventDefault();
-      alert("Por favor llenar todos los campos");
+      toast.warning('Por favor llenar todos los campos');
     } else {
       await axios
         .post(`${apiBaseBack}/postvehicle`, {
@@ -48,13 +46,14 @@ const FormVehicle = ({getCustomer3}) => {
           vin: vin,
           observacion: observacion,
           identificacion: identificacion,
-          id_tipo_vehiculo: selectVehicle 
+          id_tipo_vehiculo: selectVehicle   
         })
         .then((Response) => {
           console.log(Response.data);
-          setShowAlert(true);
         });
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
 
     /* Funcion que limpa los inputs */
@@ -77,16 +76,11 @@ const FormVehicle = ({getCustomer3}) => {
     fetchdata();
   },[])
 
+  const handleAlert = () => {
+    toast.success('Vehículo registrado con éxito.');
+  };
   return (
     <>
-          {showAlert && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Vehiculo creado!
-          </Alert>
-        </ContainAlert>
-
-      )}
       <ContainForm>
         <Form>
           <ContentInput>
@@ -198,8 +192,14 @@ const FormVehicle = ({getCustomer3}) => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Crear vehículo</BtnRegister>
+        <BtnRegister onClick={ () => {handletSumit(); handleAlert();}}>Crear vehículo</BtnRegister>
       </ButtonRegister>
+
+
+      <ToastContainer 
+      hideProgressBar={true}
+      autoClose={1000}
+      />
     </>
   );
 };
