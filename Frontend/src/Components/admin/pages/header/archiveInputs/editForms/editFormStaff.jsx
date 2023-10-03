@@ -2,6 +2,7 @@
 import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify'
 
 const EditFormStaff = ({getEmpleado}) => {
   const [nombre, setNombres] = useState("");
@@ -36,7 +37,7 @@ const EditFormStaff = ({getEmpleado}) => {
       correo === "" 
     ) {
       e.preventDefault();
-      alert("Por favor llenar todos los campos");
+      toast.warning('Por favor llenar todos los campos requeridos.');
     } else {
       await axios
         .patch(`http://localhost:3005/patchemployees/${getEmpleado.id_empleado}`, {
@@ -48,16 +49,13 @@ const EditFormStaff = ({getEmpleado}) => {
         })
         .then((Response) => {
           console.log(Response.data);
-          alert("Empleado actualizado");
+          toast.success('Empleado actualizado con éxito.');
         });
-        window.location.reload();
-    }
 
-    /* Funcion que limpa los inputs */
-    setNombres("");
-    setApellidos("");
-    setCorreo("");
-    setPass("");
+        setTimeout(() => {
+          window.location.reload();          
+        }, 1000);
+    }
   };
 
   //funcion que permite solo escribir numeros en el input.
@@ -65,6 +63,10 @@ const EditFormStaff = ({getEmpleado}) => {
     const input = evt.target.value;
     evt.target.value = input.replace(/[^\d]/g, "");
   }
+
+  const handleAlertUpdateEmployee = () => {
+    toast.success('Empleado actualizado con éxito.');
+  };
   return (
     <>
       <ContainForm>
@@ -135,8 +137,14 @@ const EditFormStaff = ({getEmpleado}) => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={handletSumit}>Actualizar</BtnRegister>
+        <BtnRegister onClick={() => {handletSumit(); handleAlertUpdateEmployee();}}>Actualizar</BtnRegister>
       </ButtonRegister>
+
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
     </>
   );
 };
