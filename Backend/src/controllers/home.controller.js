@@ -97,7 +97,7 @@ export const JanuaryClient = async (req, res) => {
   }
 };
 
-export const FebruaryCLient  = async (req, res) => {
+ export const FebruaryCLient = async (req, res) => {
   try {
     const [row] = await pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-02-01' AND '2023-02-28'")
     res.send(row)
@@ -105,8 +105,7 @@ export const FebruaryCLient  = async (req, res) => {
     console.log(error)
   }
 };
-
-export const MarchClient   = async (req, res) => {
+export const MarchClient = async (req, res) => {
   try {
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-03-01' AND '2023-03-31'");
     res.send(row);
@@ -114,7 +113,8 @@ export const MarchClient   = async (req, res) => {
     console.log(error)
   }
 }
-export const AprilClient    = async (req, res) =>{
+
+export const AprilClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-04-01' AND '2023-04-30'");
     res.send(row);
@@ -122,7 +122,7 @@ export const AprilClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const MayClient    = async (req, res) =>{
+export const MayClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-05-01' AND '2023-05-31'");
     res.send(row);
@@ -130,7 +130,8 @@ export const MayClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const JuneClient    = async (req, res) =>{
+/*
+export const JuneClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-06-01' AND '2023-06-30'");
     res.send(row);
@@ -138,7 +139,7 @@ export const JuneClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const JulyClient    = async (req, res) =>{
+export const JulyClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-07-01' AND '2023-07-31'");
     res.send(row);
@@ -146,7 +147,7 @@ export const JulyClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const AugustClient    = async (req, res) =>{
+export const AugustClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-08-01' AND '2023-08-31'");
     res.send(row);
@@ -154,7 +155,7 @@ export const AugustClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const SeptemberClient    = async (req, res) =>{
+export const SeptemberClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-09-01' AND '2023-09-30'");
     res.send(row);
@@ -162,7 +163,7 @@ export const SeptemberClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const OctoberClient    = async (req, res) =>{
+export const OctoberClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-10-01' AND '2023-10-31'");
     res.send(row);
@@ -170,7 +171,7 @@ export const OctoberClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const NovemberClient    = async (req, res) =>{
+export const NovemberClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-11-01' AND '2023-11-30'");
     res.send(row);
@@ -178,25 +179,117 @@ export const NovemberClient    = async (req, res) =>{
     console.log(error)
   }
 }
-export const DicemberClient    = async (req, res) =>{
+export const DicemberClient = async (req, res) =>{
   try{
     const [row] = pool.query("SELECT * FROM cliente WHERE fecha_creacion BETWEEN '2023-12-01' AND '2023-12-31'");
     res.send(row);
   }catch (error) {
     console.log(error)
   }
-}
+} */
 /* Final Consulta que traer clientes mes a mes en cada una */
 
-export const DateVehicle = async (req, res) => {
+/* Inicio Consulta que traer vehiculos mes a mes en cada una */
+
+/* export const JanuaryVehicle = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT month(fecha_creacion) AS 'Mes', count(*) as 'total' FROM vehiculo GROUP BY month(fecha_creacion)")
+    const [row] = await pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-01-01' AND '2023-01-31'");
     res.send(row)
   } catch (error) {
-    console.log(`Error: ${error}`)
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
+    console.log(error)
   }
-}; 
+};
+
+export const FebruaryVehicle  = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-02-01' AND '2023-02-28'")
+    res.send(row)
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export const MarchVehicle   = async (req, res) => {
+  try {
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-03-01' AND '2023-03-31'");
+    res.send(row);
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const AprilVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-04-01' AND '2023-04-30'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const MayVehicle   = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-05-01' AND '2023-05-31'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const JuneVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-06-01' AND '2023-06-30'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const JulyVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-07-01' AND '2023-07-31'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const AugustVehicle   = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-08-01' AND '2023-08-31'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const SeptemberVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-09-01' AND '2023-09-30'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const OctoberVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-10-01' AND '2023-10-31'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const NovemberVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-11-01' AND '2023-11-30'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+}
+export const DicemberVehicle    = async (req, res) =>{
+  try{
+    const [row] = pool.query("SELECT * FROM vehiculo WHERE fecha_creacion BETWEEN '2023-12-01' AND '2023-12-31'");
+    res.send(row);
+  }catch (error) {
+    console.log(error)
+  }
+} */
+/* Final Consulta que traer vehiculos mes a mes en cada una */
+
+
 

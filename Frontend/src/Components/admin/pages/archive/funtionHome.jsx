@@ -88,80 +88,88 @@ export const getMarch = async (setMarchClient) => {
     const res = await axios.get("http://localhost:3005/march/client");
     setMarchClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de marzo:", error);
   }
 };
 
 export const getApril = async (setAprilClient) => {
   try {
     const res = await axios.get("http://localhost:3005/april/client");
-    setAprilClient(res.data)
+    setAprilClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de abril:", error);
+  }
+};
+export const getMay = async (setMayClient) => {
+  try {
+    const res = await axios.get("http://localhost:3005/may/client");
+    setMayClient(res.data);
+  } catch (error) {
+    console.error("Error al obtener datos de mayo:", error);
   }
 };
 
-export const getMay = async (setMayClient) => {
-  try {
-    const res = await axios.get("http://localhost:3005/may/client")
-    setMayClient(res.data)
-  } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
-  }
-}
+/* 
 export const getJune = async (setJuneClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/june/client")
-    setJuneClient(res.data)
+    const res = await axios.get("http://localhost:3005/june/client");
+    setJuneClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de junio:", error);
   }
-}
+};
+
 export const getJuly = async (setJulyClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/july/client")
-    setJulyClient(res.data)
+    const res = await axios.get("http://localhost:3005/july/client");
+    setJulyClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de julio:", error);
   }
-}
+};
+
 export const getAugust = async (setAugustClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/august/client")
-    setAugustClient(res.data)
+    const res = await axios.get("http://localhost:3005/august/client");
+    setAugustClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de agosto:", error);
   }
-}
-export const getSeptember = async (setSeptemberClientsetOctoberClient) => {
+};
+
+export const getSeptember = async (setSeptemberClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/september/client")
-    setSeptemberClientsetOctoberClient(res.data)
+    const res = await axios.get("http://localhost:3005/september/client");
+    setSeptemberClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de septiembre:", error);
   }
-}
+};
+
 export const getOctober = async (setOctoberClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/october/client")
-    setOctoberClient(res.data)
+    const res = await axios.get("http://localhost:3005/october/client");
+    setOctoberClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de octubre:", error);
   }
-}
+};
+
 export const getNovember = async (setNovemberClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/november/client")
-    setNovemberClient(res.data)
+    const res = await axios.get("http://localhost:3005/november/client");
+    setNovemberClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de noviembre:", error);
   }
-}
-export const getDicember = async (setDicemberClient) => {
+};
+
+export const getDecember = async (setDecemberClient) => {
   try {
-    const res = await axios.get("http://localhost:3005/dicember/client")
-    setDicemberClient(res.data)
+    const res = await axios.get("http://localhost:3005/december/client");
+    setDecemberClient(res.data);
   } catch (error) {
-    console.error("Error al obtener datos de febrero:", error);
+    console.error("Error al obtener datos de diciembre:", error);
   }
-}
+}; */
+

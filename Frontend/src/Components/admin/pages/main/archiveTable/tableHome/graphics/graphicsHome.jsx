@@ -11,9 +11,8 @@ import {
   Filler,
 } from "chart.js";
 import { Doughnut, Line } from "react-chartjs-2";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { getApril, getAugust, getDicember, getFebruary, getJanuary, getJuly, getJune, getMarch, getMay, getNovember, getOctober, getSeptember } from "../../../../archive/funtionHome";
+import {  getApril,/* getAugust, getDecember,*/ getFebruary,  getJanuary, /* getJuly, */ /* getJune,*/ getMarch, getMay,/* getNovember, getOctober, getSeptember */ } from "../../../../archive/funtionHome";
 
 ChartJS.register(
   ArcElement,
@@ -28,21 +27,16 @@ ChartJS.register(
 );
 
 export const GraphicsVehicle = () => {
-  const [dataVehicle, setDataVehicle] = useState([]);
-  const getVehicle = async () => {
-    const res = await axios.get("http://localhost:3005/DateVehicle");
-    setDataVehicle(res.data);
-}
 useEffect(()=>{
-  getVehicle();
-}, [setDataVehicle]);
+
+}, []);
 
   const Data = {
     labels: ["RED", "hola", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
         label: "# of Votes",
-        data: dataVehicle.map((item) => item.total),
+        data: "",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -82,16 +76,16 @@ export const GraphicsCustomer = () => {
   useEffect(() => {
     getJanuary(setJanuaryClient);
     getFebruary(setFebruaryClient);
-    getMarch(setMarchClient);
     getApril(setAprilClient);
     getMay(setMayClient);
-    getJune(setJuneClient);
+     getMarch(setMarchClient);
+    /*getJune(setJuneClient);
     getJuly(setJulyClient);
     getAugust(setAugustClient);
     getSeptember(setSeptemberClient);
     getOctober(setOctoberClient);
     getNovember(setNovemberClient);
-    getDicember(setDicemberClient);
+    getDecember(setDicemberClient); */
   }, []);
 
   const Data2 = {
@@ -99,7 +93,7 @@ export const GraphicsCustomer = () => {
     datasets: [
       {
         label: "# de Clientes",
-        data: [januaryClient.length, februaryClient.length, marchClient.length, aprilClient.length, mayClient.length, juneClient.length, julyClient.length, augustClient.length, septemberClient.length, octoberClient.length, novemberClient.length, dicemberClient.length],
+        data: [januaryClient.length , februaryClient.length, marchClient.length, aprilClient.length,/* mayClient.length, juneClient.length, julyClient.length, augustClient.length, septemberClient.length, octoberClient.length, novemberClient.length, dicemberClient.length */],
         backgroundColor: [
           "#fdcae1c5",
           "#84b6f4",
