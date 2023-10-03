@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
 import {
@@ -24,32 +25,33 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import {toast, ToastContainer} from 'react-toastify'
 
 
 const ModalContent = ({ data1 }) => {
 
   return (
-    <div>
-      <>
-        <h4>Modal</h4>
-        <div>
-          <p>Id factura: {data1.id_factura}</p>
-          <p>Identificacion: {data1.identificacion}</p>
-          <p>Id orden: {data1.id_orden}</p>
-          <p>Fecha de emision: {moment(data1.fecha_emision).format("YYYY-MM-DD")}</p>
-          <p>Estado de pago: {data1.estado_pago}</p>
-          {value.map((value, i) =>{
-           <div key={i}>
-            <p>Servicios: {value.servicios}</p>
-            <p>Precio: {value.precio}</p>
-           </div>
-         })}
-          <p>Total pagado: {data1.cantidad_pagada}</p>
-        </div>
+  <div>
+    <>
+      <h4>Modal</h4>
+      <div>
+        <p>Id factura: {data1.id_factura}</p>
+        <p>Identificacion: {data1.identificacion}</p>
+        <p>Id orden: {data1.id_orden}</p>
+        <p>Fecha de emision: {moment(data1.fecha_emision).format("YYYY-MM-DD")}</p>
+        <p>Estado de pago: {data1.estado_pago}</p>
+        {value.map((value, i) =>{
+          <div key={i}>
+          <p>Servicios: {value.servicios}</p>
+          <p>Precio: {value.precio}</p>
+          </div>
+        })}
+        <p>Total pagado: {data1.cantidad_pagada}</p>
+      </div>
 
-        <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-      </>
-    </div>
+      <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
+    </>
+  </div>
   );
 };
 
@@ -61,7 +63,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false)
-
+  const [delInvoice, setDelInvoice] = useState(null);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
   //Funcion para traer los datos de la factura
@@ -103,7 +105,10 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();      
+    }, 1000);
   };
 
   const getInvoice = async () => {
@@ -148,9 +153,13 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`${apiBaseBack}/deleteinvoice/`);
+      const result = await axios.delete(`${apiBaseBack}/deleteinvoice/${delInvoice.id_factura}`);
       console.log(result);
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();        
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
@@ -159,21 +168,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-  /*   lookVal(); */
   }, [setInvoice, setSave]);
 
- /*  console.log(lookVal);
-
-  const lookServices = async (item) => {
-    try {
-      const res = await axios.get(`http://localhost:3005/getCallService/${id}`);
-      console.log(res.data, "esto es el res");
-      setValue(res.data);
-     } catch (error) {
-       console.log(error);
-     }
-  }  */
-
+  const handleAlertDeleteInvoice = () => {
+    toast.success('Factura eliminada con éxito.');
+  };  
   return (
     <>
       <ContainControls>
@@ -225,7 +224,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                     <Buttons
                       title="Eliminar producto"
                       onClick={() => {
-                        setHandleDeleteInvoice(!handleDeleteInvoice); 
+                        setHandleDeleteInvoice(!handleDeleteInvoice);
+                        setDelInvoice(item);
                       }}
                     >
                       <i className={deletInvoice}></i>
@@ -250,6 +250,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
           </Tbody>
         </Table>
       </ContainTable>
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
 
       <Modals
         status={handlePdfInvoice}
@@ -277,7 +282,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); deleteInvoice()}}>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteInvoice(!handleDeleteInvoice); handleAlertDeleteInvoice(); deleteInvoice()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

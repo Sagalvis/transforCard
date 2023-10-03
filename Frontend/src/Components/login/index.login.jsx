@@ -20,9 +20,9 @@ import {
   Input,
 } from "./styled.login";
 import Logologin from "../../assets/svg/transforCars-01.svg";
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { ToastContainer, Zoom, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 
 
 const Login = () => {
@@ -139,9 +139,8 @@ const Login = () => {
 
       {/* Content alert ¡IMPORTANT! */}
       <ToastContainer
-      autoClose='2000' 
-      hideProgressBar='true' 
-      transition={Zoom}/>
+      autoClose={2000}
+      hideProgressBar={true}/>
     </>
   );
 };
