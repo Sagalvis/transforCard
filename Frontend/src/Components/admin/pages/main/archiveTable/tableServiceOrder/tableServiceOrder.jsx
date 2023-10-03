@@ -31,8 +31,7 @@ const searching = (e) => {
 //Funcion para mostrar los clientes a los cuales tienen asignado un servicio
 const getAllService = async ()=>{
   const services = await axios.get(`${apiBaseBack}/getServicesClient`)
-  setOrden(services.data)
-  console.log(services.data)
+  setOrden(services.data);
 }
 useEffect(()=>{
   getAllService()

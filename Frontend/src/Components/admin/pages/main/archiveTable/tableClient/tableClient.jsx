@@ -24,7 +24,7 @@ import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainSe
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import { toast, ToastContainer, Zoom } from "react-toastify";
+import { toast, ToastContainer} from "react-toastify";
 
 const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
@@ -51,7 +51,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Función de busqueda
   const searching = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   }; 
 
   //Metodo de filtrado tabla cliente
