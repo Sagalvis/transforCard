@@ -125,7 +125,6 @@ if (!search) {
               <Th>ID Cliente</Th>
               <Th>Nombres</Th>
               <Th>Apellidos</Th>
-              <Th>Matrícula</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -136,7 +135,6 @@ if (!search) {
                 <Td>{item.identificacion}</Td>
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
-                <Td>[get.pendiente]</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons
