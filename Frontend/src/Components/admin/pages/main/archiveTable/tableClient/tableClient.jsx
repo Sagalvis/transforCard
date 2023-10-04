@@ -141,7 +141,7 @@ const handleAddOrdenService = (item) => {
 };
 
 // Función para enviar los servicios del cliente
-const postOrdenServiceCliente = useCallback(async () => {
+const postOrdenServiceCliente = useCallback (async () => {
   // No ejecutar la función si idOrden no está definido
   if (!idOrden) {
     return;
@@ -193,9 +193,9 @@ const postOrdenServiceCliente = useCallback(async () => {
     toast.success("Cliente eliminado con éxito");
   };
 
-  const handleAlertWithVehicle = () => {
-    toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
-  };
+  // const handleAlertWithVehicle = () => {
+  //   toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
+  // };
   const handleAlertService = () => {
     toast.success("Se añadio el servicio al cliente seleccionado.");
   };
