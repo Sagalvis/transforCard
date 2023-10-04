@@ -11,6 +11,7 @@ getRouter.get('/vehicle', controllGet.getVehicle);
 getRouter.get('/vehicle/:identificacion', controllGet.getVehicleId);
 getRouter.get('/tipovehicle', controllGet.getSelectypevehicle);
 getRouter.get('/tiporol', controllGet.getSelectRol);
+getRouter.get('/tipodocument', controllGet.getSelectDocument);
 getRouter.get('/tipocliente', controllGet.getTypeClient);
 getRouter.get('/inventario', controllGet.getInventario);
 getRouter.get('/tipomedida', controllGet.getMedida);
