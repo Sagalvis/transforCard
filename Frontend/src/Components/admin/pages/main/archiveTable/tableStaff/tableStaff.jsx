@@ -6,6 +6,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormStaff from "../../../header/archiveInputs/editForms/editFormStaff";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import { toast, ToastContainer} from 'react-toastify'
 
 const TableStaff = ({editStaff, deletStaff}) => {
   const [employees, setEmployees] = useState([]);
@@ -60,7 +61,11 @@ const TableStaff = ({editStaff, deletStaff}) => {
         `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`
       );
       console.log(result);
-      window.location.reload()
+
+      setTimeout(() => {
+        window.location.reload()        
+      }, 1000);
+      
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +74,10 @@ const TableStaff = ({editStaff, deletStaff}) => {
     getEmployees();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setEmployees]);
+
+  const handleAlertDeleteStaff = () => {
+    toast.success('Empleado eliminado con éxito');
+  };
   return (
     <>
       {/* Controladores */}
@@ -131,6 +140,12 @@ const TableStaff = ({editStaff, deletStaff}) => {
         </Table>
       </ContainTable>
 
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
+
       {/* Modal editar empleado  */}
       <Modals
       status={handleEditEmployee}
@@ -159,7 +174,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-          <Btn_Delete onClick={deleteStaff}>Eliminar</Btn_Delete>
+          <Btn_Delete onClick={() => {deleteStaff(); handleAlertDeleteStaff();}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

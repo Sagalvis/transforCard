@@ -1,4 +1,5 @@
-  /* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"; // Importa React
 import {
   ButtonOptions,
@@ -20,38 +21,14 @@ import {
 } from "./styledTableInvoice";
 import axios from "axios";
 import Modals from "../../../archive/modals";
-import { Button, ContainInfoModal, Paragraph } from "../../../header/styledHeader";
+import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import {toast, ToastContainer} from 'react-toastify'
 
 
-const ModalContent = ({ data1 }) => {
 
-  return (
-    <div>
-      <>
-        <h4>Modal</h4>
-        <div>
-          <p>Id factura: {data1.id_factura}</p>
-          <p>Identificacion: {data1.identificacion}</p>
-          <p>Id orden: {data1.id_orden}</p>
-          <p>Fecha de emision: {moment(data1.fecha_emision).format("YYYY-MM-DD")}</p>
-          <p>Estado de pago: {data1.estado_pago}</p>
-          {value.map((value, i) =>{
-           <div key={i}>
-            <p>Servicios: {value.servicios}</p>
-            <p>Precio: {value.precio}</p>
-           </div>
-         })}
-          <p>Total pagado: {data1.cantidad_pagada}</p>
-        </div>
-
-        <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
-      </>
-    </div>
-  );
-};
 
 const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
@@ -60,9 +37,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [handlePdfInvoice, setHandlePdfInvoice] = useState(false);
   const [save, setSave] = useState([])
   const [value, setValue] = useState([])
-  const [id, setId] = useState()
   const [handleDeleteInvoice, setHandleDeleteInvoice] = useState(false)
-
+  const [delInvoice, setDelInvoice] = useState(null);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   
   //Funcion para traer los datos de la factura
@@ -84,7 +60,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Id orden: ${data1.id_orden}
       Productos y Servicios:
       ${value.map((item) =>`   
-      servicios: ${item.nombre_serv}  precios: $ ${item.precio} 
+          servicios: ${item.nombre_serv}   precios: ${item.precio} $
       `)}
       _________________________________________________________
       Cantidad pagada: ${data1.cantidad_pagada} $
@@ -104,6 +80,33 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
     window.location.reload();
+  };
+  
+  const ModalContent = ({ data1 }) => {
+
+    return (
+    <div>
+      <>
+        <h4>Modal</h4>
+        <div>
+          <p>Id factura: {data1.id_factura}</p>
+          <p>Identificacion: {data1.identificacion}</p>
+          <p>Id orden: {data1.id_orden}</p>
+          <p>Fecha de emision: {moment(data1.fecha_emision).format("YYY-MM-DD")}</p>
+          <p>Estado de pago: {data1.estado_pago}</p>
+          {value.map((value, i) =>{
+            <div key={i}>
+            <p>Servicios: {value.servicios}</p>
+            <p>Precio: {value.precio}</p>
+            </div>
+          })}
+          <p>Total pagado: {data1.cantidad_pagada}</p>
+        </div>
+  
+        <BtnPdf onClick={() => createPDF(data1)}>Crear PDF</BtnPdf>
+      </>
+    </div>
+    );
   };
 
   const getInvoice = async () => {
@@ -169,9 +172,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       const res = await axios.get(`http://localhost:3005/getCallService/${id}`);
       console.log(res.data, "esto es el res");
       setValue(res.data);
-     } catch (error) {
-       console.log(error);
-     }
+    } catch (error) {
+      console.log(error);
+    }
   }  */
 
   return (

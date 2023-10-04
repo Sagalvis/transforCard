@@ -24,7 +24,7 @@ import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainSe
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import aceite from '../../../../../../assets/img/ALINEAMIENTO.jpg'
+import { toast, ToastContainer } from "react-toastify";
 
 const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   /* Variable de estado para traer clientes */
@@ -43,9 +43,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-  //Variable de estado para las imagenes
-  const [img, setImg] = useState([]);
- const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState([]);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //funcion para traer los datos de la tabla a buscar
@@ -78,7 +76,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
     setId(item);
-    setHandleEdit(!handleEdit);
+    setHandleEdit(!handleEdit); 
   };
 
   // Funcion para traer toda la tabla clientes
@@ -111,18 +109,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   }
   useEffect(()=>{
     getServiCliente()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[setTodo])
-
-  //funcion para traer las imagenes
-  const getImage = async ()=> {
-    try {
-      const imagenes = await axios.get(`${apiBaseBack}/getImagen`);
-      setImg(imagenes.data);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
 
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
@@ -131,7 +119,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
     if (item) {
       setHandleCloseVehicle(!handleCloseVehicle);
     } else {
-      alert("Error");
+      toast.error('Error');
     }
   };
   //funcion para capturar los datos
@@ -147,20 +135,29 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   }, [idOrden]);
 
   //Funcion para enviar los servicios del cliente
-  const postOrdenServiceCliente = async () =>{ 
+  const postOrdenServiceCliente = async () => {
+    // Obtenemos el token de autenticación
+    //const token = localStorage.getItem('user');
+    // Establecemos la cabecera
+    /* const headers = {
+      'Authorization': `Bearer ${token}`,
+    }; */
+  
     try {
-      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`,{
+      // Hacemos la solicitud
+      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
         identificacion: id4,
         id_orden: idOrden
+      }, {
+        headers:{
+          user : localStorage.getItem('user'), 
+        },
       });
-      console.log("registrado con exito")
+      console.log("registrado con exito");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
-  // Funcion para mostrar los servicios disponibles
-
+  };
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -177,8 +174,17 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   useEffect(() => {
     getCustomer();
     getServices();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCustomer, setOrdService]);
 
+  // Funciones que contienen Alertas 
+  const handleAlert = () => {
+    toast.success('Cliente eliminado con éxito');
+  };
+
+  const handleAlertService = () => {
+    toast.success('Se añadio el servicio al cliente seleccionado.');
+  };
   return (
     <>
       {/* Controladores */}
@@ -255,7 +261,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                     <Buttons
                       onClick={() => {
                         if(todo.identificacion == id4 && todo.id_orden == idOrden){
-                          alert('ya se encuentra registrado');
+                          toast.info('Actualmente se encuentra registrado.');
                         }else{
                           setHandleOrders(!handleOrders)
                         setId4(item.identificacion)
@@ -351,7 +357,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); deleteClient()}}>Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDelete(!handleDelete); handleAlert(); deleteClient()}}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
@@ -375,7 +381,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
           {ordServicio.map((item, index) => (
             <CardService key={index}>
               <Cuadro>
-                <Img src={img}/>
+                <Img src={`http://localhost:3005/uploads/${item.ruta_img}`}/>
               </Cuadro>
               <Title>
                 <Paragraph className="size">{item.nombre_serv}</Paragraph>
@@ -390,9 +396,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                   <Paragraph className="precio">$ {item.precio.toLocaleString()}</Paragraph>
                 </Price>
                 <AddPlus>
-                <Button onClick={()=>{
-                  handleAddOrdenService(item);
-                  }} className="no-margin" ><i className="fa-solid fa-square-plus"></i></Button>
+                <Button
+                onClick={()=>{handleAddOrdenService(item); handleAlertService();}}
+                className="no-margin"><i className="fa-solid fa-square-plus"></i></Button>
                 </AddPlus>
               </ContainPrice>
             </CardService>
@@ -401,8 +407,52 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
           </ContainServices>
         </ContainInfoModal>        
       </Modals>
+
+      <ToastContainer
+      autoClose='1000'
+      hideProgressBar='true'/>
     </>
   );
 };
 
 export default TableClient;
+
+/* import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
+
+const MY_AUTH_TOKEN = 'MY_AUTH_TOKEN'; // Cambia el nombre a algo adecuado para tu aplicación
+
+export const AuthContext = createContext();
+
+export default function AuthContextProvider({ children }) {
+  const [token, setToken] = useState( window.localStorage.getItem("token") || null);
+  const x = "clave"
+  const login = useCallback(function (newToken) {
+    if (newToken) {
+      window.localStorage.setItem("token", newToken);
+      setToken(newToken);
+    }
+  }, []);
+  const logout = useCallback(function () {
+    window.localStorage.removeItem( "token");  setToken(null);
+  }, []);
+  const value = useMemo(
+    () => ({
+      login,
+      logout,
+      token,
+      x,
+    }),
+    [ x ,token, login, logout]
+    
+  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+AuthContextProvider.propTypes = {
+  children: PropTypes.object,
+};
+
+export function useAuthContext() {
+  return useContext(AuthContext);
+} */

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { Btn_Delete, ButtonDelete, ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
+import { BtnDelete, ButtonDelete, ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainTable, Label, Table, Tbody, Td, Th, Thead, Tr} from "./styledTableServiceClient";
 import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
+import { toast, ToastContainer } from "react-toastify";
 
 const TableServiceClient = ({getcustomer, deleteService}) => {
   //Variables de estados para almacenar las ordenes de servicio del cliente
@@ -30,6 +31,10 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleDeleteService = () => {
+    toast.success('Servicio eliminado con éxito.');
   };
 
   return (
@@ -83,6 +88,11 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         </Table>
       </ContainTable>
 
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
+
       {/* Modal para eliminar un servicio de cliente */}
       <Modals
       status={handleDeleteCustomerService}
@@ -95,7 +105,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este servicio?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</Btn_Delete>
+            <BtnDelete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); handleDeleteService(); deleteServiceOrder()}}>Eliminar</BtnDelete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

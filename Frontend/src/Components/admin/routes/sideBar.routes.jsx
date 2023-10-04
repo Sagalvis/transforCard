@@ -7,6 +7,7 @@ import Invocice from "../pages/invoice"
 import Inventory from "../pages/inventory"
 import Staff from "../pages/staff";
 import NotfoundPages from "../pages/notFoundPages";
+import Profile from "../pages/profile";
 
 const SidebarRoutes = () => {
   return (  
@@ -19,6 +20,7 @@ const SidebarRoutes = () => {
       <Route path="/invoice" element={<Invocice/>}/>
       <Route path="/employees" element={<Staff/>}/>
       <Route path="/inventory" element={<Inventory/>}/>
+      <Route path="/profile" element={<Profile/>}/>
       <Route path="*" element={<NotfoundPages/>}/>
     </Routes>
     </>

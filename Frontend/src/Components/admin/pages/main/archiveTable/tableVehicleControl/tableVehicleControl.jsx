@@ -6,8 +6,7 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
-import { ContainAlert } from "../../../header/archiveInputs/formClient";
-import Alert from '@mui/material/Alert'
+import { ToastContainer, toast } from "react-toastify";
 
 const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   /* Consulta para traer la tabla clientes */
@@ -17,7 +16,6 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   // Variables de estado, modal eliminar
   const [delVehicle, setDelVehicle] = useState(null);
   const [handleDeleteControlVehicle, setHandleDeleteControlVehicle] = useState(false);
-  const [showAlertDeleteVehicle, setShowAlertDeleteVehicle] = useState(false);
   
   //Función de busqueda
   const searching = (e) => {
@@ -42,7 +40,6 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   
   const getVehicle = async () => {
     try {
-      
       const res = await axios.get(`${apiBaseBack}/vehicle`);
       setVehicle(res.data);
     } catch (error) {
@@ -53,8 +50,11 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   const deleteVehicle = async () => {
     try {
       await axios.delete(`${apiBaseBack}/deletevehicle/${delVehicle.matricula}`);
-      setShowAlertDeleteVehicle(true);
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +63,11 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
   useEffect(() => {
     getVehicle();
   }, [setVehicle]);
+
+  const handleAlerteVehicleControl = () => {
+    toast.success('Vehículo eliminado con éxito.');
+  };
+
   return (
     <>
       {/* Controladores */}
@@ -130,6 +135,11 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
         </Table>
       </ContainTable>
 
+      <ToastContainer
+      autoClose={1000}
+      hideProgressBar={true}
+      />
+
       <Modals
       status={handleDeleteControlVehicle}
       changeStatus={setHandleDeleteControlVehicle}
@@ -138,17 +148,10 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
       showHeader={true}
       showCloseButton={true}
       >
-      {showAlertDeleteVehicle && (
-        <ContainAlert>
-        <Alert severity="success" color="success">
-          ¡Vehículo eliminado con exito!
-          </Alert>
-        </ContainAlert>
-      )}
         <ContainInfoModal>
           <Paragraph>¿Estas seguro de querer eliminar este vehículo?</Paragraph>
           <ButtonDelete>
-            <Btn_Delete onClick={() => {setHandleDeleteControlVehicle(!handleDeleteControlVehicle); deleteVehicle()}} >Eliminar</Btn_Delete>
+            <Btn_Delete onClick={() => {setHandleDeleteControlVehicle(!handleDeleteControlVehicle); handleAlerteVehicleControl(); deleteVehicle()}} >Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

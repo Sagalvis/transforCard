@@ -248,6 +248,7 @@ export const ButtonInventory = styled.div`
 `;
 
 export const Button = styled.div`
+  width: 35%;
   background: none;
   padding: 10px 20px;
   font-size: 15px;
@@ -259,8 +260,11 @@ export const Button = styled.div`
   border: 1px solid #ccc;
   transition: .3s ease;
   text-transform: uppercase;
-  
+  text-align: center;
   &:hover {
     background: #cfcfcf;
+  }
+  &.producto{
+    width: 40%;
   }
 `

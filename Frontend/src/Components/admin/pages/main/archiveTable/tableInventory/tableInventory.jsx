@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
@@ -123,7 +124,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     <ButtonInventory>
 
       <Button onClick={() => handleButtonClick("servicio")}>Servicio</Button>
-      <Button onClick={() => handleButtonClick("producto")}>Producto</Button>
+      <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button>
     </ButtonInventory>
 
       {showProduct && (
@@ -205,7 +206,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteProduct(!handleDeleteProduct); deleteProductInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>
-            </ContainInfoModal>                                                                              
+            </ContainInfoModal>
           </Modals>
 
           {/* Modal de ditar producto */}
@@ -263,14 +264,14 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
                   <Td>
                     <ButtonOptions>
-                      <Buttons
+                      {/* <Buttons
                         onClick={() =>
                           setHandleFormInventory(!handleFormInventory)
                         }
                         title="Editar producto"
                       >
                         <i className={editProduct}></i>
-                      </Buttons>
+                      </Buttons> */}
                       <Buttons onClick={() => {setHandleDeleteService(!handleDeleteService); setDelService(item)}} title="Eliminar producto">
                         <i className={deleteProduct}></i>
                       </Buttons>
