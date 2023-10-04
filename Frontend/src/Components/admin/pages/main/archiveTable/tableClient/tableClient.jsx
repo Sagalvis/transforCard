@@ -440,7 +440,9 @@ const postOrdenServiceCliente = useCallback(async () => {
         </ContainInfoModal>
       </Modals>
 
-      <ToastContainer autoClose="1000" hideProgressBar="true" />
+      <ToastContainer 
+      autoClose="1000" 
+      hideProgressBar={true} />
     </>
   );
 };

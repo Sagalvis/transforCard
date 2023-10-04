@@ -287,7 +287,7 @@ export const Input = styled.input`
   }
 `;
 
-export const TextArea = styled.div`
+export const TextArea = styled.textarea`
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
