@@ -193,6 +193,9 @@ const postOrdenServiceCliente = useCallback(async () => {
     toast.success("Cliente eliminado con éxito");
   };
 
+  const handleAlertWithVehicle = () => {
+    toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
+  };
   const handleAlertService = () => {
     toast.success("Se añadio el servicio al cliente seleccionado.");
   };
