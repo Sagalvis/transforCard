@@ -6,13 +6,13 @@ import { SECRET_KEY } from "../config.js";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
-    const { identificacion, nombre, apellido, correo, direccion, barrio, tel } =
+    const { identificacion, nombre, apellido, correo, direccion, barrio, tel, idtipo_documento } =
       req.body;
     const [row] = await pool.query(
-      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion,barrio, tel) VALUE(?,?,?,?,?,?,?)",
-      [identificacion, nombre, apellido, correo, direccion,barrio, tel,]
+      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento) VALUE(?,?,?,?,?,?,?,?)",
+      [identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento]
     );
-    res.send({ identificacion, nombre, apellido, correo, direccion,barrio, tel });
+    res.send({ identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -39,8 +39,8 @@ export const postEmployees = async (req, res) => {
     console.log(error)
     return res.status(500).json({
       message: "Error en el servidor",
-    });
-  }
+    });
+  }
 };
 /* Consulta para crear vehiculos */
 
@@ -261,6 +261,7 @@ export const postCreateFactura = async (req, res) => {
     res.json({
       row
     });
+
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor",

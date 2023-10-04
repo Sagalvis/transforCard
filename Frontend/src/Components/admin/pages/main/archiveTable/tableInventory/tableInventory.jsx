@@ -24,6 +24,7 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import { toast, ToastContainer } from 'react-toastify'
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
   const [invetario, setInventario] = useState([]);
@@ -113,12 +114,19 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
     try {
-      const result = await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
-      window.location.reload();
-      console.log(result);
+      await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
+      handleAlertDeleteInventory();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleAlertDeleteInventory = () => {
+    toast.success('Servicio eliminado con éxito.');
   };
   return (
     <>
@@ -314,6 +322,12 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
             <h5>aqui va el formulario de edit.</h5>
           </ContainInfoModal>
         </Modals>
+
+
+        <ToastContainer 
+        autoClose={1000}
+        hideProgressBar={true}
+        />
       </>
       )}
     </>

@@ -10,7 +10,6 @@ const FormStaff = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [tipoRol, setTipoRol] = useState([]);
-
   const [selectRol, setSeletRol] = useState(0);
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
@@ -41,7 +40,7 @@ const FormStaff = () => {
     }
   
     if (selectRol === 0) {
-      emptyFields.push("Rol");
+      emptyFields.push("Tipo de rol");
     }
   
     if (emptyFields.length > 0) {
@@ -95,28 +94,32 @@ const FormStaff = () => {
             </Select>
           </ContentInput>
 
+
           <ContentInput className="display">
-            <Input type="text" 
+            <Input
+            type="text" 
+            placeholder="Nombres"
+            value={nombres}
+            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" />
+            
+            <Input
+            type="text"
+            placeholder="Apellidos" 
+            value={apellidos}
+            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput className="display">
+            <Input
+            type="text" 
             placeholder="Documento" 
             value={identification}
             onChange={(e)=> setIdentification(e.target.value.replace(/[^0-9]/g, ''))}
             autoComplete="off" />
           </ContentInput>
 
-          <ContentInput className="display">
-
-            <Input type="text" 
-            placeholder="Nombres"
-            value={nombres}
-            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-            autoComplete="off" />
-            
-            <Input type="text"
-            placeholder="Apellidos" 
-            value={apellidos}
-            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-            autoComplete="off" />
-          </ContentInput>
 
           <ContentInput>
             <Input

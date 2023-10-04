@@ -225,6 +225,7 @@ const postOrdenServiceCliente = useCallback(async () => {
         <Table>
           <Thead>
             <Tr>
+              <Th>Tipo</Th>
               <Th>ID Cliente</Th>
               <Th>Nombres</Th>
               <Th>Apellidos</Th>
@@ -237,6 +238,7 @@ const postOrdenServiceCliente = useCallback(async () => {
           <Tbody>
             {resultsCustomer.map((item, i) => (
               <Tr key={i}>
+                <Td>{item.tipoDocumento}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.nombre}</Td>
                 <Td>{item.apellido}</Td>
