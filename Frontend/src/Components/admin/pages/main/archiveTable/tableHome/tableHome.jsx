@@ -167,7 +167,7 @@ const TableHome = () => {
             </Cards>
           ))}
 
-          <Cards>
+          <Cards to={"/admin/serviceorder"}>
             <TittleCardsContain>
               <TittleCards>Ordenes de servicio por cliente</TittleCards>
             </TittleCardsContain>
