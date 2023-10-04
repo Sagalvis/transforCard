@@ -40,13 +40,13 @@ export const ButtonNarbar1 = [
     title:"Inventario",
     icon:<i className="fa-solid fa-boxes-stacked"></i>,
     to:"/admin/inventory"
-  },
+  }/* ,
   {
     id:8,
     title:"Configuración",
     icon:<i className="fa-solid fa-gear"></i>,
     to:"/admin/profile"
-  },
+  }, */
 
 ];
 

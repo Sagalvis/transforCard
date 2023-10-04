@@ -13,21 +13,34 @@ queryHome.get("/count/factura", ControllerHome.CounterInvoice);
 /* Final de las consulta para contar el contenido de las diferentes tabalas  */
 
 /* Inicio ruta que traer clientes mes a mes en cada una */
-queryHome.get("/january/client", ControllerHome.JanuaryClient);
-queryHome.get("/february/client", ControllerHome.FebruaryCLient);
-queryHome.get("/march/client", ControllerHome.FebruaryCLient);
-queryHome.get("/april/client", ControllerHome.FebruaryCLient);
-queryHome.get("/may/client", ControllerHome.FebruaryCLient);
-queryHome.get("/june/client", ControllerHome.FebruaryCLient);
-queryHome.get("/july/client", ControllerHome.FebruaryCLient);
-queryHome.get("/august/client", ControllerHome.FebruaryCLient);
-queryHome.get("/september/client", ControllerHome.FebruaryCLient);
-queryHome.get("/october/client", ControllerHome.FebruaryCLient);
-queryHome.get("/november/client", ControllerHome.FebruaryCLient);
-queryHome.get("/dicember/client", ControllerHome.FebruaryCLient);
+queryHome.get("/january/client", ControllerHome.JanClient);
+queryHome.get("/february/client", ControllerHome.FebClient);
+queryHome.get("/march/client", ControllerHome.MarClient);
+queryHome.get("/april/client", ControllerHome.AprClient);
+queryHome.get("/may/client", ControllerHome.MayClient);
+queryHome.get("/june/client", ControllerHome.JunClient);
+queryHome.get("/july/client", ControllerHome.JulClient);
+queryHome.get("/august/client", ControllerHome.AugClient);
+queryHome.get("/september/client", ControllerHome.SepClient);
+queryHome.get("/october/client", ControllerHome.OctClient);
+queryHome.get("/november/client", ControllerHome.NovClient);
+queryHome.get("/december/client", ControllerHome.DecClient);
 /* Final  ruta que traer clientes mes a mes en cada una */
 
+/* Inicio ruta que traer clientes mes a mes en cada una */
+queryHome.get("/january/vehicle", ControllerHome.JanVehicle);
+queryHome.get("/february/vehicle", ControllerHome.FebVehicle);
+queryHome.get("/march/vehicle", ControllerHome.MarVehicle);
+queryHome.get("/april/vehicle", ControllerHome.AprVehicle);
+queryHome.get("/may/vehicle", ControllerHome.MayVehicle);
+queryHome.get("/june/vehicle", ControllerHome.JunVehicle);
+queryHome.get("/july/vehicle", ControllerHome.JulVehicle);
+queryHome.get("/august/vehicle", ControllerHome.AugVehicle);
+queryHome.get("/september/vehicle", ControllerHome.SepVehicle);
+queryHome.get("/october/vehicle", ControllerHome.OctVehicle);
+queryHome.get("/november/vehicle", ControllerHome.NovVehicle);
+queryHome.get("/december/vehicle", ControllerHome.DecVehicle);
+/* Final  ruta que traer clientes mes a mes en cada una */
 
-queryHome.get("/Datevehicle", ControllerHome.DateVehicle);
 export default queryHome
 
