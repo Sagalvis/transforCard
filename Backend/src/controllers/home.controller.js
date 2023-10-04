@@ -254,7 +254,7 @@ export const DecClient = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Error interno del servidor' });
   }
-} */
+} 
 /* Final Consulta que traer clientes mes a mes en cada una */
 
 
