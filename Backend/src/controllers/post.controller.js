@@ -39,8 +39,8 @@ export const postEmployees = async (req, res) => {
     console.log(error)
     return res.status(500).json({
       message: "Error en el servidor",
-    });
-  }
+    });
+  }
 };
 /* Consulta para crear vehiculos */
 
@@ -261,6 +261,7 @@ export const postCreateFactura = async (req, res) => {
     res.json({
       row
     });
+
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor",
