@@ -80,11 +80,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Telefono: 3254587894
       Id factura: ${data1.id_factura}
       Identificacion: ${data1.identificacion}
-      Fecha de emision: ${data1.fecha_emision} 
+      Fecha de emision: ${moment(data1.fecha_emision).format("YYYY-MM-DD")} 
       Id orden: ${data1.id_orden}
       Productos y Servicios:
       ${value.map((item) =>`   
-           servicios: ${item.nombre_serv}   precios: ${item.precio} $
+      servicios: ${item.nombre_serv}  precios: $ ${item.precio} 
       `)}
       _________________________________________________________
       Cantidad pagada: ${data1.cantidad_pagada} $
@@ -146,7 +146,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     );
   }
 
-  const deleteInvoice = async() => {
+  const deleteInvoice = async () => {
     try {
       const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
       console.log(result);
