@@ -1,5 +1,4 @@
 /* importacion de la base de la base de datos para hace las consultas */
-
 import { pool } from "../dbconfig.js";
 /*--- NOTA: USAR SOLO SI ES ESTRICAMENTE NECESARIO ---*/
 
@@ -118,11 +117,10 @@ export const deleteServiceInventory = async (req, res) => {
       });
     }
     res.send({
-      message: "producto eliminado correctamente",
+      message: "servicio eliminado correctamente",
       id_orden,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       message: "Error en el servidor",
     });

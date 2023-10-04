@@ -8,9 +8,8 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { ToastContainer, toast } from "react-toastify";
 
-const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
+const TableVehicleControl = ({deleteVehicleTable}) => {
   /* Consulta para traer la tabla clientes */
-  console.log("componente de otro lado",getCustomer2)
   const [vehicle, setVehicle] = useState([]);
   const [search, setSearch] = useState("");
   // Variables de estado, modal eliminar

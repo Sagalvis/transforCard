@@ -113,10 +113,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       
       const res = await axios.get(`${apiBaseBack}/factura`);
       setInvoice(res.data);
-      console.log("factura",res.data[0].identificacion)
-      
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
@@ -124,15 +122,13 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     try {
       const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
       setValue(res.data);
-      console.log("aqui vienen los servicios",res.data);
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
   const searching = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   //Metodo de filtrado tabla cliente
@@ -158,7 +154,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       }, 1000);
 
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 

@@ -36,20 +36,17 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
     try {
       const res = await axios.get(`${apiBaseBack}/vehicle/${getCustomer2}`)
       setVehicle(res.data);
-      console.log("res vehiculo",res)
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
   const deleteVehicle = async () => {
     try {
-      
-      const result = await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`);
-      console.log(result);
+      await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`);
       setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
