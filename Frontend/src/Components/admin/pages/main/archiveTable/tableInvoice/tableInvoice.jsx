@@ -27,9 +27,6 @@ import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { toast, ToastContainer } from 'react-toastify'
 
-
-
-
 const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
   // Variable de estado para filtrar busqueda
