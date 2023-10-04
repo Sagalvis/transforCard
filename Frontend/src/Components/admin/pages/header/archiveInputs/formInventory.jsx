@@ -88,9 +88,7 @@ const FormInventory = () => {
     const fetchdata = async () => {
       const responseMedida = await axios.get(`${apiBaseBack}/tipomedida`);
       setTipoMedida(responseMedida.data);
-      const responseProducto = await axios.get(
-        `${apiBaseBack}http://localhost:3005/tipoproducto`
-      );
+      const responseProducto = await axios.get(`${apiBaseBack}http://localhost:3005/tipoproducto`);
       setTipoProducto(responseProducto.data);
     };
     fetchdata();

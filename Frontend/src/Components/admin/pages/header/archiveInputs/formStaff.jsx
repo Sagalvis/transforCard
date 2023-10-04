@@ -10,7 +10,8 @@ const FormStaff = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [tipoRol, setTipoRol] = useState([]);
-
+  const [tipoDocument, setTipoDocument] = useState([]);
+  const [selectDocument, setSeletDocument] = useState(0);
   const [selectRol, setSeletRol] = useState(0);
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
@@ -42,6 +43,10 @@ const FormStaff = () => {
   
     if (selectRol === 0) {
       emptyFields.push("Rol");
+    }
+
+    if (selectRol === 0) {
+      emptyFields.push("Tipo de documento");
     }
   
     if (emptyFields.length > 0) {
@@ -95,28 +100,45 @@ const FormStaff = () => {
             </Select>
           </ContentInput>
 
+
           <ContentInput className="display">
-            <Input type="text" 
+            <Input
+            type="text" 
+            placeholder="Nombres"
+            value={nombres}
+            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" />
+            
+            <Input
+            type="text"
+            placeholder="Apellidos" 
+            value={apellidos}
+            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput>
+            <Select
+            value={selectDocument} 
+            onChange={(e)=>setSeletDocument(e.target.value)} 
+            >
+              <Option value="0">-Tipo de documento-</Option>
+                <Option value='ti'>Tarjeta de identidad</Option>
+                <Option value='cc'>Cedula de ciudadania</Option>
+                <Option value='ce'>Cedula de extranjeria</Option>
+                <Option value='pep'>PEP</Option>
+            </Select>
+          </ContentInput>
+
+          <ContentInput className="display">
+            <Input
+            type="text" 
             placeholder="Documento" 
             value={identification}
             onChange={(e)=> setIdentification(e.target.value.replace(/[^0-9]/g, ''))}
             autoComplete="off" />
           </ContentInput>
 
-          <ContentInput className="display">
-
-            <Input type="text" 
-            placeholder="Nombres"
-            value={nombres}
-            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-            autoComplete="off" />
-            
-            <Input type="text"
-            placeholder="Apellidos" 
-            value={apellidos}
-            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-            autoComplete="off" />
-          </ContentInput>
 
           <ContentInput>
             <Input
