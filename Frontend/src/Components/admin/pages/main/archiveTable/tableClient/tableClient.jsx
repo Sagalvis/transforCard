@@ -26,7 +26,7 @@ import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiv
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
 import { toast, ToastContainer } from "react-toastify";
 
-const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }) => {
+const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -43,7 +43,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-  /* const [todo, setTodo] = useState([]); */
+  const [todo, setTodo] = useState([]);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //funcion para traer los datos de la tabla a buscar
@@ -71,7 +71,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }
   const [id, setId] = useState(null);
   const [id2, setId2] = useState(null);
   const [id3, setId3] = useState(null);
-  /* const [id4, setId4] = useState(null); */
+  const [id4, setId4] = useState(null);
 
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
@@ -101,8 +101,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }
   //funcion para trarer servicio_cliente para poder validar si ya existe 
   const getServiCliente = async () => {
     try {
-      /* const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`); */
-      /* setTodo(getAll.data); */
+      const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`);
+      setTodo(getAll.data);
     } catch (error) {
       console.log(error)
     }
@@ -127,13 +127,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }
     try {
       // Hacemos la solicitud
       await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
-        /* identificacion: id4, */
+        identificacion: id4,
         id_orden: idOrden
-      }, {
-        headers:{
-          user : localStorage.getItem('user'), 
-        },
-      });
+      }
+      );
       console.log("registrado con exito");
     } catch (error) {
       console.log(error);
@@ -245,7 +242,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }
                       <i className={deleteUser}></i>
                     </Buttons>
 
-{/*                     <Buttons
+                    <Buttons
                       onClick={() => {
                         if(todo.identificacion == id4 && todo.id_orden == idOrden){
                           toast.info('Actualmente se encuentra registrado.');
@@ -258,7 +255,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }
                       title="Crear orden de servicio"
                     >
                       {<i className={orderService}></i>}
-                    </Buttons> */}
+                    </Buttons>
                   </ButtonOptions>
                 </Td>
               </Tr>
