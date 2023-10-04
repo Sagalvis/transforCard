@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { Doughnut, Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
-import {  getApril,/* getAugust, getDecember,*/ getFebruary,  getJanuary, /* getJuly, */ /* getJune,*/ getMarch, getMay,/* getNovember, getOctober, getSeptember */ } from "../../../../archive/funtionHome";
+import {  getAprilClient, getAprilVehicle, getAugustClient, getAugustVehicle, getDecemberVehicle, getDecemberClient, getFebruaryClient, getFebruaryVehicle, getJanuaryClient, getJanuaryVehicle, getJulyClient, getJulyVehicle, getJuneClient, getJuneVehicle, getMarchClient, getMarchVehicle, getMayClient, getMayVehicle, getNovemberClient, getNovemberVehicle, getOctoberClient, getOctoberVehicle, getSeptemberClient, getSeptemberVehicle} from "../../../../archive/funtionHome";
 
 ChartJS.register(
   ArcElement,
@@ -27,33 +27,57 @@ ChartJS.register(
 );
 
 export const GraphicsVehicle = () => {
-useEffect(()=>{
-
-}, []);
-
+  const [januaryVehicle, setJanuaryVehicle] = useState([]);
+  const [februaryVehicle, setFebruaryVehicle] = useState([]);
+  const [marchVehicle, setMarchVehicle] = useState([]);
+  const [aprilVehicle, setAprilVehicle] = useState([]);
+  const [mayVehicle, setMayVehicle] = useState([]);
+  const [juneVehicle, setJuneVehicle] = useState([]);
+  const [julyVehicle, setJulyVehicle] = useState([]);
+  const [augustVehicle, setAugustVehicle] = useState([]);
+  const [septemberVehicle, setSeptemberVehicle] = useState([]);
+  const [octoberVehicle, setOctoberVehicle] = useState([]);
+  const [novemberVehicle, setNovemberVehicle] = useState([]);
+  const [decemberVehicle, setDecemberVehicle] = useState([]);  
+  useEffect(() => {
+    getJanuaryVehicle(setJanuaryVehicle);
+    getFebruaryVehicle(setFebruaryVehicle);
+    getMarchVehicle(setMarchVehicle);
+    getAprilVehicle(setAprilVehicle);
+    getMayVehicle(setMayVehicle);
+    getJuneVehicle(setJuneVehicle);
+    getJulyVehicle(setJulyVehicle);
+    getAugustVehicle(setAugustVehicle);
+    getSeptemberVehicle(setSeptemberVehicle);
+    getOctoberVehicle(setOctoberVehicle);
+    getNovemberVehicle(setNovemberVehicle);
+    getDecemberVehicle(setDecemberVehicle);
+  }, []);
   const Data = {
-    labels: ["RED", "hola", "Yellow", "Green", "Purple", "Orange"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
     datasets: [
       {
         label: "# of Votes",
-        data: "",
+        data: [januaryVehicle.length, februaryVehicle.length,marchVehicle.length,aprilVehicle.length, mayVehicle.length, 
+          juneVehicle.length, julyVehicle.length, augustVehicle.length, 
+          septemberVehicle.length,octoberVehicle.length, novemberVehicle.length, 
+          decemberVehicle.length ],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "#60f7ff",
+          "#ffff51",
+          "#725097",
+          "#0b4c90",
+          "#464980",
+          "#fdcae1c5",
+          "#84b6f4",
+          "#fdfd96",
+          "#77dd77",
+          "#ff6961",
+          "#7052ff",
+          "#d06aff",
+          "#ff81ff"
         ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
+        borderWidth: .5,
       },
     ],
   };
@@ -72,20 +96,20 @@ export const GraphicsCustomer = () => {
   const [septemberClient, setSeptemberClient] = useState([]);
   const [octoberClient, setOctoberClient] = useState([]);
   const [novemberClient, setNovemberClient] = useState([]);
-  const [dicemberClient, setDicemberClient] = useState([]);
+  const [dicemberClient, setDecemberClient] = useState([]);
   useEffect(() => {
-    getJanuary(setJanuaryClient);
-    getFebruary(setFebruaryClient);
-    getApril(setAprilClient);
-    getMay(setMayClient);
-     getMarch(setMarchClient);
-    /*getJune(setJuneClient);
-    getJuly(setJulyClient);
-    getAugust(setAugustClient);
-    getSeptember(setSeptemberClient);
-    getOctober(setOctoberClient);
-    getNovember(setNovemberClient);
-    getDecember(setDicemberClient); */
+    getJanuaryClient(setJanuaryClient);
+    getFebruaryClient(setFebruaryClient);
+    getMarchClient(setMarchClient);
+    getAprilClient(setAprilClient);
+    getMayClient(setMayClient);
+    getJuneClient(setJuneClient);
+    getJulyClient(setJulyClient);
+    getAugustClient(setAugustClient);
+    getSeptemberClient(setSeptemberClient);
+    getOctoberClient(setOctoberClient);
+    getNovemberClient(setNovemberClient);
+    getDecemberClient(setDecemberClient);
   }, []);
 
   const Data2 = {
@@ -93,7 +117,10 @@ export const GraphicsCustomer = () => {
     datasets: [
       {
         label: "# de Clientes",
-        data: [januaryClient.length , februaryClient.length, marchClient.length, aprilClient.length,/* mayClient.length, juneClient.length, julyClient.length, augustClient.length, septemberClient.length, octoberClient.length, novemberClient.length, dicemberClient.length */],
+        data: [januaryClient.length, februaryClient.length,marchClient.length,aprilClient.length, mayClient.length, 
+          juneClient.length, julyClient.length, augustClient.length, 
+          septemberClient.length,octoberClient.length, novemberClient.length, 
+          dicemberClient.length ],
         backgroundColor: [
           "#fdcae1c5",
           "#84b6f4",
@@ -103,7 +130,7 @@ export const GraphicsCustomer = () => {
           "#7052ff",
           "#d06aff",
           "#ff81ff",
-          "#ff7360",
+          "#60f7ff",
           "#ffff51",
           "#725097",
           "#0b4c90",

@@ -112,7 +112,7 @@ const TableVehicleControl = ({deleteVehicleTable, getCustomer2}) => {
           <Tbody>
             {resultsVehicleControl.map((item, i) => (
               <Tr key={i}>
-                <Td>{i+100}</Td>
+                <Td>{(i + 1).toString().padStart(2, '0')}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.tipoVehiculo}</Td>
                 <Td>{item.marca}</Td>

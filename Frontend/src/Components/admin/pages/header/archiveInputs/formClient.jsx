@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import {toast, ToastContainer} from 'react-toastify'
@@ -10,8 +10,7 @@ const FormClient = () => {
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [tipoCliente, setTipoCliente] = useState([]);
-  const [seletTipoCliente, setSelectTipoCliente] = useState(0);
+  const [barrio, setBarrio ] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -21,10 +20,8 @@ const FormClient = () => {
       apellidos === "" ||
       correo === "" ||
       direccion === "" ||
-      telefono === "" ||
-      
-      seletTipoCliente === "" 
-
+      barrio === "" ||
+      telefono === ""
     ) {
       e.preventDefault();
       toast.warning('Por favor llenar todos los campos');
@@ -36,12 +33,13 @@ const FormClient = () => {
           apellido: apellidos,
           correo: correo,
           direccion: direccion,
+          barrio:barrio,
           tel: telefono,
-          id_tipo_cliente: seletTipoCliente,
         })
+        handleAlert();
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 900);
     }
 
     /* Funcion que limpa los inputs */
@@ -51,19 +49,7 @@ const FormClient = () => {
     setCorreo("");
     setDireccion("");
     setTelefono("");
-    setSelectTipoCliente(0);
   };
-
-  useEffect(() => {
-    const fetchdata = async () => {
-      const responseCliente = await axios.get(
-        `${apiBaseBack}/tipocliente`
-      );
-      setTipoCliente(responseCliente.data);
-    };
-    fetchdata();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleAlert = () => {
     toast.success('Cliente registrado con éxito.');
@@ -72,19 +58,6 @@ const FormClient = () => {
     <>
       <ContainForm>
         <Form>
-          <ContentInput>
-            <Select
-              value={seletTipoCliente}
-              onChange={(e) => setSelectTipoCliente(e.target.value)}
-            >
-              <Option value="0">-Seleccione tipo de persona-</Option>
-              {tipoCliente.map((item, i) => (
-                <Option key={i} value={item.id_tipo_cliente}>
-                  {item.cliente_tipo}
-                </Option>
-              ))}
-            </Select>
-          </ContentInput>
 
           <ContentInput>
             <Input
@@ -116,7 +89,7 @@ const FormClient = () => {
               placeholder="Documento"
               value={identification}
               onChange={(e) => setIdentificacion(e.target.value.replace(/[^0-9]/g, ''))}
-              maxLength={13}
+              maxLength={10}
               autoComplete="off"
               required={true}
             />
@@ -130,6 +103,15 @@ const FormClient = () => {
               value={telefono}
               onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={10}
+              autoComplete="off"
+              required={true}
+            />
+            <Input
+            className="input-display"
+              type="text"
+              placeholder="Barrio"
+              value={barrio}
+              onChange={(e) => setBarrio(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
               autoComplete="off"
               required={true}
             />
@@ -161,12 +143,12 @@ const FormClient = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={() => {handletSumit(); handleAlert();}}>Registrar</BtnRegister>
+        <BtnRegister onClick={() => {handletSumit()}}>Registrar</BtnRegister>
       </ButtonRegister>
 
 
       <ToastContainer 
-      autoClose={1000}
+      autoClose={800}
       hideProgressBar={true}
       />
     </>

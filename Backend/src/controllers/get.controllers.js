@@ -4,7 +4,7 @@ import { pool } from "../dbconfig.js";
 /* consulta para traer toda la tabla de clientes */
 export const getCustomer = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM cliente");
+    const [row] = await pool.query("SELECT * FROM cliente ORDER BY fecha_creacion DESC ");
     res.send(row);
   } catch (error) {
     return res.status(500).json({
@@ -181,6 +181,8 @@ export const getServiceCliente = async (req, res) => {
     });
   }
 };
+
+/* Funcion para traer los clientes que tienen un servicio */
 export const getServicesClient = async (req, res) => {
   try {
     const [row] = await pool.query("SELECT servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido FROM servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion GROUP BY identificacion")

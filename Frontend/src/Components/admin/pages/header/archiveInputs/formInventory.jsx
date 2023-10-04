@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Alert from "@mui/material/Alert";
 import { Button } from "../../main/archiveTable/tableInventory/styledTableInventory";
+import { toast, ToastContainer } from 'react-toastify'
 
 const FormInventory = () => {
   //Varibles de estado para crear un producto
@@ -15,25 +16,21 @@ const FormInventory = () => {
   const [tipoProducto, setTipoProducto] = useState([]);
   const [selectMedida, setSelectMedida] = useState("");
   const [selectProducto, setSelectProducto] = useState("");
-
   //Variable de estado para crear servicio
-  const [ordenServicio, setOrdenServicio] = useState("")
+  const [ordenServicio, setOrdenServicio] = useState("");
   const [nombreServicio, setNombreServicio] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precioServicio, setPrecioServicio] = useState("");
   const [tiempoEstimado, setTiempoEstimado] = useState("");
-
-  //Variable de estado para mostrar alertas
-  const [showAlert, setShowAlert] = useState(false);
-    //Variable de estado para cambiar vista de item
+  //Variable de estado para cambiar vista de item
   const [showItem, setShowItem] = useState(true);
 
   //Funcion para cambiar de inputs
   const handleClickButton = (value) => {
     if (value === "producto") {
-      setShowItem(true);
-    } else if (value === "servicio") {
       setShowItem(false);
+    } else if (value === "servicio") {
+      setShowItem(true);
     }
   };
 
@@ -42,9 +39,9 @@ const FormInventory = () => {
   const handletSumitProduct = async (e) => {
     try {
       e.preventDefault();
-      alert("llenar todos los campos");
+      toast.warning('Por favor completar todos los campos requeridos.');
     } catch {
-       await axios
+      await axios
         .post(`${apiBaseBack}/postinventory`, {
           nombre: nombre,
           costo: parseInt(costo),
@@ -56,36 +53,40 @@ const FormInventory = () => {
         })
         .then((Response) => {
           console.log(Response.data);
-          setShowAlert(true);
         });
-      window.location.reload();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
     }
   };
 
   const handleSumitService = async (e) => {
     e.preventDefault();
-    if (  nombreServicio === "" || descripcion === "" || precioServicio === "" || 
-    tiempoEstimado === "" ) {
+    if (
+      nombreServicio === "" ||
+      descripcion === "" ||
+      precioServicio === "" ||
+      tiempoEstimado === ""
+    ) {
       e.preventDefault();
-      alert("Llenar todos los campos")
-    }else {
-      await axios.post(`${apiBaseBack}/postservice`,{
+      toast.warning('Por favor completar todos los campos requeridos.');
+    } else {
+      await axios.post(`${apiBaseBack}/postservice`, {
         id_orden: ordenServicio,
         nombre_serv: nombreServicio,
         descripcion: descripcion,
         precio: parseInt(precioServicio),
-        tiempo_estimado :tiempoEstimado
-      })
+        tiempo_estimado: tiempoEstimado,
+      });
     }
-  }
+  };
 
   /* Funcion que limpa los inputs */
 
   useEffect(() => {
     const fetchdata = async () => {
-      const responseMedida = await axios.get(
-        `${apiBaseBack}/tipomedida`
-      );
+      const responseMedida = await axios.get(`${apiBaseBack}/tipomedida`);
       setTipoMedida(responseMedida.data);
       const responseProducto = await axios.get(
         `${apiBaseBack}http://localhost:3005/tipoproducto`
@@ -94,16 +95,16 @@ const FormInventory = () => {
     };
     fetchdata();
   }, []);
+
+  const handleAlertCreateService = () => {
+    toast.success('Servicio creado satisfactoriamente.');
+  };
+
+  const handleAlertCreateProduct = () => {
+    toast.success('Producto creado satisfactoriamente.');
+  };
   return (
     <>
-      {showAlert && (
-        <ContainAlert>
-          <Alert severity="success" color="success">
-            ¡Producto registrado!
-          </Alert>
-        </ContainAlert>
-      )}
-
       <ContainForm>
         <Form>
           <ContentInput className="display">
@@ -113,14 +114,14 @@ const FormInventory = () => {
             >
               Servicio
             </Button>
-            <Button
+{/*             <Button
               className="btn"
               onClick={() => handleClickButton("producto")}
             >
               Producto
-            </Button>
+            </Button> */}
           </ContentInput>
-          {showItem && (
+          {!showItem && (
             <>
               <ContentInput>
                 <Select
@@ -140,7 +141,11 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+                  onChange={(e) =>
+                    setNombre(
+                      e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
+                    )
+                  }
                   placeholder="Nombre del producto"
                   autoComplete="off"
                   required={true}
@@ -167,7 +172,9 @@ const FormInventory = () => {
                   className="width"
                   type="text"
                   value={costo}
-                  onChange={(e) => setCosto(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) =>
+                    setCosto(e.target.value.replace(/[^0-9]/g, ""))
+                  }
                   placeholder="Costo"
                   autoComplete="off"
                   required={true}
@@ -177,7 +184,9 @@ const FormInventory = () => {
                   className="input-display"
                   type="text"
                   value={precioUnitario}
-                  onChange={(e) => setPrecioUnitario(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) =>
+                    setPrecioUnitario(e.target.value.replace(/[^0-9]/g, ""))
+                  }
                   placeholder="Precio unitario"
                   maxLength={10}
                   autoComplete="off"
@@ -189,7 +198,9 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadComprada}
-                  onChange={(e) => setCantidadComprada(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) =>
+                    setCantidadComprada(e.target.value.replace(/[^0-9]/g, ""))
+                  }
                   placeholder="Cantidad en comprada"
                   autoComplete="off"
                   required={true}
@@ -200,7 +211,9 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={cantidadStock}
-                  onChange={(e) => setCantidadStock(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) =>
+                    setCantidadStock(e.target.value.replace(/[^0-9]/g, ""))
+                  }
                   placeholder="Cantidad en stock"
                   autoComplete="off"
                   required={true}
@@ -208,17 +221,21 @@ const FormInventory = () => {
               </ContentInput>
               <ButtonRegister className="gap">
                 {/* <BtnRegister className="btn_red">Cancelar</BtnRegister> */}
-                <BtnRegister onClick={handletSumitProduct}>Crear producto</BtnRegister>
+                <BtnRegister onClick={() => {handletSumitProduct(); handleAlertCreateProduct();}}>
+                  Crear producto
+                </BtnRegister>
               </ButtonRegister>
             </>
           )}
-          {!showItem && (
+          {showItem && (
             <>
-            <ContentInput>
+              <ContentInput>
                 <Input
                   type="text"
                   value={ordenServicio}
-                  onChange={(e) => setOrdenServicio(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) =>
+                    setOrdenServicio(e.target.value.replace(/[^0-9]/g, ""))
+                  }
                   placeholder="ID servicio"
                   autoComplete="off"
                   required={true}
@@ -228,7 +245,11 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={nombreServicio}
-                  onChange={(e) => setNombreServicio(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+                  onChange={(e) =>
+                    setNombreServicio(
+                      e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
+                    )
+                  }
                   placeholder="Nombre del servicio"
                   autoComplete="off"
                   required={true}
@@ -238,7 +259,9 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={precioServicio}
-                  onChange={(e) => setPrecioServicio(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) =>
+                    setPrecioServicio(e.target.value.replace(/[^0-9]/g, ""))
+                  }
                   placeholder="Precio del servicio"
                   autoComplete="off"
                   required={true}
@@ -248,7 +271,11 @@ const FormInventory = () => {
                 <Input
                   type="text"
                   value={tiempoEstimado}
-                  onChange={(e) => setTiempoEstimado(e.target.value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase())}
+                  onChange={(e) =>
+                    setTiempoEstimado(
+                      e.target.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
+                    )
+                  }
                   placeholder="Tiempo estidamdo del servicio"
                   autoComplete="off"
                   required={true}
@@ -265,13 +292,19 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                {/* <BtnRegister className="btn_red">Cancelar</BtnRegister> */}
-                <BtnRegister onClick={handleSumitService}>Crear servicio</BtnRegister>
+                <BtnRegister onClick={() => {handleSumitService(); handleAlertCreateService();}}>
+                  Crear servicio
+                </BtnRegister>
               </ButtonRegister>
             </>
           )}
         </Form>
       </ContainForm>
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
     </>
   );
 };
@@ -298,6 +331,7 @@ export const ContentInput = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-bottom: 2%;
 
   &.display {

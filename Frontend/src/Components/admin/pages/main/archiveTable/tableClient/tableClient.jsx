@@ -24,9 +24,9 @@ import { AddPlus, Button, CardService, ContainInfoModal, ContainPrice, ContainSe
 import TableVehicle from "../tableVehicle/tableVehicle";
 import FormVehicle, { BtnRegister, ButtonRegister } from "../../../header/archiveInputs/formVehicle";
 import EditFormClient from "../../../header/archiveInputs/editForms/editFormClient";
-import { toast, ToastContainer, Zoom } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
-const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
+const TableClient = ({ editUser, createVehicle, deleteUser, /* orderService */ }) => {
   /* Variable de estado para traer clientes */
   const [customer, setCustomer] = useState([]);
   // Variable de estado para abrir y cerrar modal de tabla vehiculo
@@ -43,7 +43,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([])
   const [idOrden, setIdOrden] = useState([]);
-  const [todo, setTodo] = useState([]);
+  /* const [todo, setTodo] = useState([]); */
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //funcion para traer los datos de la tabla a buscar
@@ -62,8 +62,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   } else {
     resultsCustomer = customer.filter(
       (dato) =>
-        dato.identificacion &&
-        dato.identificacion.toString().includes(search.toString())
+        dato.apellido &&
+        dato.apellido.toLowerCase().includes(search.toLowerCase())
     );
   }
 
@@ -71,7 +71,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const [id, setId] = useState(null);
   const [id2, setId2] = useState(null);
   const [id3, setId3] = useState(null);
-  const [id4, setId4] = useState(null);
+  /* const [id4, setId4] = useState(null); */
 
   //Metodo para capturar al cliente en modal edit
   const Captura = (item) => {
@@ -101,16 +101,12 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   //funcion para trarer servicio_cliente para poder validar si ya existe 
   const getServiCliente = async () => {
     try {
-      const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`);
-      setTodo(getAll.data);
+      /* const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`); */
+      /* setTodo(getAll.data); */
     } catch (error) {
       console.log(error)
     }
   }
-  useEffect(()=>{
-    getServiCliente()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[setTodo])
 
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
@@ -126,26 +122,23 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   const handleAddOrdenService = (item) => {
     setIdOrden(item.id_orden);
   };
-
-  useEffect(() => {
-    if (idOrden) {
-      postOrdenServiceCliente();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idOrden]);
-
   //Funcion para enviar los servicios del cliente
-  const postOrdenServiceCliente = async () =>{ 
+  const postOrdenServiceCliente = async () => {  
     try {
-      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`,{
-        identificacion: id4,
+      // Hacemos la solicitud
+      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
+        /* identificacion: id4, */
         id_orden: idOrden
+      }, {
+        headers:{
+          user : localStorage.getItem('user'), 
+        },
       });
-      console.log("registrado con exito")
+      console.log("registrado con exito");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -160,10 +153,14 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   };
 
   useEffect(() => {
+    getServiCliente()
     getCustomer();
     getServices();
+    if (idOrden) {
+      postOrdenServiceCliente();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setCustomer, setOrdService]);
+  }, [setCustomer, setOrdService,/* setTodo, */idOrden]);
 
   // Funciones que contienen Alertas 
   const handleAlert = () => {
@@ -202,7 +199,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         <Table>
           <Thead>
             <Tr>
-              <Th>ID Cliente</Th>
+              <Th>ID </Th>
+              <Th>Identificacion</Th>
               <Th>Nombres</Th>
               <Th>Apellidos</Th>
               <Th>E-mail</Th>
@@ -214,6 +212,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
           <Tbody>
             {resultsCustomer.map((item, i) => (
               <Tr key={i}>
+                <Td>{(resultsCustomer.length - i).toString().padStart(2, '0')}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.nombre}</Td>
                 <Td>{item.apellido}</Td>
@@ -246,7 +245,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                       <i className={deleteUser}></i>
                     </Buttons>
 
-                    <Buttons
+{/*                     <Buttons
                       onClick={() => {
                         if(todo.identificacion == id4 && todo.id_orden == idOrden){
                           toast.info('Actualmente se encuentra registrado.');
@@ -258,8 +257,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
                       }}
                       title="Crear orden de servicio"
                     >
-                      <i className={orderService}></i>
-                    </Buttons>
+                      {<i className={orderService}></i>}
+                    </Buttons> */}
                   </ButtonOptions>
                 </Td>
               </Tr>
@@ -404,3 +403,4 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 };
 
 export default TableClient;
+
