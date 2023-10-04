@@ -55,9 +55,6 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
           <Thead>
             <Tr>
               <Th>ID Servicio</Th>
-              <Th>ID Cliente</Th>
-              <Th>Nombres</Th>
-              <Th>Apellidos</Th>
               <Th>Tipo de servicio</Th>
               <Th>Total a pagar</Th>
               <Th>Opciones</Th>
@@ -67,9 +64,6 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
             {mapeo.map((item, i) => (
               <Tr key={i}>
                 <Td>{i + 1}</Td>
-                <Td>{item.identificacion}</Td>
-                <Td className="name">{item.nombre}</Td>
-                <Td className="last-name">{item.apellido}</Td>
                 <Td>{item.nombre_serv}</Td>
                 <Td>$ {item.precio.toLocaleString()}</Td>
                 <Td>

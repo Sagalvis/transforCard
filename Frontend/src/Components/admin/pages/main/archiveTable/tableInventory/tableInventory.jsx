@@ -114,6 +114,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   const deleteServiceInventory = async () => {
     try {
       const result = await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
+      window.location.reload();
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -264,14 +265,14 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
                   <Td>
                     <ButtonOptions>
-                      {/* <Buttons
+                      <Buttons
                         onClick={() =>
                           setHandleFormInventory(!handleFormInventory)
                         }
                         title="Editar producto"
                       >
                         <i className={editProduct}></i>
-                      </Buttons> */}
+                      </Buttons> 
                       <Buttons onClick={() => {setHandleDeleteService(!handleDeleteService); setDelService(item)}} title="Eliminar producto">
                         <i className={deleteProduct}></i>
                       </Buttons>
