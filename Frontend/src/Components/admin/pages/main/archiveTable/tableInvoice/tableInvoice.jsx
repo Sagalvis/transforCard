@@ -222,20 +222,17 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                     >
                       <i className={deletInvoice}></i>
                     </Buttons>
-                    <Buttons title="Ver factura">
-                      <i
-                        className={printInvoice}
-                        onClick={() => {
-                          setHandlePdfInvoice(true);
-                          getServicesClient(item);
-                          createPDF(item);
-                          ModalContent(item);
-                        }}
-                      ></i>
+                    <Buttons 
+                    title="Ver factura"
+                    onClick={() => {
+                      setHandlePdfInvoice(true);
+                      getServicesClient(item);
+                      createPDF(item);
+                      ModalContent(item);
+                    }}
+                    >
+                      <i className={printInvoice}></i>
                     </Buttons>
-
-                    {/* <Buttons onClick={()=>{}}>
-                    </Buttons> */}
                   </ButtonOptions>
                 </Td>
               </Tr>
@@ -262,7 +259,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       <Modals
       status={handleDeleteInvoice}
       changeStatus={setHandleDeleteInvoice}
-      changePosition={'start'}
+      changeposition={'start'}
       titleModal={'Elimnar factura'}
       showCloseButton={true}
       showHeader={true}

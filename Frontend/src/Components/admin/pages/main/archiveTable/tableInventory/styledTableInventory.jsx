@@ -239,7 +239,7 @@ export const ButtonHandle = styled.button`
 `;
 
 export const ButtonInventory = styled.div`
-  display: flex;
+  display: none;
 /*   background-color: red; */
   width: 15%;
   height: 40px;

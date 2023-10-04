@@ -21,7 +21,6 @@ import jwt_decode from "jwt-decode"
 import { BtnCreate } from "../main/archiveTable/tableInventory/styledTableInventory";
 
 
-// const useData = jwt_decode (localStorage.getItem("user"));
 const Header = ({
   indexIcon,
   index,
@@ -96,7 +95,7 @@ const Header = ({
             <BtnCreate
               onClick={() => setHandleFormInventory(!handleFormInventory)}
             >
-              Crear P/S
+              Crear Servicio
             </BtnCreate>
           )}
           {btnCreateInvoice && (
@@ -117,7 +116,7 @@ const Header = ({
         status={handleClose}
         changeStatus={setHandleClose}
         titleModal={titleModalPages}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
       >
@@ -137,7 +136,7 @@ const Header = ({
         status={handleFormInventory}
         changeStatus={setHandleFormInventory}
         titleModal={"Crear producto"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
       >

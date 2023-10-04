@@ -143,7 +143,7 @@ const TableVehicleControl = ({deleteVehicleTable}) => {
       status={handleDeleteControlVehicle}
       changeStatus={setHandleDeleteControlVehicle}
       titleModal={'Eliminar vehículo'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
       >

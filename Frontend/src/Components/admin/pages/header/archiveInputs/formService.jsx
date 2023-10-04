@@ -119,7 +119,7 @@ const FormInventory = () => {
                   onChange={(e) => setNombre(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
                   placeholder="Nombre del producto"
                   autoComplete="off"
-                  required={true}
+                  required
                   maxLength={20}
                 />
               </ContentInput>
@@ -146,7 +146,7 @@ const FormInventory = () => {
                   onChange={(e) => setCosto(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Costo"
                   autoComplete="off"
-                  required={true}
+                  required
                   maxLength={20}
                 />
                 <Input
@@ -157,7 +157,7 @@ const FormInventory = () => {
                   placeholder="Precio unitario"
                   maxLength={10}
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
 
@@ -168,7 +168,7 @@ const FormInventory = () => {
                   onChange={(e) => setCantidadComprada(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad comprada"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
 
@@ -179,7 +179,7 @@ const FormInventory = () => {
                   onChange={(e) => setCantidadStock(e.target.value.replace(/[^0-9]/g, ''))}
                   placeholder="Cantidad en stock"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
             </>

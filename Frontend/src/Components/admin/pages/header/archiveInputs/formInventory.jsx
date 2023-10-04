@@ -148,7 +148,7 @@ const FormInventory = () => {
                   }
                   placeholder="Nombre del producto"
                   autoComplete="off"
-                  required={true}
+                  required
                   maxLength={20}
                 />
               </ContentInput>
@@ -177,7 +177,7 @@ const FormInventory = () => {
                   }
                   placeholder="Costo"
                   autoComplete="off"
-                  required={true}
+                  required
                   maxLength={20}
                 />
                 <Input
@@ -190,7 +190,7 @@ const FormInventory = () => {
                   placeholder="Precio unitario"
                   maxLength={10}
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
 
@@ -203,7 +203,7 @@ const FormInventory = () => {
                   }
                   placeholder="Cantidad en comprada"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
 
@@ -216,7 +216,7 @@ const FormInventory = () => {
                   }
                   placeholder="Cantidad en stock"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ButtonRegister className="gap">
@@ -238,7 +238,7 @@ const FormInventory = () => {
                   }
                   placeholder="ID servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -252,7 +252,7 @@ const FormInventory = () => {
                   }
                   placeholder="Nombre del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -264,7 +264,7 @@ const FormInventory = () => {
                   }
                   placeholder="Precio del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -278,7 +278,7 @@ const FormInventory = () => {
                   }
                   placeholder="Tiempo estidamdo del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -288,7 +288,7 @@ const FormInventory = () => {
                   onChange={(e) => setDescripcion(e.target.value)}
                   placeholder="Descripción del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ButtonRegister className="gap">

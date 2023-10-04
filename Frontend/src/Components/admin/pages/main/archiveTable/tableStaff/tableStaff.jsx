@@ -151,7 +151,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
       status={handleEditEmployee}
       changeStatus={setHandleEditEmployee}
       titleModal={"Editar empleado"}
-      changePosition={"start"}
+      changeposition={"start"}
       showHeader={true}
       showCloseButton={true}
       >
@@ -166,10 +166,10 @@ const TableStaff = ({editStaff, deletStaff}) => {
       status={handleAdvDelete}
       changeStatus={setHandleAdvDelete}
       titleModal={'Eliminar empleado'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
-      changePadding={"0px"}
+      changepadding={"0px"}
       >
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>

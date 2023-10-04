@@ -299,10 +299,10 @@ const postOrdenServiceCliente = useCallback(async () => {
         status={handleCloseVehicle}
         changeStatus={setHandleCloseVehicle}
         titleModal={"Tus vehículos"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
-        changeWidth={"1340px"}
+        changewidth={"1340px"}
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
@@ -334,7 +334,7 @@ const postOrdenServiceCliente = useCallback(async () => {
         status={handleOpenFormVehicle}
         changeStatus={setHandleOpenFormVehicle}
         titleModal={"Crear vehículo nuevo"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
       >
@@ -349,7 +349,7 @@ const postOrdenServiceCliente = useCallback(async () => {
         status={handleEdit}
         changeStatus={setHandleEdit}
         titleModal={"Editar cliente actual"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
       >
@@ -363,10 +363,10 @@ const postOrdenServiceCliente = useCallback(async () => {
         status={handleDelete}
         changeStatus={setHandleDelete}
         titleModal={"Eliminar cliente"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
-        changePadding={"0px"}
+        changepadding={"0px"}
       >
         <ContainInfoModal>
           <Paragraph>
@@ -387,13 +387,13 @@ const postOrdenServiceCliente = useCallback(async () => {
 
       {/* Modal de orden de servicio */}
       <Modals
-        status={handleOrders}
-        changeStatus={setHandleOrders}
-        titleModal={"Selecciona el servicio requerido por el cliente"}
-        showCloseButton={true}
-        showHeader={true}
-        changePosition={"start"}
-        changeWidth={"850px"}
+      status={handleOrders}
+      changeStatus={setHandleOrders}
+      titleModal={'Selecciona el servicio requerido por el cliente'}
+      showCloseButton={true}
+      showHeader={true}
+      changeposition={'start'}
+      changewidth={'850px'}
       >
         <TitleService>
           <Paragraph>Mantenimientos rápidos.</Paragraph>

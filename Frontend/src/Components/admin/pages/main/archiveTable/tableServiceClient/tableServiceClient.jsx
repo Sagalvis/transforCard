@@ -97,7 +97,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
       <Modals
       status={handleDeleteCustomerService}
       changeStatus={setHandleDeleteCustomerService}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
       titleModal={'Eliminar servicio'}

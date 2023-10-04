@@ -123,7 +123,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       titleModal={"Actualizar vehículo actual"}
       showHeader={true}
       showCloseButton={true}
-      changePosition={"start"}
+      changeposition={"start"}
       >
         <ContainInfoModal>
           <EditFormVehicle getVehicle={idVehicle}/>
@@ -135,7 +135,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       status={handleRemarks}
       changeStatus={setHandleRemarks}
       titleModal={"Observaciones del vehículo"}
-      changePosition={"start"}
+      changeposition={"start"}
       showHeader={true}
       showCloseButton={true}
       >
@@ -151,10 +151,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       status={handleDeleteVehicle}
       changeStatus={setHandleDeleteVehicle}
       titleModal={'Eliminar vehículo'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
-      changePadding={'0px'}
+      changepadding={'0px'}
       >
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este vehículo?</Paragraph>
