@@ -28,9 +28,9 @@ const FormInventory = () => {
   //Funcion para cambiar de inputs
   const handleClickButton = (value) => {
     if (value === "producto") {
-      setShowItem(true);
-    } else if (value === "servicio") {
       setShowItem(false);
+    } else if (value === "servicio") {
+      setShowItem(true);
     }
   };
 
@@ -114,14 +114,14 @@ const FormInventory = () => {
             >
               Servicio
             </Button>
-            <Button
+{/*             <Button
               className="btn"
               onClick={() => handleClickButton("producto")}
             >
               Producto
-            </Button>
+            </Button> */}
           </ContentInput>
-          {showItem && (
+          {!showItem && (
             <>
               <ContentInput>
                 <Select
@@ -227,7 +227,7 @@ const FormInventory = () => {
               </ButtonRegister>
             </>
           )}
-          {!showItem && (
+          {showItem && (
             <>
               <ContentInput>
                 <Input
@@ -331,6 +331,7 @@ export const ContentInput = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-bottom: 2%;
 
   &.display {

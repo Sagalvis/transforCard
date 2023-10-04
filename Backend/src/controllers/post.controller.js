@@ -6,13 +6,13 @@ import { SECRET_KEY } from "../config.js";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
-    const { identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente } =
+    const { identificacion, nombre, apellido, correo, direccion, barrio, tel } =
       req.body;
     const [row] = await pool.query(
-      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel, id_tipo_cliente) VALUE(?,?,?,?,?,?,?)",
-      [identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente]
+      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion,barrio, tel) VALUE(?,?,?,?,?,?,?)",
+      [identificacion, nombre, apellido, correo, direccion,barrio, tel,]
     );
-    res.send({ identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente });
+    res.send({ identificacion, nombre, apellido, correo, direccion,barrio, tel });
   } catch (error) {
     console.log(error);
     return res.status(500).json({

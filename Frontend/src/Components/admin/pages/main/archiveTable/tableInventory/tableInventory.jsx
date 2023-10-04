@@ -94,9 +94,9 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
   const handleButtonClick = (value) => {
     if (value === "producto") {
-      setShowProduct(true);
-    } else if (value === "servicio") {
       setShowProduct(false);
+    } else if (value === "servicio") {
+      setShowProduct(true);
     }
   };
 
@@ -124,10 +124,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     <ButtonInventory>
 
       <Button onClick={() => handleButtonClick("servicio")}>Servicio</Button>
-      <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button>
+      {/* <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button> */}
     </ButtonInventory>
 
-      {showProduct && (
+      {!showProduct && (
         <>
           <ContainControls>
             <ContainMaxData>
@@ -225,7 +225,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
         </>
       )}
 
-      {!showProduct && (
+      {showProduct && (
         <>
         <ContainControls>
           <ContainMaxData>
