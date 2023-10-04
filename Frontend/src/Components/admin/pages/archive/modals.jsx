@@ -5,10 +5,10 @@ const Modals = ({titleModal, children, status, changeStatus, changeposition, sho
   return (
     <>
     {status &&
-    <Overlay changeposition={changeposition}>
-      <ContainModal changewidth={changewidth}>
+    <Overlay $changeposition={changeposition}>
+      <ContainModal $changewidth={changewidth}>
         {showHeader &&
-        <HeaderModal changepadding={changepadding}>
+        <HeaderModal $changepadding={changepadding}>
           <H2>{titleModal}</H2>
         </HeaderModal>
         }
