@@ -10,8 +10,6 @@ const FormStaff = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [tipoRol, setTipoRol] = useState([]);
-  const [tipoDocument, setTipoDocument] = useState([]);
-  const [selectDocument, setSeletDocument] = useState(0);
   const [selectRol, setSeletRol] = useState(0);
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
@@ -42,11 +40,7 @@ const FormStaff = () => {
     }
   
     if (selectRol === 0) {
-      emptyFields.push("Rol");
-    }
-
-    if (selectRol === 0) {
-      emptyFields.push("Tipo de documento");
+      emptyFields.push("Tipo de rol");
     }
   
     if (emptyFields.length > 0) {
@@ -115,19 +109,6 @@ const FormStaff = () => {
             value={apellidos}
             onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off" />
-          </ContentInput>
-
-          <ContentInput>
-            <Select
-            value={selectDocument} 
-            onChange={(e)=>setSeletDocument(e.target.value)} 
-            >
-              <Option value="0">-Tipo de documento-</Option>
-                <Option value='ti'>Tarjeta de identidad</Option>
-                <Option value='cc'>Cedula de ciudadania</Option>
-                <Option value='ce'>Cedula de extranjeria</Option>
-                <Option value='pep'>PEP</Option>
-            </Select>
           </ContentInput>
 
           <ContentInput className="display">

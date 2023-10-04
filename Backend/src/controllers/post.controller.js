@@ -10,7 +10,7 @@ export const postCustomer = async (req, res) => {
       req.body;
     const [row] = await pool.query(
       "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento) VALUE(?,?,?,?,?,?,?,?)",
-      [identificacion, nombre, apellido, correo, direccion,barrio, tel,]
+      [identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento]
     );
     res.send({ identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento });
   } catch (error) {

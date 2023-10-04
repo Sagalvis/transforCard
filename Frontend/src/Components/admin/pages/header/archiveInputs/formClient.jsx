@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,8 +9,12 @@ const FormClient = () => {
   const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
-  const [telefono, setTelefono] = useState("");
   const [barrio, setBarrio] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [tipoDocument, setTipoDocument] = useState([]);
+  const [selectDocument, setSeletDocument] = useState(0);
+
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
   const handletSumit = async () => {
@@ -44,6 +48,10 @@ const FormClient = () => {
     emptyFields.push("Teléfono");
   }
 
+  if (selectDocument === "") {
+    emptyFields.push("Tipo de documento");
+  }
+
   if (emptyFields.length > 0) {
     const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}) se encuentra vacio.`;
     toast.warning(emptyFieldsMessage);
@@ -56,6 +64,7 @@ const FormClient = () => {
         direccion: direccion,
         barrio: barrio,
         tel: telefono,
+        idtipo_documento: selectDocument,
       });
       handleAlert();
       setTimeout(() => {
@@ -64,6 +73,13 @@ const FormClient = () => {
     }
   };
 
+  useEffect(() => {
+    const getdocumentdata = async () => {
+      const responseDocument = await axios.get(`http://localhost:3005/tipodocument`);
+      setTipoDocument(responseDocument.data);
+    };
+    getdocumentdata();
+  },[])
   const handleAlert = () => {
     toast.success("Cliente registrado con éxito.");
   };
@@ -101,6 +117,21 @@ const FormClient = () => {
               required
               maxLength={20}
             />
+          </ContentInput>
+
+          <ContentInput>
+            <Select
+            value={selectDocument} 
+            onChange={(e)=>setSeletDocument(e.target.value)} 
+            >
+              <Option value="0">-Tipo de documento-</Option>
+              {tipoDocument.map((item, i) => (
+                <Option
+                key={i}
+                value={item.idtipo_documento}>{item.tipoDocumento}</Option>
+
+              ))}
+            </Select>
           </ContentInput>
 
           <ContentInput>

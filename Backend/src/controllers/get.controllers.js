@@ -4,7 +4,7 @@ import { pool } from "../dbconfig.js";
 /* consulta para traer toda la tabla de clientes */
 export const getCustomer = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT * FROM cliente ORDER BY fecha_creacion DESC ");
+    const [row] = await pool.query("SELECT cliente.*, tipo_documento.tipoDocumento FROM cliente INNER JOIN tipo_documento ON cliente.idtipo_documento = tipo_documento.idtipo_documento");
     res.send(row);
   } catch (error) {
     return res.status(500).json({
@@ -33,6 +33,19 @@ export const getEmployees = async (req, res) => {
 export const getSelectRol = async (req, res) => {
   try {
     const [row] = await pool.query("SELECT * FROM rol_empleado");
+    res.send(row);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
+};
+
+/* Consulta para traer toda la tabla tipo documento de clientes */
+
+export const getSelectDocument = async (req, res) => {
+  try {
+    const [row] = await pool.query("SELECT * FROM tipo_documento");
     res.send(row);
   } catch (error) {
     return res.status(500).json({
