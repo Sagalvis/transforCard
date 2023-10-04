@@ -135,29 +135,17 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
   }, [idOrden]);
 
   //Funcion para enviar los servicios del cliente
-  const postOrdenServiceCliente = async () => {
-    // Obtenemos el token de autenticación
-    //const token = localStorage.getItem('user');
-    // Establecemos la cabecera
-    /* const headers = {
-      'Authorization': `Bearer ${token}`,
-    }; */
-  
+  const postOrdenServiceCliente = async () =>{ 
     try {
-      // Hacemos la solicitud
-      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
+      await axios.post(`${apiBaseBack}/postOrdenServiceCliente`,{
         identificacion: id4,
         id_orden: idOrden
-      }, {
-        headers:{
-          user : localStorage.getItem('user'), 
-        },
       });
-      console.log("registrado con exito");
+      console.log("registrado con exito")
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
@@ -416,43 +404,3 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 };
 
 export default TableClient;
-
-/* import { createContext, useCallback, useContext, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-
-const MY_AUTH_TOKEN = 'MY_AUTH_TOKEN'; // Cambia el nombre a algo adecuado para tu aplicación
-
-export const AuthContext = createContext();
-
-export default function AuthContextProvider({ children }) {
-  const [token, setToken] = useState( window.localStorage.getItem("token") || null);
-  const x = "clave"
-  const login = useCallback(function (newToken) {
-    if (newToken) {
-      window.localStorage.setItem("token", newToken);
-      setToken(newToken);
-    }
-  }, []);
-  const logout = useCallback(function () {
-    window.localStorage.removeItem( "token");  setToken(null);
-  }, []);
-  const value = useMemo(
-    () => ({
-      login,
-      logout,
-      token,
-      x,
-    }),
-    [ x ,token, login, logout]
-    
-  );
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-AuthContextProvider.propTypes = {
-  children: PropTypes.object,
-};
-
-export function useAuthContext() {
-  return useContext(AuthContext);
-} */
