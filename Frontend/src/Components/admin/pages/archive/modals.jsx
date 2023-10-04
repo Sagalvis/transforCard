@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { CloseButton, ContainModal, H2, HeaderModal, Overlay } from "./styledModals";
 
-const Modals = ({titleModal, children, status, changeStatus, changePosition, showHeader, showCloseButton, changeWidth, changePadding}) => {
+const Modals = ({titleModal, children, status, changeStatus, changeposition, showHeader, showCloseButton, changewidth, changepadding}) => {
   return (
     <>
     {status &&
-    <Overlay changePosition={changePosition}>
-      <ContainModal changeWidth={changeWidth}>
+    <Overlay changeposition={changeposition}>
+      <ContainModal changewidth={changewidth}>
         {showHeader &&
-        <HeaderModal changePadding={changePadding}>
+        <HeaderModal changepadding={changepadding}>
           <H2>{titleModal}</H2>
         </HeaderModal>
         }

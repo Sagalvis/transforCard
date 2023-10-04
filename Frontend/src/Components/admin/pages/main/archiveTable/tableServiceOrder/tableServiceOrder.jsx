@@ -48,7 +48,7 @@ if (!search) {
       dato.identificacion.toString().includes(search.toString())
   );
 }
-
+  
   // Función para eliminar orden de servicio.
   const deleteServiceCustomer = async () => {
     try {
@@ -181,7 +181,7 @@ if (!search) {
       status={handleDeleteServiceOrder}
       changeStatus={setHandleDeleteServiceOrder}
       titleModal={'Eliminar orden'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
       >
@@ -200,8 +200,8 @@ if (!search) {
       showHeader={true}
       titleModal={"Servicios de cliente actual"}
       showCloseButton={true}
-      changePosition={"start"}
-      changeWidth={"1100px"}
+      changeposition={"start"}
+      changewidth={"1100px"}
       >
         <ContainInfoModal>
           <TableServiceClient

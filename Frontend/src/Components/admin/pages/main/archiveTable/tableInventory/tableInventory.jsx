@@ -124,7 +124,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     <ButtonInventory>
 
       <Button onClick={() => handleButtonClick("servicio")}>Servicio</Button>
-      {/* <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button> */}
+      <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button>
     </ButtonInventory>
 
       {!showProduct && (
@@ -195,10 +195,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           status={handleDeleteProduct}
           changeStatus={setHandleDeleteProduct}
           titleModal={"Eliminar producto"}
-          changePosition={"start"}
+          changeposition={"start"}
           showHeader={true}
           showCloseButton={true}
-          changePadding={'0px'}
+          changepadding={'0px'}
 
           >
             <ContainInfoModal>
@@ -214,7 +214,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
             status={handleFormInventory}
             changeStatus={setHandleFormInventory}
             titleModal={"Editar item"}
-            changePosition={"start"}
+            changeposition={"start"}
             showHeader={true}
             showCloseButton={true}
           >
@@ -288,10 +288,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           status={handleDeleteService}
           changeStatus={setHandleDeleteService}
           titleModal={"Eliminar servicio"}
-          changePosition={"start"}
+          changeposition={"start"}
           showHeader={true}
           showCloseButton={true}
-          changePadding={'0px'}
+          changepadding={'0px'}
           >
             <ContainInfoModal>
               <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
@@ -305,7 +305,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           status={handleFormInventory}
           changeStatus={setHandleFormInventory}
           titleModal={"Editar item"}
-          changePosition={"start"}
+          changeposition={"start"}
           showHeader={true}
           showCloseButton={true}
         >

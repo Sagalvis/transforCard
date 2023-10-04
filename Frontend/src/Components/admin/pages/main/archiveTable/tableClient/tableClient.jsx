@@ -274,10 +274,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         status={handleCloseVehicle}
         changeStatus={setHandleCloseVehicle}
         titleModal={"Tus vehículos"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
-        changeWidth={"1340px"}
+        changewidth={"1340px"}
       >
         <ContainInfoModal>
           {/* Tabla de vehiculos registrados */}
@@ -308,7 +308,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         status={handleOpenFormVehicle}
         changeStatus={setHandleOpenFormVehicle}
         titleModal={"Crear vehículo nuevo"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
       >
@@ -323,7 +323,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         status={handleEdit}
         changeStatus={setHandleEdit}
         titleModal={"Editar cliente actual"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
       >
@@ -337,10 +337,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         status={handleDelete}
         changeStatus={setHandleDelete}
         titleModal={"Eliminar cliente"}
-        changePosition={"start"}
+        changeposition={"start"}
         showHeader={true}
         showCloseButton={true}
-        changePadding={"0px"}
+        changepadding={"0px"}
       >
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
@@ -357,8 +357,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
       titleModal={'Selecciona el servicio requerido por el cliente'}
       showCloseButton={true}
       showHeader={true}
-      changePosition={'start'}
-      changeWidth={'850px'}
+      changeposition={'start'}
+      changewidth={'850px'}
       >
             <TitleService>
               <Paragraph>Mantenimientos rápidos.</Paragraph>

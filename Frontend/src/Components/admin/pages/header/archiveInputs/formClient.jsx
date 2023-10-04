@@ -66,7 +66,7 @@ const FormClient = () => {
               onChange={(e) => setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               placeholder="Nombres"
               autoComplete="off"
-              required={true}
+              required
               maxLength={20}
             />
           </ContentInput>
@@ -78,7 +78,7 @@ const FormClient = () => {
               value={apellidos}
               onChange={(e) => setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               autoComplete="off"
-              required={true}
+              required
               maxLength={20}
             />
           </ContentInput>
@@ -91,7 +91,7 @@ const FormClient = () => {
               onChange={(e) => setIdentificacion(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={10}
               autoComplete="off"
-              required={true}
+              required
             />
           </ContentInput>
 
@@ -104,7 +104,7 @@ const FormClient = () => {
               onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={10}
               autoComplete="off"
-              required={true}
+              required
             />
             <Input
             className="input-display"
@@ -113,7 +113,7 @@ const FormClient = () => {
               value={barrio}
               onChange={(e) => setBarrio(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
               autoComplete="off"
-              required={true}
+              required
             />
           </ContentInput>
 
@@ -124,7 +124,7 @@ const FormClient = () => {
               value={direccion}
               onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
               autoComplete="off"
-              required={true}
+              required
             />
           </ContentInput>
 
@@ -135,7 +135,7 @@ const FormClient = () => {
               autoComplete="off"
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}
-              required={true}
+              required
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>

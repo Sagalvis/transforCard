@@ -10,7 +10,7 @@ export const Overlay = styled.div`
   left: 0;
   background: rgba(0,0,0,.5);
   display: flex;
-  align-items: ${props => props.changePosition ? props.changePosition : "center"};
+  align-items: ${props => props.changeposition ? props.changeposition : "center"};
   justify-content: center;
 `;
 
@@ -24,7 +24,7 @@ const right = keyframes`
   }
 `
 export const ContainModal = styled.div`
-  width: ${props => props.changeWidth ? props.changeWidth : "400px"};
+  width: ${props => props.changewidth ? props.changewidth : "400px"};
   min-height: 150px;
   background: #fff;
   position: relative;
@@ -41,7 +41,7 @@ export const HeaderModal = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  padding-bottom: ${props => props.changePadding ? props.changePadding : "10px"};
+  padding-bottom: ${props => props.changepadding ? props.changepadding : "10px"};
   border-bottom: 1px solid #e8e8e8;
 `;
 
