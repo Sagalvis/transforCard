@@ -155,15 +155,15 @@ const postOrdenServiceCliente = useCallback(async () => {
     if (response.status === 200) {
       handleAlertService();
     } else if (response.status === 400) {
-      alert("El servicio ya está registrado");
+      toast.error('IMPOSIBLE, el servicio ya se encuentra seleccionado.');
     } else {
-      alert("Error en el servidor");
+      toast.error('No se puede ejecutar esta acción');
     }
   } catch (error) {
     if (error.response) {
-      alert("Error en la respuesta del servidor: " + error.response.data.message);
+      toast.error("Error: " + error.response.data.message);
     } else if (error.request) {
-      alert("No se pudo comunicar con el servidor: " + error.request);
+      toast.error("Error: " + error.request);
     } 
   }
 

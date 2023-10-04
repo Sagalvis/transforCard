@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import {toast, ToastContainer} from 'react-toastify'
+import { toast, ToastContainer } from "react-toastify";
 
 const FormClient = () => {
   const [identification, setIdentificacion] = useState("");
@@ -10,7 +10,7 @@ const FormClient = () => {
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [barrio, setBarrio ] = useState("");
+  const [barrio, setBarrio] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
@@ -23,47 +23,41 @@ const FormClient = () => {
       barrio === "" ||
       telefono === ""
     ) {
+      toast.warning("Por favor llenar todos los campos");
       e.preventDefault();
-      toast.warning('Por favor llenar todos los campos');
     } else {
-      await axios
-        .post(`${apiBaseBack}/postcustomer`, {
-          identificacion: identification,
-          nombre: nombres,
-          apellido: apellidos,
-          correo: correo,
-          direccion: direccion,
-          barrio:barrio,
-          tel: telefono,
-        })
-        handleAlert();
-        setTimeout(() => {
-          window.location.reload();
-        }, 900);
+      await axios.post(`${apiBaseBack}/postcustomer`, {
+        identificacion: identification,
+        nombre: nombres,
+        apellido: apellidos,
+        correo: correo,
+        direccion: direccion,
+        barrio: barrio,
+        tel: telefono,
+      });
+      handleAlert();
+      setTimeout(() => {
+        window.location.reload();
+      }, 900);
     }
-
-    /* Funcion que limpa los inputs */
-    setIdentificacion("");
-    setNombres("");
-    setApellidos("");
-    setCorreo("");
-    setDireccion("");
-    setTelefono("");
   };
 
   const handleAlert = () => {
-    toast.success('Cliente registrado con éxito.');
+    toast.success("Cliente registrado con éxito.");
   };
   return (
     <>
       <ContainForm>
         <Form>
-
           <ContentInput>
             <Input
               type="text"
               value={nombres}
-              onChange={(e) => setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setNombres(
+                  e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
+                )
+              }
               placeholder="Nombres"
               autoComplete="off"
               required
@@ -76,7 +70,11 @@ const FormClient = () => {
               type="text"
               placeholder="Apellidos"
               value={apellidos}
-              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setApellidos(
+                  e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
+                )
+              }
               autoComplete="off"
               required
               maxLength={20}
@@ -88,7 +86,9 @@ const FormClient = () => {
               type="text"
               placeholder="Documento"
               value={identification}
-              onChange={(e) => setIdentificacion(e.target.value.replace(/[^0-9]/g, ''))}
+              onChange={(e) =>
+                setIdentificacion(e.target.value.replace(/[^0-9]/g, ""))
+              }
               maxLength={10}
               autoComplete="off"
               required
@@ -101,17 +101,25 @@ const FormClient = () => {
               type="tel"
               placeholder="Teléfono"
               value={telefono}
-              onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
+              onChange={(e) =>
+                setTelefono(e.target.value.replace(/[^0-9]/g, ""))
+              }
               maxLength={10}
               autoComplete="off"
               required
             />
             <Input
-            className="input-display"
+              className="input-display"
               type="text"
               placeholder="Barrio"
               value={barrio}
-              onChange={(e) => setBarrio(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setBarrio(
+                  e.target.value
+                    .replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, "")
+                    .toLowerCase()
+                )
+              }
               autoComplete="off"
               required
             />
@@ -122,7 +130,13 @@ const FormClient = () => {
               type="text"
               placeholder="Dirección"
               value={direccion}
-              onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setDireccion(
+                  e.target.value
+                    .replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, "")
+                    .toLowerCase()
+                )
+              }
               autoComplete="off"
               required
             />
@@ -143,11 +157,10 @@ const FormClient = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={() => {handletSumit()}}>Registrar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
       </ButtonRegister>
 
-
-      <ToastContainer 
+      <ToastContainer
       autoClose={800}
       hideProgressBar={true}
       />
@@ -201,7 +214,6 @@ export const Select = styled.select`
     width: 50%;
   }
 `;
-
 
 export const Option = styled.option`
   /* background-color: red; */
