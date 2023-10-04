@@ -25,7 +25,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
-import {toast, ToastContainer} from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 
 
 
@@ -146,9 +146,13 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
+      const result = await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
       console.log(result);
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
@@ -223,7 +227,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                     <Buttons
                       title="Eliminar producto"
                       onClick={() => {
-                        setHandleDeleteInvoice(!handleDeleteInvoice); 
+                        setHandleDeleteInvoice(!handleDeleteInvoice); setDelInvoice(item);
                       }}
                     >
                       <i className={deletInvoice}></i>
@@ -280,6 +284,12 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
+
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
     </>
   );
 };
