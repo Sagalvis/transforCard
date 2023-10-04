@@ -57,13 +57,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Id factura: ${data1.id_factura}
       Identificacion: ${data1.identificacion}
       Fecha de emision: ${moment(data1.fecha_emision).format("YYYY-MM-DD")} 
-      Id orden: ${data1.id_orden}
-      Productos y Servicios:
-      ${value.map((item) =>`   
-          servicios: ${item.nombre_serv}   precios: ${item.precio} $
-      `)}
-      _________________________________________________________
-      Cantidad pagada: ${data1.cantidad_pagada} $
+      ___________________________
+      Cantidad pagada: $ ${data1.cantidad_pagada} 
       Estado de pago: ${data1.estado_pago}
     `;
   
