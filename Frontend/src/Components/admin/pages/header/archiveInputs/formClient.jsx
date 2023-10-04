@@ -13,18 +13,40 @@ const FormClient = () => {
   const [barrio, setBarrio] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
-  const handletSumit = async (e) => {
-    if (
-      identification === "" ||
-      nombres === "" ||
-      apellidos === "" ||
-      correo === "" ||
-      direccion === "" ||
-      barrio === "" ||
-      telefono === ""
-    ) {
-      toast.warning("Por favor llenar todos los campos");
-      e.preventDefault();
+  const handletSumit = async () => {
+    const emptyFields = [];
+
+  if (identification === "") {
+    emptyFields.push("Documento");
+  }
+
+  if (nombres === "") {
+    emptyFields.push("Nombres");
+  }
+
+  if (apellidos === "") {
+    emptyFields.push("Apellidos");
+  }
+
+  if (correo === "") {
+    emptyFields.push("E-mail");
+  }
+
+  if (direccion === "") {
+    emptyFields.push("Dirección");
+  }
+
+  if (barrio === "") {
+    emptyFields.push("Barrio");
+  }
+
+  if (telefono === "") {
+    emptyFields.push("Teléfono");
+  }
+
+  if (emptyFields.length > 0) {
+    const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}) se encuentra vacio.`;
+    toast.warning(emptyFieldsMessage);
     } else {
       await axios.post(`${apiBaseBack}/postcustomer`, {
         identificacion: identification,
@@ -161,7 +183,7 @@ const FormClient = () => {
       </ButtonRegister>
 
       <ToastContainer
-      autoClose={800}
+      autoClose={1000}
       hideProgressBar={true}
       />
     </>

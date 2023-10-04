@@ -16,16 +16,37 @@ const FormStaff = () => {
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear empleados */
   const handleSumit = async (e) => {
-    if (
-      identification === "" ||
-      nombres === "" ||
-      apellidos === "" ||
-      correo === "" ||
-      contraseña === "" ||
-      selectRol === ""
-    ) {
-      e.preventDefault();
-      alert("Por favor llenar todos los campos");
+    e.preventDefault(); // Evita que el formulario se envíe automáticamente
+    
+    const emptyFields = [];
+  
+    if (identification === "") {
+      emptyFields.push("Documento");
+    }
+  
+    if (nombres === "") {
+      emptyFields.push("Nombres");
+    }
+  
+    if (apellidos === "") {
+      emptyFields.push("Apellidos");
+    }
+  
+    if (correo === "") {
+      emptyFields.push("E-mail");
+    }
+  
+    if (contraseña === "") {
+      emptyFields.push("Contraseña");
+    }
+  
+    if (selectRol === 0) {
+      emptyFields.push("Rol");
+    }
+  
+    if (emptyFields.length > 0) {
+      const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}), se encuentra vacio`;
+      toast.warning(emptyFieldsMessage);
     } else {
       await axios
         .post(`${apiBaseBack}/postemployees`, {
@@ -39,18 +60,11 @@ const FormStaff = () => {
         .then((Response) => {
           console.log(Response.data);
         });
-
-        setTimeout(() => {
+        handleAlertRegisterEmployee();
+      setTimeout(() => {
         window.location.reload();        
       }, 1000);
     }
-    // /* Funcion que limpa los inputs */
-    // setIdentification("");
-    // setNombres("");
-    // setApellidos("") ;
-    // setCorreo("");
-    // setContraseña("");
-    // setSeletRol(0);
   };
 
   useEffect(() => {
@@ -131,7 +145,7 @@ const FormStaff = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={() => {handleSumit(); handleAlertRegisterEmployee();}}>Registrar</BtnRegister>
+        <BtnRegister onClick={handleSumit}>Registrar</BtnRegister>
       </ButtonRegister>
 
 
