@@ -25,7 +25,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 
 
@@ -74,7 +74,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   };
   
   const ModalContent = ({ data1 }) => {
@@ -146,9 +150,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async() => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
-      console.log(result);
-
+      await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      // Alerta
+      handleAlertDeleteInvoice();
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -161,21 +165,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-  /*   lookVal(); */
   }, [setInvoice, setSave]);
 
- /*  console.log(lookVal);
-
-  const lookServices = async (item) => {
-    try {
-      const res = await axios.get(`http://localhost:3005/getCallService/${id}`);
-      console.log(res.data, "esto es el res");
-      setValue(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }  */
-
+  const handleAlertDeleteInvoice = () => {
+    toast.success('Factura eliminada con éxito.');
+  };
   return (
     <>
       <ContainControls>
