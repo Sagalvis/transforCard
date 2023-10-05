@@ -176,7 +176,7 @@ const postOrdenServiceCliente = useCallback (async () => {
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
     } catch (err) {
-      toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
+      toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado, factura y/o servicio activo.');
     }
   };
 
@@ -445,7 +445,7 @@ const postOrdenServiceCliente = useCallback (async () => {
       </Modals>
 
       <ToastContainer 
-      autoClose="500" 
+      autoClose="2000" 
       hideProgressBar={true} />
     </>
   );
