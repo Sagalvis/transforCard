@@ -137,35 +137,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       toast.error("Error");
     }
   };
-    
-  const deleteCustomer = useCallback(async () => {
-    if (!customer) {
-      return;
-    }
-  
-    try {
-      const response = await axios.delete(`${apiBaseBack}/deletecustomer/:identificacion`, {
-        data: { identificacion: customer } // Cambia 'id4' por 'customer'
-      });
-  
-      if (response.status === 200) {
-        alert('Cliente eliminado exitosamente');
-      } else if (response.status === 404) {
-        alert('Error: Datos inválidos');
-      } else {
-        alert('Error desconocido');
-      }
-    } catch (error) {
-      if (error.response) {
-        alert('Error: ' + error.response.data.message);
-      } else if (error.request) {
-        alert('Error de solicitud: ' + error.request);
-      } else {
-        alert('Error desconocido: ' + error.message);
-      }
-    }
-  }, [customer]);
-
 
 // Función para capturar los datos
 const handleAddOrdenService = (item) => {
@@ -214,7 +185,6 @@ const postOrdenServiceCliente = useCallback (async () => {
   useEffect(() => {
     if (idOrden || customer) {
       postOrdenServiceCliente();
-      deleteCustomer();
     }
     getCustomer();
     getServices();
