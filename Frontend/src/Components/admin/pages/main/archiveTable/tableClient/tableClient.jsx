@@ -62,6 +62,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [ordServicio, setOrdService] = useState([]);
   const [idOrden, setIdOrden] = useState([]);
   const [todo, setTodo] = useState([]);
+  
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //Función de busqueda
@@ -161,7 +162,7 @@ const postOrdenServiceCliente = useCallback (async () => {
     }
   } catch (error) {
     if (error.response) {
-      toast.error("Error: " + error.response.data.message);
+      toast.error("Errorrrr: " + error.response.data.message);
     } else if (error.request) {
       toast.error("Error: " + error.request);
     } 
@@ -180,7 +181,7 @@ const postOrdenServiceCliente = useCallback (async () => {
   };
 
   useEffect(() => {
-    if (idOrden) {
+    if (idOrden || customer) {
       postOrdenServiceCliente();
     }
     getCustomer();
@@ -430,7 +431,6 @@ const postOrdenServiceCliente = useCallback (async () => {
                     <Button
                       onClick={() => {
                         handleAddOrdenService(item);
-                        
                       }}
                       className="no-margin"
                     >
