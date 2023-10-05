@@ -136,12 +136,12 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
 
   //Funcion para enviar los servicios del cliente
   const postOrdenServiceCliente = async () => {
-    // Obtenemos el token de autenticación
-    //const token = localStorage.getItem('user');
+    //Obtenemos el token de autenticación
+    const token = localStorage.getItem('user');
     // Establecemos la cabecera
-    /* const headers = {
-      'Authorization': `Bearer ${token}`,
-    }; */
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
   
     try {
       // Hacemos la solicitud
@@ -149,9 +149,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService}) => {
         identificacion: id4,
         id_orden: idOrden
       }, {
-        headers:{
-          user : localStorage.getItem('user'), 
-        },
+        headers,
       });
       console.log("registrado con exito");
     } catch (error) {

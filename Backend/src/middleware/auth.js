@@ -74,7 +74,6 @@
 
 import jwt from "jsonwebtoken"; // Importa jwt desde la biblioteca correcta
 import { SECRET_KEY } from "../config.js";
-import {pool} from "../dbconfig.js"
 
 /* export const isAuth = (req, res) => { // Agrega el parámetro 'next'
     // Obtenemos el token de autenticación de la solicitud
@@ -103,17 +102,21 @@ import {pool} from "../dbconfig.js"
     }
 }; */
 
-export const valToken = async(req, res, next)=>{
-    const user = req.header('user')
-    if(!user) return res.json({message: 'User not found'})
+export const valToken = async (req, res, next) => {
+    const user = req.header('user');
+    console.log("trae token?",user);
+    if (!user) return res.json({ message: 'Token de usuario no encontrado' });
     try {
-        const validaToken = jwt.verify(user, SECRET_KEY)
-        req.id_tipo_cliente = validaToken.id_tipo_cliente
-        const User = await pool.query("select * from cliente where identificacion = ?", [req.identificacion])
-        console.log(User)
-        if(!User) return res.json({message: "no existes"})
-        next()
+        const validaToken = jwt.verify(user, SECRET_KEY);
+        console.log("validacion", validaToken);
+        
+        next();
     } catch (error) {
-        return res.status(401).json({error: error.message})
+        return res.status(401).json({ error: error.message });
     }
-}
+};
+/*  req.id_tipo_cliente = validaToken.id_tipo_cliente;
+ const User = await pool.query("select * from cliente where identificacion = ?", [req.id_tipo_cliente]);
+ if (!User || User.length === 0) {
+     return res.json({ message: "El usuario no existe" });
+ } */
