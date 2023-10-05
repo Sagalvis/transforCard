@@ -117,7 +117,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const getServicesClient = async (item) => {
     try {
-      const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
+      const res = await axios.get(`${apiBaseBack}/getServiceCliente/${item.identificacion}`)
       setValue(res.data);
     } catch (error) {
       console.log("ERROR");
@@ -141,9 +141,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     );
   }
 
-  const deleteInvoice = async() => {
+  const deleteInvoice = async () => {
     try {
-      await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      await axios.delete(`${apiBaseBack}/deleteinvoice/${delInvoice.id_factura}`);
       // Alerta
       handleAlertDeleteInvoice();
       setTimeout(() => {

@@ -38,13 +38,12 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       const res = await axios.get(`${apiBaseBack}/getService`);
       setOrdenService(res.data)
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   }
 
   const searching = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
   //Metodo de filtrado tabla servicio
   let resultsService = [];
@@ -74,7 +73,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       }, 1000);
 
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   };
 

@@ -141,7 +141,7 @@ const handleAddOrdenService = (item) => {
 };
 
 // Función para enviar los servicios del cliente
-const postOrdenServiceCliente = useCallback(async () => {
+const postOrdenServiceCliente = useCallback (async () => {
   // No ejecutar la función si idOrden no está definido
   if (!idOrden) {
     return;
@@ -193,9 +193,9 @@ const postOrdenServiceCliente = useCallback(async () => {
     toast.success("Cliente eliminado con éxito");
   };
 
-  const handleAlertWithVehicle = () => {
-    toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
-  };
+  // const handleAlertWithVehicle = () => {
+  //   toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
+  // };
   const handleAlertService = () => {
     toast.success("Se añadio el servicio al cliente seleccionado.");
   };
@@ -411,7 +411,7 @@ const postOrdenServiceCliente = useCallback(async () => {
             {ordServicio.map((item, index) => (
               <CardService key={index}>
                 <Cuadro>
-                  <Img src={`http://localhost:3005/uploads/${item.ruta_img}`} />
+                  <Img src={`${apiBaseBack}/uploads/${item.ruta_img}`} />
                 </Cuadro>
                 <Title>
                   <Paragraph className="size">{item.nombre_serv}</Paragraph>

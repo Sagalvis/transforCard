@@ -7,10 +7,11 @@ import { pool } from "../dbconfig.js";
 export const deleteCustomer = async (req, res) => {
   try {
     const { identificacion } = req.params;
-    const [vehiculo]=await pool.query("select * from vehiculo where identificacion = ?",[identificacion])
-    console.log(vehiculo.length>0)
-    if(vehiculo.length>0){
-      return res.status(404).json({message:"No se puede eliminar el registro porque tiene un vehiculo"})
+    const [vehiculo] = await pool.query("SELECT * FROM vehiculo WHERE identificacion = ?",[identificacion])
+    console.log(vehiculo.length > 0)
+    if(vehiculo.length > 0){
+      return res.status(404).json({
+        message:"No se puede eliminar el registro porque tiene un vehiculo"})
     }else{
       const [row] = await pool.query(
         "DELETE FROM cliente WHERE identificacion = ?",
@@ -137,23 +138,30 @@ export const deleteServiceInventory = async (req, res) => {
 
 export const deleteServiceCustomer = async (req, res) => {
   try {
-    const { identificacion } = req.params;
-    const [row] = await pool.query(
-      "DELETE FROM servicio_cliente WHERE identificacion = ? ",
-      [identificacion]
-    );
-    if (row.affectedRows === 0) {
-      return res.status(404).json({
-        message: "No se encontró el servicio.",
-      });
+    const { identificacion} = req.params;
+    const { id_servicio_cliente } = req.body;
+    const [rows] = await pool.query("SELECT * FROM factura WHERE id_servicio_cliente = ?", [id_servicio_cliente])
+    if(rows.length>0){
+      return res.status(404).json({message:"No se puede eliminar el registro porque tiene una factura"})
+    }else{
+      const [row] = await pool.query(
+        "DELETE FROM servicio_cliente WHERE identificacion = ? ",
+        [identificacion]
+      );
+      if (row.affectedRows === 0) {
+        return res.status(404).json({
+          message: "No se encontró el servicio.",
+        });
+      }
     }
+
     res.send({
       message: "Servicio eliminado correctamente",
       identificacion,
     });
   } catch (error) {
     return res.status(500).json({
-      message: "Error en el servidor",
+      message: "Error en el servidor mmm",
     });
   }
 };
