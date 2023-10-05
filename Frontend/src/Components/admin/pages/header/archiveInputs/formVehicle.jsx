@@ -47,13 +47,19 @@ const FormVehicle = ({getCustomer3}) => {
           observacion: observacion,
           identificacion: identificacion,
           id_tipo_vehiculo: selectVehicle   
+        },{
+          headers: {           
+            token : localStorage.getItem("user")
+          }
         })
         .then((Response) => {
           console.log(Response.data);
+          alert('vehiculo ingresado exitosamente')
         });
-      setTimeout(() => {
+      /* setTimeout(() => {
         window.location.reload();
-      }, 1000);
+      }, 1000); */
+      console.log(headers);
     }
 
     /* Funcion que limpa los inputs */
