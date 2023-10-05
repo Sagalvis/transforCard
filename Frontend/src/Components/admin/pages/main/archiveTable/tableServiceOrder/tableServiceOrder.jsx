@@ -78,7 +78,6 @@ if (!search) {
 
   const postCreateFactura = () => {
     try {
-      
       axios.post(`${apiBaseBack}/postCreateFactura`,{
         identificacion : cedula,
         id_servicio_cliente: idServCliente
@@ -122,6 +121,7 @@ if (!search) {
           <Thead>
             <Tr>
               <Th>ID Orden</Th>
+              <Th>Tipo</Th>
               <Th>ID Cliente</Th>
               <Th>Nombres</Th>
               <Th>Apellidos</Th>
@@ -132,7 +132,8 @@ if (!search) {
             {resultsServiceOrder.map((item, i) => (
               <Tr key={i}>
                 <Td>{i + 1}</Td>
-                <Td>{item.identificacion}</Td>
+                <Td>{item.tipoDocumento}</Td>
+                <Td>{item.identificacion.toLocaleString()}</Td>
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
                 <Td>

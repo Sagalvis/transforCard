@@ -115,7 +115,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
           <Tbody>
             {resultsStaff.map((item, i) => (
               <Tr key={i}>
-              <Td>{item.id_empleado}</Td>
+              <Td>{item.id_empleado.toLocaleString()}</Td>
               <Td className="rol">{item.rol}</Td>
               <Td>{item.nombre}</Td>
               <Td>{item.apellido}</Td>

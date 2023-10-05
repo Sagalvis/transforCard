@@ -89,7 +89,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
             {vehicle.map((item, i) => (
               <Tr key={i}>
                 <Td>{(i + 1).toString().padStart(2, '0')}</Td>
-                <Td>{item.identificacion}</Td>
+                <Td>{item.identificacion.toLocaleString()}</Td>
                 <Td>{item.tipoVehiculo}</Td>
                 <Td>{item.marca}</Td>
                 <Td>{item.modelo}</Td>

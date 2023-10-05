@@ -198,7 +198,7 @@ export const getServiceCliente = async (req, res) => {
 /* Funcion para traer los clientes que tienen un servicio */
 export const getServicesClient = async (req, res) => {
   try {
-    const [row] = await pool.query("SELECT servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido FROM servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion GROUP BY identificacion")
+    const [row] = await pool.query("SELECT servicio_cliente.id_servicio_cliente, cliente.identificacion, cliente.nombre, cliente.apellido, tipo_documento.tipoDocumento FROM servicio_cliente INNER JOIN cliente ON servicio_cliente.identificacion = cliente.identificacion INNER JOIN tipo_documento ON cliente.idtipo_documento = tipo_documento.idtipo_documento GROUP BY cliente.identificacion")
     res.send(row)
   } catch (error) {
     return res.status(500).json({
