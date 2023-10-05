@@ -26,7 +26,7 @@ const EditFormVehicle = ({ getVehicle }) => {
     }
   }, [getVehicle]);
   /* Funcion para crear clientes */
-  const handletSumit = async (e) => {
+  const handletSumit = async () => {
     if (
       marca === "" ||
       modelo === "" ||
@@ -165,11 +165,6 @@ const EditFormVehicle = ({ getVehicle }) => {
       <ButtonRegister>
         <BtnRegister onClick={() => {handletSumit(); handleAlertUpdate();}}>Actualizar datos</BtnRegister>
       </ButtonRegister>
-
-      <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
-      />
     </>
   );
 };

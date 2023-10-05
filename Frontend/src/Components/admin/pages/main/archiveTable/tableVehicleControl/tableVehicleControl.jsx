@@ -134,10 +134,11 @@ const TableVehicleControl = ({deleteVehicleTable}) => {
         </Table>
       </ContainTable>
 
-      <ToastContainer
-      autoClose={1000}
-      hideProgressBar={true}
-      />
+      <ToastContainer 
+      autoClose="1000" 
+      hideProgressBar={false}
+      theme="dark"
+      pauseOnHover/>
 
       <Modals
       status={handleDeleteControlVehicle}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const FormStaff = () => {
   const [identification, setIdentification] = useState("");
@@ -14,9 +14,14 @@ const FormStaff = () => {
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear empleados */
-  const handleSumit = async (e) => {
-    e.preventDefault(); // Evita que el formulario se envíe automáticamente
-    
+  const handleSumit = async () => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  if (!emailPattern.test(correo)) {
+    toast.warning("El correo electronico ingresado no es valido.");
+    return; // Salir de la función si el correo es inválido
+  }
+  
     const emptyFields = [];
   
     if (identification === "") {
@@ -150,12 +155,6 @@ const FormStaff = () => {
       <ButtonRegister>
         <BtnRegister onClick={handleSumit}>Registrar</BtnRegister>
       </ButtonRegister>
-
-
-      <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
-      />
     </>
   );
 };

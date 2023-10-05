@@ -8,7 +8,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, Label } from "../tableClient/styledTableClient";
 import { TextArea } from "../../../header/archiveInputs/formVehicle";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
@@ -116,6 +116,12 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
           </Tbody>
         </Table>
       </ContainTable>
+
+      <ToastContainer 
+      autoClose="1000" 
+      hideProgressBar={false}
+      theme="dark"
+      pauseOnHover/>
 
       <Modals
       status={handleEditVehicle}

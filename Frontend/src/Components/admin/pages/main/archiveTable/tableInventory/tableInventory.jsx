@@ -171,9 +171,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
 
         <ToastContainer 
-        autoClose={1000}
-        hideProgressBar={true}
-        />
+        autoClose="1000" 
+        hideProgressBar={false}
+        theme="dark"
+        pauseOnHover/>
       </>
   );
 };

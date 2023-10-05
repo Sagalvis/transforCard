@@ -83,9 +83,10 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
       </ContainTable>
 
       <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
-      />
+      autoClose="1000" 
+      hideProgressBar={false}
+      theme="dark"
+      pauseOnHover/>
 
       {/* Modal para eliminar un servicio de cliente */}
       <Modals

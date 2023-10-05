@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const FormInventory = () => {
 
@@ -127,10 +127,6 @@ const FormInventory = () => {
               </ButtonRegister>
         </Form>
       </ContainForm>
-      <ToastContainer 
-        autoClose={1000}
-        hideProgressBar={true}
-      />
     </>
   );
 };
