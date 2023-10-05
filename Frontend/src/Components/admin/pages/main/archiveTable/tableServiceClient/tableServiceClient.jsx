@@ -11,10 +11,10 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   const [mapeo, setMapeo] = useState([])
   const [handleDeleteCustomerService, setHandleDeleteCustomerService] = useState(false);
   const [delServiderOrder, setDelServiceOrder] = useState(null);
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //Funcion para traer todos los servicios del cliente
   const getOrdenService = async ()=> {
-    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
     const res = await axios.get(`${apiBaseBack}/getServiceCliente/${getcustomer}`);
     setMapeo(res.data)
   }
@@ -25,7 +25,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
 
   const deleteServiceOrder = async() => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteserviceorder/${delServiderOrder.id_servicio_cliente}`)
+      const result = await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiderOrder.id_servicio_cliente}`)
       console.log(result);
       setMapeo(mapeo.filter((v) => v.id_servicio_cliente !== delServiderOrder.id_servicio_cliente));
     } catch (error) {

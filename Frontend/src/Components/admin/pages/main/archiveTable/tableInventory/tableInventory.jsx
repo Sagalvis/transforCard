@@ -45,7 +45,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       const res = await axios.get(`${apiBaseBack}/getService`);
       setOrdenService(res.data)
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   }
   const getInventario = async () => {
@@ -53,13 +53,12 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       const res = await axios.get(`${apiBaseBack}/inventario`);
       setInventario(res.data);
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   };
 
   const searching = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
 
@@ -107,7 +106,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       await axios.delete(`${apiBaseBack}/deleteproduct/${delProduct.id_inventario}`);
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   };
 
@@ -121,7 +120,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       }, 1000);
 
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   };
 
