@@ -117,6 +117,6 @@ export const valToken = async (req, res, next) => {
 };
 /*  req.id_tipo_cliente = validaToken.id_tipo_cliente;
  const User = await pool.query("select * from cliente where identificacion = ?", [req.id_tipo_cliente]);
- if (!User || User.length === 0) {
-     return res.json({ message: "El usuario no existe" });
+if (!User || User.length === 0) {
+    return res.json({ message: "El usuario no existe" });
  } */

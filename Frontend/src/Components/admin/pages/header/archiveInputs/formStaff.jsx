@@ -55,14 +55,18 @@ const FormStaff = () => {
           correo: correo,
           contraseña: contraseña,
           id_rol: selectRol
+        }, {
+          headers: {
+            user: localStorage.getItem('user'),
+          },
         })
         .then((Response) => {
           console.log(Response.data);
         });
         handleAlertRegisterEmployee();
-      setTimeout(() => {
+      /* setTimeout(() => {
         window.location.reload();        
-      }, 1000);
+      }, 1000); */
     }
   };
 
