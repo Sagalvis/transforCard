@@ -14,6 +14,7 @@ import {
 } from "./styledTableHome";
 import {
   getCountCustomer,
+  getCountOrderCustomer,
   getEmployees,
   getInvoice,
   getProduct,
@@ -31,6 +32,7 @@ const TableHome = () => {
   const [CountService, setCountService] = useState([]);
   const [CountServiceOrder, setCountServiceOrder] = useState([]);
   const [CountInvoice, setCountInvoice] = useState([]);
+  const [CountOrderCustomer, setCountOrderCustomer] = useState([]);
   useEffect(() => {
     getCountCustomer(setCountCustomer);
     getVehicle(setCountVehicle);
@@ -39,6 +41,7 @@ const TableHome = () => {
     getService(setCountService);
     getServiceOrder(setCountServiceOrder);
     getInvoice(setCountInvoice);
+    getCountOrderCustomer(setCountOrderCustomer);
   }, [
     setCountCustomer,
     setCountVehicle,
@@ -47,6 +50,7 @@ const TableHome = () => {
     setCountService,
     setCountServiceOrder,
     setCountInvoice,
+    setCountOrderCustomer,
   ]);
   return (
     <ContainerTableHome>
@@ -155,7 +159,7 @@ const TableHome = () => {
 
             <Cards key={index} to={"/admin/serviceorder"}>
               <TittleCardsContain>
-                <TittleCards>Ordenes de servicio</TittleCards>
+                <TittleCards>Ordenes de servicio generadas</TittleCards>
               </TittleCardsContain>
               <ContenCards>
                 <CardsParagraft>{item.Numero_ordenes_servicio}</CardsParagraft>
@@ -163,13 +167,13 @@ const TableHome = () => {
             </Cards>
           ))}
 
-          <Cards>
+          <Cards to={"/admin/serviceorder"}>
             <TittleCardsContain>
-              <TittleCards>Cargando...</TittleCards>
+              <TittleCards>Ordenes de servicio por cliente</TittleCards>
             </TittleCardsContain>
             <ContenCards>
               <CardsParagraft className="size">
-                Cargando...
+                {CountOrderCustomer.length}
               </CardsParagraft>
             </ContenCards>
           </Cards>

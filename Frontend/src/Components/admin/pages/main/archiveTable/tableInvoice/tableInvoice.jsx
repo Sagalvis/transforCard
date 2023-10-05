@@ -25,10 +25,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { PDFDocument, rgb } from "pdf-lib";
 import moment from "moment";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
-import {toast, ToastContainer} from 'react-toastify'
-
-
-
+import { toast, ToastContainer } from 'react-toastify'
 
 const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const [invoice, setInvoice] = useState([]);
@@ -57,13 +54,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Id factura: ${data1.id_factura}
       Identificacion: ${data1.identificacion}
       Fecha de emision: ${moment(data1.fecha_emision).format("YYYY-MM-DD")} 
-      Id orden: ${data1.id_orden}
-      Productos y Servicios:
-      ${value.map((item) =>`   
-          servicios: ${item.nombre_serv}   precios: ${item.precio} $
-      `)}
-      _________________________________________________________
-      Cantidad pagada: ${data1.cantidad_pagada} $
+      ___________________________
+      Cantidad pagada: $ ${data1.cantidad_pagada} 
       Estado de pago: ${data1.estado_pago}
     `;
   
@@ -79,7 +71,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
     const pdfUrl = URL.createObjectURL(pdfBlob);
     window.open(pdfUrl, "_blank");
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   };
   
   const ModalContent = ({ data1 }) => {
@@ -114,10 +110,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       
       const res = await axios.get(`${apiBaseBack}/factura`);
       setInvoice(res.data);
-      console.log("factura",res.data[0].identificacion)
-      
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
@@ -125,15 +119,13 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     try {
       const res = await axios.get(`http://localhost:3005/getServiceCliente/${item.identificacion}`)
       setValue(res.data);
-      console.log("aqui vienen los servicios",res.data);
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
   const searching = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   //Metodo de filtrado tabla cliente
@@ -151,32 +143,26 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const deleteInvoice = async () => {
     try {
-      const result = await axios.delete(`http://localhost:3005/deleteinvoice/`);
-      console.log(result);
-      window.location.reload();
+      await axios.delete(`http://localhost:3005/deleteinvoice/${delInvoice.id_factura}`);
+      // Alerta
+      handleAlertDeleteInvoice();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
 
   useEffect(() => {
     getInvoice();
-  /*   lookVal(); */
   }, [setInvoice, setSave]);
 
- /*  console.log(lookVal);
-
-  const lookServices = async (item) => {
-    try {
-      const res = await axios.get(`http://localhost:3005/getCallService/${id}`);
-      console.log(res.data, "esto es el res");
-      setValue(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }  */
-
+  const handleAlertDeleteInvoice = () => {
+    toast.success('Factura eliminada con éxito.');
+  };
   return (
     <>
       <ContainControls>
@@ -228,25 +214,22 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                     <Buttons
                       title="Eliminar producto"
                       onClick={() => {
-                        setHandleDeleteInvoice(!handleDeleteInvoice); 
+                        setHandleDeleteInvoice(!handleDeleteInvoice); setDelInvoice(item);
                       }}
                     >
                       <i className={deletInvoice}></i>
                     </Buttons>
-                    <Buttons title="Ver factura">
-                      <i
-                        className={printInvoice}
-                        onClick={() => {
-                          setHandlePdfInvoice(true);
-                          getServicesClient(item);
-                          createPDF(item);
-                          ModalContent(item);
-                        }}
-                      ></i>
+                    <Buttons 
+                    title="Ver factura"
+                    onClick={() => {
+                      setHandlePdfInvoice(true);
+                      getServicesClient(item);
+                      createPDF(item);
+                      ModalContent(item);
+                    }}
+                    >
+                      <i className={printInvoice}></i>
                     </Buttons>
-
-                    {/* <Buttons onClick={()=>{}}>
-                    </Buttons> */}
                   </ButtonOptions>
                 </Td>
               </Tr>
@@ -273,7 +256,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       <Modals
       status={handleDeleteInvoice}
       changeStatus={setHandleDeleteInvoice}
-      changePosition={'start'}
+      changeposition={'start'}
       titleModal={'Elimnar factura'}
       showCloseButton={true}
       showHeader={true}
@@ -285,6 +268,12 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>
+
+
+      <ToastContainer 
+      autoClose={1000}
+      hideProgressBar={true}
+      />
     </>
   );
 };

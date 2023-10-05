@@ -11,12 +11,12 @@ getRouter.get('/vehicle', controllGet.getVehicle);
 getRouter.get('/vehicle/:identificacion', controllGet.getVehicleId);
 getRouter.get('/tipovehicle', controllGet.getSelectypevehicle);
 getRouter.get('/tiporol', controllGet.getSelectRol);
+getRouter.get('/tipodocument', controllGet.getSelectDocument);
 getRouter.get('/tipocliente', controllGet.getTypeClient);
 getRouter.get('/inventario', controllGet.getInventario);
 getRouter.get('/tipomedida', controllGet.getMedida);
 getRouter.get('/tipoproducto', controllGet.getProducto);
 getRouter.get('/factura', controllGet.getInvoices);
-/* getRouter.get('/factura/:id_factura', controllGet.getInvoicesId);*/
 getRouter.get('/getService', controllGet.getService);
 getRouter.get('/getServiceCliente/:identificacion', controllGet.getServiceCliente);
 getRouter.get('/getAllServicesClient', controllGet.getAllServicesClient);

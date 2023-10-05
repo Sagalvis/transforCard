@@ -108,7 +108,7 @@ const FormVehicle = ({getCustomer3}) => {
             onChange={(e)=>setMarca(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
             autoComplete="off"
             maxLength={10}
-            required="true"
+            required
             />
 
             <Input type="text" 
@@ -117,7 +117,7 @@ const FormVehicle = ({getCustomer3}) => {
             onChange={(e)=>setModelo(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
             autoComplete="off" 
             maxLength={10}
-            required="true"
+            required
             />
           </ContentInput>
 
@@ -128,7 +128,7 @@ const FormVehicle = ({getCustomer3}) => {
             onChange={(e)=>setAño(e.target.value.replace(/[^0-9]/g, ''))}
             autoComplete="off"
             maxLength={4}
-            required="true"
+            required
             />
           </ContentInput>
 
@@ -140,7 +140,7 @@ const FormVehicle = ({getCustomer3}) => {
               value={matricula}
               onChange={(e)=>setMatricula(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
               maxLength={6}
-              required="true"
+              required
             />
           </ContentInput>
           <ContentInput>
@@ -151,7 +151,7 @@ const FormVehicle = ({getCustomer3}) => {
               value={tarjetaPropiedad}
               onChange={(e)=>setTarjetaPropiedad(e.target.value.replace(/[^0-9]/g, ''))}
               maxLength={12}
-              required="true"
+              required
             />
           </ContentInput>
 
@@ -162,7 +162,7 @@ const FormVehicle = ({getCustomer3}) => {
               value={color}
               onChange={(e) => setColor(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
               autoComplete="off"
-              required="true"
+              required
               maxLength={20}
             />
           </ContentInput>
@@ -173,7 +173,7 @@ const FormVehicle = ({getCustomer3}) => {
             value={vin}
             onChange={(e)=>setVin(e.target.value.replace(/[^a-zA-Z0-9]/g, ''))}
             autoComplete="off" 
-            required="true"
+            required
             maxLength={17}
             />
           </ContentInput>

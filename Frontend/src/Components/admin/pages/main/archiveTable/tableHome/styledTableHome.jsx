@@ -93,10 +93,6 @@ export const ContenCards = styled.div`
 export const CardsParagraft = styled.p`
   margin: 0;
   font-size: 4.6rem;
-
-  &.size {
-    font-size: 1.5rem;
-  }
   @media ( max-width: 1039px ) {
     font-size: 3rem;
   }

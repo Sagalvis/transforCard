@@ -26,13 +26,11 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
 //Función de busqueda
 const searching = (e) => {
   setSearch(e.target.value);
-  console.log(e.target.value);
 }; 
 //Funcion para mostrar los clientes a los cuales tienen asignado un servicio
 const getAllService = async ()=>{
   const services = await axios.get(`${apiBaseBack}/getServicesClient`)
   setOrden(services.data)
-  console.log(services.data)
 }
 useEffect(()=>{
   getAllService()
@@ -50,7 +48,7 @@ if (!search) {
       dato.identificacion.toString().includes(search.toString())
   );
 }
-
+  
   // Función para eliminar orden de servicio.
   const deleteServiceCustomer = async () => {
     try {
@@ -127,7 +125,6 @@ if (!search) {
               <Th>ID Cliente</Th>
               <Th>Nombres</Th>
               <Th>Apellidos</Th>
-              <Th>Matrícula</Th>
               <Th>Opciones</Th>
             </Tr>
           </Thead>
@@ -138,7 +135,6 @@ if (!search) {
                 <Td>{item.identificacion}</Td>
                 <Td className="name">{item.nombre}</Td>
                 <Td className="last-name">{item.apellido}</Td>
-                <Td>[get.pendiente]</Td>
                 <Td>
                   <ButtonOptions>
                     <Buttons
@@ -183,7 +179,7 @@ if (!search) {
       status={handleDeleteServiceOrder}
       changeStatus={setHandleDeleteServiceOrder}
       titleModal={'Eliminar orden'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
       >
@@ -202,8 +198,8 @@ if (!search) {
       showHeader={true}
       titleModal={"Servicios de cliente actual"}
       showCloseButton={true}
-      changePosition={"start"}
-      changeWidth={"1100px"}
+      changeposition={"start"}
+      changewidth={"1100px"}
       >
         <ContainInfoModal>
           <TableServiceClient

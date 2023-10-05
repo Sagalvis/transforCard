@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import {toast, ToastContainer} from 'react-toastify'
+import { toast, ToastContainer } from "react-toastify";
 
 const FormClient = () => {
   const [identification, setIdentificacion] = useState("");
@@ -9,91 +9,96 @@ const FormClient = () => {
   const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
+  const [barrio, setBarrio] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [tipoCliente, setTipoCliente] = useState([]);
-  const [seletTipoCliente, setSelectTipoCliente] = useState(0);
+  const [tipoDocument, setTipoDocument] = useState([]);
+  const [selectDocument, setSeletDocument] = useState(0);
+
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
-  const handletSumit = async (e) => {
-    if (
-      identification === "" ||
-      nombres === "" ||
-      apellidos === "" ||
-      correo === "" ||
-      direccion === "" ||
-      telefono === "" ||
-      
-      seletTipoCliente === "" 
+  const handletSumit = async () => {
+    const emptyFields = [];
 
-    ) {
-      e.preventDefault();
-      toast.warning('Por favor llenar todos los campos');
+  if (identification === "") {
+    emptyFields.push("Documento");
+  }
+
+  if (nombres === "") {
+    emptyFields.push("Nombres");
+  }
+
+  if (apellidos === "") {
+    emptyFields.push("Apellidos");
+  }
+
+  if (correo === "") {
+    emptyFields.push("E-mail");
+  }
+
+  if (direccion === "") {
+    emptyFields.push("Dirección");
+  }
+
+  if (barrio === "") {
+    emptyFields.push("Barrio");
+  }
+
+  if (telefono === "") {
+    emptyFields.push("Teléfono");
+  }
+
+  if (selectDocument === "") {
+    emptyFields.push("Tipo de documento");
+  }
+
+  if (emptyFields.length > 0) {
+    const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}) se encuentra vacio.`;
+    toast.warning(emptyFieldsMessage);
     } else {
-      await axios
-        .post(`${apiBaseBack}/postcustomer`, {
-          identificacion: identification,
-          nombre: nombres,
-          apellido: apellidos,
-          correo: correo,
-          direccion: direccion,
-          tel: telefono,
-          id_tipo_cliente: seletTipoCliente,
-        })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+      await axios.post(`${apiBaseBack}/postcustomer`, {
+        identificacion: identification,
+        nombre: nombres,
+        apellido: apellidos,
+        correo: correo,
+        direccion: direccion,
+        barrio: barrio,
+        tel: telefono,
+        idtipo_documento: selectDocument,
+      });
+      handleAlert();
+      setTimeout(() => {
+        window.location.reload();
+      }, 900);
     }
-
-    /* Funcion que limpa los inputs */
-    setIdentificacion("");
-    setNombres("");
-    setApellidos("");
-    setCorreo("");
-    setDireccion("");
-    setTelefono("");
-    setSelectTipoCliente(0);
   };
 
   useEffect(() => {
-    const fetchdata = async () => {
-      const responseCliente = await axios.get(
-        `${apiBaseBack}/tipocliente`
-      );
-      setTipoCliente(responseCliente.data);
+    const getdocumentdata = async () => {
+      const responseDocument = await axios.get(`http://localhost:3005/tipodocument`);
+      setTipoDocument(responseDocument.data);
     };
-    fetchdata();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+    getdocumentdata();
+  },[])
   const handleAlert = () => {
-    toast.success('Cliente registrado con éxito.');
+    toast.success("Cliente registrado con éxito.");
   };
   return (
     <>
       <ContainForm>
         <Form>
           <ContentInput>
-            <Select
-              value={seletTipoCliente}
-              onChange={(e) => setSelectTipoCliente(e.target.value)}
-            >
-              <Option value="0">-Seleccione tipo de persona-</Option>
-              {tipoCliente.map((item, i) => (
-                <Option key={i} value={item.id_tipo_cliente}>
-                  {item.cliente_tipo}
-                </Option>
-              ))}
-            </Select>
-          </ContentInput>
-
-          <ContentInput>
             <Input
               type="text"
               value={nombres}
-              onChange={(e) => setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setNombres(
+                  e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
+                )
+              }
               placeholder="Nombres"
               autoComplete="off"
-              required={true}
+              required
               maxLength={20}
             />
           </ContentInput>
@@ -103,11 +108,30 @@ const FormClient = () => {
               type="text"
               placeholder="Apellidos"
               value={apellidos}
-              onChange={(e) => setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setApellidos(
+                  e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
+                )
+              }
               autoComplete="off"
-              required={true}
+              required
               maxLength={20}
             />
+          </ContentInput>
+
+          <ContentInput>
+            <Select
+            value={selectDocument} 
+            onChange={(e)=>setSeletDocument(e.target.value)} 
+            >
+              <Option value="0">-Tipo de documento-</Option>
+              {tipoDocument.map((item, i) => (
+                <Option
+                key={i}
+                value={item.idtipo_documento}>{item.tipoDocumento}</Option>
+
+              ))}
+            </Select>
           </ContentInput>
 
           <ContentInput>
@@ -115,10 +139,12 @@ const FormClient = () => {
               type="text"
               placeholder="Documento"
               value={identification}
-              onChange={(e) => setIdentificacion(e.target.value.replace(/[^0-9]/g, ''))}
-              maxLength={13}
+              onChange={(e) =>
+                setIdentificacion(e.target.value.replace(/[^0-9]/g, ""))
+              }
+              maxLength={10}
               autoComplete="off"
-              required={true}
+              required
             />
           </ContentInput>
 
@@ -128,10 +154,27 @@ const FormClient = () => {
               type="tel"
               placeholder="Teléfono"
               value={telefono}
-              onChange={(e) => setTelefono(e.target.value.replace(/[^0-9]/g, ''))}
+              onChange={(e) =>
+                setTelefono(e.target.value.replace(/[^0-9]/g, ""))
+              }
               maxLength={10}
               autoComplete="off"
-              required={true}
+              required
+            />
+            <Input
+              className="input-display"
+              type="text"
+              placeholder="Barrio"
+              value={barrio}
+              onChange={(e) =>
+                setBarrio(
+                  e.target.value
+                    .replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, "")
+                    .toLowerCase()
+                )
+              }
+              autoComplete="off"
+              required
             />
           </ContentInput>
 
@@ -140,9 +183,15 @@ const FormClient = () => {
               type="text"
               placeholder="Dirección"
               value={direccion}
-              onChange={(e) => setDireccion(e.target.value.replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, '').toLowerCase())}
+              onChange={(e) =>
+                setDireccion(
+                  e.target.value
+                    .replace(/[^a-z0-9\s#.,-ñáéíóúü]/g, "")
+                    .toLowerCase()
+                )
+              }
               autoComplete="off"
-              required={true}
+              required
             />
           </ContentInput>
 
@@ -153,7 +202,7 @@ const FormClient = () => {
               autoComplete="off"
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}
-              required={true}
+              required
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>
@@ -161,11 +210,10 @@ const FormClient = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={() => {handletSumit(); handleAlert();}}>Registrar</BtnRegister>
+        <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
       </ButtonRegister>
 
-
-      <ToastContainer 
+      <ToastContainer
       autoClose={1000}
       hideProgressBar={true}
       />
@@ -219,7 +267,6 @@ export const Select = styled.select`
     width: 50%;
   }
 `;
-
 
 export const Option = styled.option`
   /* background-color: red; */

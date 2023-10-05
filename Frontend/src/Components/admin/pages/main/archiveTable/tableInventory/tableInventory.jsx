@@ -24,6 +24,7 @@ import axios from "axios";
 import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
+import { toast, ToastContainer } from 'react-toastify'
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
   const [invetario, setInventario] = useState([]);
@@ -94,9 +95,9 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
   const handleButtonClick = (value) => {
     if (value === "producto") {
-      setShowProduct(true);
-    } else if (value === "servicio") {
       setShowProduct(false);
+    } else if (value === "servicio") {
+      setShowProduct(true);
     }
   };
 
@@ -113,11 +114,19 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
     try {
-      const result = await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
-      console.log(result);
+      await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
+      handleAlertDeleteInventory();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleAlertDeleteInventory = () => {
+    toast.success('Servicio eliminado con éxito.');
   };
   return (
     <>
@@ -127,7 +136,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       <Button className="producto" onClick={() => handleButtonClick("producto")}>Producto</Button>
     </ButtonInventory>
 
-      {showProduct && (
+      {!showProduct && (
         <>
           <ContainControls>
             <ContainMaxData>
@@ -195,10 +204,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           status={handleDeleteProduct}
           changeStatus={setHandleDeleteProduct}
           titleModal={"Eliminar producto"}
-          changePosition={"start"}
+          changeposition={"start"}
           showHeader={true}
           showCloseButton={true}
-          changePadding={'0px'}
+          changepadding={'0px'}
 
           >
             <ContainInfoModal>
@@ -214,7 +223,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
             status={handleFormInventory}
             changeStatus={setHandleFormInventory}
             titleModal={"Editar item"}
-            changePosition={"start"}
+            changeposition={"start"}
             showHeader={true}
             showCloseButton={true}
           >
@@ -225,7 +234,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
         </>
       )}
 
-      {!showProduct && (
+      {showProduct && (
         <>
         <ContainControls>
           <ContainMaxData>
@@ -264,14 +273,14 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
                   <Td>
                     <ButtonOptions>
-                      {/* <Buttons
+                      <Buttons
                         onClick={() =>
                           setHandleFormInventory(!handleFormInventory)
                         }
                         title="Editar producto"
                       >
                         <i className={editProduct}></i>
-                      </Buttons> */}
+                      </Buttons> 
                       <Buttons onClick={() => {setHandleDeleteService(!handleDeleteService); setDelService(item)}} title="Eliminar producto">
                         <i className={deleteProduct}></i>
                       </Buttons>
@@ -288,10 +297,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           status={handleDeleteService}
           changeStatus={setHandleDeleteService}
           titleModal={"Eliminar servicio"}
-          changePosition={"start"}
+          changeposition={"start"}
           showHeader={true}
           showCloseButton={true}
-          changePadding={'0px'}
+          changepadding={'0px'}
           >
             <ContainInfoModal>
               <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
@@ -305,7 +314,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           status={handleFormInventory}
           changeStatus={setHandleFormInventory}
           titleModal={"Editar item"}
-          changePosition={"start"}
+          changeposition={"start"}
           showHeader={true}
           showCloseButton={true}
         >
@@ -313,6 +322,12 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
             <h5>aqui va el formulario de edit.</h5>
           </ContainInfoModal>
         </Modals>
+
+
+        <ToastContainer 
+        autoClose={1000}
+        hideProgressBar={true}
+        />
       </>
       )}
     </>

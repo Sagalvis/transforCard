@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { ButtonOptions, Buttons, ContainControls, ContainMaxData, ContainSearch, ContainTable, Input, Label, Table, Tbody, Td, Th, Thead, Tr } from "./styledTableStaff";
@@ -56,15 +57,14 @@ const TableStaff = ({editStaff, deletStaff}) => {
 
   const deleteStaff = async () => {
     try {
-      
-      const result = await axios.delete(
+      await axios.delete(
         `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`
       );
-      console.log(result);
 
+      handleAlertDeleteStaff();
       setTimeout(() => {
         window.location.reload()        
-      }, 1000);
+      }, 500);
       
     } catch (error) {
       console.log(error);
@@ -72,7 +72,6 @@ const TableStaff = ({editStaff, deletStaff}) => {
   }
   useEffect(() => {
     getEmployees();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setEmployees]);
 
   const handleAlertDeleteStaff = () => {
@@ -139,10 +138,8 @@ const TableStaff = ({editStaff, deletStaff}) => {
           </Tbody>
         </Table>
       </ContainTable>
-
-
       <ToastContainer 
-      autoClose={1000}
+      autoClose={300}
       hideProgressBar={true}
       />
 
@@ -151,7 +148,7 @@ const TableStaff = ({editStaff, deletStaff}) => {
       status={handleEditEmployee}
       changeStatus={setHandleEditEmployee}
       titleModal={"Editar empleado"}
-      changePosition={"start"}
+      changeposition={"start"}
       showHeader={true}
       showCloseButton={true}
       >
@@ -166,15 +163,15 @@ const TableStaff = ({editStaff, deletStaff}) => {
       status={handleAdvDelete}
       changeStatus={setHandleAdvDelete}
       titleModal={'Eliminar empleado'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
-      changePadding={"0px"}
+      changepadding={"0px"}
       >
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
           <ButtonDelete>
-          <Btn_Delete onClick={() => {deleteStaff(); handleAlertDeleteStaff();}}>Eliminar</Btn_Delete>
+          <Btn_Delete onClick={() => {setHandleAdvDelete(!handleAdvDelete); deleteStaff(); }}>Eliminar</Btn_Delete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

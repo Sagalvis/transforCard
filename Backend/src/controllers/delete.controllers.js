@@ -1,5 +1,4 @@
 /* importacion de la base de la base de datos para hace las consultas */
-
 import { pool } from "../dbconfig.js";
 /*--- NOTA: USAR SOLO SI ES ESTRICAMENTE NECESARIO ---*/
 
@@ -8,14 +7,21 @@ import { pool } from "../dbconfig.js";
 export const deleteCustomer = async (req, res) => {
   try {
     const { identificacion } = req.params;
-    const [row] = await pool.query(
-      "DELETE FROM cliente WHERE identificacion = ?",
-      [identificacion]
-    );
-    if (row.affectedRows === 0) {
+    const [vehiculo] = await pool.query("SELECT * FROM vehiculo WHERE identificacion = ?",[identificacion])
+    console.log(vehiculo.length > 0)
+    if(vehiculo.length > 0){
       return res.status(404).json({
-        message: "No se encontró al cliente",
-      });
+        message:"No se puede eliminar el registro porque tiene un vehiculo"})
+    }else{
+      const [row] = await pool.query(
+        "DELETE FROM cliente WHERE identificacion = ?",
+        [identificacion]
+      );
+      if (row.affectedRows === 0) {
+        return res.status(404).json({
+          message: "No se encontró al cliente",
+        });
+      }
     }
     res.send({
       message: "Cliente eliminado correctamente",
@@ -118,11 +124,10 @@ export const deleteServiceInventory = async (req, res) => {
       });
     }
     res.send({
-      message: "producto eliminado correctamente",
+      message: "servicio eliminado correctamente",
       id_orden,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       message: "Error en el servidor",
     });
@@ -134,15 +139,21 @@ export const deleteServiceInventory = async (req, res) => {
 export const deleteServiceCustomer = async (req, res) => {
   try {
     const { identificacion } = req.params;
-    const [row] = await pool.query(
-      "DELETE FROM servicio_cliente WHERE identificacion = ? ",
-      [identificacion]
-    );
-    if (row.affectedRows === 0) {
-      return res.status(404).json({
-        message: "No se encontró el servicio.",
-      });
+    const [rows] = await pool.query("", [identificacion])
+    if(rows.length>0){
+      return res.status(404).json({message:"No se puede eliminar el registro porque tiene una factura"})
+    }else{
+      const [row] = await pool.query(
+        "DELETE FROM servicio_cliente WHERE identificacion = ? ",
+        [identificacion]
+      );
+      if (row.affectedRows === 0) {
+        return res.status(404).json({
+          message: "No se encontró el servicio.",
+        });
+      }
     }
+
     res.send({
       message: "Servicio eliminado correctamente",
       identificacion,

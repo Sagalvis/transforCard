@@ -6,13 +6,13 @@ import { SECRET_KEY } from "../config.js";
 /* Consulta para crear clientes */
 export const postCustomer = async (req, res) => {
   try {
-    const { identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente } =
+    const { identificacion, nombre, apellido, correo, direccion, barrio, tel, idtipo_documento } =
       req.body;
     const [row] = await pool.query(
-      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion, tel, id_tipo_cliente) VALUE(?,?,?,?,?,?,?)",
-      [identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente]
+      "INSERT INTO cliente (identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento) VALUE(?,?,?,?,?,?,?,?)",
+      [identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento]
     );
-    res.send({ identificacion, nombre, apellido, correo, direccion, tel,  id_tipo_cliente });
+    res.send({ identificacion, nombre, apellido, correo, direccion,barrio, tel, idtipo_documento });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -25,11 +25,6 @@ export const postCustomer = async (req, res) => {
 
 export const postEmployees = async (req, res) => {
   try {
-    // const file = req.file
-    // console.log(file)
-    // const imagen = {
-    //     name: file.originalname
-    // }
     const { id_empleado, nombre, apellido, correo, contraseña, id_rol } =
       req.body;
     const passwordHash = await bcrypt.hash(contraseña, 8);
@@ -44,8 +39,8 @@ export const postEmployees = async (req, res) => {
     console.log(error)
     return res.status(500).json({
       message: "Error en el servidor",
-    });
-  }
+    });
+  }
 };
 /* Consulta para crear vehiculos */
 
@@ -232,17 +227,30 @@ export const postOrdenService = async (req, res) => {
 export const postOrdenServiceCliente = async (req, res) => {
   try {
     const { identificacion, id_orden } = req.body;
+
+    // Verificar si el servicio ya existe en la base de datos
+    const [existingService] = await pool.query(
+      "SELECT * FROM servicio_cliente WHERE identificacion = ? AND id_orden = ?",
+      [identificacion, id_orden]
+    );
+
+    if (existingService.length > 0) {
+      // El servicio ya está registrado, muestra un mensaje de error
+      return res.status(400).json({
+        message: "El servicio ya está registrado",
+      });
+    }
+
+    // El servicio no existe, puedes proceder a insertarlo en la base de datos
     const [row] = await pool.query(
-      "INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?,?)",
+      "INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?, ?)",
       [identificacion, id_orden]
     );
     res.send(row);
   } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
   }
 };
+
 
 export const postCreateFactura = async (req, res) => {
   try {
@@ -253,6 +261,7 @@ export const postCreateFactura = async (req, res) => {
     res.json({
       row
     });
+
   } catch (error) {
     return res.status(500).json({
       message: "Error en el servidor",

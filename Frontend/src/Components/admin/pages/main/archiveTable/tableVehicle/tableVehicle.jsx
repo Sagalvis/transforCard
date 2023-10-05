@@ -8,7 +8,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import EditFormVehicle from "../../../header/archiveInputs/editForms/editFormVehicle";
 import { Btn_Delete, ButtonDelete, ContainControls, ContainMaxData, Label } from "../tableClient/styledTableClient";
 import { TextArea } from "../../../header/archiveInputs/formVehicle";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 
 const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCustomer2}) => {
@@ -36,20 +36,17 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
     try {
       const res = await axios.get(`${apiBaseBack}/vehicle/${getCustomer2}`)
       setVehicle(res.data);
-      console.log("res vehiculo",res)
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
   const deleteVehicle = async () => {
     try {
-      
-      const result = await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`);
-      console.log(result);
+      await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`);
       setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
-      console.log(error);
+      console.log("ERROR");
     }
   };
 
@@ -91,7 +88,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
           <Tbody>
             {vehicle.map((item, i) => (
               <Tr key={i}>
-                <Td>{i+100}</Td>
+                <Td>{(i + 1).toString().padStart(2, '0')}</Td>
                 <Td>{item.identificacion}</Td>
                 <Td>{item.tipoVehiculo}</Td>
                 <Td>{item.marca}</Td>
@@ -126,7 +123,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       titleModal={"Actualizar vehículo actual"}
       showHeader={true}
       showCloseButton={true}
-      changePosition={"start"}
+      changeposition={"start"}
       >
         <ContainInfoModal>
           <EditFormVehicle getVehicle={idVehicle}/>
@@ -138,7 +135,7 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       status={handleRemarks}
       changeStatus={setHandleRemarks}
       titleModal={"Observaciones del vehículo"}
-      changePosition={"start"}
+      changeposition={"start"}
       showHeader={true}
       showCloseButton={true}
       >
@@ -154,10 +151,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
       status={handleDeleteVehicle}
       changeStatus={setHandleDeleteVehicle}
       titleModal={'Eliminar vehículo'}
-      changePosition={'start'}
+      changeposition={'start'}
       showHeader={true}
       showCloseButton={true}
-      changePadding={'0px'}
+      changepadding={'0px'}
       >
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este vehículo?</Paragraph>

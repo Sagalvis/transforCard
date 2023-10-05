@@ -10,22 +10,42 @@ const FormStaff = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [tipoRol, setTipoRol] = useState([]);
-
   const [selectRol, setSeletRol] = useState(0);
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear empleados */
   const handleSumit = async (e) => {
-    if (
-      identification === "" ||
-      nombres === "" ||
-      apellidos === "" ||
-      correo === "" ||
-      contraseña === "" ||
-      selectRol === ""
-    ) {
-      e.preventDefault();
-      alert("Por favor llenar todos los campos");
+    e.preventDefault(); // Evita que el formulario se envíe automáticamente
+    
+    const emptyFields = [];
+  
+    if (identification === "") {
+      emptyFields.push("Documento");
+    }
+  
+    if (nombres === "") {
+      emptyFields.push("Nombres");
+    }
+  
+    if (apellidos === "") {
+      emptyFields.push("Apellidos");
+    }
+  
+    if (correo === "") {
+      emptyFields.push("E-mail");
+    }
+  
+    if (contraseña === "") {
+      emptyFields.push("Contraseña");
+    }
+  
+    if (selectRol === 0) {
+      emptyFields.push("Tipo de rol");
+    }
+  
+    if (emptyFields.length > 0) {
+      const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}), se encuentra vacio`;
+      toast.warning(emptyFieldsMessage);
     } else {
       await axios
         .post(`${apiBaseBack}/postemployees`, {
@@ -39,18 +59,11 @@ const FormStaff = () => {
         .then((Response) => {
           console.log(Response.data);
         });
-
-        setTimeout(() => {
+        handleAlertRegisterEmployee();
+      setTimeout(() => {
         window.location.reload();        
       }, 1000);
     }
-    // /* Funcion que limpa los inputs */
-    // setIdentification("");
-    // setNombres("");
-    // setApellidos("") ;
-    // setCorreo("");
-    // setContraseña("");
-    // setSeletRol(0);
   };
 
   useEffect(() => {
@@ -81,28 +94,32 @@ const FormStaff = () => {
             </Select>
           </ContentInput>
 
+
           <ContentInput className="display">
-            <Input type="text" 
+            <Input
+            type="text" 
+            placeholder="Nombres"
+            value={nombres}
+            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" />
+            
+            <Input
+            type="text"
+            placeholder="Apellidos" 
+            value={apellidos}
+            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
+            autoComplete="off" />
+          </ContentInput>
+
+          <ContentInput className="display">
+            <Input
+            type="text" 
             placeholder="Documento" 
             value={identification}
             onChange={(e)=> setIdentification(e.target.value.replace(/[^0-9]/g, ''))}
             autoComplete="off" />
           </ContentInput>
 
-          <ContentInput className="display">
-
-            <Input type="text" 
-            placeholder="Nombres"
-            value={nombres}
-            onChange={(e)=> setNombres(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-            autoComplete="off" />
-            
-            <Input type="text"
-            placeholder="Apellidos" 
-            value={apellidos}
-            onChange={(e)=> setApellidos(e.target.value.replace(/[^a-zA-Z\s]/g, '').toLowerCase())}
-            autoComplete="off" />
-          </ContentInput>
 
           <ContentInput>
             <Input
@@ -131,7 +148,7 @@ const FormStaff = () => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={() => {handleSumit(); handleAlertRegisterEmployee();}}>Registrar</BtnRegister>
+        <BtnRegister onClick={handleSumit}>Registrar</BtnRegister>
       </ButtonRegister>
 
 

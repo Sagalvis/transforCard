@@ -1,234 +1,53 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { Button } from "../../main/archiveTable/tableInventory/styledTableInventory";
 import { toast, ToastContainer } from 'react-toastify'
 
 const FormInventory = () => {
-  //Varibles de estado para crear un producto
-  const [nombre, setNombre] = useState("");
-  const [costo, setCosto] = useState("");
-  const [cantidadComprada, setCantidadComprada] = useState("");
-  const [precioUnitario, setPrecioUnitario] = useState("");
-  const [cantidadStock, setCantidadStock] = useState("");
-  const [tipoMedida, setTipoMedida] = useState([]);
-  const [tipoProducto, setTipoProducto] = useState([]);
-  const [selectMedida, setSelectMedida] = useState("");
-  const [selectProducto, setSelectProducto] = useState("");
-  //Variable de estado para crear servicio
+
   const [ordenServicio, setOrdenServicio] = useState("");
   const [nombreServicio, setNombreServicio] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precioServicio, setPrecioServicio] = useState("");
   const [tiempoEstimado, setTiempoEstimado] = useState("");
-  //Variable de estado para cambiar vista de item
-  const [showItem, setShowItem] = useState(true);
-
-  //Funcion para cambiar de inputs
-  const handleClickButton = (value) => {
-    if (value === "producto") {
-      setShowItem(true);
-    } else if (value === "servicio") {
-      setShowItem(false);
-    }
-  };
-
-  //Funcion para crear un producto
+  const [selectedImage, setSelectedImage] = useState(null);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-  const handletSumitProduct = async (e) => {
+
+  const handleSumitService = async (e) => {
     try {
       e.preventDefault();
       toast.warning('Por favor completar todos los campos requeridos.');
     } catch {
-      await axios
-        .post(`${apiBaseBack}/postinventory`, {
-          nombre: nombre,
-          costo: parseInt(costo),
-          cantidad_comprada: parseInt(cantidadComprada),
-          precio_unitario: parseInt(precioUnitario),
-          cantidad_en_stock: parseInt(cantidadStock),
-          id_medida: selectMedida,
-          id_producto: selectProducto,
-        })
-        .then((Response) => {
-          console.log(Response.data);
-        });
+      if (
+        nombreServicio === "" ||
+        descripcion === "" ||
+        precioServicio === "" ||
+        tiempoEstimado === ""
+      ) {
+        return;
+      }
+      const formData = new FormData();
+      formData.append("id_orden", ordenServicio);
+      formData.append("nombre_serv", nombreServicio);
+      formData.append("descripcion", descripcion);
+      formData.append("precio", parseInt(precioServicio));
+      formData.append("tiempo_estimado", tiempoEstimado);
+      formData.append("ruta_img", selectedImage);
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+      await axios.post(`${apiBaseBack}/postservice`, formData);
     }
   };
 
-  const handleSumitService = async (e) => {
-    e.preventDefault();
-    if (
-      nombreServicio === "" ||
-      descripcion === "" ||
-      precioServicio === "" ||
-      tiempoEstimado === ""
-    ) {
-      e.preventDefault();
-      toast.warning('Por favor completar todos los campos requeridos.');
-    } else {
-      await axios.post(`${apiBaseBack}/postservice`, {
-        id_orden: ordenServicio,
-        nombre_serv: nombreServicio,
-        descripcion: descripcion,
-        precio: parseInt(precioServicio),
-        tiempo_estimado: tiempoEstimado,
-      });
-    }
-  };
-
-  /* Funcion que limpa los inputs */
-
-  useEffect(() => {
-    const fetchdata = async () => {
-      const responseMedida = await axios.get(`${apiBaseBack}/tipomedida`);
-      setTipoMedida(responseMedida.data);
-      const responseProducto = await axios.get(
-        `${apiBaseBack}http://localhost:3005/tipoproducto`
-      );
-      setTipoProducto(responseProducto.data);
-    };
-    fetchdata();
-  }, []);
 
   const handleAlertCreateService = () => {
     toast.success('Servicio creado satisfactoriamente.');
   };
 
-  const handleAlertCreateProduct = () => {
-    toast.success('Producto creado satisfactoriamente.');
-  };
   return (
     <>
       <ContainForm>
         <Form>
-          <ContentInput className="display">
-            <Button
-              className="btn"
-              onClick={() => handleClickButton("servicio")}
-            >
-              Servicio
-            </Button>
-            <Button
-              className="btn"
-              onClick={() => handleClickButton("producto")}
-            >
-              Producto
-            </Button>
-          </ContentInput>
-          {showItem && (
-            <>
-              <ContentInput>
-                <Select
-                  value={selectProducto}
-                  onChange={(e) => setSelectProducto(e.target.value)}
-                >
-                  <Option value="0">-Seleccione tipo de producto-</Option>
-                  {tipoProducto.map((item, index) => (
-                    <Option key={index} value={item.id_producto}>
-                      {item.tipo_producto}
-                    </Option>
-                  ))}
-                </Select>
-              </ContentInput>
-
-              <ContentInput>
-                <Input
-                  type="text"
-                  value={nombre}
-                  onChange={(e) =>
-                    setNombre(
-                      e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
-                    )
-                  }
-                  placeholder="Nombre del producto"
-                  autoComplete="off"
-                  required={true}
-                  maxLength={20}
-                />
-              </ContentInput>
-
-              <ContentInput>
-                <Select
-                  value={selectMedida}
-                  onChange={(e) => setSelectMedida(e.target.val)}
-                >
-                  <Option value="0">-Seleccione tipo de medida-</Option>
-                  {tipoMedida.map((item, index) => (
-                    <Option key={index} value={item.id_medida}>
-                      {item.tipo_medida}
-                    </Option>
-                  ))}
-                </Select>
-              </ContentInput>
-
-              <ContentInput className="display">
-                <Input
-                  className="width"
-                  type="text"
-                  value={costo}
-                  onChange={(e) =>
-                    setCosto(e.target.value.replace(/[^0-9]/g, ""))
-                  }
-                  placeholder="Costo"
-                  autoComplete="off"
-                  required={true}
-                  maxLength={20}
-                />
-                <Input
-                  className="input-display"
-                  type="text"
-                  value={precioUnitario}
-                  onChange={(e) =>
-                    setPrecioUnitario(e.target.value.replace(/[^0-9]/g, ""))
-                  }
-                  placeholder="Precio unitario"
-                  maxLength={10}
-                  autoComplete="off"
-                  required={true}
-                />
-              </ContentInput>
-
-              <ContentInput>
-                <Input
-                  type="text"
-                  value={cantidadComprada}
-                  onChange={(e) =>
-                    setCantidadComprada(e.target.value.replace(/[^0-9]/g, ""))
-                  }
-                  placeholder="Cantidad en comprada"
-                  autoComplete="off"
-                  required={true}
-                />
-              </ContentInput>
-
-              <ContentInput>
-                <Input
-                  type="text"
-                  value={cantidadStock}
-                  onChange={(e) =>
-                    setCantidadStock(e.target.value.replace(/[^0-9]/g, ""))
-                  }
-                  placeholder="Cantidad en stock"
-                  autoComplete="off"
-                  required={true}
-                />
-              </ContentInput>
-              <ButtonRegister className="gap">
-                {/* <BtnRegister className="btn_red">Cancelar</BtnRegister> */}
-                <BtnRegister onClick={() => {handletSumitProduct(); handleAlertCreateProduct();}}>
-                  Crear producto
-                </BtnRegister>
-              </ButtonRegister>
-            </>
-          )}
-          {!showItem && (
-            <>
               <ContentInput>
                 <Input
                   type="text"
@@ -238,7 +57,7 @@ const FormInventory = () => {
                   }
                   placeholder="ID servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -252,7 +71,7 @@ const FormInventory = () => {
                   }
                   placeholder="Nombre del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -264,7 +83,7 @@ const FormInventory = () => {
                   }
                   placeholder="Precio del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -276,9 +95,19 @@ const FormInventory = () => {
                       e.target.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
                     )
                   }
-                  placeholder="Tiempo estidamdo del servicio"
+                  placeholder="Tiempo estimado del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
+                />
+              </ContentInput>
+              <ContentInput>
+                <Input
+                  type="file"
+                  id="file"
+                  name="file"
+                  onChange={(e) => setSelectedImage(e.target.files[0])}
+                  placeholder="Agregar imagen"
+                  required
                 />
               </ContentInput>
               <ContentInput>
@@ -288,7 +117,7 @@ const FormInventory = () => {
                   onChange={(e) => setDescripcion(e.target.value)}
                   placeholder="Descripción del servicio"
                   autoComplete="off"
-                  required={true}
+                  required
                 />
               </ContentInput>
               <ButtonRegister className="gap">
@@ -296,14 +125,11 @@ const FormInventory = () => {
                   Crear servicio
                 </BtnRegister>
               </ButtonRegister>
-            </>
-          )}
         </Form>
       </ContainForm>
-
       <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
+        autoClose={1000}
+        hideProgressBar={true}
       />
     </>
   );
@@ -311,10 +137,7 @@ const FormInventory = () => {
 
 export default FormInventory;
 
-// Estilos de los inputs
-
 export const ContainForm = styled.div`
-  /* background-color: red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -331,6 +154,7 @@ export const ContentInput = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-bottom: 2%;
 
   &.display {
@@ -363,9 +187,7 @@ export const Select = styled.select`
   }
 `;
 
-export const Option = styled.option`
-  /* background-color: red; */
-`;
+export const Option = styled.option``;
 
 export const Input = styled.input`
   width: 100%;
