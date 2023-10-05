@@ -8,7 +8,6 @@ export const deleteCustomer = async (req, res) => {
   try {
     const { identificacion } = req.params;
     const [vehiculo] = await pool.query("SELECT * FROM vehiculo WHERE identificacion = ?",[identificacion])
-    console.log(vehiculo.length > 0)
     if(vehiculo.length > 0){
       return res.status(404).json({
         message:"No se puede eliminar el registro porque tiene un vehiculo"})
