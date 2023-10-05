@@ -250,7 +250,7 @@ const postOrdenServiceCliente = useCallback (async () => {
               <Tr key={i}>
                 <Td>{(resultsCustomer.length - i).toString().padStart(2,'0')}</Td>
                 <Td>{item.tipoDocumento}</Td>
-                <Td>{item.identificacion}</Td>
+                <Td>{item.identificacion.toLocaleString()}</Td>
                 <Td>{item.nombre}</Td>
                 <Td>{item.apellido}</Td>
                 <Td className="email">{item.correo}</Td>

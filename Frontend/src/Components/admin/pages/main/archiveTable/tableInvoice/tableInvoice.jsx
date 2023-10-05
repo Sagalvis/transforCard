@@ -166,7 +166,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
               <Th>Apellidos</Th>
               <Th>ID Orden</Th>
               <Th>Fecha de emisión</Th>
-              <Th>Cantidad pagada</Th>
+              <Th>Total a pagar</Th>
               <Th>Estado de pago</Th>
               <Th>Opciones</Th>
             </Tr>
@@ -175,7 +175,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
             {resultsInvoice.map((item, i) => (
               <Tr key={i}>
                 <Td>{item.id_factura}</Td>
-                <Td>{item.identificacion}</Td>
+                <Td>{item.identificacion.toLocaleString()}</Td>
                 <Td>{item.nombre}</Td>
                 <Td>{item.apellido}</Td>
                 <Td>{item.id_orden}</Td>
