@@ -17,8 +17,8 @@ const FormClient = () => {
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
-  const handletSumit = async () => {
-    const emptyFields = [];
+const handletSumit = async () => {
+  const emptyFields = [];
 
   if (identification === "") {
     emptyFields.push("Documento");
@@ -34,6 +34,12 @@ const FormClient = () => {
 
   if (correo === "") {
     emptyFields.push("E-mail");
+  } else {
+    // Validación de correo electrónico con una expresión regular
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(correo)) {
+      emptyFields.push("E-mail inválido");
+    }
   }
 
   if (direccion === "") {
@@ -53,25 +59,25 @@ const FormClient = () => {
   }
 
   if (emptyFields.length > 0) {
-    const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}) se encuentra vacio.`;
+    const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}) se encuentra vacío o el correo es inválido.`;
     toast.warning(emptyFieldsMessage);
-    } else {
-      await axios.post(`${apiBaseBack}/postcustomer`, {
-        identificacion: identification,
-        nombre: nombres,
-        apellido: apellidos,
-        correo: correo,
-        direccion: direccion,
-        barrio: barrio,
-        tel: telefono,
-        idtipo_documento: selectDocument,
-      });
-      handleAlert();
-      setTimeout(() => {
-        window.location.reload();
-      }, 900);
-    }
-  };
+  } else {
+    await axios.post(`${apiBaseBack}/postcustomer`, {
+      identificacion: identification,
+      nombre: nombres,
+      apellido: apellidos,
+      correo: correo,
+      direccion: direccion,
+      barrio: barrio,
+      tel: telefono,
+      idtipo_documento: selectDocument,
+    });
+    handleAlert();
+    setTimeout(() => {
+      window.location.reload();
+    }, 900);
+  }
+};
 
   useEffect(() => {
     const getdocumentdata = async () => {
@@ -203,7 +209,6 @@ const FormClient = () => {
               value={correo}
               onChange={(e) => setCorreo(e.target.value.toLowerCase())}
               required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
           </ContentInput>
         </Form>

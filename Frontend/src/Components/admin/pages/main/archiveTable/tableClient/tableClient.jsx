@@ -162,9 +162,9 @@ const postOrdenServiceCliente = useCallback (async () => {
     }
   } catch (error) {
     if (error.response) {
-      toast.error("Errorrrr: " + error.response.data.message);
+      toast.error("Error: " + error.response.data.message);
     } else if (error.request) {
-      toast.error("Error: " + error.request);
+      toast.error("QUITAR: " + error.request);
     } 
   }
 
