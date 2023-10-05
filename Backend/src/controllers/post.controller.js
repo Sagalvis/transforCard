@@ -98,22 +98,17 @@ export const postLoginEmployees = async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
     const [rows] = await pool.query("SELECT rol_empleado.rol, empleado.* FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol where correo = ?", [correo]);
-    
     if (rows.length > 0) {
       const compassword = await bcrypt.compare(contraseña, rows[0].contraseña);
-
       if (compassword) {
         const token = jwt.sign({rol:rows[0].rol, id: rows[0].id_empleado, nombre: rows[0].nombre , apellido: rows[0].apellido, correo: rows[0].correo }, SECRET_KEY, {
           expiresIn: "1h",
         });
-        
         // Envía el token si la contraseña es correcta
         res.status(200).json({ token });
-        
       } else {
         // Envía un mensaje de error si la contraseña es incorrecta
         res.status(401).json({ error: "Contraseña incorrecta" });
-
       }
     } else {
       // Envía un mensaje de error si el usuario no existe
