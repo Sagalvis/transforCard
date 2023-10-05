@@ -25,7 +25,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
 
   const deleteServiceOrder = async() => {
     try {
-      const result = await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiderOrder.id_servicio_cliente}`)
+      const result = await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiderOrder.id_servicio_cliente}`)
       console.log(result);
       setMapeo(mapeo.filter((v) => v.id_servicio_cliente !== delServiderOrder.id_servicio_cliente));
     } catch (error) {

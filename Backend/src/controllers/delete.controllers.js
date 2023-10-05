@@ -138,8 +138,7 @@ export const deleteServiceInventory = async (req, res) => {
 
 export const deleteServiceCustomer = async (req, res) => {
   try {
-    const { identificacion} = req.params;
-    const { id_servicio_cliente } = req.body;
+    const { identificacion, id_servicio_cliente} = req.params;
     const [rows] = await pool.query("SELECT * FROM factura WHERE id_servicio_cliente = ?", [id_servicio_cliente])
     if(rows.length>0){
       return res.status(404).json({message:"No se puede eliminar el registro porque tiene una factura"})
@@ -161,11 +160,16 @@ export const deleteServiceCustomer = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: "Error en el servidor mmm",
+      message: "Error en el servidor",
     });
   }
 };
+//--------------------PRUEBAS AQUÍ----------------------------------------------
 
+
+
+
+//--------------------FIN PRUEBAS-----------------------------------------------
 
 /* Consulta para eliminar ordenes de la tabla orden de servicio */
 
@@ -187,7 +191,7 @@ export const deleteServiceOrder = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: "Error en el servidor",
+      message: "Error en el servidor77",
     });
   }
 };

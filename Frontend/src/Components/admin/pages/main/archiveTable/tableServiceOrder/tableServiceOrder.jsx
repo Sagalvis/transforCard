@@ -52,8 +52,7 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceCustomer = async () => {
     try {
-      const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-      await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiceCustomer.id_servicio_cliente}`);
+      await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiceCustomer.id_servicio_cliente}`);
 
       setTimeout(() => {
         window.location.reload();
