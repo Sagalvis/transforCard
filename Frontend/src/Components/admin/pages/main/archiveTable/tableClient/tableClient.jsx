@@ -412,7 +412,7 @@ const postOrdenServiceCliente = useCallback (async () => {
             {ordServicio.map((item, index) => (
               <CardService key={index}>
                 <Cuadro>
-                  <Img src={`http://localhost:3005/uploads/${item.ruta_img}`} />
+                  <Img src={`${apiBaseBack}/uploads/${item.ruta_img}`} />
                 </Cuadro>
                 <Title>
                   <Paragraph className="size">{item.nombre_serv}</Paragraph>
