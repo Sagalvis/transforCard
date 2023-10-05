@@ -56,6 +56,8 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [handleOrders, setHandleOrders] = useState(false);
   // Variable de estado para capturar id del usuario y eliminarlo
   const [selectedItem, setSelectedItem] = useState(null);
+
+  const [error, setError] = useState(null);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
@@ -135,12 +137,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       toast.error("Error");
     }
   };
-
-  // Funcion que indica si el cliente tiene un vehículo vinculado
-  const handleDeleteVehicleCustomer = () => {
-    setCustomer();
-  };
-  
+    
   const deleteCustomer = useCallback(async () => {
     if (!customer) {
       return;
@@ -209,8 +206,8 @@ const postOrdenServiceCliente = useCallback (async () => {
       await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`);
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      setError(err.message)
     }
   };
 
@@ -228,15 +225,19 @@ const postOrdenServiceCliente = useCallback (async () => {
   const handleAlert = () => {
     toast.success("Cliente eliminado con éxito");
   };
-
-  // const handleAlertWithVehicle = () => {
-  //   toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
-  // };
   const handleAlertService = () => {
     toast.success("Se añadio el servicio al cliente seleccionado.");
   };
+
+  if (error){
+    toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
+    setTimeout(() => {
+      window.location.reload();
+    }, 800)
+  }
   return (
     <>
+
       {/* Controladores */}
 
       <ContainControls>
@@ -264,6 +265,7 @@ const postOrdenServiceCliente = useCallback (async () => {
         <Table>
           <Thead>
             <Tr>
+              <Th>ID</Th>
               <Th>Tipo</Th>
               <Th>ID Cliente</Th>
               <Th>Nombres</Th>
@@ -418,8 +420,7 @@ const postOrdenServiceCliente = useCallback (async () => {
             <Btn_Delete
               onClick={() => {
                 setHandleDelete(!handleDelete);
-                deleteClient();
-                handleDeleteVehicleCustomer();
+                deleteClient('customer-delete');
               }}
             >
               Eliminar
@@ -483,7 +484,7 @@ const postOrdenServiceCliente = useCallback (async () => {
       </Modals>
 
       <ToastContainer 
-      autoClose="1000" 
+      autoClose="500" 
       hideProgressBar={true} />
     </>
   );

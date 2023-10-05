@@ -63,6 +63,7 @@ const Main = ({showTableProfile, showTableClient,showTableHome, showTableStaff,s
           <TableInvoice 
           deletInvoice={"fa-solid fa-trash-can"}
           printInvoice={"fa-solid fa-eye"}
+          payPayu={"fa-solid fa-money-bill-1-wave"}
           />
         )}
         {showTableHome && (
