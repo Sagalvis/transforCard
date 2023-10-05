@@ -62,6 +62,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [ordServicio, setOrdService] = useState([]);
   const [idOrden, setIdOrden] = useState([]);
   const [todo, setTodo] = useState([]);
+  
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //Función de busqueda
@@ -135,6 +136,40 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
     }
   };
 
+  // Funcion que indica si el cliente tiene un vehículo vinculado
+  const handleDeleteVehicleCustomer = () => {
+    setCustomer();
+  };
+  
+  const deleteCustomer = useCallback(async () => {
+    if (!customer) {
+      return;
+    }
+  
+    try {
+      const response = await axios.delete(`${apiBaseBack}/deletecustomer/:identificacion`, {
+        data: { identificacion: customer } // Cambia 'id4' por 'customer'
+      });
+  
+      if (response.status === 200) {
+        alert('Cliente eliminado exitosamente');
+      } else if (response.status === 404) {
+        alert('Error: Datos inválidos');
+      } else {
+        alert('Error desconocido');
+      }
+    } catch (error) {
+      if (error.response) {
+        alert('Error: ' + error.response.data.message);
+      } else if (error.request) {
+        alert('Error de solicitud: ' + error.request);
+      } else {
+        alert('Error desconocido: ' + error.message);
+      }
+    }
+  }, [customer]);
+
+
 // Función para capturar los datos
 const handleAddOrdenService = (item) => {
   setIdOrden(item.id_orden);
@@ -161,7 +196,7 @@ const postOrdenServiceCliente = useCallback (async () => {
     }
   } catch (error) {
     if (error.response) {
-      toast.error("Error: " + error.response.data.message);
+      toast.error("Errorrrr: " + error.response.data.message);
     } else if (error.request) {
       toast.error("Error: " + error.request);
     } 
@@ -180,8 +215,9 @@ const postOrdenServiceCliente = useCallback (async () => {
   };
 
   useEffect(() => {
-    if (idOrden) {
+    if (idOrden || customer) {
       postOrdenServiceCliente();
+      deleteCustomer();
     }
     getCustomer();
     getServices();
@@ -383,6 +419,7 @@ const postOrdenServiceCliente = useCallback (async () => {
               onClick={() => {
                 setHandleDelete(!handleDelete);
                 deleteClient();
+                handleDeleteVehicleCustomer();
               }}
             >
               Eliminar
@@ -432,7 +469,6 @@ const postOrdenServiceCliente = useCallback (async () => {
                     <Button
                       onClick={() => {
                         handleAddOrdenService(item);
-                        
                       }}
                       className="no-margin"
                     >
