@@ -62,6 +62,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [ordServicio, setOrdService] = useState([]);
   const [idOrden, setIdOrden] = useState([]);
   const [todo, setTodo] = useState([]);
+  
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //Función de busqueda
@@ -161,7 +162,7 @@ const postOrdenServiceCliente = useCallback (async () => {
     }
   } catch (error) {
     if (error.response) {
-      toast.error("Error: " + error.response.data.message);
+      toast.error("Errorrrr: " + error.response.data.message);
     } else if (error.request) {
       toast.error("Error: " + error.request);
     } 
@@ -174,13 +175,13 @@ const postOrdenServiceCliente = useCallback (async () => {
       await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`);
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado, factura y/o servicio activo.');
     }
   };
 
   useEffect(() => {
-    if (idOrden) {
+    if (idOrden || customer) {
       postOrdenServiceCliente();
     }
     getCustomer();
@@ -192,15 +193,12 @@ const postOrdenServiceCliente = useCallback (async () => {
   const handleAlert = () => {
     toast.success("Cliente eliminado con éxito");
   };
-
-  // const handleAlertWithVehicle = () => {
-  //   toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
-  // };
   const handleAlertService = () => {
     toast.success("Se añadio el servicio al cliente seleccionado.");
   };
   return (
     <>
+
       {/* Controladores */}
 
       <ContainControls>
@@ -228,6 +226,7 @@ const postOrdenServiceCliente = useCallback (async () => {
         <Table>
           <Thead>
             <Tr>
+              <Th>ID</Th>
               <Th>Tipo</Th>
               <Th>ID Cliente</Th>
               <Th>Nombres</Th>
@@ -382,7 +381,7 @@ const postOrdenServiceCliente = useCallback (async () => {
             <Btn_Delete
               onClick={() => {
                 setHandleDelete(!handleDelete);
-                deleteClient();
+                deleteClient('customer-delete');
               }}
             >
               Eliminar
@@ -432,7 +431,6 @@ const postOrdenServiceCliente = useCallback (async () => {
                     <Button
                       onClick={() => {
                         handleAddOrdenService(item);
-                        
                       }}
                       className="no-margin"
                     >
@@ -448,7 +446,9 @@ const postOrdenServiceCliente = useCallback (async () => {
 
       <ToastContainer 
       autoClose="1000" 
-      hideProgressBar={true} />
+      hideProgressBar={false}
+      theme="dark"
+      pauseOnHover/>
     </>
   );
 };

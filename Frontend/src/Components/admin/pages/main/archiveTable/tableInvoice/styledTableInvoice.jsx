@@ -151,6 +151,9 @@ export const ButtonOptions = styled.div`
   .fa-eye {
     font-size: 15px;
   }
+  .fa-money-bill-1-wave{
+    font-size: 15px;
+  }
 `;
 
 // Boton de Opciones independiente del de crear un cliente.
