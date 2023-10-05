@@ -56,8 +56,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [handleOrders, setHandleOrders] = useState(false);
   // Variable de estado para capturar id del usuario y eliminarlo
   const [selectedItem, setSelectedItem] = useState(null);
-
-  const [error, setError] = useState(null);
   // Variable de estado para filtrar busqueda
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
@@ -177,7 +175,7 @@ const postOrdenServiceCliente = useCallback (async () => {
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
     } catch (err) {
-      setError(err.message)
+      toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
     }
   };
 
@@ -197,13 +195,6 @@ const postOrdenServiceCliente = useCallback (async () => {
   const handleAlertService = () => {
     toast.success("Se añadio el servicio al cliente seleccionado.");
   };
-
-  if (error){
-    toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado.');
-    setTimeout(() => {
-      window.location.reload();
-    }, 800)
-  }
   return (
     <>
 
