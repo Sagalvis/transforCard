@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const FormClient = () => {
   const [identification, setIdentificacion] = useState("");
@@ -18,6 +18,13 @@ const FormClient = () => {
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
   const handletSumit = async () => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  if (!emailPattern.test(correo)) {
+    toast.warning("El correo electronico ingresado no es valido.");
+    return; // Salir de la función si el correo es inválido
+  }
+
     const emptyFields = [];
 
   if (identification === "") {
@@ -48,7 +55,7 @@ const FormClient = () => {
     emptyFields.push("Teléfono");
   }
 
-  if (selectDocument === "") {
+  if (selectDocument === 0) {
     emptyFields.push("Tipo de documento");
   }
 
@@ -69,7 +76,7 @@ const FormClient = () => {
       handleAlert();
       setTimeout(() => {
         window.location.reload();
-      }, 900);
+      }, 1000);
     }
   };
 
@@ -212,11 +219,6 @@ const FormClient = () => {
       <ButtonRegister>
         <BtnRegister onClick={handletSumit}>Registrar</BtnRegister>
       </ButtonRegister>
-
-      <ToastContainer
-      autoClose={1000}
-      hideProgressBar={true}
-      />
     </>
   );
 };

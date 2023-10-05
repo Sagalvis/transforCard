@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import {toast, ToastContainer} from 'react-toastify'
+import {toast} from 'react-toastify'
 
 const FormVehicle = ({getCustomer3}) => {
   const [matricula, setMatricula] = useState("");
@@ -194,12 +194,6 @@ const FormVehicle = ({getCustomer3}) => {
       <ButtonRegister>
         <BtnRegister onClick={ () => {handletSumit(); handleAlert();}}>Crear vehículo</BtnRegister>
       </ButtonRegister>
-
-
-      <ToastContainer 
-      hideProgressBar={true}
-      autoClose={1000}
-      />
     </>
   );
 };

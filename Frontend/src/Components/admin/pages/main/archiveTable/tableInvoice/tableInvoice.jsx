@@ -253,11 +253,11 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
         </ContainInfoModal>
       </Modals>
 
-
       <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
-      />
+      autoClose="1000" 
+      hideProgressBar={false}
+      theme="dark"
+      pauseOnHover/>
     </>
   );
 };

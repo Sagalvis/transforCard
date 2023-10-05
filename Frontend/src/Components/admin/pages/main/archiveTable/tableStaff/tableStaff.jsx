@@ -138,10 +138,12 @@ const TableStaff = ({editStaff, deletStaff}) => {
           </Tbody>
         </Table>
       </ContainTable>
+      
       <ToastContainer 
-      autoClose={300}
-      hideProgressBar={true}
-      />
+      autoClose="1000" 
+      hideProgressBar={false}
+      theme="dark"
+      pauseOnHover/>
 
       {/* Modal editar empleado  */}
       <Modals

@@ -23,7 +23,7 @@ const EditFormClient = ({getCustomer}) => {
     }
 }, [getCustomer]);
   /* Funcion para crear clientes */
-  const handletSumit = async (e) => {
+  const handletSumit = async () => {
     if (
       nombre === "" ||
       apellido === "" ||
@@ -113,10 +113,6 @@ const EditFormClient = ({getCustomer}) => {
       <ButtonRegister>
         <BtnRegister onClick={() => {handletSumit(); handleAlert();}}>Actualizar datos</BtnRegister>
       </ButtonRegister>
-
-      <ToastContainer
-      autoClose='1000' 
-      hideProgressBar='true'/>
     </>
   );
 };

@@ -139,12 +139,6 @@ const EditFormStaff = ({getEmpleado}) => {
       <ButtonRegister>
         <BtnRegister onClick={() => {handletSumit(); handleAlertUpdateEmployee();}}>Actualizar</BtnRegister>
       </ButtonRegister>
-
-
-      <ToastContainer 
-      autoClose={1000}
-      hideProgressBar={true}
-      />
     </>
   );
 };
