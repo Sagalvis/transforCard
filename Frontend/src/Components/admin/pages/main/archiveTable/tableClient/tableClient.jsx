@@ -447,7 +447,8 @@ const postOrdenServiceCliente = useCallback (async () => {
       <ToastContainer 
       autoClose="1000" 
       hideProgressBar={false}
-      theme="dark"/>
+      theme="dark"
+      pauseOnHover/>
     </>
   );
 };
