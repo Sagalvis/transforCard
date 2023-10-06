@@ -7,7 +7,11 @@ export const isAuth = async (req, res, next) => {
     try {
         const validaToken = jwt.verify(token, SECRET_KEY);
         console.log("validacion", validaToken);
-        next()
+        if (validaToken.role === 'administrador') {
+            next();
+        } else {
+            return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta.' });
+        }
     } catch (error) {
         return res.status(401).json({ error: error.message });
     }
