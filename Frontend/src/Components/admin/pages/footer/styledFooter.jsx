@@ -7,8 +7,7 @@ export const ContainFooter = styled.div`
   padding: 0 24px;
   box-sizing: border-box;
   border-top: solid 1px #e5e4e4;
-
-  height: 8.3%;
+  height: 8.3%; //fix it
 `;
 
 export const Copyright = styled.div`
