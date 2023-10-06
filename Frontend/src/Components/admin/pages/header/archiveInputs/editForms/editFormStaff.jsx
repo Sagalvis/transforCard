@@ -2,18 +2,20 @@
 import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify'
+import { toast} from 'react-toastify'
 
 const EditFormStaff = ({getEmpleado}) => {
   const [nombre, setNombres] = useState("");
   const [apellido, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [contraseña, setPass] = useState("");
+  const [rol, setRol] = useState("")
   const [tipoRol, setTipoRol] = useState([]);
   const [selectRol, setSeletRol] = useState(0);
 
   useEffect ( () =>{
     if(getEmpleado){
+      setRol(getEmpleado.id_rol)
       setNombres(getEmpleado.nombre);
       setApellidos(getEmpleado.apellido);
       setCorreo(getEmpleado.correo);
@@ -45,7 +47,7 @@ const EditFormStaff = ({getEmpleado}) => {
           apellido,
           correo,
           contraseña,
-          id_rol: selectRol
+          id_rol: selectRol || rol
         })
         .then((Response) => {
           console.log(Response.data);
@@ -64,15 +66,12 @@ const EditFormStaff = ({getEmpleado}) => {
     evt.target.value = input.replace(/[^\d]/g, "");
   }
 
-  const handleAlertUpdateEmployee = () => {
-    toast.success('Empleado actualizado con éxito.');
-  };
   return (
     <>
       <ContainForm>
         <Form>
         <ContentInput>
-            <Select value={selectRol} 
+            <Select value={selectRol || rol} 
             onChange={(e)=>setSeletRol(e.target.value)} 
             >
               <Option value="0">-Seleccione el rol-</Option>
@@ -137,7 +136,7 @@ const EditFormStaff = ({getEmpleado}) => {
       </ContainForm>
 
       <ButtonRegister>
-        <BtnRegister onClick={() => {handletSumit(); handleAlertUpdateEmployee();}}>Actualizar</BtnRegister>
+        <BtnRegister onClick={() => {handletSumit();}}>Actualizar</BtnRegister>
       </ButtonRegister>
     </>
   );
