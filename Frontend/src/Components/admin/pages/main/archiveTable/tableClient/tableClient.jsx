@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Btn_Delete,
   ButtonDelete,
@@ -60,8 +60,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([]);
-  const [idOrden, setIdOrden] = useState([]);
-  const [todo, setTodo] = useState([]);
   
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
@@ -116,15 +114,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   };
 
   //funcion para trarer servicio_cliente para poder validar si ya existe
-  const getServiCliente = async () => {
-    try {
-      const getAll = await axios.get(`${apiBaseBack}/getAllServicesClient`);
-      setTodo(getAll.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
     setId2(item);
@@ -136,39 +125,21 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
     }
   };
 
-// Función para capturar los datos
-const handleAddOrdenService = (item) => {
-  setIdOrden(item.id_orden);
-};
 
 // Función para enviar los servicios del cliente
-const postOrdenServiceCliente = useCallback (async () => {
-  // No ejecutar la función si idOrden no está definido
-  if (!idOrden) {
-    return;
+const postOrdenServiceCliente = async (item) => {
+try {
+  const res = await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
+    identificacion: id4,
+    id_orden: item.id_orden
+  })
+  if (res.status === 200){
+    toast.success("Servicio agregado con exito");
   }
-  try {
-    const response = await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
-      identificacion: id4,
-      id_orden: idOrden,
-    });
-    // Verificar el estado de la respuesta
-    if (response.status === 200) {
-      handleAlertService();
-    } else if (response.status === 400) {
-      toast.error('IMPOSIBLE, el servicio ya se encuentra seleccionado.');
-    } else {
-      toast.error('No se puede ejecutar esta acción');
-    }
-  } catch (error) {
-    if (error.response) {
-      toast.error("Error: " + error.response.data.message);
-    } else if (error.request) {
-      toast.error("QUITAR: " + error.request);
-    } 
-  }
-
-}, [idOrden]);
+} catch (error) {
+  toast.error("Error. Servicio ya fue agregado");
+}
+};
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
@@ -181,21 +152,16 @@ const postOrdenServiceCliente = useCallback (async () => {
   };
 
   useEffect(() => {
-    if (idOrden || customer) {
-      postOrdenServiceCliente();
-    }
     getCustomer();
     getServices();
-    getServiCliente();
-  }, [setCustomer, setOrdService,setTodo,idOrden]);
+  }, [setCustomer, setOrdService]);
 
   // Funciones que contienen Alertas
   const handleAlert = () => {
     toast.success("Cliente eliminado con éxito");
   };
-  const handleAlertService = () => {
-    toast.success("Se añadio el servicio al cliente seleccionado.");
-  };
+
+
   return (
     <>
 
@@ -275,17 +241,7 @@ const postOrdenServiceCliente = useCallback (async () => {
                     </Buttons>
 
                     <Buttons
-                      onClick={() => {
-                        if (
-                          todo.identificacion == id4 &&
-                          todo.id_orden == idOrden
-                        ) {
-                          toast.info("Actualmente se encuentra registrado.");
-                        } else {
-                          setHandleOrders(!handleOrders);
-                          setId4(item.identificacion);
-                        }
-                      }}
+                      onClick={() => {setHandleOrders(!handleOrders); setId4(item.identificacion)}}
                       title="Crear orden de servicio"
                     >
                       <i className={orderService}></i>
@@ -429,10 +385,8 @@ const postOrdenServiceCliente = useCallback (async () => {
                   </Price>
                   <AddPlus>
                     <Button
-                      onClick={() => {
-                        handleAddOrdenService(item);
-                      }}
                       className="no-margin"
+                      onClick={() => postOrdenServiceCliente(item)}
                     >
                       <i className="fa-solid fa-square-plus"></i>
                     </Button>

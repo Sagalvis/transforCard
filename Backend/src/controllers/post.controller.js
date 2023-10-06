@@ -267,23 +267,24 @@ export const postOrdenService = async (req, res) => {
 
 export const postOrdenServiceCliente = async (req, res) => {
   try {
-    const { identificacion, id_orden } = req.body;
-    const [existingService] = await pool.query(
-      "SELECT * FROM servicio_cliente WHERE identificacion = ? AND id_orden = ?",
-      [identificacion, id_orden]
-    );
-
+    const {identificacion, id_orden} = req.body;
+    const [existingService] = await pool.query("SELECT * FROM servicio_cliente WHERE identificacion = ? AND id_orden = ?",[identificacion, id_orden]);
     if (existingService.length > 0) {
-      return res.status(400).json({
-        message: "El servicio ya está registrado",
-      });
+      return res.status(404).json({
+        message:"Error. El servicio ya existe"
+      })
+    }else {
+      const [rows] = await pool.query("INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?,?)",[identificacion,id_orden]);
+      res.status(200).json({
+        message: "Servicio agregado con exito"
+      })
     }
-    const [row] = await pool.query(
-      "INSERT INTO servicio_cliente (identificacion, id_orden) VALUES (?, ?)",
-      [identificacion, id_orden]
-    );
-    res.send(row);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+    });
+  }
 };
 
 export const postCreateFactura = async (req, res) => {
