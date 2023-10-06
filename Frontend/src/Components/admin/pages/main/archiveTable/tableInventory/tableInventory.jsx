@@ -68,6 +68,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
     try {
       await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
       handleAlertDeleteInventory();
+      
       setTimeout(() => {
         window.location.reload();
       }, 1000);

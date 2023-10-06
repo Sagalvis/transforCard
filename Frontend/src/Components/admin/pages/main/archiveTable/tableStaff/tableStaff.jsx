@@ -58,13 +58,10 @@ const TableStaff = ({editStaff, deletStaff}) => {
   const deleteStaff = async () => {
     try {
       await axios.delete(
-        `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`
-      );
-
+        `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`);
       handleAlertDeleteStaff();
-      setTimeout(() => {
-        window.location.reload()        
-      }, 500);
+
+      setEmployees(employees.filter((c) => c.id_empleado !== idempleado.id_empleado));
       
     } catch (error) {
       console.log(error);

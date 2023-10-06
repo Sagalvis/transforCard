@@ -139,10 +139,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       toast.error("Error. Servicio ya fue agregado");
     }
   };
+
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`);
+      await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`); 
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
     } catch (err) {
@@ -151,6 +152,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       );
     }
   };
+  
   useEffect(() => {
     getCustomer();
     getServices();
