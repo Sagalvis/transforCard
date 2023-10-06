@@ -157,13 +157,6 @@ export const deleteServiceCustomer = async (req, res) => {
     });
   }
 };
-//--------------------PRUEBAS AQUÍ----------------------------------------------
-
-
-
-
-//--------------------FIN PRUEBAS-----------------------------------------------
-
 /* Consulta para eliminar ordenes de la tabla orden de servicio */
 
 export const deleteServiceOrder = async (req, res) => {

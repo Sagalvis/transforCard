@@ -60,7 +60,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([]);
-  
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   //Función de busqueda
@@ -103,6 +103,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       console.log(error);
     }
   };
+  
   //Funcion para trae los servicios
   const getServices = async () => {
     try {
@@ -113,7 +114,6 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
     }
   };
 
-  //funcion para trarer servicio_cliente para poder validar si ya existe
   //Metodo para mostrar los vehiculos por la cedula
   const CapVehiculo = (item) => {
     setId2(item);
@@ -125,21 +125,20 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
     }
   };
 
-
-// Función para enviar los servicios del cliente
-const postOrdenServiceCliente = async (item) => {
-try {
-  const res = await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
-    identificacion: id4,
-    id_orden: item.id_orden
-  })
-  if (res.status === 200){
-    toast.success("Servicio agregado con exito");
-  }
-} catch (error) {
-  toast.error("Error. Servicio ya fue agregado");
-}
-};
+  // Función para enviar los servicios del cliente
+  const postOrdenServiceCliente = async (item) => {
+    try {
+      const res = await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
+        identificacion: id4,
+        id_orden: item.id_orden,
+      });
+      if (res.status === 200) {
+        toast.success("Servicio agregado con exito");
+      }
+    } catch (error) {
+      toast.error("Error. Servicio ya fue agregado");
+    }
+  };
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
@@ -147,10 +146,11 @@ try {
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
     } catch (err) {
-      toast.error('No se pudo eliminar el cliente porque contiene un vehículo registrado, factura y/o servicio activo.');
+      toast.error(
+        "No se pudo eliminar el cliente porque contiene un vehículo registrado, factura y/o servicio activo."
+      );
     }
   };
-
   useEffect(() => {
     getCustomer();
     getServices();
@@ -160,11 +160,8 @@ try {
   const handleAlert = () => {
     toast.success("Cliente eliminado con éxito");
   };
-
-
   return (
     <>
-
       {/* Controladores */}
 
       <ContainControls>
@@ -206,7 +203,9 @@ try {
           <Tbody>
             {resultsCustomer.map((item, i) => (
               <Tr key={i}>
-                <Td>{(resultsCustomer.length - i).toString().padStart(2,'0')}</Td>
+                <Td>
+                  {(resultsCustomer.length - i).toString().padStart(2, "0")}
+                </Td>
                 <Td>{item.tipoDocumento}</Td>
                 <Td>{item.identificacion.toLocaleString()}</Td>
                 <Td>{item.nombre}</Td>
@@ -241,7 +240,10 @@ try {
                     </Buttons>
 
                     <Buttons
-                      onClick={() => {setHandleOrders(!handleOrders); setId4(item.identificacion)}}
+                      onClick={() => {
+                        setHandleOrders(!handleOrders);
+                        setId4(item.identificacion);
+                      }}
                       title="Crear orden de servicio"
                     >
                       <i className={orderService}></i>
@@ -337,7 +339,7 @@ try {
             <Btn_Delete
               onClick={() => {
                 setHandleDelete(!handleDelete);
-                deleteClient('customer-delete');
+                deleteClient("customer-delete");
               }}
             >
               Eliminar
@@ -348,13 +350,13 @@ try {
 
       {/* Modal de orden de servicio */}
       <Modals
-      status={handleOrders}
-      changeStatus={setHandleOrders}
-      titleModal={'Selecciona el servicio requerido por el cliente'}
-      showCloseButton={true}
-      showHeader={true}
-      changeposition={'start'}
-      changewidth={'850px'}
+        status={handleOrders}
+        changeStatus={setHandleOrders}
+        titleModal={"Selecciona el servicio requerido por el cliente"}
+        showCloseButton={true}
+        showHeader={true}
+        changeposition={"start"}
+        changewidth={"850px"}
       >
         <TitleService>
           <Paragraph>Mantenimientos rápidos.</Paragraph>
@@ -398,11 +400,12 @@ try {
         </ContainInfoModal>
       </Modals>
 
-      <ToastContainer 
-      autoClose="1000" 
-      hideProgressBar={false}
-      theme="dark"
-      pauseOnHover/>
+      <ToastContainer
+        autoClose="1000"
+        hideProgressBar={false}
+        theme="dark"
+        pauseOnHover
+      />
     </>
   );
 };
