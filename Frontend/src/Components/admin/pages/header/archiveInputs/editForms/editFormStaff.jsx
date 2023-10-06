@@ -2,7 +2,7 @@
 import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const EditFormStaff = ({getEmpleado}) => {
   const [nombre, setNombres] = useState("");
@@ -11,7 +11,7 @@ const EditFormStaff = ({getEmpleado}) => {
   const [contraseña, setPass] = useState("");
   const [tipoRol, setTipoRol] = useState([]);
   const [selectRol, setSeletRol] = useState(0);
-
+  
   useEffect ( () =>{
     if(getEmpleado){
       setNombres(getEmpleado.nombre);
@@ -31,6 +31,8 @@ const EditFormStaff = ({getEmpleado}) => {
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
+    const token = localStorage.getItem('user')
+  const limpiar = token.replace(/"/g,"")
     if (
       nombre === "" ||
       apellido === "" ||
@@ -46,7 +48,12 @@ const EditFormStaff = ({getEmpleado}) => {
           correo,
           contraseña,
           id_rol: selectRol
-        })
+        },{
+          headers:{
+            Authorization:`${limpiar}`,
+          }
+        }
+        )
         .then((Response) => {
           console.log(Response.data);
           toast.success('Empleado actualizado con éxito.');
