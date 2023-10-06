@@ -53,7 +53,7 @@ if (!search) {
   const deleteServiceCustomer = async () => {
     try {
       await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiceCustomer.id_servicio_cliente}`);
-
+      
       setTimeout(() => {
         window.location.reload();
       }, 1000);

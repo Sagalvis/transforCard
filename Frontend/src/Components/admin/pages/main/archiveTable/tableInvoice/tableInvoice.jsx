@@ -118,11 +118,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const deleteInvoice = async () => {
     try {
       await axios.delete(`${apiBaseBack}/deleteinvoice/${delInvoice.id_factura}`);
-      // Alerta
       handleAlertDeleteInvoice();
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+
+      setInvoice(invoice.filter((c) => c.id_factura !== delInvoice.id_factura));
 
     } catch (error) {
       console.log("ERROR");

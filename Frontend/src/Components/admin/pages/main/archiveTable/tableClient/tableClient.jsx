@@ -139,6 +139,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       toast.error("Error. Servicio ya fue agregado");
     }
   };
+
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
@@ -151,6 +152,7 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       );
     }
   };
+  
   useEffect(() => {
     getCustomer();
     getServices();

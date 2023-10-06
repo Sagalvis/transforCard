@@ -50,9 +50,7 @@ const TableVehicleControl = ({deleteVehicleTable}) => {
     try {
       await axios.delete(`${apiBaseBack}/deletevehicle/${delVehicle.matricula}`);
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      setVehicle(vehicle.filter((c) => c.matricula !== delVehicle.matricula));
 
     } catch (error) {
       console.log(error);
