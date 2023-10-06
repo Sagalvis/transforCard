@@ -8,7 +8,7 @@ const postRouter = Router();
 postRouter.post('/postcustomer', controllpost.postCustomer);
 postRouter.post('/postemployees',isAuth,controllpost.postEmployees);
 postRouter.post('/postvehicle', controllpost.postVehicle);
-postRouter.post('/postLoginEmployees', controllpost.postLoginEmployees);
+postRouter.post('/postLoginEmployees',/* isAuth, */ controllpost.postLoginEmployees);
 postRouter.post('/postinventory', controllpost.postInventario);
 postRouter.post('/postinvoices', controllpost.postInvoices);
 postRouter.post('/postservice', controllimg.upload.single('file'), controllpost.postOrdenService);

@@ -6,9 +6,10 @@ import { pool } from "../dbconfig.js";
 
 export const deleteCustomer = async (req, res) => {
   try {
-    const { identificacion } = req.params;
+    const { identificacion, id_orden } = req.params;
 
     const [vehiculo] = await pool.query("SELECT * FROM vehiculo WHERE identificacion = ?",[identificacion])
+    const [orden_servicio] = await pool.query("SELECT * FROM servicio_cliente WHERE identificacion = ? AND id_orden = ?", [identificacion, id_orden])
     if(vehiculo.length > 0){
       return res.status(404).json({
         message:"No se puede eliminar el registro porque tiene un vehiculo"

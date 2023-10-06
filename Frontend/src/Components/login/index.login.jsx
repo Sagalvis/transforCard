@@ -43,6 +43,7 @@ const Login = () => {
   };
 
   const Log = async () => {
+    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
     let result = null;
     if (correo && !contraseña) {
       toast.warning('Por favor llenar el campo de contraseña.');
@@ -51,7 +52,7 @@ const Login = () => {
     } else if (correo && contraseña) {
       try {
         const response = await axios.post(
-          "http://localhost:3005/postLoginEmployees",
+          `${apiBaseBack}/postLoginEmployees`,
           {
             correo: correo,
             contraseña: contraseña,
@@ -147,7 +148,7 @@ const Login = () => {
 
 export default Login;
 
-export const Log = async (correo, contraseña) => {
+/* export const Log = async (correo, contraseña) => {
   let result = null;
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
@@ -181,3 +182,4 @@ export const Log = async (correo, contraseña) => {
 
   return result;
 };
+ */
