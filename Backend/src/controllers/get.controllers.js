@@ -18,7 +18,7 @@ export const getCustomer = async (req, res) => {
 export const getEmployees = async (req, res) => {
   try {
     const [row] = await pool.query(
-      "SELECT empleado.*, rol_empleado.rol FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol "
+      "SELECT empleado.*, rol_empleado.rol FROM empleado INNER JOIN rol_empleado ON empleado.id_rol = rol_empleado.id_rol ORDER	BY	fecha_creacion DESC  "
     );
     res.send(row);
   } catch (error) {
