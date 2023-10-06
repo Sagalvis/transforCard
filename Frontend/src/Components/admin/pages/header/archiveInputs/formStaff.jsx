@@ -16,7 +16,9 @@ const FormStaff = () => {
   /* Funcion para crear empleados */
   const handleSumit = async () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
+    const token = localStorage.getItem("user")
+    const limpio = token.replace(/"/g,"")
+    console.log("mi token",limpio)
   if (!emailPattern.test(correo)) {
     toast.warning("El correo electronico ingresado no es valido.");
     return; // Salir de la función si el correo es inválido
@@ -52,6 +54,7 @@ const FormStaff = () => {
       const emptyFieldsMessage = `El campo (${emptyFields.join(", ")}), se encuentra vacio`;
       toast.warning(emptyFieldsMessage);
     } else {
+      
       await axios
         .post(`${apiBaseBack}/postemployees`, {
           id_empleado: identification,
@@ -62,16 +65,16 @@ const FormStaff = () => {
           id_rol: selectRol
         }, {
           headers: {
-            user: localStorage.getItem('user'),
+            Authorization: `${limpio}`,
           },
         })
         .then((Response) => {
           console.log(Response.data);
         });
         handleAlertRegisterEmployee();
-      /* setTimeout(() => {
+      setTimeout(() => {
         window.location.reload();        
-      }, 1000); */
+      }, 1000);
     }
   };
 
