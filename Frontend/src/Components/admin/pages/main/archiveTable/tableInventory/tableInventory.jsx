@@ -24,7 +24,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { toast, ToastContainer } from 'react-toastify'
 
-const TableInventory = ({ editProduct, deleteProduct }) => {
+const TableInventory = ({ /* editProduct, */ deleteProduct }) => {
   const [ordenService, setOrdenService] = useState([]);
   const [search, setSearch] = useState("");
   const [handleFormInventory, setHandleFormInventory] = useState(false);
@@ -120,14 +120,14 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
 
                   <Td>
                     <ButtonOptions>
-                      <Buttons
+   {/*                    <Buttons
                         onClick={() =>
                           setHandleFormInventory(!handleFormInventory)
                         }
                         title="Editar producto"
                       >
                         <i className={editProduct}></i>
-                      </Buttons> 
+                      </Buttons>  */}
                       <Buttons onClick={() => {setHandleDeleteService(!handleDeleteService); setDelService(item)}} title="Eliminar producto">
                         <i className={deleteProduct}></i>
                       </Buttons>

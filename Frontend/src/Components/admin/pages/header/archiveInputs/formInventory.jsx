@@ -12,32 +12,54 @@ const FormInventory = () => {
   const [precioServicio, setPrecioServicio] = useState("");
   const [tiempoEstimado, setTiempoEstimado] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
   const handleSumitService = async (e) => {
+  try {
+    e.preventDefault();
+    toast.warning('Por favor complete todos los campos requeridos.');
+  } catch (error) {
+    if (
+      nombreServicio === "" ||
+      descripcion === "" ||
+      precioServicio === "" ||
+      tiempoEstimado === "" ||
+      !selectedImage // Asegúrese de que se haya seleccionado una imagen
+    ) {
+      return;
+    }
+
     try {
-      e.preventDefault();
-      toast.warning('Por favor completar todos los campos requeridos.');
-    } catch {
-      if (
-        nombreServicio === "" ||
-        descripcion === "" ||
-        precioServicio === "" ||
-        tiempoEstimado === ""
-      ) {
-        return;
-      }
       const formData = new FormData();
       formData.append("id_orden", ordenServicio);
       formData.append("nombre_serv", nombreServicio);
       formData.append("descripcion", descripcion);
       formData.append("precio", parseInt(precioServicio));
       formData.append("tiempo_estimado", tiempoEstimado);
-      formData.append("ruta_img", selectedImage);
+      formData.append("file", selectedImage); // Use "file" como nombre de campo
 
-      await axios.post(`${apiBaseBack}/postservice`, formData);
+      const response = await axios.post(`${apiBaseBack}/postservice`, formData);
+
+      if (response.status === 200) {
+        // Éxito, maneje la respuesta o muestre un mensaje al usuario
+        console.log("Servicio creado exitosamente:", response.data);
+        // Aquí puede mostrar un mensaje de éxito al usuario
+        toast.success("Servicio creado exitosamente");
+      } else {
+        // Maneje posibles errores de la respuesta
+        console.error("Error al crear el servicio:", response.statusText);
+        // Puede mostrar un mensaje de error al usuario
+        toast.error("Error al crear el servicio");
+      }
+    } catch (error) {
+      // Maneje errores de la solicitud POST
+      console.error("Error al enviar la solicitud POST:", error);
+      // Puede mostrar un mensaje de error al usuario
+      toast.error("Error al crear el servicio");
     }
-  };
+  }
+};
 
 
   const handleAlertCreateService = () => {
