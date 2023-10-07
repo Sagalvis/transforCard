@@ -1,5 +1,5 @@
 import { Button, ContainInp, ContainRoute, ContentNav, HHHe2, Infovehiculo, Input, Label, Nav, Span, TitleDocument, TitleP } from "./styledCheckClient";
-import Footer from '../../admin/pages/footer/footer'
+// import Footer from '../../admin/pages/footer/footer'
 import { ContainMain } from "../../admin/pages/main/styledMain";
 
 const CheckClient = () => {
