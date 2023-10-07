@@ -29,11 +29,7 @@ const IndexRoutes = () => {
         ) : (
           <Route path="/admin/*" element={<Navigate to="/not-found" />} />
         )}
-
-        {/* Just routes for customers  */}
         <Route path="/check" element={<CheckClient/>} />
-        {/* ---------------->>>*/}
-
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
