@@ -46,8 +46,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
 
-    
-    
     const content = `
       Transforcars
       Direccion: Calle 47 #21-63
@@ -117,7 +115,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     );
   }
 
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const token = localStorage.getItem("user")
   const limpio = token.replace(/"/g,"")
 
