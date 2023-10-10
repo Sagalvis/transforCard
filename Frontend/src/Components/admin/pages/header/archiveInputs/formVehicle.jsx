@@ -17,7 +17,8 @@ const FormVehicle = ({getCustomer3}) => {
   const [identificacion, setIdentificacion] = useState("");
   const [tipoVehiculo, setTipo_vehiculo] = useState([]);
   const [selectVehicle, setSelectVehicle] = useState(0);
-  
+  const token = localStorage.getItem("user")
+    const limpio = token.replace(/"/g,"")
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear vehiculos */
   const handletSumit = async (e) => {
@@ -47,6 +48,10 @@ const FormVehicle = ({getCustomer3}) => {
           observacion: observacion,
           identificacion: identificacion,
           id_tipo_vehiculo: selectVehicle   
+        }, {
+          headers: {
+            Authorization: `${limpio}`,
+          },
         })
         .then((Response) => {
           console.log(Response.data);

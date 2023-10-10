@@ -244,6 +244,7 @@ export const postInvoices = async (req, res) => {
 export const postOrdenService = async (req, res) => {
   try {
     const file = req.file;
+    console.log(file);
 
     if (!file) {
       return res.status(400).json({ message: 'No se ha proporcionado una imagen' });
@@ -261,7 +262,7 @@ export const postOrdenService = async (req, res) => {
 
     res.json(row);
   } catch (error) {
-    console.error('error');
+    console.error(error);
     return res.status(500).json({
       message: "Error en el servidor",
     });
