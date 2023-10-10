@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {  useState, useEffect } from "react";
+import  {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import {toast, ToastContainer, Zoom} from 'react-toastify'

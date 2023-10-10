@@ -2,7 +2,7 @@
 import {  useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const EditFormStaff = ({getEmpleado}) => {
   const [nombre, setNombres] = useState("");
@@ -122,10 +122,10 @@ const EditFormStaff = ({getEmpleado}) => {
 
           <ContentInput>
             <Input
-              type="text"
+              type="password"
               placeholder="Contraseña"
-              //value={}
-              //onChange={(e) => setIdentificacion(e.target.value)}
+              value={contraseña}
+              onChange={(e) => setPass(e.target.value)}
               onInput={(evt) => acceptNum(evt)}
               maxLength={13}
               autoComplete="off"
