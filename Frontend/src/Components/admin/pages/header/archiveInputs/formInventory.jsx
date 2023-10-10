@@ -146,7 +146,7 @@ const FormInventory = () => {
   );
 
                 }
-
+// Estilos en linea
 export default FormInventory;
 
 export const ContainForm = styled.div`
