@@ -12,9 +12,8 @@ postRouter.post('/postLoginEmployees', controllpost.postLoginEmployees);
 postRouter.post('/postinventory', controllpost.postInventario);
 postRouter.post('/postinvoices', controllpost.postInvoices);
 postRouter.post('/postservice', controllimg.upload.single('file'), controllpost.postOrdenService);
-postRouter.post('/postOrdenServiceCliente', controllpost.postOrdenServiceCliente);
-postRouter.post('/postCreateFactura', controllpost.postCreateFactura);
+postRouter.post('/postOrdenServiceCliente',isAuth, controllpost.postOrdenServiceCliente);
+postRouter.post('/postCreateFactura',isAuth, controllpost.postCreateFactura);
 postRouter.post('/postCallService/:identificacion', controllpost.postCallService);
-postRouter.post('/validacioncorreo', controllpost.validationCorreoSoporte );
 
 export default postRouter;

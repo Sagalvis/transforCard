@@ -202,7 +202,6 @@ export const postInventario = async (req, res) => {
   }
 };
 
-/* post para crear la factura */
 
 export const postInvoices = async (req, res) => {
   try {
@@ -293,6 +292,7 @@ export const postOrdenServiceCliente = async(req, res) => {
   }
 };
 
+/* post para crear la factura */
 export const postCreateFactura = async (req, res) => {
   try {
     const { id_servicio_cliente, identificacion } = req.body;
@@ -334,21 +334,4 @@ export const postCallService = async (req, res) => {
   }
 };
 
-export const validationCorreoSoporte = async (req, res) => {
-  try {
-    const { correo } = req.body;
-    const [rows] = await pool.query(
-      "SELECT correo FROM empleado WHERE correo = ?",
-      [correo]
-    );
-    if (rows.length > 0) {
-      res.status(200).json({ exists: true });
-    } else {
-      res.status(404).json({ exists: false });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
-  }
-};
+

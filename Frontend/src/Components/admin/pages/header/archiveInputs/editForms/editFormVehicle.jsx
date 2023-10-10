@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const EditFormVehicle = ({ getVehicle }) => {
   const [marca, setMarca] = useState("");

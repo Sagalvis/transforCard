@@ -56,7 +56,7 @@ const FormInventory = () => {
       toast.error("Error al crear el servicio");
     }
   }
-};
+
 
   return (    
     <>
@@ -136,7 +136,7 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister onClick={() => {handleSubmitService(); handleAlertCreateService();}}>
+                <BtnRegister onClick={() => {handleSubmitService();}}>
                   Crear servicio
                 </BtnRegister>
               </ButtonRegister>
@@ -144,8 +144,8 @@ const FormInventory = () => {
       </ContainForm>
     </>
   );
-}
-;
+
+                }
 
 export default FormInventory;
 
