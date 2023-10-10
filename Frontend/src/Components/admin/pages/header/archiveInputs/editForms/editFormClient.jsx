@@ -37,7 +37,7 @@ const EditFormClient = ({getCustomer}) => {
       toast.warning('Por favor llenar todos los campos');
     } else {
       await axios
-        .patch(`${apiBaseBack}/patchemployees/${getCustomer.identificacion}`, {
+        .patch(`${apiBaseBack}/patchcustomer/${getCustomer.identificacion}`, {
           // eslint-disable-next-line no-undef
           nombre,
           apellido,
