@@ -2,7 +2,7 @@
 import  {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import {toast, ToastContainer, Zoom} from 'react-toastify'
+import {toast} from 'react-toastify'
 
 const EditFormClient = ({getCustomer}) => {
   const [nombre, setNombres] = useState("");
@@ -11,6 +11,7 @@ const EditFormClient = ({getCustomer}) => {
   const [direccion, setDireccion] = useState("");
   const [tel, setTelefono] = useState("");
 
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
 //TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
   useEffect(() => {
@@ -24,6 +25,8 @@ const EditFormClient = ({getCustomer}) => {
 }, [getCustomer]);
   /* Funcion para crear clientes */
   const handletSumit = async () => {
+    const token = localStorage.getItem('user');
+    const limpio = token.replace(/"/g,"")
     if (
       nombre === "" ||
       apellido === "" ||
@@ -34,13 +37,17 @@ const EditFormClient = ({getCustomer}) => {
       toast.warning('Por favor llenar todos los campos');
     } else {
       await axios
-        .patch(`http://localhost:3005/patchcustomer/${getCustomer.identificacion}`, {
+        .patch(`${apiBaseBack}/patchemployees/${getCustomer.identificacion}`, {
           // eslint-disable-next-line no-undef
           nombre,
           apellido,
           correo,
           direccion,
           tel
+        }, {
+          headers:{
+            Authorization: `${limpio}`,
+          }
         })
         setTimeout(() => { 
           window.location.reload(); 

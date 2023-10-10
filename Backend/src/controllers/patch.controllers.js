@@ -29,24 +29,16 @@ export const updateCustomer = async (req, res) => {
 /* Consulta para actualizar empleados */
 
 export const updateEmployees = async (req, res) => {
+  const {nombre,apellido, correo, id_rol} = req.body
+  const {id_empleado} = req.params
   try {
-    const { id_empleado } = req.params;
-    const { nombre, apellido, correo, contraseña, id_rol } = req.body;
-    const [PassNew] = await pool.query("SELECT contraseña FROM empleado WHERE id_empleado = ?", [id_empleado]);
-    const Compare = await bcrypt.compare(PassNew[0],contraseña);
-    
-    if (!compare) {
-      
-    }
-
-
-    const [row] = await pool.query("UPDATE empleado SET nombre = COALESCE(?, nombre), apellido = COALESCE(?, apellido), correo = COALESCE(?, correo), contraseña = COALESCE(?, contraseña), id_rol = COALESCE(?,id_rol) WHERE id_empleado = ?",[nombre, apellido, correo,contraseña, id_rol, id_empleado ]);
+    const [row] = await pool.query("UPDATE empleado SET nombre = COALESCE(?,nombre), apellido = COALESCE(?, apellido), correo = COALESCE(?, correo),  id_rol = COALESCE(?,id_rol) WHERE id_empleado = ?",[nombre, apellido, correo, id_rol, id_empleado ]);
     if (row.affectedRows === 0) {
       return res.status(404).json({
         message: "No se encontró al empleado",
       });
     }
-    res.send({ id_empleado,nombre,apellido,correo,contraseña,id_rol });
+    res.send({ id_empleado,nombre,apellido,correo,id_rol });
     console.log(res)
   } catch (error) {
     console.log(error);

@@ -8,7 +8,6 @@ const EditFormStaff = ({getEmpleado}) => {
   const [nombre, setNombres] = useState("");
   const [apellido, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
-  const [contraseña, setPass] = useState("");
   const [rol, setRol] = useState("")
   const [tipoRol, setTipoRol] = useState([]);
   const [selectRol, setSeletRol] = useState(0);
@@ -19,7 +18,6 @@ const EditFormStaff = ({getEmpleado}) => {
       setNombres(getEmpleado.nombre);
       setApellidos(getEmpleado.apellido);
       setCorreo(getEmpleado.correo);
-      setPass(getEmpleado.contraseña);
     }  
   },[getEmpleado])
 
@@ -33,6 +31,8 @@ const EditFormStaff = ({getEmpleado}) => {
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
+    const token = localStorage.getItem('user')
+    const limpio = token.replace(/"/g,"")
     if (
       nombre === "" ||
       apellido === "" ||
@@ -46,8 +46,9 @@ const EditFormStaff = ({getEmpleado}) => {
           nombre,
           apellido,
           correo,
-          contraseña,
           id_rol: selectRol || rol
+        },{
+          headers:{Authorization:`${limpio}`}
         })
         .then((Response) => {
           console.log(Response.data);
@@ -61,10 +62,10 @@ const EditFormStaff = ({getEmpleado}) => {
   };
 
   //funcion que permite solo escribir numeros en el input.
-  function acceptNum(evt) {
-    const input = evt.target.value;
-    evt.target.value = input.replace(/[^\d]/g, "");
-  }
+  // function acceptNum(evt) {
+  //   const input = evt.target.value;
+  //   evt.target.value = input.replace(/[^\d]/g, "");
+  // }
 
   return (
     <>
@@ -119,7 +120,7 @@ const EditFormStaff = ({getEmpleado}) => {
               maxLength={32}
             />
           </ContentInput>
-
+{/* 
           <ContentInput>
             <Input
               type="password"
@@ -130,7 +131,7 @@ const EditFormStaff = ({getEmpleado}) => {
               maxLength={13}
               autoComplete="off"
             />
-          </ContentInput>
+          </ContentInput> */}
 
         </Form>
       </ContainForm>
