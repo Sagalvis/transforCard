@@ -334,21 +334,4 @@ export const postCallService = async (req, res) => {
   }
 };
 
-export const validationCorreoSoporte = async (req, res) => {
-  try {
-    const { correo } = req.body;
-    const [rows] = await pool.query(
-      "SELECT correo FROM empleado WHERE correo = ?",
-      [correo]
-    );
-    if (rows.length > 0) {
-      res.status(200).json({ exists: true });
-    } else {
-      res.status(404).json({ exists: false });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
-  }
-};
+

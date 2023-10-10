@@ -15,6 +15,5 @@ postRouter.post('/postservice', controllimg.upload.single('file'), controllpost.
 postRouter.post('/postOrdenServiceCliente',isAuth, controllpost.postOrdenServiceCliente);
 postRouter.post('/postCreateFactura',isAuth, controllpost.postCreateFactura);
 postRouter.post('/postCallService/:identificacion', controllpost.postCallService);
-postRouter.post('/validacioncorreo', controllpost.validationCorreoSoporte );
 
 export default postRouter;
