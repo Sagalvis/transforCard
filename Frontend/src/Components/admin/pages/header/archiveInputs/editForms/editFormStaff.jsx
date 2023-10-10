@@ -12,7 +12,9 @@ const EditFormStaff = ({getEmpleado}) => {
   const [rol, setRol] = useState("")
   const [tipoRol, setTipoRol] = useState([]);
   const [selectRol, setSeletRol] = useState(0);
-  
+
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
   useEffect ( () =>{
     if(getEmpleado){
       setRol(getEmpleado.id_rol)
@@ -25,7 +27,7 @@ const EditFormStaff = ({getEmpleado}) => {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const responseRol = await axios.get("http://localhost:3005/tiporol");
+      const responseRol = await axios.get(`${apiBaseBack}/tiporol`);
       setTipoRol(responseRol.data)
     }
     fetchdata()
@@ -44,7 +46,7 @@ const EditFormStaff = ({getEmpleado}) => {
       toast.warning('Por favor llenar todos los campos requeridos.');
     } else {
       await axios
-        .patch(`http://localhost:3005/patchemployees/${getEmpleado.id_empleado}`, {
+        .patch(`${apiBaseBack}/patchemployees/${getEmpleado.id_empleado}`, {
           nombre,
           apellido,
           correo,

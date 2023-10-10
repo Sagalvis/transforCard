@@ -15,7 +15,9 @@ const TableVehicleControl = ({deleteVehicleTable}) => {
   // Variables de estado, modal eliminar
   const [delVehicle, setDelVehicle] = useState(null);
   const [handleDeleteControlVehicle, setHandleDeleteControlVehicle] = useState(false);
-  
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
   //Función de busqueda
   const searching = (e) => {
     setSearch(e.target.value);
@@ -48,7 +50,12 @@ const TableVehicleControl = ({deleteVehicleTable}) => {
 
   const deleteVehicle = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deletevehicle/${delVehicle.matricula}`);
+      await axios.delete(`${apiBaseBack}/deletevehicle/${delVehicle.matricula}`
+      ,{
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
 
       setVehicle(vehicle.filter((c) => c.matricula !== delVehicle.matricula));
 

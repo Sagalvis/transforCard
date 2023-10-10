@@ -270,7 +270,7 @@ export const postOrdenService = async (req, res) => {
 
 /* Consulta para crear orden se servicio a cada cliente */
 
-export const postOrdenServiceCliente = async (req, res) => {
+export const postOrdenServiceCliente = async(req, res) => {
   try {
     const {identificacion, id_orden} = req.body;
     const [existingService] = await pool.query("SELECT * FROM servicio_cliente WHERE identificacion = ? AND id_orden = ?",[identificacion, id_orden]);

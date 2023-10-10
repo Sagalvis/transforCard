@@ -36,6 +36,8 @@ const Login = () => {
     const newPassword = e.target.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+{}[\]?~\\/-]/g, "");
     setContraseña(newPassword);
   };
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+  const apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
   const handleKeyDownLogin = (e) => {
     if (e.key === "Enter") {
       Log();
@@ -62,7 +64,7 @@ const Login = () => {
           const token = response.data.token;
           localStorage.setItem("user", JSON?.stringify(token));
           setTimeout(() => {
-            window.location.href = "http://localhost:5173/admin";
+            window.location.href =`${apiBaseFront}/admin`;
           }, 300);
         }
       } catch (error) {

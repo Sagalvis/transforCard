@@ -17,18 +17,23 @@ const TableStaff = ({editStaff, deletStaff}) => {
   const [search, setSearch] = useState("");
   // Variable de estado para modal de editar empleado
   const [handleEditEmployee, setHandleEditEmployee] = useState(false);
-
   //Variable de estado para capturar empleado
   const [empleadoId, setEmpleadoId] = useState(null)
+
   //Funcion para pasar la variable de estado como parametro al componente
   const CapturaEmpleado = (item) => {
     setHandleEditEmployee(!handleEditEmployee)
     setEmpleadoId(item)
   }
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+  
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
+
   const getEmployees = async () => {
-    try {
-      
+    try {      
       const res = await axios.get(`${apiBaseBack}/employees`);
       setEmployees(res.data);
     } catch (error) {
@@ -58,7 +63,13 @@ const TableStaff = ({editStaff, deletStaff}) => {
   const deleteStaff = async () => {
     try {
       await axios.delete(
-        `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`);
+        `${apiBaseBack}/deleteemployees/${idempleado.id_empleado}`,{
+          headers: {
+            Authorization: `${limpio}`
+          }
+        }
+      );
+
       handleAlertDeleteStaff();
 
       setEmployees(employees.filter((c) => c.id_empleado !== idempleado.id_empleado));
