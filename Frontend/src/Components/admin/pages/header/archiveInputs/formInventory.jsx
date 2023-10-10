@@ -144,7 +144,7 @@ const FormInventory = () => {
       </ContainForm>
     </>
   );
-
+}
 ;
 
 export default FormInventory;
