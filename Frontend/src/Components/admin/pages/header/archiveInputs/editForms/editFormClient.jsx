@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, {  useState, useEffect } from "react";
+import  {  useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import {toast, ToastContainer, Zoom} from 'react-toastify'
+import {toast} from 'react-toastify'
 
 const EditFormClient = ({getCustomer}) => {
   const [nombre, setNombres] = useState("");
@@ -25,6 +25,8 @@ const EditFormClient = ({getCustomer}) => {
 }, [getCustomer]);
   /* Funcion para crear clientes */
   const handletSumit = async () => {
+    const token = localStorage.getItem('user');
+    const limpio = token.replace(/"/g,"")
     if (
       nombre === "" ||
       apellido === "" ||
@@ -42,6 +44,10 @@ const EditFormClient = ({getCustomer}) => {
           correo,
           direccion,
           tel
+        }, {
+          headers:{
+            Authorization: `${limpio}`,
+          }
         })
         setTimeout(() => { 
           window.location.reload(); 

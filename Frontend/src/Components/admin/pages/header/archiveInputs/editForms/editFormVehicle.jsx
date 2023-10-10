@@ -29,6 +29,8 @@ const EditFormVehicle = ({ getVehicle }) => {
   }, [getVehicle]);
   /* Funcion para crear clientes */
   const handletSumit = async () => {
+    const token = localStorage.getItem("user")
+    const limpio = token.replace(/"/g,"")
     if (
       marca === "" ||
       modelo === "" ||
@@ -48,6 +50,10 @@ const EditFormVehicle = ({ getVehicle }) => {
           año,
           color,
           vin,
+        }, {
+          headers:{
+            Authorization: `${limpio}`,
+          }
         })
         .then((Response) => {
           console.log("actualizador", Response.data);
