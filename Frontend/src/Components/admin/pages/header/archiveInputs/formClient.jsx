@@ -82,7 +82,7 @@ const FormClient = () => {
 
   useEffect(() => {
     const getdocumentdata = async () => {
-      const responseDocument = await axios.get(`http://localhost:3005/tipodocument`);
+      const responseDocument = await axios.get(`${apiBaseBack}/tipodocument`);
       setTipoDocument(responseDocument.data);
     };
     getdocumentdata();

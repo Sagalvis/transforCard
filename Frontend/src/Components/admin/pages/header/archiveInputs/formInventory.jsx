@@ -12,19 +12,20 @@ const FormInventory = () => {
   const [precioServicio, setPrecioServicio] = useState("");
   const [tiempoEstimado, setTiempoEstimado] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
-  const handleSumitService = async (e) => {
+  const handleSubmitService = async (e) => {
     try {
       e.preventDefault();
-      toast.warning('Por favor completar todos los campos requeridos.');
-    } catch {
-      if (
+      if(
         nombreServicio === "" ||
         descripcion === "" ||
         precioServicio === "" ||
-        tiempoEstimado === ""
-      ) {
+        tiempoEstimado === "" ||
+        selectedImage === ""
+      ){
+        toast.warning('Por favor  completar todos los campos. ')
         return;
       }
       const formData = new FormData();
@@ -33,18 +34,23 @@ const FormInventory = () => {
       formData.append("descripcion", descripcion);
       formData.append("precio", parseInt(precioServicio));
       formData.append("tiempo_estimado", tiempoEstimado);
-      formData.append("ruta_img", selectedImage);
+      formData.append("imagen", selectedImage);
 
-      await axios.post(`${apiBaseBack}/postservice`, formData);
+      // realiza la solicitud si todos los datos estan completos.
+      const res = await axios.post(`${apiBaseBack}/postService`, formData);
+      if (res.status === 200) {
+        handleAlertCreateService();
+        toast.success('Servicio creado satisfacctoriamente.');
+      }else{
+        toast.error('Hubo un problema al crear el servicio.')
+      }
+    }catch (error) {
+      console.error('Error en el cliente: ', error);
+      toast.error('Hubo un problema al crear el servicio.');
     }
   };
 
-
-  const handleAlertCreateService = () => {
-    toast.success('Servicio creado satisfactoriamente.');
-  };
-
-  return (
+  return (    
     <>
       <ContainForm>
         <Form>
@@ -62,7 +68,7 @@ const FormInventory = () => {
               </ContentInput>
               <ContentInput>
                 <Input
-                  type="text"
+                  type="text" 
                   value={nombreServicio}
                   onChange={(e) =>
                     setNombreServicio(
@@ -89,7 +95,7 @@ const FormInventory = () => {
               <ContentInput>
                 <Input
                   type="text"
-                  value={tiempoEstimado}
+                  value={tiempoEstimado}               
                   onChange={(e) =>
                     setTiempoEstimado(
                       e.target.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
@@ -114,6 +120,7 @@ const FormInventory = () => {
                 <TextArea
                   type="text"
                   value={descripcion}
+
                   onChange={(e) => setDescripcion(e.target.value)}
                   placeholder="Descripción del servicio"
                   autoComplete="off"
@@ -121,7 +128,7 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister onClick={() => {handleSumitService(); handleAlertCreateService();}}>
+                <BtnRegister onClick={() => {handleSubmitService(); handleAlertCreateService();}}>
                   Crear servicio
                 </BtnRegister>
               </ButtonRegister>
