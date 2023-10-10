@@ -71,9 +71,8 @@ const TableStaff = ({editStaff, deletStaff}) => {
       );
 
       handleAlertDeleteStaff();
-      setTimeout(() => {
-        window.location.reload()        
-      }, 500);
+
+      setEmployees(employees.filter((c) => c.id_empleado !== idempleado.id_empleado));
       
     } catch (error) {
       console.log(error);

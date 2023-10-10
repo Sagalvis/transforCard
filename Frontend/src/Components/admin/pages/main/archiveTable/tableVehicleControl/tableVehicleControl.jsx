@@ -57,9 +57,7 @@ const TableVehicleControl = ({deleteVehicleTable}) => {
         }
       });
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      setVehicle(vehicle.filter((c) => c.matricula !== delVehicle.matricula));
 
     } catch (error) {
       console.log(error);

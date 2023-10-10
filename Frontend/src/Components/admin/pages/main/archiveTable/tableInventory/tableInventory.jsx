@@ -64,7 +64,6 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   useEffect(() => {
     getOrdenService();
   }, []);
-
   // Funcion para eliminar producto de inventario
 
   // Funcion para eliminar servicio...
@@ -76,10 +75,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
         }
       });
       handleAlertDeleteInventory();
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-
+      setOrdenService(ordenService.filter((c) => c.id_orden !== delService.id_orden));
     } catch (error) {
       console.log("error");
     }

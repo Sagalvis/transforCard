@@ -5,9 +5,9 @@ import {isAuth} from "../middleware/auth.js"
 const postRouter = Router();
 
 /* Rutas para crear clientes, empleados, vehiculo, logueo de empleado */
-postRouter.post('/postcustomer', controllpost.postCustomer);
-postRouter.post('/postemployees',isAuth,controllpost.postEmployees);
-postRouter.post('/postvehicle', controllpost.postVehicle);
+postRouter.post('/postcustomer',isAuth, controllpost.postCustomer);
+postRouter.post('/postemployees',isAuth, controllpost.postEmployees);
+postRouter.post('/postvehicle',isAuth, controllpost.postVehicle);
 postRouter.post('/postLoginEmployees', controllpost.postLoginEmployees);
 postRouter.post('/postinventory', controllpost.postInventario);
 postRouter.post('/postinvoices', controllpost.postInvoices);

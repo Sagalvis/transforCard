@@ -34,21 +34,29 @@ const FormInventory = () => {
       formData.append("descripcion", descripcion);
       formData.append("precio", parseInt(precioServicio));
       formData.append("tiempo_estimado", tiempoEstimado);
-      formData.append("imagen", selectedImage);
+      formData.append("file", selectedImage); // Use "file" como nombre de campo
 
-      // realiza la solicitud si todos los datos estan completos.
-      const res = await axios.post(`${apiBaseBack}/postService`, formData);
-      if (res.status === 200) {
-        handleAlertCreateService();
-        toast.success('Servicio creado satisfacctoriamente.');
-      }else{
-        toast.error('Hubo un problema al crear el servicio.')
+      const response = await axios.post(`${apiBaseBack}/postservice`, formData);
+
+      if (response.status === 200) {
+        // Éxito, maneje la respuesta o muestre un mensaje al usuario
+        console.log("Servicio creado exitosamente:", response.data);
+        // Aquí puede mostrar un mensaje de éxito al usuario
+        toast.success("Servicio creado exitosamente");
+      } else {
+        // Maneje posibles errores de la respuesta
+        console.error("Error al crear el servicio:", response.statusText);
+        // Puede mostrar un mensaje de error al usuario
+        toast.error("Error al crear el servicio");
       }
-    }catch (error) {
-      console.error('Error en el cliente: ', error);
-      toast.error('Hubo un problema al crear el servicio.');
+    } catch (error) {
+      // Maneje errores de la solicitud POST
+      console.error("Error al enviar la solicitud POST:", error);
+      // Puede mostrar un mensaje de error al usuario
+      toast.error("Error al crear el servicio");
     }
-  };
+  }
+};
 
   return (    
     <>
@@ -136,7 +144,8 @@ const FormInventory = () => {
       </ContainForm>
     </>
   );
-};
+
+;
 
 export default FormInventory;
 

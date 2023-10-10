@@ -130,9 +130,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       });
       // Alerta
       handleAlertDeleteInvoice();
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+
+      setInvoice(invoice.filter((c) => c.id_factura !== delInvoice.id_factura));
 
     } catch (error) {
       console.log("ERROR");

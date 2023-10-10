@@ -245,18 +245,24 @@ export const postOrdenService = async (req, res) => {
   try {
     const file = req.file;
     console.log(file);
-    const imagen = {
-      name: file.originalname,
-    };
-    const { id_orden, nombre_serv, descripcion, precio, tiempo_estimado } =
-      req.body;
+
+    if (!file) {
+      return res.status(400).json({ message: 'No se ha proporcionado una imagen' });
+    }
+
+    const { id_orden, nombre_serv, descripcion, precio, tiempo_estimado } = req.body;
+
+    // Extraer el nombre del archivo del campo originalname
+    const imageName = file.originalname;
+
     const [row] = await pool.query(
-      "INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado, ruta_img) VALUES (?,?,?,?,?,?)",
-      [id_orden, nombre_serv, descripcion, precio, tiempo_estimado, imagen.name]
+      "INSERT INTO orden_servicio (id_orden, nombre_serv, descripcion, precio, tiempo_estimado, ruta_img) VALUES (?,?,?,?,?,?)",
+      [id_orden, nombre_serv, descripcion, precio, tiempo_estimado, imageName]
     );
+
     res.json(row);
   } catch (error) {
-    console.log('fail', error);
+    console.error(error);
     return res.status(500).json({
       message: "Error en el servidor",
     });

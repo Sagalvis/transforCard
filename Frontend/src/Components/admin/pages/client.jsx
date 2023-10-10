@@ -22,6 +22,7 @@ const Client = () => {
       <Main
       showTableClient={true}
       />
+      
       {/* Componente FOOTER */}
       <Footer 
       copyright='Copyright &copy; 2023 transforCAR. All Rights'
