@@ -19,7 +19,7 @@ export const ButtonNarbar1 = [
   },
   {
     id:4,
-    title:"Ordenes de servicio",
+    title:"Control ordenes de servicios",
     icon:<i className="fa-solid fa-receipt"></i>,
     to:"/admin/serviceorder"
   },

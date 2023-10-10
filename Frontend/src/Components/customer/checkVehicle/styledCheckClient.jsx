@@ -2,10 +2,14 @@ import styled from 'styled-components';
 
 export const ContainRoute = styled.div`
   /* background-color: green; */
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-height: 896px) {
+    min-height: 57vh;
+  }
 `;
 
 export const Infovehiculo = styled.div`
@@ -26,6 +30,16 @@ export const TitleDocument = styled.div`
 
 export const TitleP = styled.p`
   color: #fff;
+
+  &.red {
+    color: red;
+    text-align: center;
+    margin: 0;
+  }
+  &.trust {
+    margin: 0;
+    letter-spacing: 2px;
+  }
 `;
 
 export const ContainInp = styled.div`
@@ -73,4 +87,40 @@ export const Button = styled.button`
   &:active {
     transform: translateY(1px);
   }
+`;
+
+// HEADER!! 
+
+export const ContentNav = styled.div`
+  /* background-color: blue; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+`;
+
+export const Nav = styled.div`
+  background-color: #041737;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 0 0 100px 100px;
+  height: 10vh;
+  /* margin-bottom: 15px; */
+
+  @media ( max-width: 728px) {
+    height: 25vh;
+  } 
+`;
+
+export const HHHe2 = styled.h2`
+  color: #fff;
+  font-size: 3rem;
+  margin: 0;
+`;
+
+export const Span = styled.span`
+  font-weight: 200;
 `;

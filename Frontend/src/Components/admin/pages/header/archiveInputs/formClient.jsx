@@ -13,7 +13,8 @@ const FormClient = () => {
   const [telefono, setTelefono] = useState("");
   const [tipoDocument, setTipoDocument] = useState([]);
   const [selectDocument, setSeletDocument] = useState(0);
-
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   /* Funcion para crear clientes */
@@ -72,6 +73,10 @@ const FormClient = () => {
         barrio: barrio,
         tel: telefono,
         idtipo_documento: selectDocument,
+      }, {
+        headers: {
+          Authorization: `${limpio}`,
+        },
       });
       handleAlert();
       setTimeout(() => {
@@ -82,7 +87,7 @@ const FormClient = () => {
 
   useEffect(() => {
     const getdocumentdata = async () => {
-      const responseDocument = await axios.get(`http://localhost:3005/tipodocument`);
+      const responseDocument = await axios.get(`${apiBaseBack}/tipodocument`);
       setTipoDocument(responseDocument.data);
     };
     getdocumentdata();

@@ -178,10 +178,11 @@ export const Paragraph = styled.p`
 
 export const ContainServices = styled.div`
   /* background-color: red; */
-  width: 850px;
+  min-width: 900px;
   box-sizing: border-box;
   display: flex;
   gap: 10px;
+  /* overflow-x: scroll; */
   height: 230px;
 `;
 
@@ -193,8 +194,8 @@ export const CardService = styled.div`
   background-color: #f8f8f8;
   box-sizing: border-box;
   padding: 5px;
-  width: 165px;
-  height: 100%x;
+  min-width: 160px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

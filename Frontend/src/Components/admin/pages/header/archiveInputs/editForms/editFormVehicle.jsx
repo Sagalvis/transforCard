@@ -13,6 +13,8 @@ const EditFormVehicle = ({ getVehicle }) => {
   const [placa, setPlaca] = useState("");
   const [vin, setVin] = useState("");
 
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
   //TREAE LOS DATOS DEL GET EN TABLACLIENT Y LOS MUESTRA EN LOS INPUTS DEL MODAL
   useEffect(() => {
     if (getVehicle) {
@@ -40,7 +42,7 @@ const EditFormVehicle = ({ getVehicle }) => {
       toast.warning('Favor llenar todos los campos requeridos.');
     } else {
       await axios
-        .patch(`http://localhost:3005/patchvehicle/${getVehicle.matricula}`, {
+        .patch(`${apiBaseBack}/patchvehicle/${getVehicle.matricula}`, {
           // eslint-disable-next-line no-undef
           tarjetaPropiedad,
           marca,

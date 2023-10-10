@@ -45,6 +45,8 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     const font = page.drawText("");
     // Utiliza CustomFontText como fuente personalizada
     // Organiza los datos como deseas en el PDF
+
+    
     
     const content = `
       Transforcars
@@ -115,9 +117,18 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     );
   }
 
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
+
   const deleteInvoice = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deleteinvoice/${delInvoice.id_factura}`);
+      await axios.delete(`${apiBaseBack}/deleteinvoice/${delInvoice.id_factura}`, {
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
+      // Alerta
       handleAlertDeleteInvoice();
 
       setInvoice(invoice.filter((c) => c.id_factura !== delInvoice.id_factura));

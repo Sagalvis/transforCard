@@ -36,6 +36,8 @@ const Login = () => {
     const newPassword = e.target.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+{}[\]?~\\/-]/g, "");
     setContraseña(newPassword);
   };
+  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+  const apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
   const handleKeyDownLogin = (e) => {
     if (e.key === "Enter") {
       Log();
@@ -43,6 +45,7 @@ const Login = () => {
   };
 
   const Log = async () => {
+    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
     let result = null;
     if (correo && !contraseña) {
       toast.warning('Por favor llenar el campo de contraseña.');
@@ -51,7 +54,7 @@ const Login = () => {
     } else if (correo && contraseña) {
       try {
         const response = await axios.post(
-          "http://localhost:3005/postLoginEmployees",
+          `${apiBaseBack}/postLoginEmployees`,
           {
             correo: correo,
             contraseña: contraseña,
@@ -61,7 +64,7 @@ const Login = () => {
           const token = response.data.token;
           localStorage.setItem("user", JSON?.stringify(token));
           setTimeout(() => {
-            window.location.href = "http://localhost:5173/admin";
+            window.location.href =`${apiBaseFront}/admin`;
           }, 300);
         }
       } catch (error) {
@@ -146,38 +149,3 @@ const Login = () => {
 };
 
 export default Login;
-
-export const Log = async (correo, contraseña) => {
-  let result = null;
-
-  const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-  console.log(apiBaseBack, "😎😎😎😎😎😎🧰🧰🧰");
-  const apiBaseFront = import.meta.env.VITE_URL_FRONTEND;
-
-  if (correo && contraseña) {
-    try {
-      const response = await axios.post(`${apiBaseBack}/postLoginEmployees`, {
-        correo: correo,
-        contraseña: contraseña,
-      });
-
-      console.log(response.data, "😎😎😎");
-      result = response.data;
-      if (response.data === "") {
-        toast.error('El usuario no existe');
-      } else {
-        localStorage.setItem("user", JSON?.stringify(result));
-        setTimeout(() => {
-          window.location.href = `${apiBaseFront}/admin`;
-        }, 300);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error('Usuario y/o contraseña no válidos');
-    }
-  } else {
-    toast.error('Usuario y/o contraseña no ingresados, por favor ingrese los campos requeridos');
-  }
-
-  return result;
-};

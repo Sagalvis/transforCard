@@ -21,7 +21,7 @@ const FormStaff = () => {
   if (!emailPattern.test(correo)) {
     toast.warning("El correo electronico ingresado no es valido.");
     return; // Salir de la función si el correo es inválido
-  }
+   }
   
     const emptyFields = [];
   

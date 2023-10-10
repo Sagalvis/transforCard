@@ -11,7 +11,13 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   const [mapeo, setMapeo] = useState([])
   const [handleDeleteCustomerService, setHandleDeleteCustomerService] = useState(false);
   const [delServiderOrder, setDelServiceOrder] = useState(null);
+
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
 
   //Funcion para traer todos los servicios del cliente
   const getOrdenService = async ()=> {
@@ -25,7 +31,11 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
 
   const deleteServiceOrder = async() => {
     try {
-      const result = await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiderOrder.id_servicio_cliente}`)
+      const result = await axios.delete(`${apiBaseBack}/deleteserviceorder/${delServiderOrder.id_servicio_cliente}`,{
+        headers: {
+          Authorization: `${limpio}`
+        }
+      })
       console.log(result);
       setMapeo(mapeo.filter((v) => v.id_servicio_cliente !== delServiderOrder.id_servicio_cliente));
     } catch (error) {

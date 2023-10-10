@@ -202,7 +202,6 @@ export const postInventario = async (req, res) => {
   }
 };
 
-/* post para crear la factura */
 
 export const postInvoices = async (req, res) => {
   try {
@@ -245,18 +244,24 @@ export const postOrdenService = async (req, res) => {
   try {
     const file = req.file;
     console.log(file);
-    const imagen = {
-      name: file.originalname,
-    };
-    const { id_orden, nombre_serv, descripcion, precio, tiempo_estimado } =
-      req.body;
+
+    if (!file) {
+      return res.status(400).json({ message: 'No se ha proporcionado una imagen' });
+    }
+
+    const { id_orden, nombre_serv, descripcion, precio, tiempo_estimado } = req.body;
+
+    // Extraer el nombre del archivo del campo originalname
+    const imageName = file.originalname;
+
     const [row] = await pool.query(
-      "INSERT INTO orden_servicio (id_orden,nombre_serv, descripcion, precio, tiempo_estimado, ruta_img) VALUES (?,?,?,?,?,?)",
-      [id_orden, nombre_serv, descripcion, precio, tiempo_estimado, imagen.name]
+      "INSERT INTO orden_servicio (id_orden, nombre_serv, descripcion, precio, tiempo_estimado, ruta_img) VALUES (?,?,?,?,?,?)",
+      [id_orden, nombre_serv, descripcion, precio, tiempo_estimado, imageName]
     );
+
     res.json(row);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({
       message: "Error en el servidor",
     });
@@ -265,7 +270,7 @@ export const postOrdenService = async (req, res) => {
 
 /* Consulta para crear orden se servicio a cada cliente */
 
-export const postOrdenServiceCliente = async (req, res) => {
+export const postOrdenServiceCliente = async(req, res) => {
   try {
     const {identificacion, id_orden} = req.body;
     const [existingService] = await pool.query("SELECT * FROM servicio_cliente WHERE identificacion = ? AND id_orden = ?",[identificacion, id_orden]);
@@ -287,6 +292,7 @@ export const postOrdenServiceCliente = async (req, res) => {
   }
 };
 
+/* post para crear la factura */
 export const postCreateFactura = async (req, res) => {
   try {
     const { id_servicio_cliente, identificacion } = req.body;
@@ -328,21 +334,4 @@ export const postCallService = async (req, res) => {
   }
 };
 
-export const validationCorreoSoporte = async (req, res) => {
-  try {
-    const { correo } = req.body;
-    const [rows] = await pool.query(
-      "SELECT correo FROM empleado WHERE correo = ?",
-      [correo]
-    );
-    if (rows.length > 0) {
-      res.status(200).json({ exists: true });
-    } else {
-      res.status(404).json({ exists: false });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error en el servidor",
-    });
-  }
-};
+

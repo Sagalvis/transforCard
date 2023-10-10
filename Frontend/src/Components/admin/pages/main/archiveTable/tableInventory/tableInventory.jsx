@@ -33,6 +33,10 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   const [delService, setDelService] = useState(null);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
+
   const getOrdenService = async () => {
     try {
       const res = await axios.get(`${apiBaseBack}/getService`);
@@ -60,19 +64,18 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   useEffect(() => {
     getOrdenService();
   }, []);
-
   // Funcion para eliminar producto de inventario
 
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
+      await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`, {
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
       handleAlertDeleteInventory();
-      
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-
+      setOrdenService(ordenService.filter((c) => c.id_orden !== delService.id_orden));
     } catch (error) {
       console.log("error");
     }

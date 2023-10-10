@@ -12,19 +12,20 @@ const FormInventory = () => {
   const [precioServicio, setPrecioServicio] = useState("");
   const [tiempoEstimado, setTiempoEstimado] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
-  const handleSumitService = async (e) => {
+  const handleSubmitService = async (e) => {
     try {
       e.preventDefault();
-      toast.warning('Por favor completar todos los campos requeridos.');
-    } catch {
-      if (
+      if(
         nombreServicio === "" ||
         descripcion === "" ||
         precioServicio === "" ||
-        tiempoEstimado === ""
-      ) {
+        tiempoEstimado === "" ||
+        selectedImage === ""
+      ){
+        toast.warning('Por favor  completar todos los campos. ')
         return;
       }
       const formData = new FormData();
@@ -33,18 +34,31 @@ const FormInventory = () => {
       formData.append("descripcion", descripcion);
       formData.append("precio", parseInt(precioServicio));
       formData.append("tiempo_estimado", tiempoEstimado);
-      formData.append("ruta_img", selectedImage);
+      formData.append("file", selectedImage); // Use "file" como nombre de campo
 
-      await axios.post(`${apiBaseBack}/postservice`, formData);
+      const response = await axios.post(`${apiBaseBack}/postservice`, formData);
+
+      if (response.status === 200) {
+        // Éxito, maneje la respuesta o muestre un mensaje al usuario
+        console.log("Servicio creado exitosamente:", response.data);
+        // Aquí puede mostrar un mensaje de éxito al usuario
+        toast.success("Servicio creado exitosamente");
+      } else {
+        // Maneje posibles errores de la respuesta
+        console.error("Error al crear el servicio:", response.statusText);
+        // Puede mostrar un mensaje de error al usuario
+        toast.error("Error al crear el servicio");
+      }
+    } catch (error) {
+      // Maneje errores de la solicitud POST
+      console.error("Error al enviar la solicitud POST:", error);
+      // Puede mostrar un mensaje de error al usuario
+      toast.error("Error al crear el servicio");
     }
-  };
+  }
 
 
-  const handleAlertCreateService = () => {
-    toast.success('Servicio creado satisfactoriamente.');
-  };
-
-  return (
+  return (    
     <>
       <ContainForm>
         <Form>
@@ -62,7 +76,7 @@ const FormInventory = () => {
               </ContentInput>
               <ContentInput>
                 <Input
-                  type="text"
+                  type="text" 
                   value={nombreServicio}
                   onChange={(e) =>
                     setNombreServicio(
@@ -89,7 +103,7 @@ const FormInventory = () => {
               <ContentInput>
                 <Input
                   type="text"
-                  value={tiempoEstimado}
+                  value={tiempoEstimado}               
                   onChange={(e) =>
                     setTiempoEstimado(
                       e.target.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
@@ -114,6 +128,7 @@ const FormInventory = () => {
                 <TextArea
                   type="text"
                   value={descripcion}
+
                   onChange={(e) => setDescripcion(e.target.value)}
                   placeholder="Descripción del servicio"
                   autoComplete="off"
@@ -121,7 +136,7 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister onClick={() => {handleSumitService(); handleAlertCreateService();}}>
+                <BtnRegister onClick={() => {handleSubmitService();}}>
                   Crear servicio
                 </BtnRegister>
               </ButtonRegister>
@@ -129,7 +144,8 @@ const FormInventory = () => {
       </ContainForm>
     </>
   );
-};
+
+                }
 
 export default FormInventory;
 

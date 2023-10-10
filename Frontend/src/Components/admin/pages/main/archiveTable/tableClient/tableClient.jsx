@@ -60,9 +60,9 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   const [search, setSearch] = useState("");
   //Variable para guardar el servicio y mostrarlo
   const [ordServicio, setOrdService] = useState([]);
-
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
   //Función de busqueda
   const searching = (e) => {
     setSearch(e.target.value);
@@ -131,6 +131,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
       const res = await axios.post(`${apiBaseBack}/postOrdenServiceCliente`, {
         identificacion: id4,
         id_orden: item.id_orden,
+      }, {
+        headers: {
+          Authorization: `${limpio}`,
+        },
       });
       if (res.status === 200) {
         toast.success("Servicio agregado con exito");
@@ -143,7 +147,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`); 
+      await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`, {
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
     } catch (err) {

@@ -22,7 +22,8 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   const [handleShowServices, setHandleShowServices] = useState(false);
   const [id, setId] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
 //Función de busqueda
 const searching = (e) => {
   setSearch(e.target.value);
@@ -52,14 +53,17 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceCustomer = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiceCustomer.id_servicio_cliente}`);
-      
+      await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiceCustomer.id_servicio_cliente}`,{
+        headers: {
+          Authorization: `${limpio}`,
+        },
+      });
       setTimeout(() => {
         window.location.reload();
       }, 1000);
 
     } catch (error) {
-      console.log(error);
+      console.log(error, 'no se encuentra 😭😭😭');
     }
   };
 
@@ -80,6 +84,10 @@ if (!search) {
       axios.post(`${apiBaseBack}/postCreateFactura`,{
         identificacion : cedula,
         id_servicio_cliente: idServCliente
+      }, {
+        headers: {
+          Authorization: `${limpio}`,
+        },
       })
       toast.success('Factura creada con éxito.')
     } catch (error) {
