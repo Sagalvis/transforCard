@@ -202,7 +202,6 @@ export const postInventario = async (req, res) => {
   }
 };
 
-/* post para crear la factura */
 
 export const postInvoices = async (req, res) => {
   try {
@@ -293,6 +292,7 @@ export const postOrdenServiceCliente = async (req, res) => {
   }
 };
 
+/* post para crear la factura */
 export const postCreateFactura = async (req, res) => {
   try {
     const { id_servicio_cliente, identificacion } = req.body;

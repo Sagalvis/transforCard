@@ -11,7 +11,6 @@ import {PORT} from './config.js'
 
 /* Se crea una instancia de aplicacion express y se almacena en la app */
 const app = express();
-/* const port = process.env.PORT || 3005; */
 
 /* Se usa el middleware de express para las solicitudes en JSON */
 app.use(express.json());

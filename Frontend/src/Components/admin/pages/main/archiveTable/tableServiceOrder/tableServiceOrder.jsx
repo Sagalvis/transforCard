@@ -22,7 +22,8 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   const [handleShowServices, setHandleShowServices] = useState(false);
   const [id, setId] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
 //Función de busqueda
 const searching = (e) => {
   setSearch(e.target.value);
@@ -80,6 +81,10 @@ if (!search) {
       axios.post(`${apiBaseBack}/postCreateFactura`,{
         identificacion : cedula,
         id_servicio_cliente: idServCliente
+      }, {
+        headers: {
+          Authorization: `${limpio}`,
+        },
       })
       toast.success('Factura creada con éxito.')
     } catch (error) {
