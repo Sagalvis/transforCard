@@ -24,7 +24,7 @@ import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { toast, ToastContainer } from 'react-toastify'
 
-const TableInventory = ({ /* editProduct, */ deleteProduct }) => {
+const TableInventory = ({ editProduct, deleteProduct }) => {
   const [ordenService, setOrdenService] = useState([]);
   const [search, setSearch] = useState("");
   const [handleFormInventory, setHandleFormInventory] = useState(false);
@@ -32,6 +32,10 @@ const TableInventory = ({ /* editProduct, */ deleteProduct }) => {
   const [handleDeleteService, setHandleDeleteService] = useState(false);
   const [delService, setDelService] = useState(null);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
 
   const getOrdenService = async () => {
     try {
@@ -60,19 +64,18 @@ const TableInventory = ({ /* editProduct, */ deleteProduct }) => {
   useEffect(() => {
     getOrdenService();
   }, []);
-
   // Funcion para eliminar producto de inventario
 
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`);
+      await axios.delete(`${apiBaseBack}/deleteservice/${delService.id_orden}`, {
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
       handleAlertDeleteInventory();
-      
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-
+      setOrdenService(ordenService.filter((c) => c.id_orden !== delService.id_orden));
     } catch (error) {
       console.log("error");
     }
@@ -120,14 +123,14 @@ const TableInventory = ({ /* editProduct, */ deleteProduct }) => {
 
                   <Td>
                     <ButtonOptions>
-   {/*                    <Buttons
+                      <Buttons
                         onClick={() =>
                           setHandleFormInventory(!handleFormInventory)
                         }
                         title="Editar producto"
                       >
                         <i className={editProduct}></i>
-                      </Buttons>  */}
+                      </Buttons> 
                       <Buttons onClick={() => {setHandleDeleteService(!handleDeleteService); setDelService(item)}} title="Eliminar producto">
                         <i className={deleteProduct}></i>
                       </Buttons>

@@ -63,6 +63,10 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
+
   //Función de busqueda
   const searching = (e) => {
     setSearch(e.target.value);
@@ -143,7 +147,11 @@ const TableClient = ({ editUser, createVehicle, deleteUser, orderService }) => {
   // Funcion para eliminar cliente de la tabla
   const deleteClient = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`); 
+      await axios.delete(`${apiBaseBack}/deletecustomer/${selectedItem}`, {
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
       handleAlert();
       setCustomer(customer.filter((c) => c.identificacion !== selectedItem));
     } catch (err) {

@@ -25,6 +25,10 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
   // Variable de estado para abrir modal de observacion vehiculo.
   const [handleRemarks, setHandleRemarks] = useState(false);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
   
   //Metodo para captura la placa en el modal
   const CapturaVehicle = (item) => {
@@ -43,7 +47,11 @@ const TableVehicle = ({editVehicleTable, deleteVehicleTable, showRemarks, getCus
 
   const deleteVehicle = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`);
+      await axios.delete(`${apiBaseBack}/deletevehicle/${delIdVehicle.matricula}`,{
+        headers: {
+          Authorization: `${limpio}`
+        }
+      });
       setVehicle(vehicle.filter((v) => v.matricula !== delIdVehicle.matricula));
     } catch (error) {
       console.log("ERROR");

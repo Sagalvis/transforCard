@@ -23,6 +23,10 @@ const TableServiceOrder = ({ deleteOrder, createServiceOrder, showServiceOrder})
   const [id, setId] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const token = localStorage.getItem("user")
+  const limpio = token.replace(/"/g,"")
+
 //Función de busqueda
 const searching = (e) => {
   setSearch(e.target.value);
@@ -52,14 +56,17 @@ if (!search) {
   // Función para eliminar orden de servicio.
   const deleteServiceCustomer = async () => {
     try {
-      await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiceCustomer.id_servicio_cliente}`);
-      
+      await axios.delete(`${apiBaseBack}/deleteservicecustomer/${delServiceCustomer.id_servicio_cliente}`,{
+        headers: {
+          Authorization: `${limpio}`,
+        },
+      });
       setTimeout(() => {
         window.location.reload();
       }, 1000);
 
     } catch (error) {
-      console.log(error);
+      console.log(error, 'no se encuentra 😭😭😭');
     }
   };
 

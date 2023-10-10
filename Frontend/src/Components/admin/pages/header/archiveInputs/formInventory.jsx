@@ -15,22 +15,19 @@ const FormInventory = () => {
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
-  const handleSumitService = async (e) => {
-  try {
-    e.preventDefault();
-    toast.warning('Por favor complete todos los campos requeridos.');
-  } catch (error) {
-    if (
-      nombreServicio === "" ||
-      descripcion === "" ||
-      precioServicio === "" ||
-      tiempoEstimado === "" ||
-      !selectedImage // Asegúrese de que se haya seleccionado una imagen
-    ) {
-      return;
-    }
-
+  const handleSubmitService = async (e) => {
     try {
+      e.preventDefault();
+      if(
+        nombreServicio === "" ||
+        descripcion === "" ||
+        precioServicio === "" ||
+        tiempoEstimado === "" ||
+        selectedImage === ""
+      ){
+        toast.warning('Por favor  completar todos los campos. ')
+        return;
+      }
       const formData = new FormData();
       formData.append("id_orden", ordenServicio);
       formData.append("nombre_serv", nombreServicio);
@@ -61,12 +58,7 @@ const FormInventory = () => {
   }
 };
 
-
-  const handleAlertCreateService = () => {
-    toast.success('Servicio creado satisfactoriamente.');
-  };
-
-  return (
+  return (    
     <>
       <ContainForm>
         <Form>
@@ -84,7 +76,7 @@ const FormInventory = () => {
               </ContentInput>
               <ContentInput>
                 <Input
-                  type="text"
+                  type="text" 
                   value={nombreServicio}
                   onChange={(e) =>
                     setNombreServicio(
@@ -111,7 +103,7 @@ const FormInventory = () => {
               <ContentInput>
                 <Input
                   type="text"
-                  value={tiempoEstimado}
+                  value={tiempoEstimado}               
                   onChange={(e) =>
                     setTiempoEstimado(
                       e.target.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
@@ -136,6 +128,7 @@ const FormInventory = () => {
                 <TextArea
                   type="text"
                   value={descripcion}
+
                   onChange={(e) => setDescripcion(e.target.value)}
                   placeholder="Descripción del servicio"
                   autoComplete="off"
@@ -143,7 +136,7 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister onClick={() => {handleSumitService(); handleAlertCreateService();}}>
+                <BtnRegister onClick={() => {handleSubmitService(); handleAlertCreateService();}}>
                   Crear servicio
                 </BtnRegister>
               </ButtonRegister>
@@ -151,7 +144,8 @@ const FormInventory = () => {
       </ContainForm>
     </>
   );
-};
+
+;
 
 export default FormInventory;
 

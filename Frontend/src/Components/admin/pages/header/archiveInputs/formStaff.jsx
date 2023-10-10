@@ -19,10 +19,11 @@ const FormStaff = () => {
     const token = localStorage.getItem("user")
     const limpio = token.replace(/"/g,"")
     console.log("mi token",limpio)
-  if (!emailPattern.test(correo)) {
+
+   if (!emailPattern.test(correo)) {
     toast.warning("El correo electronico ingresado no es valido.");
     return; // Salir de la función si el correo es inválido
-  }
+   }
   
     const emptyFields = [];
   
