@@ -15,9 +15,9 @@ const FormInventory = () => {
 
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
-  const handleSubmitService = async (e) => {
+  const handleSubmitService = async () => {
     try {
-      e.preventDefault();
+      
       if(
         nombreServicio === "" ||
         descripcion === "" ||
@@ -136,7 +136,7 @@ const FormInventory = () => {
                 />
               </ContentInput>
               <ButtonRegister className="gap">
-                <BtnRegister onClick={() => {handleSubmitService();}}>
+                <BtnRegister type="button" onClick={() => {handleSubmitService();}}>
                   Crear servicio
                 </BtnRegister>
               </ButtonRegister>
@@ -145,7 +145,7 @@ const FormInventory = () => {
     </>
   );
 
-                }
+}
 // Estilos en linea
 export default FormInventory;
 

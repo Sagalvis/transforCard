@@ -23,6 +23,7 @@ import Modals from "../../../archive/modals";
 import { ContainInfoModal, Paragraph } from "../../../header/styledHeader";
 import { Btn_Delete, ButtonDelete } from "../tableClient/styledTableClient";
 import { toast, ToastContainer } from 'react-toastify'
+import EditFormService from "../../../header/archiveInputs/editForms/editFormServices";
 
 const TableInventory = ({ editProduct, deleteProduct }) => {
   const [ordenService, setOrdenService] = useState([]);
@@ -31,9 +32,9 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   // Variable de estado de eliminar servicio
   const [handleDeleteService, setHandleDeleteService] = useState(false);
   const [delService, setDelService] = useState(null);
+  const [Idorden, setIdorden] = useState([]);
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
 
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const token = localStorage.getItem("user")
   const limpio = token.replace(/"/g,"")
 
@@ -64,7 +65,11 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
   useEffect(() => {
     getOrdenService();
   }, []);
-  // Funcion para eliminar producto de inventario
+  // Funcion para actualizar servicio...
+  const updateServices = (item) =>{
+    setIdorden(item);
+    setHandleFormInventory(!handleFormInventory);
+  }
 
   // Funcion para eliminar servicio...
   const deleteServiceInventory = async () => {
@@ -125,7 +130,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
                     <ButtonOptions>
                       <Buttons
                         onClick={() =>
-                          setHandleFormInventory(!handleFormInventory)
+                          updateServices(item)
                         }
                         title="Editar producto"
                       >
@@ -169,7 +174,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           showCloseButton={true}
         >
           <ContainInfoModal>
-            <h5>aqui va el formulario de edit.</h5>
+            <EditFormService GetService={Idorden}/>
           </ContainInfoModal>
         </Modals>
 
