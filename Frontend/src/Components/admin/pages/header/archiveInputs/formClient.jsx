@@ -91,7 +91,7 @@ const FormClient = () => {
       setTipoDocument(responseDocument.data);
     };
     getdocumentdata();
-  },[])
+  },[apiBaseBack])
   const handleAlert = () => {
     toast.success("Cliente registrado con éxito.");
   };

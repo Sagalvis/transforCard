@@ -45,7 +45,6 @@ const Login = () => {
   };
 
   const Log = async () => {
-    const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
     let result = null;
     if (correo && !contraseña) {
       toast.warning('Por favor llenar el campo de contraseña.');

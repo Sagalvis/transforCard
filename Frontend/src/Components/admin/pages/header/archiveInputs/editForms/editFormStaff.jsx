@@ -29,7 +29,7 @@ const EditFormStaff = ({getEmpleado}) => {
       setTipoRol(responseRol.data)
     }
     fetchdata()
-  },[])
+  },[apiBaseBack])
 
   /* Funcion para crear clientes */
   const handletSumit = async (e) => {
