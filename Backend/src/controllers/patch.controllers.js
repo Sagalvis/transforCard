@@ -90,3 +90,15 @@ export const updateProcutoInventario = async (req, res) => {
     });
   }
 } 
+
+// Consulta para actualizar Service 
+export const updateService = async (req, res) => {
+  try {
+    const {nombre_serv, descripcion, precio, tiempo_estimado} = req.body;
+    const {id_orden} = req.params
+    const [row] = await pool.query('UPDATE orden_servicio SET nombre_serv = IFNULL(?, nombre_serv), descripcion = IFNULL(?, descripcion), precio = IFNULL(?, precio), tiempo_estimado = IFNULL(?, tiempo_estimado) WHERE id_orden = ?',[nombre_serv, descripcion, precio, tiempo_estimado, id_orden]);
+    res.status(201).json({message:"registro actualizado..."})
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
