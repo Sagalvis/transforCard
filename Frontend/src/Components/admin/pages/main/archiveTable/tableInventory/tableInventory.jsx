@@ -82,7 +82,9 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
       handleAlertDeleteInventory();
       setOrdenService(ordenService.filter((c) => c.id_orden !== delService.id_orden));
     } catch (error) {
-      console.log("error");
+      toast.error(
+        "No se pudo eliminar el servicio porque un cliente lo contiene activo."
+      );
     }
   };
 
@@ -158,7 +160,7 @@ const TableInventory = ({ editProduct, deleteProduct }) => {
           changepadding={'0px'}
           >
             <ContainInfoModal>
-              <Paragraph>¿Estás seguro de que quieres eliminar este cliente?</Paragraph>
+              <Paragraph>¿Estás seguro de que quieres eliminar este Servicio?</Paragraph>
               <ButtonDelete>
                 <Btn_Delete onClick={() => {setHandleDeleteService(!handleDeleteService); deleteServiceInventory()}} >Eliminar</Btn_Delete>
               </ButtonDelete>

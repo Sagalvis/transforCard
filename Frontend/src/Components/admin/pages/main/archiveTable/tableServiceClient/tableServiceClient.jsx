@@ -11,11 +11,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
   const [mapeo, setMapeo] = useState([])
   const [handleDeleteCustomerService, setHandleDeleteCustomerService] = useState(false);
   const [delServiderOrder, setDelServiceOrder] = useState(null);
-
-
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
-
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const token = localStorage.getItem("user")
   const limpio = token.replace(/"/g,"")
 
@@ -37,9 +33,12 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         }
       })
       console.log(result);
+      handleDeleteService()
       setMapeo(mapeo.filter((v) => v.id_servicio_cliente !== delServiderOrder.id_servicio_cliente));
     } catch (error) {
-      console.log(error);
+      toast.error(
+        "No se pudo eliminar el servicio porque contiene una factura activa."
+      );
     }
   };
 
@@ -110,7 +109,7 @@ const TableServiceClient = ({getcustomer, deleteService}) => {
         <ContainInfoModal>
           <Paragraph>¿Estás seguro de que quieres eliminar este servicio?</Paragraph>
           <ButtonDelete>
-            <BtnDelete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); handleDeleteService(); deleteServiceOrder()}}>Eliminar</BtnDelete>
+            <BtnDelete onClick={() => {setHandleDeleteCustomerService(!handleDeleteCustomerService); deleteServiceOrder()}}>Eliminar</BtnDelete>
           </ButtonDelete>
         </ContainInfoModal>
       </Modals>

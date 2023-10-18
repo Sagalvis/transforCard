@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
+import {toast} from 'react-toastify';
 const EditFormService = ({ GetService }) => {
   const [ordenServicio, setOrdenServicio] = useState("");
-  const [nombreServicio, setNombreServicio] = useState("");
+  const [nombre_serv, setNombreServicio] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  const [precioServicio, setPrecioServicio] = useState("");
-  const [tiempoEstimado, setTiempoEstimado] = useState("");
+  const [precio, setPrecioServicio] = useState("");
+  const [tiempo_estimado, setTiempoEstimado] = useState("");
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
+
   useEffect(() => {
     if (GetService) {
       setOrdenServicio(GetService.id_orden);
@@ -19,16 +21,35 @@ const EditFormService = ({ GetService }) => {
     }
   }, [GetService]);
   //Funcion para actualizar servicios...
-  const updateService = async ()=> {
-    await axios.patch(`${apiBaseBack}/patchinventario/${GetService.id_orden}`,{
-      ordenServicio,
-      nombreServicio,
+  const handletSumit = async () => {
+    const token = localStorage.getItem('user');
+    const limpio = token.replace(/"/g,"")
+    if (
+      nombre_serv === "" ||
+      descripcion === "" ||
+      precio === "" ||
+      tiempo_estimado === ""  
+    ) {
+      toast.warning('Por favor llenar todos los campos');
+    } else {
+    await axios.patch(`${apiBaseBack}/patchservice/${GetService.id_orden}`,{
+      nombre_serv,
       descripcion,
-      precioServicio,
-      tiempoEstimado
+      precio,
+      tiempo_estimado
+    }, {
+      headers:{
+        Authorization: `${limpio}`,
+      }
     })
+    setTimeout(() => { 
+      window.location.reload(); 
+    }, 1000);
   }
-
+  }
+  const handleAlert = () => { 
+    toast.success('Servicio actualizado con éxito.'); 
+  }; 
   return (
     <>
       <ContainForm>
@@ -48,7 +69,7 @@ const EditFormService = ({ GetService }) => {
           <ContentInput>
             <Input
               type="text"
-              value={nombreServicio}
+              value={nombre_serv}
               onChange={(e) =>
                 setNombreServicio(
                   e.target.value.replace(/[^a-zA-Z\s]/g, "").toLowerCase()
@@ -62,7 +83,7 @@ const EditFormService = ({ GetService }) => {
           <ContentInput>
             <Input
               type="text"
-              value={precioServicio}
+              value={precio}
               onChange={(e) =>
                 setPrecioServicio(e.target.value.replace(/[^0-9]/g, ""))
               }
@@ -74,7 +95,7 @@ const EditFormService = ({ GetService }) => {
           <ContentInput>
             <Input
               type="text"
-              value={tiempoEstimado}
+              value={tiempo_estimado}
               onChange={(e) =>
                 setTiempoEstimado(
                   e.target.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
@@ -96,7 +117,7 @@ const EditFormService = ({ GetService }) => {
             />
           </ContentInput>
           <ButtonRegister className="gap">
-            <BtnRegister type="button" onClick={() => updateService}>
+            <BtnRegister type="button" onClick={() => {handletSumit(); handleAlert()}}>
               Actualizar servicio
             </BtnRegister>
           </ButtonRegister>
