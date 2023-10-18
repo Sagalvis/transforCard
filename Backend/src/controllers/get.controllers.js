@@ -230,8 +230,8 @@ export const getService = async (req, res) => {
 };
 
 
-
-export const getCallService = async (req, res) => {
+// Funcion para traer todos los servicios que tiene el cliente
+export const getAllService = async (req, res) => {
   try{
     const { identificacion } = req.params;
     console.log(req.body);
@@ -245,13 +245,5 @@ export const getCallService = async (req, res) => {
       message: "Error en el servidor",
     });
   }
-} 
-//Funcion para traer las imagenes 
-export const getImg = async (req, res) =>{
-  try {
-      const [row] = await pool.query("SELECT * FROM imagen");
-      res.json(row[0]); 
-  } catch (error) {
-      return res.status(500).json({message:"No se encontro la imagen"})
-  }
 };
+

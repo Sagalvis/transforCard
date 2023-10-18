@@ -8,10 +8,15 @@ import deleteRouter from "./routes/delete.routes.js";
 import downloadRoutes from "./routes/download.routes.js";
 import queryHome from "./routes/home.routes.js";
 import {PORT} from './config.js'
+import session from "express-session";
 
 /* Se crea una instancia de aplicacion express y se almacena en la app */
 const app = express();
-
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}))
 /* Se usa el middleware de express para las solicitudes en JSON */
 app.use(express.json());
 

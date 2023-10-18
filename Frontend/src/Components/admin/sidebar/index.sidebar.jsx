@@ -10,7 +10,6 @@ import {
   ContentLogout,
   ContentName,
   ContentProfile,
-  Image,
   LogoSidebar,
   NavConten,
   NavIcon,
@@ -24,7 +23,6 @@ import Logo from "../../../assets/svg/transforCars-01.svg";
 import jwt_decode from "jwt-decode"
 import { useLocation  } from "react-router-dom";
 import { useEffect } from "react"
-import profile from '../../../assets/img/Imagen de WhatsApp 2023-09-26 a las 15.23.58.jpg'
 
 
 const Sidebar = () => {
@@ -65,7 +63,7 @@ const Sidebar = () => {
 
             <ContentCircle>
             <Circle>
-              <Image src={profile} alt="" />
+              {/* <Image src={profile} alt="" /> */}
             </Circle>
             </ContentCircle>
 
