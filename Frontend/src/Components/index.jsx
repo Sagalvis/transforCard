@@ -12,11 +12,19 @@ const IndexRoutes = () => {
   const user = localStorage.getItem("user");
   const isUserLoggedIn = !!user;
 
+  const isTokenExpired = () =>{
+    const tokenData = JSON.parse(atob(user.split(".")[1]));
+    const tokenExperitationTime =tokenData.exp * 1000;
+    return tokenExperitationTime < Date.now();
+  };
+
+  const isAuthenticated = isUserLoggedIn && !isTokenExpired();
+
   return (
     <ContainerMain>
       <Routes>
         <Route path="/" element={<Login />} />
-        {isUserLoggedIn ? (
+        {isAuthenticated ? (
 
           <Route
             path="/admin/*"
