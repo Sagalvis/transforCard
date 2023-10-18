@@ -49,6 +49,7 @@ const FormInventory = () => {
         // Puede mostrar un mensaje de error al usuario
         toast.error("Error al crear el servicio");
       }
+      window.location.reload()
     } catch (error) {
       // Maneje errores de la solicitud POST
       console.error("Error al enviar la solicitud POST:", error);
