@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react"; // Importa React
+import { useEffect, useState, useRef } from "react"; // Importa React
 import {
   ButtonOptions,
   Buttons,
@@ -36,6 +36,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
   const apiBaseBack = import.meta.env.VITE_URL_BACKEND;
   //Variable de estado para pasarela de pago 
   const [payuPay, setPayuPay] = useState(false)
+  const [value, setValue] = useState([])
+  const [ide, setIde] = useState('')
+  const itemRef = useRef();
   
   //Funcion para traer los datos de la factura
 
@@ -53,9 +56,13 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       Id factura: ${data1.id_factura}
       Identificacion: ${data1.identificacion}
       Fecha de emision: ${moment(data1.fecha_emision).format("YYYY-MM-DD")} 
-      ___________________________
-      Cantidad pagada: $ ${data1.cantidad_pagada} 
-      Estado de pago: ${data1.estado_pago}
+      ${value.map((data) =>{
+      `servicio:${data.nombre_serv} precio:${data. 
+        precio}         
+      ` })}
+      ____________________________________________
+                               Cantidad pagada: $ ${data1.cantidad_pagada} 
+                               Estado de pago: ${data1.estado_pago}
     `;
   
     page.drawText(content, {
@@ -81,7 +88,6 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   const getInvoice = async () => {
     try {
-      
       const res = await axios.get(`${apiBaseBack}/factura`);
       setInvoice(res.data);
     } catch (error) {
@@ -89,12 +95,24 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
     }
   };
 
-  const getServicesClient = async (item) => {
+  const getServicesClient = async () => {
     try {
-      await axios.get(`${apiBaseBack}/getServiceCliente/${item.identificacion}`)
-
+      console.log(ide);
+      const res = await axios.get(`${apiBaseBack}/getServiceCliente/${ide}`);
+      setValue(res.data);
+      console.log(res);
     } catch (error) {
-      console.log("ERROR");
+      if (error.response.status === 404) {
+        //el cliente no existe
+        console.log(ide);
+        console.log("el cliente no existe");
+      } else if (error.response.status === 500){
+        // Error interno del servidor
+        console.log("Error interno del servidor");
+      } else {
+        // Otro tipo de error
+        console.log(error);
+      }
     }
   };
 
@@ -137,7 +155,9 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
 
   useEffect(() => {
     getInvoice();
-  }, [setInvoice]);
+    getServicesClient();
+    itemRef.current = value
+  }, [setInvoice, setValue]);
 
   const handleAlertDeleteInvoice = () => {
     toast.success('Factura eliminada con éxito.');
@@ -200,12 +220,13 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
                     </Buttons>
                     <Buttons 
                     title="Ver factura"
-                    onClick={() => {
+                    onClick={async () => {
                       setHandlePdfInvoice(true);
-                      getServicesClient(item);
+                      setIde(item.identification)
+                      await getServicesClient(ide);
                       createPDF(item);
                     }}
-                    >
+                    > 
                       <i className={printInvoice}></i>
                     </Buttons>
                   </ButtonOptions>
@@ -234,7 +255,7 @@ const TableInvoice = ({ deletInvoice, printInvoice }) => {
       status={handleDeleteInvoice}
       changeStatus={setHandleDeleteInvoice}
       changeposition={'start'}
-      titleModal={'Elimnar factura'}
+      titleModal={'Eliminar factura'}
       showCloseButton={true}
       showHeader={true}
       >
